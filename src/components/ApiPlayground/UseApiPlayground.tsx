@@ -25,8 +25,8 @@ export type PlaygroundProps = {
   body?: string | { type: "json"; example?: string };
   requiresSignature?: boolean;
   requiresAccessToken?: boolean;
-  /** Example request body shown in static code snippets */
-  exampleRequest?: string; // raw cURL from frontmatter examples.request
+  /** Raw cURL from frontmatter examples.request */
+  exampleRequest?: string;
 };
 
 /* ─── helpers ─────────────────────────────────────────────────────── */
@@ -64,7 +64,6 @@ export function useApiPlayground(props: PlaygroundProps) {
   const baseUrl =
     typeof props.url === "string" ? props.url : (props.url as any)?.[env] ?? "";
 
-  /* ── sandbox url (used for static snippets) ── */
   const sandboxUrl =
     typeof props.url === "string"
       ? props.url
@@ -120,34 +119,96 @@ export function useApiPlayground(props: PlaygroundProps) {
     typeof props.body === "string"
       ? props.body
       : props.body?.type === "json"
-      ? (props.body as any).example ?? "{}"
-      : "{}"
+        ? (props.body as any).example ?? "{}"
+        : "{}"
   );
 
   /* ── response state ── */
   const [response, setResponse] = useState<any>(null);
   const [status, setStatus] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // Tracks what was missing when the last request was sent
   const [missedSignature, setMissedSignature] = useState(false);
+  const [missedToken, setMissedToken] = useState(false);
 
   /* ── signature ── */
   const generateNonce = () => crypto.randomUUID().replace(/-/g, "");
   const generateTimestamp = () => Math.floor(Date.now() / 1000).toString();
 
-  const importPrivateKey = async (pem: string) => {
+  /** Encode a DER length field (short and long form) */
+  const derLen = (n: number): number[] => {
+    if (n < 0x80) return [n];
+    if (n < 0x100) return [0x81, n];
+    return [0x82, (n >> 8) & 0xff, n & 0xff];
+  };
+
+  /**
+   * Supports both PKCS#1 (-----BEGIN RSA PRIVATE KEY-----)
+   * and PKCS#8 (-----BEGIN PRIVATE KEY-----).
+   * Web Crypto only supports PKCS#8 natively — PKCS#1 is wrapped in memory.
+   *
+   * PKCS#8 structure:
+   *   SEQUENCE {
+   *     INTEGER 0                    -- version
+   *     SEQUENCE { OID, NULL }       -- AlgorithmIdentifier (rsaEncryption)
+   *     OCTET STRING { <pkcs1 der> } -- privateKey
+   *   }
+   */
+  const importPrivateKey = async (pem: string): Promise<CryptoKey> => {
+    const isPkcs1 = pem.includes("BEGIN RSA PRIVATE KEY");
+
     const cleaned = pem
-      .replace(/-----BEGIN.*?-----/, "")
-      .replace(/-----END.*?-----/, "")
+      .replace(/-----BEGIN[^-]*-----/, "")
+      .replace(/-----END[^-]*-----/, "")
       .replace(/\s/g, "");
-    const binaryDer = window.atob(cleaned);
-    const binaryArray = Uint8Array.from(binaryDer, (c) => c.charCodeAt(0));
-    return crypto.subtle.importKey(
-      "pkcs8",
-      binaryArray.buffer,
-      { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-      false,
-      ["sign"]
-    );
+
+    const pkcs1 = Uint8Array.from(window.atob(cleaned), (c) => c.charCodeAt(0));
+
+    let der: Uint8Array;
+
+    if (isPkcs1) {
+      // AlgorithmIdentifier: SEQUENCE { OID rsaEncryption, NULL }
+      const algoId = new Uint8Array([
+        0x30, 0x0d,
+        0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01,
+        0x05, 0x00,
+      ]);
+
+      // OCTET STRING { pkcs1 }
+      const octetString = new Uint8Array([
+        0x04, ...derLen(pkcs1.length), ...pkcs1,
+      ]);
+
+      // version INTEGER 0
+      const version = new Uint8Array([0x02, 0x01, 0x00]);
+
+      // Inner content
+      const inner = new Uint8Array([
+        ...version, ...algoId, ...octetString,
+      ]);
+
+      // Outer SEQUENCE
+      der = new Uint8Array([0x30, ...derLen(inner.length), ...inner]);
+    } else {
+      der = pkcs1;
+    }
+
+    try {
+      return await crypto.subtle.importKey(
+        "pkcs8",
+        der.buffer as ArrayBuffer,
+        { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+        false,
+        ["sign"]
+      );
+    } catch (e: any) {
+      throw new Error(
+        `Failed to import private key (${isPkcs1 ? "PKCS#1" : "PKCS#8"}): ` +
+        (e?.message || "invalid format") +
+        ". Make sure you paste the full PEM including the -----BEGIN----- and -----END----- lines."
+      );
+    }
   };
 
   const signRSA = async (
@@ -186,23 +247,16 @@ export function useApiPlayground(props: PlaygroundProps) {
   };
 
   /* ── send ── */
+  // Neither missing token nor missing key blocks the request.
+  // Both are soft warnings — the request goes through and the real
+  // API error is shown so the developer knows exactly what to fix.
   const send = async () => {
-    if (requiresAccessToken && tokenStatus !== "active") {
-      setResponse({
-        _error:
-          tokenStatus === "expired"
-            ? "Access token expired. Re-run Client Credentials to get a new one."
-            : "No access token. Run Client Credentials first.",
-      });
-      setStatus(401);
-      return;
-    }
-
-
     try {
       setLoading(true);
       setResponse(null);
       setStatus(null);
+      setMissedToken(false);
+      setMissedSignature(false);
 
       let requestBody: any;
       if (!["GET", "DELETE"].includes(props.method)) {
@@ -215,11 +269,14 @@ export function useApiPlayground(props: PlaygroundProps) {
         finalHeaders["Content-Type"] = "application/json";
       }
 
-      let sentWithoutSignature = false;
-
       if (!isOAuth) {
         if (requiresAccessToken) {
-          finalHeaders["Authorization"] = `Bearer ${getToken()}`;
+          if (tokenStatus === "active") {
+            finalHeaders["Authorization"] = `Bearer ${getToken()}`;
+          } else {
+            // Soft warning — send without token, API will return auth error
+            setMissedToken(true);
+          }
         }
         if (requiresSignature) {
           if (hasPrivateKey()) {
@@ -233,12 +290,11 @@ export function useApiPlayground(props: PlaygroundProps) {
             finalHeaders["X-Nonce-Str"] = nonce;
             finalHeaders["X-Signature"] = `sha256 ${signature}`;
           } else {
-            sentWithoutSignature = true;
+            // Soft warning — send without signature, API will return INVALID_SIGNATURE
+            setMissedSignature(true);
           }
         }
       }
-
-      setMissedSignature(sentWithoutSignature);
 
       const res = await fetch(
         "https://rm-api-proxy.aiman-danish.workers.dev",
@@ -277,16 +333,18 @@ export function useApiPlayground(props: PlaygroundProps) {
         setTokenStatus("active");
       }
     } catch (err: any) {
-      alert(err.message);
+      const msg = err?.message || String(err) || "Unknown error";
+      alert("Request failed: " + msg);
     } finally {
       setLoading(false);
     }
   };
 
   /* ── derived ── */
-  // Token is still a hard block — no point sending without auth
-  // Missing private key is now a soft warning, not a block
-  const notReady = requiresAccessToken && tokenStatus !== "active";
+  // Nothing blocks sending — notReady is kept for UI hints only
+  const notReady =
+    (requiresAccessToken && tokenStatus !== "active") ||
+    (requiresSignature && !keyLoaded);
 
   return {
     // env
@@ -301,7 +359,7 @@ export function useApiPlayground(props: PlaygroundProps) {
     // request flags
     isOAuth, requiresSignature, requiresAccessToken, notReady,
     // response
-    response, status, loading, missedSignature,
+    response, status, loading, missedSignature, missedToken,
     // actions
     send,
   };
