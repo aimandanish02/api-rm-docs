@@ -45,7 +45,7 @@ export default function PrivateKeyBanner({ loaded, onLoad, onClear }: Props) {
           <textarea
             className={`${styles.textarea} ${styles.keyTextarea}`}
             placeholder={
-              "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+              "-----BEGIN RSA PRIVATE KEY----- \n...\n-----END RSA PRIVATE KEY-----"
             }
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
