@@ -43,6 +43,15 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/partner/file/upload"
+  prod="https://open.revenuemonster.my/v3/partner/file/upload"
+/>
+
+
 <!-- user cannot send/upload multipart form data for security purposes (aiman) -->
 :::note
 This endpoint accepts `multipart/form-data` and requires a file upload.
@@ -54,9 +63,6 @@ Please use the cURL example or a server-side integration to test this endpoint.
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/partner/file/upload`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/partner/file/upload`
 
 :::note
 

@@ -58,6 +58,15 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/voucher/{voucher_code}"
+  prod="https://open.revenuemonster.my/v3/voucher/{voucher_code}"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 

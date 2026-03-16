@@ -47,13 +47,19 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="PUT"
+  sandbox="https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantId}/application/{clientId}"
+  prod="https://open.revenuemonster.my/v3/partner/merchant/{merchantId}/application/{clientId}"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "blue", fontWeight: "bold" }}>PUT</span><br/>
-URL : `https://open.revenuemonster.my/v3/partner/merchant/{merchantId}/application/{clientId}`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantId}/application/{clientId}`
 
 :::note
 Update Application Client

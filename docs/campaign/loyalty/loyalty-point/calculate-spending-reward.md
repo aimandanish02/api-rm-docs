@@ -43,12 +43,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/spending-reward/calculate"
+  prod="https://open.revenuemonster.my/v3/loyalty/spending-reward/calculate"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/spending-reward/calculate`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/spending-reward/calculate`
 
 :::note
 Use amount sales to Calculate Spending Reward points

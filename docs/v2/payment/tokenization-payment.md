@@ -43,6 +43,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/recurring-payment"
+  prod="https://open.revenuemonster.my/v3/recurring-payment"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
@@ -57,9 +66,6 @@ Recurring payment is for your customer to bind their card and our system able to
 
 ### Create Recurring Customer
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/recurring-payment`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/recurring-payment`
 
 **Request Parameters**
 
@@ -194,9 +200,6 @@ Tokenized payment is for your to let your customer bind their card and you can t
 
 ### Create Tokenized Customer
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/tokenized-payment`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/tokenized-payment`
 
 **Request Parameters**
 
@@ -273,9 +276,6 @@ These API will be available only when the customer been binded once else you wil
 
 ### Get Customer Info
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL :`https://open.revenuemonster.my/v3/customer/{customer_id}`<br/>
-Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}`
 
 **Request Parameters**
 
@@ -315,9 +315,6 @@ Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}`
 
 ### Get Customer Orders
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL :`https://open.revenuemonster.my/v3/customer/{customer_id}/orders`<br/>
-Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}/orders`
 
 **Request Parameters**
 
@@ -345,9 +342,6 @@ Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}/orders
 
 ### Toggle Customer Status
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>PUT</span><br/>
-URL :`https://open.revenuemonster.my/v3/customer/{customer_id}/status`<br/>
-Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}/status`
 
 **Request Parameters**
 
@@ -388,9 +382,6 @@ Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}/status
 
 ### Create Customer Order ( Payment )
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>POST</span><br/>
-URL :`https://open.revenuemonster.my/v3/customer/{customer_id}/order`<br/>
-Sandbox URL :`https://sb-open.revenuemonster.my/v3/customer/{customer_id}/order`
 
 :::caution
 This API will use the customer binded card to make a payment, it's not a manual order creation.

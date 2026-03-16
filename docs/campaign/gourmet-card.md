@@ -66,12 +66,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/membership/verify"
+  prod="https://open.revenuemonster.my/v3/membership/verify"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL :`https://open.revenuemonster.my/v3/membership/verify`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/membership/verify`
 
 :::note
 (**For Alipay Merchant** )

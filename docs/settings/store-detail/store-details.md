@@ -88,14 +88,20 @@ examples:
       }
     }
 ---
+
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/stores"
+  prod="https://open.revenuemonster.my/v3/stores"
+/>
+
 Get Store By ID
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/stores`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/stores`
 
 :::note
 

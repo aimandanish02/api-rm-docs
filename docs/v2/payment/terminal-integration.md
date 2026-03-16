@@ -36,6 +36,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay"
+  prod="https://open.revenuemonster.my/v3/payment/terminal/quickpay"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
@@ -64,9 +73,6 @@ accept payment while you can proceed the [OpenAPI QuickPay](./quick-pay.md) inst
 performance.
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/terminal/quickpay`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay`
 
 **Request Parameters**
 
@@ -153,9 +159,6 @@ api:
 
 ## Event: Card Payment
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/terminal/quickpay`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay`
 
 **Request Parameters**
 
@@ -201,9 +204,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay`
 
 ## Event: Card Refund
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/event/terminal`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 **Request Parameters**
 
@@ -243,9 +243,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 ## Event: Card Settlement
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/event/terminal`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 **Request Parameters**
 
@@ -286,9 +283,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 ## Event: Cancel Event
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/event/terminal`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 **Request Parameters**
 

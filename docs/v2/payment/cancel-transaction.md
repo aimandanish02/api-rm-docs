@@ -27,6 +27,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/payment/reverse"
+  prod="https://open.revenuemonster.my/v3/payment/reverse"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
@@ -45,9 +54,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 If a transaction is timed out, the merchant should perform a reverse order before creating a new transaction. This is to prevent a double charge.
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/reverse`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/reverse`
 
 **Request Parameters**
 
@@ -87,9 +93,6 @@ Total Refund Amount ( if applicable ): RM 10.00<br />
 Reason for refund request/s: Exceed refund period and would like to request manual refund
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/refund`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/refund`
 
 **Request Parameters**
 

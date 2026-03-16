@@ -75,12 +75,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/member/{{member_id}}/history"
+  prod="https://open.revenuemonster.my/v3/loyalty/member/{{member_id}}/history"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL: `https://open.revenuemonster.my/v3/loyalty/member/2940921291529816182/history`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/member/2940921291529816182/history`
 
 :::note
 Get Loyalty Member Point History By `Member ID`

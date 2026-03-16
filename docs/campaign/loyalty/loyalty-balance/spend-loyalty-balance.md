@@ -91,13 +91,19 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/balances"
+  prod="https://open.revenuemonster.my/v3/loyalty/balances"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/balances`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/balances`
 
 :::note
 Get loyalty balance

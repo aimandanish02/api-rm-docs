@@ -114,12 +114,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/balances"
+  prod="https://open.revenuemonster.my/v3/loyalty/balances"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/balances`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/balances`
 
 :::note
 Get loyalty balances

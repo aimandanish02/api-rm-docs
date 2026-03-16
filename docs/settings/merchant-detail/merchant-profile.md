@@ -59,12 +59,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/merchant"
+  prod="https://open.revenuemonster.my/v3/merchant"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL :`https://open.revenuemonster.my/v3/merchant`<br/>
-Sandbox URL :`https://sb-open.revenuemonster.my/v3/merchant`
 
 :::note
 To query for merchant details.

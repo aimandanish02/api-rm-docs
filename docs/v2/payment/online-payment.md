@@ -40,6 +40,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/payment/online"
+  prod="https://open.revenuemonster.my/v3/payment/online"
+/>
+
+
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 # Online Payment
@@ -85,9 +94,6 @@ Online payment is an online payment method and it's subscription will based on o
 
 ## Hosted Payment Checkout
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/online`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/online`
 
 :::note
 
@@ -199,9 +205,6 @@ transaction you can query transcation using [Query By Transaction ID](./query-tr
 with the response of this API `transactionId`.
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/online?checkoutId={checkoutId}`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/online?checkoutId={checkoutId}`
 
 **Request Parameters**
 
@@ -237,9 +240,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/online?checkoutId={c
 
 ## Direct Payment Checkout
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/online/checkout`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/online/checkout`
 
 :::note
 

@@ -234,12 +234,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="PUT"
+  sandbox="https://sb-open.revenuemonster.my/v3/accounts/{id}"
+  prod="https://open.revenuemonster.my/v3/accounts/{id}"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "blue", fontWeight: "bold" }}>PUT</span><br/>
-URL : `https://open.revenuemonster.my/v3/accounts/{id}`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/accounts/{id}`
 
 :::note
 Upadte Account Info

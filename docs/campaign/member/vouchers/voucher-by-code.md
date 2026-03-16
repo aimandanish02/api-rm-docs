@@ -70,11 +70,17 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/me/voucher/{voucherCode}"
+  prod="https://open.revenuemonster.my/v3/loyalty/me/voucher/{voucherCode}"
+/>
+
+
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/me/voucher/{voucher-code}?countryCode=60&phoneNumber=187824152`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/me/voucher/{voucher-code}countryCode=60&phoneNumber=187824152`
 
 :::note
 

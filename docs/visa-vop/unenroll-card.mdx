@@ -42,12 +42,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="DELETE"
+  sandbox="https://sb-open.revenuemonster.my/v3/vop/unenroll-card"
+  prod="https://open.revenuemonster.my/v3/vop/unenroll-card"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "red", fontWeight: "bold" }}>DELETE</span><br/>
-URL : `https://open.revenuemonster.my/v3/vop/unenroll-card`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/vop/unenroll-card`
 
 :::note
 

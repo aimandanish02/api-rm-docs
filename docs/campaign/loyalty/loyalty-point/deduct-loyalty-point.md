@@ -33,12 +33,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="DELETE"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/reward"
+  prod="https://open.revenuemonster.my/v3/loyalty/reward"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>DELETE</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/reward`<br/>
-Sandbox URL :  `https://sb-open.revenuemonster.my/v3/loyalty/reward`
 
 :::note
 To deduct loyalty point(s) to customers using phone number or member ID.

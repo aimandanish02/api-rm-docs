@@ -26,6 +26,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/payment/transaction/{id}"
+  prod="https://open.revenuemonster.my/v3/payment/transaction/{id}"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -41,9 +50,6 @@ You should always store either **Transaction ID** or **Order ID** for transactio
 
 ## Query By Order ID
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/transaction/order/{id}`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/transaction/order/{id}`
 
 **Request Parameters**
 
@@ -63,9 +69,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/transaction/order/{i
 
 ## Query By Transaction ID
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/transaction/{id}`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/transaction/{id}`
 
 **Request Parameters**
 
@@ -85,9 +88,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/transaction/{id}`
 
 ## Get All Transactions
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
-URL :`https://open.revenuemonster.my/v3/payment/transactions`<br/>
-Sandbox URL :`https://sb-open.revenuemonster.my/v3/payment/transactions`<br/>
 URL with limit : `https://sb-open.revenuemonster.my/v3/payment/transactions?limit=1`
 
 **Request Parameters**

@@ -76,12 +76,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="PATCH"
+  sandbox="https://sb-open.revenuemonster.my/v3/store/{store_id}"
+  prod="https://open.revenuemonster.my/v3/store/{store_id}"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "gray", fontWeight: "bold" }}>PATCH</span><br/>
-URL : `https://open.revenuemonster.my/v3/store/1662168764176583360`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/store/1662168764176583360`
 
 :::note
 To update a specific store under the merchant. Specify `store_id` in your query.

@@ -187,13 +187,19 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="PATCH"
+  sandbox="https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantID}"
+  prod="https://open.revenuemonster.my/v3/partner/merchant/{merchantID}"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "gray", fontWeight: "bold" }}>PATCH</span><br/>
-URL : `https://open.revenuemonster.my/v3/partner/merchant/{merchantID}`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantID}`
 
 :::note
 Update Merchant By ID

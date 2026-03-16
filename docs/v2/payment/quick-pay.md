@@ -38,6 +38,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/payment/quickpay"
+  prod="https://open.revenuemonster.my/v3/payment/quickpay"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -103,9 +112,6 @@ Quick Pay is an offline payment method and it's subscription will based on offli
 ## Standard Quick Pay
 
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/quickpay`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/quickpay`
 
 **Request Parameters**
 
@@ -153,9 +159,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/quickpay`
 Voucher can be generated as a QRCode for scanning the voucher code, so we suggest to scan the voucher qrcode first then only go for the wallet's qrcode.
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/quickpay`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/quickpay`
 
 **Request Parameters**
 
@@ -209,9 +212,6 @@ You will receive extra parameteres in the transaction response and you will need
 Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spending-loyalty)
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/quickpay`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/quickpay`
 
 **Request Parameters**
 
@@ -271,9 +271,6 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 ### Verify Membership Card
 
 **Request Parameters**
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/membership/verify`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/membership/verify`
 
 **Request Parameters**
 
@@ -301,9 +298,6 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/membership/verify`
 
 ### Quick Pay
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://open.revenuemonster.my/v3/payment/quickpay`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/quickpay`
 
 **Request Parameters**
 

@@ -44,14 +44,12 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   method="POST"
   sandbox="https://sb-oauth.revenuemonster.my/v1/token"
   prod="https://oauth.revenuemonster.my/v1/token"
-/>
+/> 
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-<!-- **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://oauth.revenuemonster.my/v1/token`<br/>
-Sandbox URL : `https://sb-oauth.revenuemonster.my/v1/token`<br/> -->
+<!--  -->
 
 **Process flow for Grant Type: `client_credentials`**
 

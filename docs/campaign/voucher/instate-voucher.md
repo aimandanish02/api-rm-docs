@@ -71,6 +71,15 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="PATCH"
+  sandbox="https://sb-open.revenuemonster.my/v3/voucher/{code}/reinstate"
+  prod="https://open.revenuemonster.my/v3/voucher/{code}/reinstate"
+/>
+
+
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>PATCH</span><br/>

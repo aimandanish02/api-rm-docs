@@ -52,6 +52,15 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-open.revenuemonster.my/v3/service"
+  prod="https://open.revenuemonster.my/v3/service"
+/>
+
+
 
 :::note
 Prerequisite : Acquire requestID from mykad recognition response
@@ -82,12 +91,6 @@ customization splash screen. Default to true.
 A simple HTML example below should be sufficient to get the liveness app started.
 ![image](/img/ekyc/liveness-sdk-code.jpg)
 
-
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-
-URL: `https://ekyc.revenuemonster.my/`<br/>
-
-Sandbox URL: `https://sb-ekyc.revenuemonster.my/`
 
 ### Request Parameters
 

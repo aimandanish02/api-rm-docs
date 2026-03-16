@@ -62,12 +62,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/me/rewards?countryCode=60&phoneNumber=187824152"
+  prod="https://open.revenuemonster.my/v3/loyalty/me/rewards?countryCode=60&phoneNumber=187824152"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/me/rewards?countryCode=60&phoneNumber=187824152`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/me/rewards?countryCode=60&phoneNumber=187824152`
 
 :::noteya,,
 

@@ -33,6 +33,15 @@ examples:
     There is no example response provided.
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="https://sb-oauth.revenuemonster.my/v1/token"
+  prod="https://oauth.revenuemonster.my/v1/token"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -40,9 +49,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 <span style={{ color: "red", fontWeight: "bold" }}>This page is for plugin developer only</span><br/><br/>
 :::
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
-URL : `https://sb-oauth.revenuemonster.my/v1/token`<br/>
-Sandbox URL : `https://sb-oauth.revenuemonster.my/v1/token`<br/>
 
 **Process flow for Grant Type:** `auth_code` <br/>
 This is for the scenario where a partner wants to request permission to develop an application of a merchant.

@@ -67,13 +67,19 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="GET"
+  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/me"
+  prod="https://open.revenuemonster.my/v3/loyalty/me"
+/>
+
+
 
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
-URL : `https://open.revenuemonster.my/v3/loyalty/me?countryCode=60&phoneNumber=187824152`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/me?countryCode=60&phoneNumber=187824152`
 
 :::note
 Using Query String to **Get User Profile** by input the **country code** and **phone number**  

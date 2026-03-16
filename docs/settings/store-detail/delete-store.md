@@ -25,12 +25,18 @@ examples:
     }
 ---
 
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="DELETE"
+  sandbox="https://sb-open.revenuemonster.my/v3/store/{store_id}"
+  prod="https://open.revenuemonster.my/v3/store/{store_id}"
+/>
+
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "red", fontWeight: "bold" }}>DEL</span><br/>
-URL : `https://open.revenuemonster.my/v3/store/1662168764176583360`<br/>
-Sandbox URL : `https://sb-open.revenuemonster.my/v3/store/1662168764176583360`
 
 :::note
 To delete specific store under the merchant. Specify `store_id` in your query.
