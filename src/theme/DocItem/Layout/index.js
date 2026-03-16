@@ -7,27 +7,21 @@ import styles from "./styles.module.css";
 
 export default function LayoutWrapper(props) {
   const { frontMatter } = useDoc();
-
   const api = frontMatter?.api;
-  const examples = frontMatter?.examples;
 
   if (!api) {
     return <Layout {...props} />;
   }
 
   return (
-    <div className={`${styles.apiLayout} ${styles.apiPage}`}>
-      <Layout {...props} />
-
+    <div className={`${styles.apiLayout} api-page-layout`}>
+      <div className={styles.docContent}>
+        <Layout {...props} />
+      </div>
       <aside className={styles.playground}>
         <ApiPlayground {...api} />
-
-        <ApiExamples
-          exampleRequest={examples?.request}
-          exampleResponse={examples?.response}
-        />
+        <ApiExamples />
       </aside>
     </div>
   );
 }
-

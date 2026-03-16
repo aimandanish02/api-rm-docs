@@ -125,17 +125,17 @@
    API METHOD BADGES (SIDEBAR)
 ================================ */
 
-.api-get > .menu__link,
-.api-post > .menu__link,
-.api-put > .menu__link,
-.api-delete > .menu__link,
-.api-patch > .menu__link {
+.api-get>.menu__link,
+.api-post>.menu__link,
+.api-put>.menu__link,
+.api-delete>.menu__link,
+.api-patch>.menu__link {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.api-get > .menu__link::after {
+.api-get>.menu__link::after {
   content: "GET";
   padding: 2px 6px;
   font-size: 10px;
@@ -145,7 +145,7 @@
   color: white;
 }
 
-.api-post > .menu__link::after {
+.api-post>.menu__link::after {
   content: "POST";
   padding: 2px 6px;
   font-size: 10px;
@@ -155,7 +155,7 @@
   color: rgb(255, 255, 255);
 }
 
-.api-put > .menu__link::after {
+.api-put>.menu__link::after {
   content: "PUT";
   padding: 2px 6px;
   font-size: 10px;
@@ -165,7 +165,7 @@
   color: rgb(255, 255, 255);
 }
 
-.api-delete > .menu__link::after {
+.api-delete>.menu__link::after {
   content: "DEL";
   padding: 2px 6px;
   font-size: 10px;
@@ -175,7 +175,7 @@
   color: white;
 }
 
-.api-patch > .menu__link::after {
+.api-patch>.menu__link::after {
   content: "PATCH";
   padding: 2px 6px;
   font-size: 10px;
@@ -203,7 +203,8 @@ html[data-theme="light"] .menu__list .menu__list {
 
 /* src/css/custom.css */
 .navbar__item--explore {
-  display: block; /* desktop */
+  display: block;
+  /* desktop */
 }
 
 @media screen and (max-width: 768px) {
@@ -214,7 +215,8 @@ html[data-theme="light"] .menu__list .menu__list {
 
 /* src/css/custom.css */
 .navbar__item--explore {
-  display: block; /* desktop */
+  display: block;
+  /* desktop */
 }
 
 @media screen and (max-width: 768px) {
@@ -223,5 +225,45 @@ html[data-theme="light"] .menu__list .menu__list {
   }
 }
 
-@import "./api-playground.css";
+/* ================================
+   API PAGE LAYOUT OVERRIDES
+================================ */
+.api-page-layout .container {
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
 
+.api-page-layout .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.api-page-layout .col,
+.api-page-layout [class*="col--"] {
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Hide TOC on API pages */
+.api-page-layout .col--3 {
+  display: none !important;
+}
+
+.navbar-sidebar,
+.menu,
+nav.menu {
+  width: 420px !important;
+  min-width: 420px !important;
+}
+
+.docSidebarContainer,
+aside.theme-doc-sidebar-container,
+[class*="docSidebarContainer"] {
+  width: 420px !important;
+  min-width: 420px !important;
+}
+
+@import "./api-playground.css";
