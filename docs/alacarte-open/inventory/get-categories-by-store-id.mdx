@@ -93,6 +93,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
@@ -100,17 +103,35 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Function that provide by alacarte | "get.category"               |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter | Type   | Description                         | Example               |
 | --------- | ------ | ----------------------------------- | --------------------- |
 | `storeId` | String | ID of the Store that Create from RM | "1556079400120532579" |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                     | Example                      |
 | --------- | ------ | ------------------------------- | ---------------------------- |
 | `items`   | Array  | (Refer to explanation below)    | (Refer to explanation below) |
 | `cursor`  | String | Optional, if pagination exists. | "0"                          |
 | `count`   | Uint   | Current page record             | 2                            |
+
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter    | Type     | Description                                        | Example                      |
 | ------------ | -------- | -------------------------------------------------- | ---------------------------- |
@@ -122,3 +143,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `position`   | Uint     | Current position among Category                    | 0                            |
 | `createdAt`  | DateTime | Creation date time                                 | "2020-09-21T06:29:48.839Z"   |
 | `updatedAt`  | DateTime | Last update date time                              | "2020-09-21T06:29:48.839Z"   |
+
+</details>
+

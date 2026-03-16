@@ -66,9 +66,15 @@ Check user is it a member by input the **country code** and **phone number**
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                               | Example   |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | --------- |
 | `item`    | Object | Inside `item` is an `"exist":true`                                                                        | true      |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS" |
+
+</details>
+
 
 <br />

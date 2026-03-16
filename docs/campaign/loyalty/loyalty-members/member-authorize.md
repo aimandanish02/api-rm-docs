@@ -84,16 +84,28 @@ Get Member Authorized URL
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter     | Type   | Description         | Example     |
 | ------------- | ------ | ------------------- | ----------- |
 | `countryCode` | String | Country Code        | "60"        |
 | `phoneNumber` | String | Member phone number | "187824153" |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description              | Example       |
 | --------- | ------ | ------------------------ | ------------- |
 | `profile` | Object | Member Profile           | Show as Below |
 | `url`     | String | Loyalty App Redirect URL | Show as Below |
+
+</details>
+
 
 <br />

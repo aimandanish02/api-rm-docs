@@ -72,25 +72,43 @@ Upload Merchant File
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Example   |
 | ---------- | ------ | --------- |
 | `file`     | File   |           |
 | `fileName` | String | "Testing" |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Item Object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter  | Type   | Description | Example                                                                                                       |
 | ---------- | ------ | ----------- | ------------------------------------------------------------------------------------------------------------- |
 | `fileName` | String |             | "testing"                                                                                                     |
 | `fileUrl`  | String |             | "https://rm-sandbox-document.oss-ap-southeast-3.aliyuncs.com/1629257189967895215/dGVzdGluZw==-1629297786.pdf" |
+
+</details>
+
 
 <br/>

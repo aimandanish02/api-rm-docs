@@ -86,6 +86,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
@@ -93,12 +96,24 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Function that provide by alacarte | "set.notification.webhook"   |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter          | Type  | Required | Description                       | Example                                                       |
 | ------------------ | ----- | -------- | --------------------------------- | ------------------------------------------------------------- |
 | `notificationUrls` | Array | Yes      | Maximum webhook url is 3          | ["https://webhook.site/2688336e-7b61-4cd2-b2bb-40592a3e353a"] |
 | `storeIds`         | Array | Optional | Merchant can set multi `storeIds` | ["5eabf31ee0e9cd7b01a3a35e"]                                  |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter          | Type     | Description                                              | Example                                                       |
 | ------------------ | -------- | -------------------------------------------------------- | ------------------------------------------------------------- |
@@ -108,3 +123,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `notificationUrls` | Array    | Maximum webhook url is 3                                 | ["https://webhook.site/2688336e-7b61-4cd2-b2bb-40592a3e353a"] |
 | `storeIds`         | Array    | When store ID's is **null** mean will apply to all store | null                                                          |
 | `updatedAt`        | DateTime | Last update date time                                    | "2020-09-22T04:44:57.950398414Z"                              |
+
+</details>
+

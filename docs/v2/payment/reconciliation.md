@@ -49,6 +49,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter         | Type         | Validation                                                            | Required | Description        |
 | ----------------- | ------------ | --------------------------------------------------------------------- | -------- | ------------------ |
 | `transactionType` | String       | ENUM("PAYMENT", "REFUND")                                             | No       | Terminal ID        |
@@ -56,6 +59,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `method`          | List(String) | [Appendix: Method](./query-transaction.md#transaction-method--region) | No       | Transaction method |
 | `region`          | List(String) | [Appendix: Region](./query-transaction.md#transaction-method--region) | No       | Transaction region |
 | `cursor`          | String       |                                                                       | No       | Pagination cursor  |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -68,6 +74,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 ```
 
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                  | Type   | Validation                                                | Description                        |
 | -------------------------- | ------ | --------------------------------------------------------- | ---------------------------------- |
@@ -92,3 +101,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `error.code`               | String |                                                           | Error code                         |
 | `error.message`            | String |                                                           | Error message                      |
 | `error.debug`              | String |                                                           | Debug message ( sandbox only )     |
+
+</details>
+

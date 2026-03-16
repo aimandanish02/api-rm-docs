@@ -69,6 +69,9 @@ Recurring payment is for your customer to bind their card and our system able to
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter             | Type   | Validation                         | Required | Description                                                         |
 | --------------------- | ------ | ---------------------------------- | -------- | ------------------------------------------------------------------- |
 | `storeId`             | String |                                    | Yes      | Store ID                                                            |
@@ -86,7 +89,13 @@ Recurring payment is for your customer to bind their card and our system able to
 | `recurringTarget`     | String |                                    | Yes      | Recurring target rules can be different values based on interval    |
 | `recurringRepetition` | Uint64 |                                    | Yes      | Recurring repetition rules, how many times charge the customer card |
 
+</details>
+
+
 <strong>Recurring Target Rules:</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Interval | Target | Payment Behaviour                     |
 | -------- | ------ | ------------------------------------- |
@@ -100,6 +109,9 @@ Recurring payment is for your customer to bind their card and our system able to
 | MONTHLY  | -1     | End of every month e.g. 2022/10/31    |
 | MONTHLY  | 0      | Start of every month, e.g. 2022/10/01 |
 | MONTHLY  | 1 - 28 | Day of month                          |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -121,6 +133,9 @@ Recurring payment is for your customer to bind their card and our system able to
 ```
 
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                                   | Type   | Validation                         | Description                                                                               |
 | ------------------------------------------- | ------ | ---------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -150,6 +165,9 @@ Recurring payment is for your customer to bind their card and our system able to
 | `error.message`                             | String |                                    | Error message                                                                             |
 | `error.debug`                               | String |                                    | Debug message ( sandbox only )                                                            |
 
+</details>
+
+
 
 ### Redirect Response
 
@@ -159,11 +177,17 @@ Redirect URL to redirect your customer back to your page after card bind, it's c
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation                             | Required | Description           |
 | ------------ | ------ | -------------------------------------- | -------- | --------------------- |
 | `status`     | String | Enum("SUCCESS", "FAILED", "CANCELLED") | Yes      | Card bind status      |
 | `customerId` | String |                                        | Yes      | Card bind customer id |
 | `reason`     | String |                                        | No       | Card bind fail reason |
+
+</details>
+
 
 ### Notify Response
 
@@ -176,6 +200,9 @@ Reference: [Query Transaction](./query-transaction.md)
 :::
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter          | Type   | Validation                | Required | Description                       |
 | ------------------ | ------ | ------------------------- | -------- | --------------------------------- |
@@ -194,6 +221,9 @@ Reference: [Query Transaction](./query-transaction.md)
 | `data.createdAt`   | String | RFC3339                   | Yes      | Recurring order created date time |
 | `data.updatedAt`   | String | RFC3339                   | Yes      | Recurring order updated date time |
 
+</details>
+
+
 ## Tokenization: Tokenized Payment
 
 Tokenized payment is for your to let your customer bind their card and you can take the fund from customer and receive payment based on your own requirements. If you have own recurring engine to process payment you can using this API instead of our recurring payment example like [WooCommerce Subscription Plugin](https://woocommerce.com/products/woocommerce-subscriptions/).
@@ -202,6 +232,9 @@ Tokenized payment is for your to let your customer bind their card and you can t
 
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter            | Type   | Validation | Required | Description                           |
 | -------------------- | ------ | ---------- | -------- | ------------------------------------- |
@@ -213,6 +246,9 @@ Tokenized payment is for your to let your customer bind their card and you can t
 | `productName`        | String |            | Yes      | Tokenized product name                |
 | `productDescription` | String |            | Yes      | Tokenized product description         |
 | `redirectUrl`        | String |            | Yes      | Redirect URL after customer bind card |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -228,6 +264,9 @@ Tokenized payment is for your to let your customer bind their card and you can t
 ```
 
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                 | Type   | Validation      | Description                                                                               |
 | ------------------------- | ------ | --------------- | ----------------------------------------------------------------------------------------- |
@@ -252,6 +291,9 @@ Tokenized payment is for your to let your customer bind their card and you can t
 | `error.message`           | String |                 | Error message                                                                             |
 | `error.debug`             | String |                 | Debug message ( sandbox only )                                                            |
 
+</details>
+
+
 ### Redirect Response
 
 :::info
@@ -260,11 +302,17 @@ Redirect URL to redirect your customer back to your page after card bind, it's c
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation                             | Required | Description           |
 | ------------ | ------ | -------------------------------------- | -------- | --------------------- |
 | `status`     | String | Enum("SUCCESS", "FAILED", "CANCELLED") | Yes      | Card bind status      |
 | `customerId` | String |                                        | Yes      | Card bind customer id |
 | `reason`     | String |                                        | No       | Card bind fail reason |
+
+</details>
+
 
 ## Tokenization Customer API
 
@@ -279,11 +327,20 @@ These API will be available only when the customer been binded once else you wil
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter     | Type  | Validation | Required | Description                                                                  |
 | ------------- | ----- | ---------- | -------- | ---------------------------------------------------------------------------- |
 | `customer_id` | Param |            | Yes      | Customer ID return from the creation of recurring payment / tokenize payment |
 
+</details>
+
+
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                                   | Type   | Validation                         | Description                                                                               |
 | ------------------------------------------- | ------ | ---------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -313,16 +370,28 @@ These API will be available only when the customer been binded once else you wil
 | `error.message`                             | String |                                    | Error message                                                                             |
 | `error.debug`                               | String |                                    | Debug message ( sandbox only )                                                            |
 
+</details>
+
+
 ### Get Customer Orders
 
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter     | Type  | Validation | Required | Description                                                                  |
 | ------------- | ----- | ---------- | -------- | ---------------------------------------------------------------------------- |
 | `customer_id` | Param |            | Yes      | Customer ID return from the creation of recurring payment / tokenize payment |
 
+</details>
+
+
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                    | Type   | Validation      | Description                            |
 | ---------------------------- | ------ | --------------- | -------------------------------------- |
@@ -340,17 +409,29 @@ These API will be available only when the customer been binded once else you wil
 | `error.message`              | String |                 | Error message                          |
 | `error.debug`                | String |                 | Debug message ( sandbox only )         |
 
+</details>
+
+
 ### Toggle Customer Status
 
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter     | Type  | Validation | Required | Description                                                                  |
 | ------------- | ----- | ---------- | -------- | ---------------------------------------------------------------------------- |
 | `customer_id` | Param |            | Yes      | Customer ID return from the creation of recurring payment / tokenize payment |
 
+</details>
+
+
 
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                                   | Type   | Validation                         | Description                                                                               |
 | ------------------------------------------- | ------ | ---------------------------------- | ----------------------------------------------------------------------------------------- |
@@ -380,6 +461,9 @@ These API will be available only when the customer been binded once else you wil
 | `error.message`                             | String |                                    | Error message                                                                             |
 | `error.debug`                               | String |                                    | Debug message ( sandbox only )                                                            |
 
+</details>
+
+
 ### Create Customer Order ( Payment )
 
 
@@ -389,6 +473,9 @@ This API will use the customer binded card to make a payment, it's not a manual 
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter     | Type   | Validation  | Required | Description                                                                  |
 | ------------- | ------ | ----------- | -------- | ---------------------------------------------------------------------------- |
 | `customer_id` | Param  |             | Yes      | Customer ID return from the creation of recurring payment / tokenize payment |
@@ -396,6 +483,9 @@ This API will use the customer binded card to make a payment, it's not a manual 
 | `amount`      | Uint64 |             | Yes      | Payment amount                                                               |
 | `title`       | String |             | No       | Payment information title                                                    |
 | `description` | String |             | No       | Payment information description                                              |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -408,6 +498,9 @@ This API will use the customer binded card to make a payment, it's not a manual 
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -415,3 +508,5 @@ This API will use the customer binded card to make a payment, it's not a manual 
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>

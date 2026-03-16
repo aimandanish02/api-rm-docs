@@ -64,14 +64,23 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type     | Description                                                                                               | Example                      |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object[] | Array of user object                                                                                      | (Refer to explanation below) |
 | `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Array of store object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter     | Type     | Description                         | Example                                                       |
 | ------------- | -------- | ----------------------------------- | ------------------------------------------------------------- |
@@ -87,3 +96,6 @@ No request parameter is required for this endpoint.
 | `isActive`    | Boolean  | User active or deactivated status   | true                                                          |
 | `createdAt`   | DateTime | Creation date time of user          | "2018-02-12T08:53:13Z"                                        |
 | `updatedAt`   | DateTime | Last update date time of user       | "2018-02-12T08:53:13Z"                                        |
+
+</details>
+

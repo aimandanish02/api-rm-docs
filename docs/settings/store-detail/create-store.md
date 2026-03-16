@@ -95,6 +95,9 @@ To create a store under one merchant.
 
 ### Request Parameters:
 
+<details>
+<summary><strong>Request Parameters:</strong></summary>
+
 | Parameter              | Type              | Required | Description                                    | Example                                            |
 | ---------------------- | ----------------- | -------- | ---------------------------------------------- | -------------------------------------------------- |
 | `merchantSettlementId` | String            | No       | Linkage with payment settlement account        |                                                    |
@@ -109,16 +112,28 @@ To create a store under one merchant.
 | `phoneNumber`          | String            | Yes      | Phone number of store                          | "377334080"                                        |
 | `geoLocation`          | Object of [Float] | No       | Geo Location (latitude and longitude) of store | {"latitude": 3.1349857, "longitude": 101.6136659 } |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type     | Description                                                                                               | Example                      |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object[] | Array of store object                                                                                     | (Refer to explanation below) |
 | `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Array of store object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type              | Description                                                 | Example                                            |
 | ---------------------- | ----------------- | ----------------------------------------------------------- | -------------------------------------------------- |
@@ -138,3 +153,6 @@ To create a store under one merchant.
 | `isDefault`            | String            | Default store of merchant (first store created upon signup) | true                                               |
 | `createdAt`            | DateTime          | Creation date time of store                                 | "2018-02-12T08:53:13Z"                             |
 | `updatedAt`            | DateTime          | Last update date time of store                              | "2018-02-12T08:53:13Z"                             |
+
+</details>
+

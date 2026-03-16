@@ -152,6 +152,9 @@ For Merchant that has a Partner account
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter     | Type   | Example               |
 | ------------- | ------ | --------------------- |
 | `companyName` | String | "Revenue Monster"     |
@@ -161,16 +164,28 @@ For Merchant that has a Partner account
 | `lastName`    | String | "Testing"             |
 | `phoneNumber` | String | "164699177"           |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Merchant Object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type     | Description                             | Example                                                        |
 | --------------------- | -------- | --------------------------------------- | -------------------------------------------------------------- |
@@ -208,9 +223,15 @@ For Merchant that has a Partner account
 | `createdAt`           | DateTime | Creation date time of merchant          | "2018-02-12T08:53:13Z"                                         |
 | `updatedAt`           | DateTime | Last update date time of merchant       | "2018-02-12T08:53:13Z"                                         |
 
+</details>
+
+
 <br/>
 
 <strong>Subscription object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                   | Type | Description | Example |
 | --------------------------- | ---- | ----------- | ------- |
@@ -218,9 +239,15 @@ For Merchant that has a Partner account
 | `terminalOfflineCreditCard` | Bool |             | false   |
 | `onlineCreditCard`          | Bool |             | false   |
 
+</details>
+
+
 <br />
 
 <strong>Store object (store):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type              | Description                                     | Example                                                      |
 | ---------------------- | ----------------- | ----------------------------------------------- | ------------------------------------------------------------ |
@@ -241,9 +268,15 @@ For Merchant that has a Partner account
 | `createdAt`            | DateTime          | Creation date time of store                     | "2018-02-12T08:53:13Z"                                       |
 | `updatedAt`            | DateTime          | Last update date time of store                  | "2018-02-12T08:53:13Z"                                       |
 
+</details>
+
+
 <br />
 
 <strong>User object (store):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type     | Description                         | Example                                                       |
 | --------------------- | -------- | ----------------------------------- | ------------------------------------------------------------- |
@@ -261,3 +294,6 @@ For Merchant that has a Partner account
 | `currentStoreId`      | String   | Current Store ID                    | ""                                                            |
 | `createdAt`           | DateTime | Creation date time of user          | "2018-02-12T08:53:13Z"                                        |
 | `updatedAt`           | DateTime | Last update date time of user       | "2018-02-12T08:53:13Z"                                        |
+
+</details>
+

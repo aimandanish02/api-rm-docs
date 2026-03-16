@@ -97,15 +97,24 @@ Get Merchants Info
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type     | Description                                                                                               | Example                      |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object[] |                                                                                                           | (Refer to explanation below) |
 | `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 | `meta`    | Object   |                                                                                                           | {}                           |
 
+</details>
+
+
 <br />
 
 <strong>Merchant Info (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type     | Description                             | Example                                                        |
 | --------------------- | -------- | --------------------------------------- | -------------------------------------------------------------- |
@@ -143,14 +152,23 @@ Get Merchants Info
 | `createdAt`           | DateTime | Creation date time of merchant          | "2018-02-12T08:53:13Z"                                         |
 | `updatedAt`           | DateTime | Last update date time of merchant       | "2018-02-12T08:53:13Z"                                         |
 
+</details>
+
+
 <br/>
 
 <strong>Subscription object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                   | Type | Description | Example |
 | --------------------------- | ---- | ----------- | ------- |
 | `terminalOfflineEWallet`    | Bool |             | false   |
 | `terminalOfflineCreditCard` | Bool |             | false   |
 | `onlineCreditCard`          | Bool |             | false   |
+
+</details>
+
 
 <br />

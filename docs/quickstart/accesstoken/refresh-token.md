@@ -68,10 +68,16 @@ In case you lost your refresh token or do not want to deal with refresh token, y
 
 To get your **Client ID** and **Client Secret** , go to [RM Merchant Portal](https://merchant.revenuemonster.my/) > **Developer** > **Application**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter      |  Type  | Required | Description                                                                                            |             Example              |
 | :------------- | :----: | :------: | :----------------------------------------------------------------------------------------------------- | :------------------------------: |
 | `ClientID`     | String |   Yes    | Client ID or AppID as obtained from [RM Merchant Portal](https://merchant.revenuemonster.my/).         |       3208919753194101125        |
 | `ClientSecret` | String |   Yes    | Client secret or AppSecret as obtained from [RM Merchant Portal](https://merchant.revenuemonster.my/). | mglve4W3UhPSGOV7gnwoYKyvbRCe83zZ |
+
+</details>
+
 
 ### Step 2 : Encode the parameters from Step 1 in Base 64 format
 
@@ -94,12 +100,21 @@ More info: [Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Au
 
 **In Body Request** :
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter      | Type   | Required | Description                                                                           | Example       |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------- | ------------- |
 | `grantType`    | String | Yes      | Only support refresh_token                                                            | refresh_token |
 | `refreshToken` | String | Yes      | Refresh token is obtained from response parameter when **access token** is generated. | Random String |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter               |  Type  | Description                                                                  |              Example |
 | :---------------------- | :----: | ---------------------------------------------------------------------------- | -------------------: |
@@ -108,3 +123,6 @@ More info: [Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Au
 | `expiresIn`             | String | Token expiry, in seconds format. “72591999” means 72591999 seconds or 30 day |             72591999 |
 | `refreshToken`          | String | Required for getting new access token after expiry                           | Refresh token string |
 | `refreshTokenExpiresIn` | String | Token expiry, in seconds format. “1576799999” means 1576799999 seconds       |           1576799999 |
+
+</details>
+

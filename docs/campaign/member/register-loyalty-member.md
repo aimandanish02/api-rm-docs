@@ -116,6 +116,9 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter       | Type   | Required | Description                                    | Example                      |
 | --------------- | ------ | -------- | ---------------------------------------------- | ---------------------------- |
 | `name`          | String | Yes      | Member name                                    | "Oska"                       |
@@ -128,20 +131,32 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 | `point`         | Uint   | Yes      | Loyalty Point                                  | 0                            |
 | `address`       | Object | Yes      | Refer to explanation below                     | (Refer to explanation below) |
 
+</details>
+
+
 <br />
 
 
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object | Profile object                                                                                            | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br />
 
 <strong>Profile object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type     | Description                  | Example                                                           |
 | --------------------- | -------- | ---------------------------- | ----------------------------------------------------------------- |
@@ -163,10 +178,16 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 | `createdAt`           | DateTime | Creation date time           | "2018-10-19T03:39:47Z"                                            |
 | `updatedAt`           | DateTime | Last update date time        | "2020-06-29T10:14:33Z"                                            |
 
+</details>
+
+
 <br />
 
 
 <strong>Address object:</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Description | Example |
 | -------------- | ------ | ----------- | ------- |
@@ -176,3 +197,6 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 | `city`         | String | City        | ""      |
 | `state`        | String | State       | ""      |
 | `country`      | String | Country     | ""      |
+
+</details>
+

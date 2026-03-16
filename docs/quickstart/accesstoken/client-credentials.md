@@ -82,10 +82,16 @@ After getting an **Access Token** from RM Authorization Server , **Access token*
 
 To get your **Client ID** and **Client Secret** , go to [RM Merchant Portal](https://merchant.revenuemonster.my/) > **Developer** > **Application**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter      |  Type  | Required | Description                                                                                            |             Example              |
 | :------------- | :----: | :------: | :----------------------------------------------------------------------------------------------------- | :------------------------------: |
 | `ClientID`     | String |   Yes    | Client ID or AppID as obtained from [RM Merchant Portal](https://merchant.revenuemonster.my/).         |       3208919753194101125        |
 | `ClientSecret` | String |   Yes    | Client secret or AppSecret as obtained from [RM Merchant Portal](https://merchant.revenuemonster.my/). | mglve4W3UhPSGOV7gnwoYKyvbRCe83zZ |
+
+</details>
+
 
 ### Step 2 : Encode the parameters from Step 1 in Base 64 format
 
@@ -127,6 +133,9 @@ In Body Request :
 
 <details> <summary><strong>Response Parameters</strong></summary>
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter               |  Type  | Description                                                                  |              Example |
 | :---------------------- | :----: | ---------------------------------------------------------------------------- | -------------------: |
 | `accessToken`           | String | Required for subsequent request(s)                                           |         Access Token |
@@ -134,6 +143,9 @@ In Body Request :
 | `expiresIn`             | String | Token expiry, in seconds format. “72591999” means 72591999 seconds or 30 day |             72591999 |
 | `refreshToken`          | String | Required for getting new access token after expiry                           | Refresh token string |
 | `refreshTokenExpiresIn` | String | Token expiry, in seconds format. “1576799999” means 1576799999 seconds       |           1576799999 |
+
+</details>
+
 
 </details>
 

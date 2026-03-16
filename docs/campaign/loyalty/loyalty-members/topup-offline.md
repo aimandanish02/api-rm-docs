@@ -114,6 +114,9 @@ Specify loyalty member id to topup using quickpay
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Required | Description                                            | Example                      |
 | ---------- | ------ | -------- | ------------------------------------------------------ | ---------------------------- |
 | `authCode` | String | Yes      | Auth code of QR code/barcode being scanned. Length: 18 | "134850717797247290"         |
@@ -121,11 +124,17 @@ Specify loyalty member id to topup using quickpay
 | `storeId`  | String | Yes      | ID of the store                                        | "6170506694335521334"        |
 | `memberId` | String | Yes      | Member id                                              | "1626838502220135674"        |
 
+</details>
+
+
 
 
 <br />
 
 <strong>Order object (order):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Required | Description                                         | Example              |
 | -------------- | ------ | -------- | --------------------------------------------------- | -------------------- |
@@ -133,18 +142,30 @@ Specify loyalty member id to topup using quickpay
 | `currencyType` | String | Yes      | Currency notation (currently only support MYR)      | "MYR"                |
 | `amount`       | Uint   | Yes      | Amount of order in cent (min RM 0.10 or amount: 10) | 100                  |
 
+</details>
+
+
 
 ### Response Parameters
 
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object | Transaction object                                                                                        | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br />
 
 <strong>Transaction object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type     | Description                                                          | Example                                    |
 | --------------- | -------- | -------------------------------------------------------------------- | ------------------------------------------ |
@@ -163,8 +184,14 @@ Specify loyalty member id to topup using quickpay
 | `createdAt`     | DateTime | Creation date time of transaction                                    | "2018-03-21T06:41:22Z"                     |
 | `updatedAt`     | DateTime | Last update date time of transaction                                 | "2018-03-21T06:41:22Z"                     |
 
+</details>
+
+
 <br />
 <strong>Store object (store):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type              | Description                                     | Example                                             |
 | -------------- | ----------------- | ----------------------------------------------- | --------------------------------------------------- |
@@ -183,8 +210,14 @@ Specify loyalty member id to topup using quickpay
 | `createdAt`    | DateTime          | Creation date time of store                     | "2018-02-12T08:53:13Z"                              |
 | `updatedAt`    | DateTime          | Last update date time of store                  | "2018-02-12T08:53:13Z"                              |
 
+</details>
+
+
 <br />
 <strong>Order object (order):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter | Type   | Description                                         | Example                        |
 | --------- | ------ | --------------------------------------------------- | ------------------------------ |
@@ -192,3 +225,6 @@ Specify loyalty member id to topup using quickpay
 | `title`   | String | Order title, max: 32                                | "Sales"                        |
 | `details` | String | Order details, max: 600                             | "1 x iPhone X; 2 x SAMSUNG S8" |
 | `amount`  | Uint   | Amount of order in cent (min RM 0.10 or amount: 10) | 100                            |
+
+</details>
+

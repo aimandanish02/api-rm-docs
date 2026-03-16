@@ -140,6 +140,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
@@ -147,17 +150,35 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Function that provide by alacarte | "get.category.items"         |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Description        | Example                    |
 | ------------ | ------ | ------------------ | -------------------------- |
 | `categoryId` | String | ID of the Category | "5eabf31ee0e9cd7b01a3a35e" |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                     | Example                      |
 | --------- | ------ | ------------------------------- | ---------------------------- |
 | `cursor`  | String | Optional, if pagination exists. | ""                           |
 | `count`   | Uint   | Current page record             | 2                            |
 | `items`   | Object | (Refer to explanation below)    | (Refer to explanation below) |
+
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type     | Description                               | Example                                                  |
 | -------------- | -------- | ----------------------------------------- | -------------------------------------------------------- | --- |
@@ -178,7 +199,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `sku`          | String   | Item SKU                                  | "fkj31i"                                                 |     |
 | `updatedAt`    | DateTime | Last update date time                     | "2020-09-22T04:44:57.950398414Z"                         |
 
+</details>
+
+
 ### Inside Sides (parameter)
+
+<details>
+<summary><strong>Inside Sides (parameter)</strong></summary>
 
 | Parameter     | Type   | Description                | Example                      |
 | ------------- | ------ | -------------------------- | ---------------------------- |
@@ -189,7 +216,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `maxChoice`   | Uint   | Set maximum choice         | 3                            |
 | `sideItems`   | Array  | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Side Items (parameter)
+
+<details>
+<summary><strong>Inside Side Items (parameter)</strong></summary>
 
 | Parameter         | Type   | Description                         | Example                         |
 | ----------------- | ------ | ----------------------------------- | ------------------------------- |
@@ -199,14 +232,26 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `price`           | Object | Refer to the <b>Price parameter</b> | ( Refer to the Price parameter) |
 | `referenceItemId` | String | Optional, Item reference ID         | "5eaa7b72e0e9cd7b01a3a2b2"      |
 
+</details>
+
+
 ### Inside Price (parameter)
+
+<details>
+<summary><strong>Inside Price (parameter)</strong></summary>
 
 | Parameter      | Type   | Description                                      | Example |
 | -------------- | ------ | ------------------------------------------------ | ------- |
 | `amount`       | Uint   | Amount in cent (min RM 0.10 <b>10 = RM 0.10</b>) | 100     |
 | `currencyType` | String | Current only support Ringgit Malaysia            | "MYR"   |
 
+</details>
+
+
 ### Inside Preferences (parameter)
+
+<details>
+<summary><strong>Inside Preferences (parameter)</strong></summary>
 
 | Parameter   | Type   | Description                | Example                      |
 | ----------- | ------ | -------------------------- | ---------------------------- |
@@ -216,9 +261,18 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `maxChoice` | Uint   | Set maximum choice         | 3                            |
 | `labels`    | Array  | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Labels (parameter)
+
+<details>
+<summary><strong>Inside Labels (parameter)</strong></summary>
 
 | Parameter | Type   | Description | Example                    |
 | --------- | ------ | ----------- | -------------------------- |
 | `id`      | String | Label ID    | "5f698149585d7cc1ae35a38e" |
 | `name`    | String | Label name  | "Basic"                    |
+
+</details>
+

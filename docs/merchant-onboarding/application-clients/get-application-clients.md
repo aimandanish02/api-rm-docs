@@ -49,13 +49,22 @@ Get Application Clients
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `items`   | Array  |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 | `meta`    | Object |                                                                                                           | {"count":1}                  |
 
+</details>
+
+
 <br />
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type           | Description                       | Example                                                                             |
 | --------------------- | -------------- | --------------------------------- | ----------------------------------------------------------------------------------- |
@@ -74,6 +83,9 @@ Get Application Clients
 | `redirectUri`         | Array (String) |                                   | ["https://google.com"],                                                             |
 | `createdAt`           | DateTime       | Creation date time of merchant    | "2021-02-12T08:53:13Z"                                                              |
 | `updatedAt`           | DateTime       | Last update date time of merchant | "2021-02-12T08:53:13Z"                                                              |
+
+</details>
+
 
 <br />
 

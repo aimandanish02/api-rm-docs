@@ -207,6 +207,9 @@ Update Merchant By ID
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter                   | Type              | Example     |
 | --------------------------- | ----------------- | ----------- |
 | `brandName`                 | String            | ""          |
@@ -240,9 +243,15 @@ Update Merchant By ID
 | `terminalOfflineCreditCard` | String            | ""          |
 | `onlineCreditCard`          | String            | ""          |
 
+</details>
+
+
 <br/>
 
 <strong>invoiceAddress (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Description     | Example |
 | -------------- | ------ | --------------- | ------- |
@@ -253,9 +262,15 @@ Update Merchant By ID
 | `state`        | String | Address State   | ""      |
 | `country`      | String | Country         | ""      |
 
+</details>
+
+
 <br/>
 
 <strong>inspectList (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type   | Example |
 | --------------- | ------ | ------- |
@@ -272,8 +287,14 @@ Update Merchant By ID
 | `beginDateTime` | String | ""      |
 | `endDateTime`   | String | ""      |
 
+</details>
+
+
 <br/>
 <strong>document (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type   | Example |
 | ----------------------------- | ------ | ------- |
@@ -290,15 +311,27 @@ Update Merchant By ID
 | `form44FileUrl`               | String | ""      |
 | `businessSitePhotoFileUrl`    | String | ""      |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 <strong>Item Object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                 | Type              | Description                             | Example                                 |
 | ------------------------- | ----------------- | --------------------------------------- | --------------------------------------- |
@@ -338,9 +371,15 @@ Update Merchant By ID
 | `createdAt`               | DateTime          | Creation date time of merchant          | "2021-02-12T08:53:13Z"                  |
 | `updatedAt`               | DateTime          | Last update date time of merchant       | "2021-02-12T08:53:13Z"                  |
 
+</details>
+
+
 <br/>
 
 <strong>invoiceAddress (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Description     | Example |
 | -------------- | ------ | --------------- | ------- |
@@ -351,9 +390,15 @@ Update Merchant By ID
 | `state`        | String | Address State   | ""      |
 | `country`      | String | Country         | ""      |
 
+</details>
+
+
 <br/>
 
 <strong>inspectList (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type   | Example |
 | --------------- | ------ | ------- |
@@ -370,8 +415,14 @@ Update Merchant By ID
 | `beginDateTime` | String | ""      |
 | `endDateTime`   | String | ""      |
 
+</details>
+
+
 <br/>
 <strong>document (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type   | Example |
 | ----------------------------- | ------ | ------- |
@@ -388,8 +439,14 @@ Update Merchant By ID
 | `form44FileUrl`               | String | ""      |
 | `businessSitePhotoFileUrl`    | String | ""      |
 
+</details>
+
+
 <br/>
 <strong>documentFile (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type   | Example |
 | ----------------------------- | ------ | ------- |
@@ -405,3 +462,6 @@ Update Merchant By ID
 | `Section14FileURL`            | String | ""      |
 | `Form44FileURL`               | String | ""      |
 | `BusinessSitePhotoFileURL`    | String | ""      |
+
+</details>
+

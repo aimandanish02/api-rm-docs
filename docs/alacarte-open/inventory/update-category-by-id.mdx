@@ -85,12 +85,21 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
 | `version`  | String | Currently only support 'v1"       | "v1"                         |
 | `function` | String | Function that provide by alacarte | "update.category"            |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
+
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter        | Type   | Description                                                | Example                    |
 | ---------------- | ------ | ---------------------------------------------------------- | -------------------------- |
@@ -99,11 +108,23 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `status`         | String | Status of Category **"ACTIVE"** and **"INACTIVE"**         | "ACTIVE"                   |
 | `positionChange` | Int    | Move **UP** or **DOWN** the position using **-1** or **1** | 1                          |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                  | Example                      |
 | --------- | ------ | ---------------------------- | ---------------------------- |
 | `item`    | Object | (Refer to explanation below) | (Refer to explanation below) |
+
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter    | Type     | Description                         | Example                          |
 | ------------ | -------- | ----------------------------------- | -------------------------------- |
@@ -115,3 +136,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `position`   | Uint     | Current position among Category     | 1                                |
 | `createdAt`  | DateTime | Creation date time                  | "2020-09-22T04:25:23.684330293Z" |
 | `updatedAt`  | DateTime | Last update date time               | "2020-09-22T04:25:23.684330293Z" |
+
+</details>
+

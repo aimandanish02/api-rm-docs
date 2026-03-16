@@ -84,14 +84,23 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                   | Example                    |
 | --------- | ------ | --------------------------------------------------------------------------------------------- | -------------------------- |
 | `item`    | Object | Object of item details.                                                                       | (Refer explanantion below) |
 | `code`    | String | Status returned from Revenue Monster server, whether successfully called our endpoint or not. | "SUCCESS"                  |
 
+</details>
+
+
 <br/>
 
 <strong>Item Object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter            | Type     | Description                             | Example                                                        |
 | -------------------- | -------- | --------------------------------------- | -------------------------------------------------------------- |
@@ -121,9 +130,15 @@ No request parameter is required for this endpoint.
 | `createdAt`          | DateTime | Creation date time of merchant          | "2018-02-12T08:53:13Z"                                         |
 | `updatedAt`          | DateTime | Last update date time of merchant       | "2018-02-12T08:53:13Z"                                         |
 
+</details>
+
+
 <br/>
 
 <strong>Invoice Address Object:</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Description           | Example                                 |
 | -------------- | ------ | --------------------- | --------------------------------------- |
@@ -133,3 +148,6 @@ No request parameter is required for this endpoint.
 | `city`         | String | City of merchant      | "Selangor"                              |
 | `state`        | String | State of merchant     | "Selangor"                              |
 | `country`      | String | Country of merchant   | "Malaysia"                              |
+
+</details>
+

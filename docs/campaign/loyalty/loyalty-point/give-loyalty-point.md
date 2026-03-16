@@ -53,6 +53,9 @@ To give loyalty point(s) to customers using phone number or member ID.
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter     | Type    | Required | Description                                        | Example                                                    |
 | ------------- | ------- | -------- | -------------------------------------------------- | ---------------------------------------------------------- |
 | `point`       | Integer | Yes      | Loyalty point given to customers.                  | 100                                                        |
@@ -60,6 +63,9 @@ To give loyalty point(s) to customers using phone number or member ID.
 | `memberId`    | String  | No       | Member ID if type "ID" being provided.             | "2777058682717858418"                                      |
 | `countryCode` | String  | No       | Country code if type "PHONENUMBER" being provided. | "60"                                                       |
 | `phoneNumber` | String  | No       | Phone number if type "PHONENUMBER" being provided. | "172826990"                                                |
+
+</details>
+
 
 > Example Request Phone Number
 
@@ -117,9 +123,15 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/loyalty/rew
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   |                                                                           Description                                                                            | Example   |
 | --------- | ------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------- |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer [Appendix 1: Error Codes](https://doc.revenuemonster.my/#appendix-1-error-codes)) | "SUCCESS" |
+
+</details>
+
 
 > Example Response (PhoneNumber & Member ID)
 

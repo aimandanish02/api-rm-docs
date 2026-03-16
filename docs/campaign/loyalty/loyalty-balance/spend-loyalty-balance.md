@@ -111,15 +111,24 @@ Get loyalty balance
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description | Example                                                |
 | ---------- | ------ | ----------- | ------------------------------------------------------ | ----------------------- |
 | `authCode` | String | Yes         | Auth code of QR code/barcode being scanned. Length: 18 | "134850717797247290"    |
 | `storeId`  | String |             |                                                        |                         |
 | `order`    | Object |             |                                                        | **refer below example** |
 
+</details>
+
+
 <br />
 
 <strong>Order object (order):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter        | Type   | Required | Description                                         | Example               |
 | ---------------- | ------ | -------- | --------------------------------------------------- | --------------------- |
@@ -129,14 +138,26 @@ Get loyalty balance
 | `additionalData` | String |          |                                                     | ""                    |
 | `amount`         | Uint   | Yes      | Amount of order in cent (min RM 0.10 or amount: 10) | 100                   |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br />
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type     | Description                       | Example                 |
 | --------------- | -------- | --------------------------------- | ----------------------- |
@@ -153,9 +174,15 @@ Get loyalty balance
 | `createdAt`     | DateTime | Creation date time of merchant    | "2022-01-27T04:02:46Z"  |
 | `updatedAt`     | DateTime | Last update date time of merchant | "2022-01-27T04:02:46Z"  |
 
+</details>
+
+
 <br />
 
 <strong>Store object (store):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type     | Description                                    | Example                                                      |
 | ---------------------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
@@ -176,9 +203,15 @@ Get loyalty balance
 | `createdAt`            | DateTime | Creation date time of store                    | "2020-09-14T03:01:20Z"                                       |
 | `updatedAt`            | DateTime | Last update date time of store                 | "2020-09-14T03:01:20Z"                                       |
 
+</details>
+
+
 <br />
 
 <strong>Order object (order):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter | Type   | Required | Description                                         | Example              |
 | --------- | ------ | -------- | --------------------------------------------------- | -------------------- |
@@ -186,3 +219,6 @@ Get loyalty balance
 | `title`   | String | Yes      |                                                     | ""                   |
 | `detail`  | String | Yes      |                                                     | ""                   |
 | `amount`  | Uint   | Yes      | Amount of order in cent (min RM 0.10 or amount: 10) | 100                  |
+
+</details>
+

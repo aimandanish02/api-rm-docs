@@ -64,12 +64,18 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter     | Type   | Description | Example       |
 | ------------- | ------ | ----------- | ------------- |
 | `countryCode` | String |             | "60"          |
 | `phoneNumber` | String | User Number | "163877652"   |
 | `message`     | String |             | "test"        |
 | `type`        | String |             | "VERIFY_CODE" |
+
+</details>
+
 
 <!-- :::note
 

@@ -81,6 +81,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                 | Example                      |
 | ---------- | ------ | --------------------------- | ---------------------------- |
 | `service`  | String | EKYC service                | "ekyc"                       |
@@ -88,10 +91,19 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Selected function           | "face-compare"               |
 | `request`  | Object | Refer to explanation below  | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter               | Type   | Description                             | Example |
 | ----------------------- | ------ | --------------------------------------- | ------- |
 | `query_image_content_1` | String | First face image (Base64 image string)  | ""      |
 | `query_image_content_2` | String | Second face image (Base64 image string) | ""      |
+
+</details>
+
 
 ### Response Parameters
 
@@ -111,6 +123,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter            | Type     | Description                           | Example                      |
 | -------------------- | -------- | ------------------------------------- | -----------------------------|
 | `id`                 | String   | Table ID                              | "60f79b737b03abf23ad65206"   |
@@ -119,3 +134,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `isSamePerson`       | Boolean  | Visualization for result image        | true                         |
 | `similarity`         | Int      | Percentage of similarity of two faces | 99                           |
 | `updatedAt`          | DateTime | Last update date time                 | "2021-07-21T15:07:43.266243" |
+
+</details>
+

@@ -133,6 +133,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
@@ -140,13 +143,25 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Function that provide by alacarte | "update.store.delivery"      |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter | Type   | Description                                                                        | Example                      |
 | --------- | ------ | ---------------------------------------------------------------------------------- | ---------------------------- |
 | `storeId` | String | ID of the Store that Create from RM                                                | "2808912573238362402"        |
 | `method`  | String | Current delivery service for merchant to select "OWN" , "MRSPEEDY" , "GRABEXPRESS" | "OWN"                        |
 | `cost`    | Array  | Refer to explanation below                                                         | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Cost (parameter)
+
+<details>
+<summary><strong>Inside Cost (parameter)</strong></summary>
 
 | Parameter              | Type   | Description                     | Example |
 | ---------------------- | ------ | ------------------------------- | ------- |
@@ -155,7 +170,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `endDistanceInMeter`   | Uint   | Set a End Distance (In Meter)   | 5000    |
 | `amount`               | Uint   | Set Distance amount             | 0       |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter        | Type     | Description                       | Example                                        |
 | ---------------- | -------- | --------------------------------- | ---------------------------------------------- |
@@ -164,14 +185,26 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `delivery`       | Object   | Refer to explanation below        | (Refer to explanation below)                   |
 | `updatedAt`      | DateTime | Last update date time             | "2020-09-22T04:44:57.950398414Z"               |
 
+</details>
+
+
 ### Inside Delivery (parameter)
+
+<details>
+<summary><strong>Inside Delivery (parameter)</strong></summary>
 
 | Parameter | Type   | Description                                                                        | Example                      |
 | --------- | ------ | ---------------------------------------------------------------------------------- | ---------------------------- |
 | `method`  | String | Current delivery service for merchant to select "OWN" , "MRSPEEDY" , "GRABEXPRESS" | "OWN"                        |
 | `cost`    | Array  | Refer to explanation below                                                         | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Cost (parameter)
+
+<details>
+<summary><strong>Inside Cost (parameter)</strong></summary>
 
 | Parameter              | Type   | Description                     | Example |
 | ---------------------- | ------ | ------------------------------- | ------- |
@@ -179,3 +212,6 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `startDistanceInMeter` | Uint   | Set a Start Distance (In Meter) | 0       |
 | `endDistanceInMeter`   | Uint   | Set a End Distance (In Meter)   | 5000    |
 | `amount`               | Uint   | Set Distance amount             | 0       |
+
+</details>
+

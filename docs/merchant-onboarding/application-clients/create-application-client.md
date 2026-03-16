@@ -71,6 +71,9 @@ Create Application Client
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter          | Type         | Example |
 | ------------------ | ------------ | ------- | ---------------------- |
 | `userId`           | String       |         | "1647501978916382207"  |
@@ -82,16 +85,28 @@ Create Application Client
 | `publicKey`        | String       |         | "....."                |
 | `isActive`         | Boolean      |         | true                   |
 
+</details>
+
+
 <br />
 
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br />
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type           | Description                       | Example                                                                             |
 | --------------------- | -------------- | --------------------------------- | ----------------------------------------------------------------------------------- |
@@ -110,6 +125,9 @@ Create Application Client
 | `redirectUri`         | Array (String) |                                   | ["https://google.com"],                                                             |
 | `createdAt`           | DateTime       | Creation date time of merchant    | "2021-02-12T08:53:13Z"                                                              |
 | `updatedAt`           | DateTime       | Last update date time of merchant | "2021-02-12T08:53:13Z"                                                              |
+
+</details>
+
 
 <br />
 

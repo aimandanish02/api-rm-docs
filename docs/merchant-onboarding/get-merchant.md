@@ -161,14 +161,23 @@ Get Merchant Info By ID
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br />
 
 <strong>Merchant Info (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type     | Description                             | Example                                                        |
 | --------------------- | -------- | --------------------------------------- | -------------------------------------------------------------- |
@@ -206,9 +215,15 @@ Get Merchant Info By ID
 | `createdAt`           | DateTime | Creation date time of merchant          | "2018-02-12T08:53:13Z"                                         |
 | `updatedAt`           | DateTime | Last update date time of merchant       | "2018-02-12T08:53:13Z"                                         |
 
+</details>
+
+
 <br/>
 
 <strong>Subscription object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                   | Type | Description | Example |
 | --------------------------- | ---- | ----------- | ------- |
@@ -216,9 +231,15 @@ Get Merchant Info By ID
 | `terminalOfflineCreditCard` | Bool |             | false   |
 | `onlineCreditCard`          | Bool |             | false   |
 
+</details>
+
+
 <br />
 
 <strong>Settlement Info :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                 | Type              | Description                             | Example                                 |
 | ------------------------- | ----------------- | --------------------------------------- | --------------------------------------- |
@@ -258,9 +279,15 @@ Get Merchant Info By ID
 | `createdAt`               | DateTime          | Creation date time of merchant          | "2021-02-12T08:53:13Z"                  |
 | `updatedAt`               | DateTime          | Last update date time of merchant       | "2021-02-12T08:53:13Z"                  |
 
+</details>
+
+
 <br/>
 
 <strong>Document object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type   | Description | Example |
 | ----------------------------- | ------ | ----------- | ------- |
@@ -279,9 +306,15 @@ Get Merchant Info By ID
 | `essmDocumentFileUrl`         | String |             | ""      |
 | `letterOfConsentFileUrl`      | String |             | ""      |
 
+</details>
+
+
 <br />
 
 <strong>DocumentFile object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type              | Description | Example |
 | ----------------------------- | ----------------- | ----------- | ------- |
@@ -297,5 +330,8 @@ Get Merchant Info By ID
 | `Section14FileUrl`            | String (nullable) |             | null    |
 | `Form44FileUrl`               | String (nullable) |             | null    |
 | `BusinessSitePhotoFileUrl`    | String (nullable) |             | null    |
+
+</details>
+
 
 <br />

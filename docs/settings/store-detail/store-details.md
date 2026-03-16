@@ -119,14 +119,23 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type     | Description                                                                                               | Example                      |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `items`   | Object[] | Array of store object                                                                                     | (Refer to explanation below) |
 | `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 | `meta`    | Object   | Database object                                                                                           | (Refer to explanation below) |
 
+</details>
+
+
 <br/>
 <strong>Array of store object (items):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type               | Description                                                 | Example                                   |
 | -------------- | ------------------ | ----------------------------------------------------------- | ----------------------------------------- |
@@ -146,11 +155,20 @@ No request parameter is required for this endpoint.
 | `createdAt`    | DateTime           | Creation date time of store                                 | "2018-02-12T08:53:13Z"                    |
 | `updatedAt`    | DateTime           | Last update date time of store                              | "2018-02-12T08:53:13Z"                    |
 
+</details>
+
+
 <br/>
 <strong>Database object (meta):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter | Type | Description                     | Example |
 | --------- | ---- | ------------------------------- | ------- |
 | `count`   | Uint | Current page record             | 1       |
 | `total`   | Uint | Total record in database        | 1       |
 | `cursor`  | Uint | Optional, if pagination exists. | 1       |
+
+</details>
+

@@ -128,15 +128,24 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `items`   | Array  | Vouchers object                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 | `meta`    | Object | Inside `meta` have `count` key example `"count": 2 `                                                      | 2                            |
 
+</details>
+
+
 <br />
 
 <strong>Vouchers object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter            | Type     | Description                                                                      | Example                                                            |
 | -------------------- | -------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -166,17 +175,29 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `createdAt`          | DateTime | Create date time                                                                 | "2020-11-18T06:43:19Z"                                             |
 | `updatedAt`          | DateTime | Last update date time                                                            | "2020-11-25T05:58:56Z"                                             |
 
+</details>
+
+
 <br />
 
 <strong>Payload object:</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter     | Type   | Description                | Example                      |
 | ------------- | ------ | -------------------------- | ---------------------------- |
 | `tnc`         | Array  |                            | ["T&C"]                      |
 | `contactInfo` | Object | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 <br/>
 <strong>Expiry object:</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter   | Type     | Description                         | Example                |
 | ----------- | -------- | ----------------------------------- | ---------------------- |
@@ -184,8 +205,14 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `day`       | Uint     | Expired Day                         | 1                      |
 | `expiredAt` | DateTime | Voucher Expired                     | "2020-11-26T04:33:04Z" |
 
+</details>
+
+
 <br />
 <strong>Address object:</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Description | Example |
 | -------------- | ------ | ----------- | ------- |
@@ -195,5 +222,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `city`         | String | City        | ""      |
 | `state`        | String | State       | ""      |
 | `country`      | String | Country     | ""      |
+
+</details>
+
 
 <br />

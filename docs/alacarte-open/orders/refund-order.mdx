@@ -192,6 +192,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
@@ -199,9 +202,18 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Function that provide by alacarte | "refund.store.order"         |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter | Type   | Description | Example                     |
 | --------- | ------ | ----------- | --------------------------- |
 | `orderId` | String | Order Id    | "25f6984d6585d7cc1ae35a39c" |
+
+</details>
+
 
 ### Response Parameters
 
@@ -231,6 +243,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type     | Description                          | Example                          |
 | ------------ | -------- | ------------------------------------ | -------------------------------- |
 | `createdAt`  | DateTime | Creation date time of store          | "2020-09-22T04:44:57.950398414Z" |
@@ -250,7 +265,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `type`       | String   | Type of the item                     | "DELIVERY"                       |
 | `updatedAt`  | DateTime | Last update date time                | "2020-10-01T08:44:16.863Z"       |
 
+</details>
+
+
 ### Inside Customer (parameter)
+
+<details>
+<summary><strong>Inside Customer (parameter)</strong></summary>
 
 | Parameter     | Type   | Description             | Example                    |
 | ------------- | ------ | ----------------------- | -------------------------- |
@@ -260,7 +281,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `phoneNumber` | String | Customer contact number | "1123621544"               |
 | `id`          | String | Customer ID             | "5f63082ae9c755d6ba3122ac" |
 
+</details>
+
+
 ### Inside Delivery (parameter)
+
+<details>
+<summary><strong>Inside Delivery (parameter)</strong></summary>
 
 | Parameter         | Type   | Description                  | Example                      |
 | ----------------- | ------ | ---------------------------- | ---------------------------- |
@@ -271,7 +298,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `method`          | String | Customer ID                  | "OWN"                        |
 | `vendorId`        | String | Customer ID                  | "5f815e2c3c6920f1233a540f"   |
 
+</details>
+
+
 ### Inside Address (parameter)
+
+<details>
+<summary><strong>Inside Address (parameter)</strong></summary>
 
 | Parameter      | Type   | Description                  | Example |
 | -------------- | ------ | ---------------------------- | ------- |
@@ -287,6 +320,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `state`        | String | Address State                | ""      |
 | `unit`         | String | Address Unit                 | ""      |
 
+</details>
+
+
 ### Inside Courier (parameter)
 
 :::note
@@ -294,6 +330,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 - If Courier don't have `name` and `phone` will display as **null**
 
 :::
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter   | Type   | Description                  | Example      |
 | ----------- | ------ | ---------------------------- | ------------ |
@@ -305,6 +344,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `photoURL`  | String | Courier Image                | ""           |
 | `surname`   | String | Courier Surname              | ""           |
 
+</details>
+
+
 ### Inside Drive Thru (parameter)
 
 :::note
@@ -313,12 +355,21 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter            | Type   | Description         | Example   |
 | -------------------- | ------ | ------------------- | --------- |
 | `vehicleDescription` | String | Vehicle description | ""        |
 | `vehicleNo`          | String | Vehicle Number      | "TLA3202" |
 
+</details>
+
+
 ### Inside Items (parameter)
+
+<details>
+<summary><strong>Inside Items (parameter)</strong></summary>
 
 | Parameter     | Type   | Description                               | Example                              |
 | ------------- | ------ | ----------------------------------------- | ------------------------------------ |
@@ -332,6 +383,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `remark`      | String | Customer Remark                           | ""                                   |
 | `sides`       | Array  | Refer to the <b>Sides parameter</b>       | ( Refer to the Sides parameter)      |
 
+</details>
+
+
 ### Inside Preferences (parameter)
 
 :::note
@@ -340,12 +394,18 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter   | Type   | Description                | Example                      |
 | ----------- | ------ | -------------------------- | ---------------------------- |
 | `name`      | String | Preferences name           | "Sweetness"                  |
 | `minChoice` | Uint   | Set minimum choice         | 1                            |
 | `maxChoice` | Uint   | Set maximum choice         | 3                            |
 | `labels`    | Array  | Refer to explanation below | (Refer to explanation below) |
+
+</details>
+
 
 ### Inside Sides (parameter)
 
@@ -355,19 +415,31 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter   | Type   | Description                             | Example                                 |
 | ----------- | ------ | --------------------------------------- | --------------------------------------- |
 | `id`        | String | Side ID                                 | ""                                      |
 | `name`      | String | Side Name                               | "test"                                  |
 | `sideItems` | Array  | Refer to the <b>SideItems parameter</b> | Refer to the <b>SideItems parameter</b> |
 
+</details>
+
+
 ### Inside SideItems (parameter)
+
+<details>
+<summary><strong>Inside SideItems (parameter)</strong></summary>
 
 | Parameter | Type   | Description                         | Example                             |
 | --------- | ------ | ----------------------------------- | ----------------------------------- |
 | `id`      | String | Side ID                             | "5f7b4195021ba83f52a02551"          |
 | `name`    | String | Side Name                           | "Hainan Chicken Rice"               |
 | `price`   | Object | Refer to the <b>Price parameter</b> | Refer to the <b>Price parameter</b> |
+
+</details>
+
 
 ### Inside Payment (parameter)
 
@@ -378,6 +450,9 @@ Current type in <b>Payment</b> will be :-
 "PAID" , "NOTPAID" , "PENDING" , "REFUNDED"
 
 :::
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter             | Type   | Description                         | Example                         |
 | --------------------- | ------ | ----------------------------------- | ------------------------------- |
@@ -390,6 +465,9 @@ Current type in <b>Payment</b> will be :-
 | `totalAfterRounding`  | Object | Refer to the <b>Price parameter</b> | ( Refer to the Price parameter) |
 | `totalBeforeRounding` | Object | Refer to the <b>Price parameter</b> | ( Refer to the Price parameter) |
 
+</details>
+
+
 ### Inside Price (parameter)
 
 :::note
@@ -398,13 +476,22 @@ Only `serviceFee` and `serviceTax` have <b>percentage</b>
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter      | Type   | Description                                      | Example |
 | -------------- | ------ | ------------------------------------------------ | ------- |
 | `amount`       | Uint   | Amount in cent (min RM 0.10 <b>10 = RM 0.10</b>) | 100     |
 | `currencyType` | String | Current only support Ringgit Malaysia            | "MYR"   |
 | `percentage`   | Uint   | precentage will be divide 100 eg: 1300/100       | 1300    |
 
+</details>
+
+
 ### Inside Table (parameter)
+
+<details>
+<summary><strong>Inside Table (parameter)</strong></summary>
 
 | Parameter     | Type   | Description    | Example                    |
 | ------------- | ------ | -------------- | -------------------------- |
@@ -412,3 +499,6 @@ Only `serviceFee` and `serviceTax` have <b>percentage</b>
 | `isAvailable` | Bool   | Vehicle Number | true                       |
 | `isDefault`   | Bool   | Vehicle Number | true                       |
 | `name`        | String | Table Name     | "Default Table"            |
+
+</details>
+

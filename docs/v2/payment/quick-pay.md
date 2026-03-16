@@ -115,6 +115,9 @@ Quick Pay is an offline payment method and it's subscription will based on offli
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter              | Type   | Validation  | Required | Description                                         |
 | ---------------------- | ------ | ----------- | -------- | --------------------------------------------------- |
 | `authCode`             | String |             | Yes      | Auth code of QR code/barcode being scanned          |
@@ -126,6 +129,9 @@ Quick Pay is an offline payment method and it's subscription will based on offli
 | `order.amount`         | Uint64 |             | Yes      | Order Amount                                        |
 | `order.detail`         | String | Length(600) | No       | Order Detail                                        |
 | `order.additionalData` | String | Length(128) | No       | Order Additional Data                               |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -145,6 +151,9 @@ Quick Pay is an offline payment method and it's subscription will based on offli
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -152,6 +161,9 @@ Quick Pay is an offline payment method and it's subscription will based on offli
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ## Quick Pay + Voucher
 
@@ -161,6 +173,9 @@ Voucher can be generated as a QRCode for scanning the voucher code, so we sugges
 
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type   | Validation  | Required | Description                                         |
 | ---------------------- | ------ | ----------- | -------- | --------------------------------------------------- |
@@ -174,6 +189,9 @@ Voucher can be generated as a QRCode for scanning the voucher code, so we sugges
 | `order.detail`         | String | Length(600) | No       | Order Detail                                        |
 | `order.additionalData` | String | Length(128) | No       | Order Additional Data                               |
 | `voucher.code`         | String |             | No       | Revenue Monster Voucher Code                        |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -196,6 +214,9 @@ Voucher can be generated as a QRCode for scanning the voucher code, so we sugges
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -203,6 +224,9 @@ Voucher can be generated as a QRCode for scanning the voucher code, so we sugges
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ## Quick Pay + Spending Loyalty
 
@@ -214,6 +238,9 @@ Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spendi
 
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type   | Validation                          | Required    | Description                                          |
 | ---------------------- | ------ | ----------------------------------- | ----------- | ---------------------------------------------------- |
@@ -230,6 +257,9 @@ Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spendi
 | `loyalty.memberId`     | String | Required when type="ID"             | Conditional | Loyalty Member's ID                                  |
 | `loyalty.countryCode`  | String | Required when type="PHONENUMBER"    | Conditional | Loyalty Member's Country Code                        |
 | `loyalty.phoneNumber`  | String | Required when type="PHONENUMBER"    | Conditional | Loyalty Member's Phone Number                        |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -254,6 +284,9 @@ Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spendi
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -261,6 +294,9 @@ Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spendi
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ## Quick Pay + Membership Card
 
@@ -274,10 +310,16 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation | Required | Description             |
 | ------------ | ------ | ---------- | -------- | ----------------------- |
 | memberCardId | String |            | Yes      | Alipay's Member Card ID |
 | storeId      | String |            | Yes      | Store ID                |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -288,6 +330,9 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation      | Description                    |
 | --------------- | ------ | --------------- | ------------------------------ |
 | `code`          | String | ENUM("SUCCESS") | Determine request have success |
@@ -295,11 +340,17 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 | `error.message` | String |                 | Error message                  |
 | `error.debug`   | String |                 | Debug message ( sandbox only ) |
 
+</details>
+
+
 
 ### Quick Pay
 
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type   | Validation  | Required | Description                                         |
 | ---------------------- | ------ | ----------- | -------- | --------------------------------------------------- |
@@ -314,6 +365,9 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 | `order.additionalData` | String | Length(128) | No       | Order Additional Data                               |
 | `extraInfo.type`       | String |             | No       | Extra Type "MEMBERSHIP"                             |
 | `extraInfo.reference`  | String |             | No       | Membership Card ID                                  |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -337,6 +391,9 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -344,3 +401,5 @@ Currently available membership card only Alipay's Gourmet Card ( 马来西亚美
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>

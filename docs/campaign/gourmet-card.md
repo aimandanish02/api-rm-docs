@@ -86,21 +86,36 @@ Collect information using member card ID
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter      | Type   | Description                 | Example               |
 | -------------- | ------ | --------------------------- | --------------------- |
 | `memberCardId` | String | From Ali Pay member card id | 28158443195878043074  |
 | `storeId`      | String | Store ID                    | "4949529109748431621" |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object | Transaction object                                                                                        | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Item object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type     | Description           | Example                |
 | --------------- | -------- | --------------------- | ---------------------- |
@@ -113,10 +128,16 @@ Collect information using member card ID
 | `updateAt`      | DateTime | Last update date time | "2020-03-05T09:40:21Z" |
 | `card`          | Object   | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 
 <br/>
 
 <strong> Card object (card):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter            | Type     | Description          | Example                                                                                                                      |
 | -------------------- | -------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -136,3 +157,6 @@ Collect information using member card ID
 | `icon`               | String   | Icon                 | "https://rm-sandbox-membership-public.oss-ap-southeast-3.aliyuncs.com/gourmet/card/icon-1579505367845553007-1579505367.png"  |
 | `createAt`           | DateTime | Create date time     | "2019-12-18T01:28:24Z"                                                                                                       |
 | `updateAt`           | DateTime | Update date time     | "2019-12-18T01:28:24Z"                                                                                                       |
+
+</details>
+

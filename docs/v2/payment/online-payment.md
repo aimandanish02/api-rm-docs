@@ -103,6 +103,9 @@ Online payment is an online payment method and it's subscription will based on o
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter              | Type     | Validation                            | Required    | Description                                            |
 |------------------------|----------|---------------------------------------|-------------|--------------------------------------------------------|
 | `storeId`              | String   |                                       | Yes         | Store ID                                               |
@@ -122,7 +125,13 @@ Online payment is an online payment method and it's subscription will based on o
 | `customer.countryCode` | String   |                                       | No          |                                                        |
 | `customer.phoneNumber` | String   |                                       | No          |                                                        |
 
+</details>
+
+
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter         | Type   | Validation      | Description                    |
 |-------------------|--------|-----------------|--------------------------------|
@@ -132,6 +141,9 @@ Online payment is an online payment method and it's subscription will based on o
 | `error.code`      | String |                 | Error code                     |
 | `error.message`   | String |                 | Error message                  |
 | `error.debug`     | String |                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ### Advance: Individual Payment Checkout
 
@@ -149,11 +161,17 @@ url, server url ) as long as the browser itself can go and process.
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter | Type   | Validation                                        | Required | Description         |
 |-----------|--------|---------------------------------------------------|----------|---------------------|
 | `status`  | String | Enum("SUCCESS", "FAILED", "CANCELLED", "EXPIRED") | Yes      | Payment Status      |
 | `orderId` | String |                                                   | Yes      | Payment Order ID    |
 | `reason`  | String |                                                   | No       | Payment fail reason |
+
+</details>
+
 
 ### Notify Response
 
@@ -168,6 +186,9 @@ Reference: [Query Transaction](./query-transaction.md)
 :::
 
 **Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                   | Type                       | Validation                                                            | Required | Description                                                |
 |-----------------------------|----------------------------|-----------------------------------------------------------------------|----------|------------------------------------------------------------|
@@ -196,6 +217,9 @@ Reference: [Query Transaction](./query-transaction.md)
 | `data.order.detail`         | String                     | Length(600)                                                           | No       | Order Detail                                               |
 | `data.order.additionalData` | String                     | Length(128)                                                           | No       | Order Additional Data                                      |
 
+</details>
+
+
 ## Query Payment Checkout
 
 :::caution
@@ -208,11 +232,20 @@ with the response of this API `transactionId`.
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type       | Validation | Description          |
 |--------------|------------|------------|----------------------|
 | `checkoutId` | QueryParam | Yes        | Payment checkout  id |
 
+</details>
+
+
 **Response Paramters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                   | Type   | Validation                                                            | Description                                                                                         |
 |-----------------------------|--------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
@@ -238,6 +271,9 @@ with the response of this API `transactionId`.
 | `item.createdAt`            | String | RFC3339                                                               | Payment checkout created date time                                                                  |
 | `item.updatedAt`            | String | RFC3339                                                               | Payment checkout last updated date time                                                             |
 
+</details>
+
+
 ## Direct Payment Checkout
 
 
@@ -259,11 +295,17 @@ seconds or even longer based on your use cases.
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation                                                            | Required | Description       |
 |--------------|--------|-----------------------------------------------------------------------|----------|-------------------|
 | `checkoutId` | String |                                                                       | Yes      | Checkout ID       |
 | `type`       | String | ENUM("URL")                                                           | Yes      | Checkout type url |
 | `method`     | String | [Appendix: Method](./query-transaction.md#transaction-method--region) | Yes      | Checkout method   |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -275,6 +317,9 @@ seconds or even longer based on your use cases.
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation      | Description                    |
 |-----------------|--------|-----------------|--------------------------------|
 | `item.type`     | String | ENUM("URL")     | Checkout session type          |
@@ -283,6 +328,9 @@ seconds or even longer based on your use cases.
 | `error.code`    | String |                 | Error code                     |
 | `error.message` | String |                 | Error message                  |
 | `error.debug`   | String |                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ### Mode: QRCode
 
@@ -309,11 +357,17 @@ seconds or even longer based on your use cases.
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation                                                            | Required | Description          |
 |--------------|--------|-----------------------------------------------------------------------|----------|----------------------|
 | `checkoutId` | String |                                                                       | Yes      | Checkout ID          |
 | `type`       | String | ENUM("QRCODE")                                                        | Yes      | Checkout type qrcode |
 | `method`     | String | [Appendix: Method](./query-transaction.md#transaction-method--region) | Yes      | Checkout method      |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -325,6 +379,9 @@ seconds or even longer based on your use cases.
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter                 | Type   | Validation      | Description                    |
 |---------------------------|--------|-----------------|--------------------------------|
 | `item.type`               | String | ENUM("QRCODE")  | Checkout session type          |
@@ -335,15 +392,24 @@ seconds or even longer based on your use cases.
 | `error.message`           | String |                 | Error message                  |
 | `error.debug`             | String |                 | Debug message ( sandbox only ) |
 
+</details>
+
+
 ### Mode: DuitNow QR
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter    | Type   | Validation             | Required | Description          |
 |--------------|--------|------------------------|----------|----------------------|
 | `checkoutId` | String |                        | Yes      | Checkout ID          |
 | `type`       | String | ENUM("DUITNOW_QRCODE") | Yes      | Checkout type qrcode |
 | `method`     | String | ENUM("")               | Yes      | Checkout method      |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -355,6 +421,9 @@ seconds or even longer based on your use cases.
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter                 | Type   | Validation      | Description                    |
 |---------------------------|--------|-----------------|--------------------------------|
 | `item.type`               | String | ENUM("QRCODE")  | Checkout session type          |
@@ -365,15 +434,24 @@ seconds or even longer based on your use cases.
 | `error.message`           | String |                 | Error message                  |
 | `error.debug`             | String |                 | Debug message ( sandbox only ) |
 
+</details>
+
+
 ### Mode: Alipay Mini Program
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter    | Type   | Validation                                                            | Required | Description          |
 |--------------|--------|-----------------------------------------------------------------------|----------|----------------------|
 | `checkoutId` | String |                                                                       | Yes      | Checkout ID          |
 | `type`       | String | ENUM("MINI_PROGRAM")                                                  | Yes      | Checkout type qrcode |
 | `method`     | String | [Appendix: Method](./query-transaction.md#transaction-method--region) | Yes      | Checkout method      |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -385,6 +463,9 @@ seconds or even longer based on your use cases.
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation           | Description                                  |
 |-----------------|--------|----------------------|----------------------------------------------|
 | `item.type`     | String | ENUM("MINI_PROGRAM") | Checkout session type                        |
@@ -393,6 +474,9 @@ seconds or even longer based on your use cases.
 | `error.code`    | String |                      | Error code                                   |
 | `error.message` | String |                      | Error message                                |
 | `error.debug`   | String |                      | Debug message ( sandbox only )               |
+
+</details>
+
 
 **Alipay Mini Program Frontend**
 
@@ -427,12 +511,18 @@ Program App ID / 小程序 App ID" to your account once binded then we will info
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation                                                            | Required | Description          |
 |--------------|--------|-----------------------------------------------------------------------|----------|----------------------|
 | `checkoutId` | String |                                                                       | Yes      | Checkout ID          |
 | `type`       | String | ENUM("MINI_PROGRAM")                                                  | Yes      | Checkout type qrcode |
 | `method`     | String | [Appendix: Method](./query-transaction.md#transaction-method--region) | Yes      | Checkout method      |
 | `userId`     | String |                                                                       | Yes      | Wechat User Open ID  |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -445,6 +535,9 @@ Program App ID / 小程序 App ID" to your account once binded then we will info
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation           | Description                                  |
 |-----------------|--------|----------------------|----------------------------------------------|
 | `item.type`     | String | ENUM("MINI_PROGRAM") | Checkout session type                        |
@@ -453,6 +546,9 @@ Program App ID / 小程序 App ID" to your account once binded then we will info
 | `error.code`    | String |                      | Error code                                   |
 | `error.message` | String |                      | Error message                                |
 | `error.debug`   | String |                      | Debug message ( sandbox only )               |
+
+</details>
+
 
 **WechatPay Mini Program Frontend**
 
@@ -624,12 +720,18 @@ wx.requestPayment({
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter      | Type   | Validation     | Required | Description          |
 |----------------|--------|----------------|----------|----------------------|
 | `checkoutId`   | String |                | Yes      | Checkout ID          |
 | `type`         | String | ENUM("URL")    | Yes      | Checkout type qrcode |
 | `method`       | String | ENUM("FPX_MY") | Yes      | Checkout method      |
 | `fpx.bankCode` | String |                | Yes      | FPX Bank code        |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -644,6 +746,9 @@ wx.requestPayment({
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation      | Description                    |
 |-----------------|--------|-----------------|--------------------------------|
 | `item.type`     | String | ENUM("QRCODE")  | Checkout session type          |
@@ -653,9 +758,15 @@ wx.requestPayment({
 | `error.message` | String |                 | Error message                  |
 | `error.debug`   | String |                 | Debug message ( sandbox only ) |
 
+</details>
+
+
 ### Mode: GoBiz / Paydee / Mastercard
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter    | Type   | Validation                    | Required | Description          |
 |--------------|--------|-------------------------------|----------|----------------------|
@@ -663,6 +774,9 @@ wx.requestPayment({
 | `type`       | String | ENUM("URL")                   | Yes      | Checkout type qrcode |
 | `method`     | String | ENUM("GOBIZ_MY", "PAYDEE_MY", "MASTERCARD_MY") | Yes      | Checkout method      |
 | `gobiz.type` | String | ENUM("UNIVERSAL_PAYMENT")     | No      | GoBiz Payment Type   |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -674,6 +788,9 @@ wx.requestPayment({
 
 **Response Paramters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation      | Description                    |
 |-----------------|--------|-----------------|--------------------------------|
 | `item.type`     | String | ENUM("URL")     | Checkout session type          |
@@ -682,3 +799,6 @@ wx.requestPayment({
 | `error.code`    | String |                 | Error code                     |
 | `error.message` | String |                 | Error message                  |
 | `error.debug`   | String |                 | Debug message ( sandbox only ) |
+
+</details>
+

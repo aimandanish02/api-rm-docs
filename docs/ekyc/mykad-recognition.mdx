@@ -71,6 +71,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                 | Example                      |
 | ---------- | ------ | --------------------------- | ---------------------------- |
 | `service`  | String | EKYC service                | "ekyc"                       |
@@ -78,10 +81,19 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Selected function           | "id-mykad"                   |
 | `request`  | Object | Refer to explanation below  | (Refer to explanation below) |
 
+</details>
+
+
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter             | Type   | Description                       | Example |
 | --------------------- | ------ | --------------------------------- | ------- |
 | `notify_url`          | String | URL to receive ekyc result        | ""      |
 | `query_image_content` | String | Mykad image (Base64 image string) | ""      |
+
+</details>
+
 ### How to use notify URL
 Clients can retrieve ekyc result by passing in a `notify_url` as a webhook callback. For instance, client provides a `POST` API handler that has an address of `https://client-api/rm-ekyc-callback`, pass this address as the `notify_url` when sending the OpenAPI request. Our webhook will subsequently return the result to this API address.
 
@@ -91,6 +103,12 @@ Clients can retrieve ekyc result by passing in a `notify_url` as a webhook callb
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter   | Type   | Description | Example                    |
 | ----------- | ------ | ----------- | -------------------------- |
 | `requestID` | String | Request ID  | "62201d48a694817dede84b35" |
+
+</details>
+

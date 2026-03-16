@@ -134,14 +134,23 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type     | Description                                                                                               | Example                      |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `items`   | []Object | Voucher object array                                                                                      | (Refer to explanation below) |
 | `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Voucher object (items):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter         | Type             | Description                                                                                                                | Example                                                                  |
 | ----------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
@@ -165,3 +174,6 @@ No request parameter is required for this endpoint.
 | `isDeviceRedeem`  | Boolean          | **TRUE** means only can be redeemed through merchant app. **FALSE** means customer can do redemption from own loyalty app. | false                                                                    |
 | `createdAt`       | DateTime         | Date time of voucher being created (UTC)                                                                                   | "2018-06-21T11:08:00Z"                                                   |
 | `updatedAt`       | DateTime         | Date time of voucher being updated (UTC)                                                                                   | "2018-09-28T17:19:44.686549977Z"                                         |
+
+</details>
+

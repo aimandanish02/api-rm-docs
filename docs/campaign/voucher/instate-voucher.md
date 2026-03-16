@@ -102,21 +102,36 @@ To reinstate voucher(s) of customer.
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter      | Type   | Description                 | Example               |
 | -------------- | ------ | --------------------------- | --------------------- |
 | `pin`          | String |  User Pin                   | "321123"              |
 | `reason`       | String |  Reinstate reason           | "wrong void"          |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object | Voucher object                                                                                            | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Voucher object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter            | Type             | Description                                                                                                                                                                                                                                                                                                                                                             | Example                                                                      |
 | -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -143,12 +158,21 @@ To reinstate voucher(s) of customer.
 | `createdAt`          | DateTime         | Date time of voucher being created (UTC)                                                                                                                                                                                                                                                                                                                                | "2018-06-21T11:08:00Z"                                                       |
 | `updatedAt`          | DateTime         | Date time of voucher being updated (UTC)                                                                                                                                                                                                                                                                                                                                | "2018-09-28T17:19:44.686549977Z"                                             |
 
+</details>
+
+
 <br/>
 
 <strong>Expiry object (expiry):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter  | Type     | Description                                                                               | Example                            |
 | ---------- | -------- | ----------------------------------------------------------------------------------------- | ---------------------------------- |
 | `type`     | String   | "DYNAMIC" (days from now), "FIXED" (specific fixed date)                                  | "DYNAMIC"                          |
 | `day`      | Uint     | Only required by "DYNAMIC" expiry type. To indicate number of days from now until expiry. | 30                                 |
 | `expiryAt` | DateTime | Only required by "FIXED". To indicate specific expiry date.                               | "2020-10-07T17:44:26.679908+08:00" |
+
+</details>
+

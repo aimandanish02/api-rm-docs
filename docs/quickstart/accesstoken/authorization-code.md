@@ -57,6 +57,9 @@ For authorization code, only `client_id` is needed. You are required to use the 
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter      | Type   | Required | Description                                                                                                                                                                                                                                | Example                  |
 | -------------- | ------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------ |
 | `responseType` | String | Yes      | Only support authorization code                                                                                                                                                                                                            | code                     |
@@ -64,6 +67,9 @@ For authorization code, only `client_id` is needed. You are required to use the 
 | `redirectUri`  | String | Yes      | Specify your desired redirect Uri after request successful. This Uri must be EXACTLY the same as the one entered in [RM Merchant Portal](https://merchant.revenuemonster.my/)                                                              | <https://www.google.com> |
 | `scope`        | String | Yes      | Scope of authorization granted to user, to perform action(s) when calling other API endpoints. (Currently only support `manage_payment`, `get_merchant_profile`, `get_user_profile`, `manage_store`). Separated by comma(s) without space. | manage_payment           |
 | `state`        | String | No       | Optional field for user reference, will be passed back in response                                                                                                                                                                         | Anything                 |
+
+</details>
+
 
 **Example Request URL :**
 
@@ -78,10 +84,16 @@ state=123456</a>
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                        | Example       |
 | --------- | ------ | ---------------------------------- | ------------- |
 | `code`    | String | Required for subsequent request(s) | Random string |
 | `state`   | String | Optional field for user reference  | Anything      |
+
+</details>
+
 
 **Example Response URL :**
 

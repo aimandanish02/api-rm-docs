@@ -65,22 +65,37 @@ Give a stamp to customer
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter | Type   | Description      | Example                                                                                                          |
 | --------- | ------ | ---------------- | ---------------------------------------------------------------------------------------------------------------- |
 | `code`    | String | QR code Url link | EhQKCE1lcmNoYW50EJXVzd3wraqTORIgChRMb3lhbHR5Q2hvcFN0YW1wQ2FyZBCm1qHe2eDX_BU:d439a47d-3cd3-48bc-aae7-1effda5c7e1b |
 
+</details>
+
+
 ![images](/img/campaign/chop-stamp.png)
 
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object | Transaction object                                                                                        | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br/>
 
 <strong>Transaction object (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter          | Type     | Description           | Example                                                                       |
 | ------------------ | -------- | --------------------- | ----------------------------------------------------------------------------- |
@@ -92,3 +107,6 @@ Give a stamp to customer
 | `endAt`            | DateTime | Time End              | "2021-04-02T13:49:08Z"                                                        |
 | `createdAt`        | DateTime | Creation date time    | "2020-03-05T09:40:21Z"                                                        |
 | `updatedAt`        | DateTime | Last update date time | "2020-03-05T09:40:21Z"                                                        |
+
+</details>
+

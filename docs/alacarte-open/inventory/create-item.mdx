@@ -264,6 +264,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
+<details>
+<summary><strong>Request Parameters</strong></summary>
+
 | Parameter  | Type   | Description                       | Example                      |
 | ---------- | ------ | --------------------------------- | ---------------------------- |
 | `service`  | String | alacarte service                  | "alacarte"                   |
@@ -271,7 +274,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `function` | String | Function that provide by alacarte | "create.item"                |
 | `request`  | Object | Refer to explanation below        | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside request (parameter)
+
+<details>
+<summary><strong>Inside request (parameter)</strong></summary>
 
 | Parameter     | Type   | Description                               | Example                                                  |
 | ------------- | ------ | ----------------------------------------- | -------------------------------------------------------- |
@@ -288,14 +297,26 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `categoryIds` | Array  | ID of the Category                        | ["5ec1bf480e7df1ca6f3f6350"]                             |
 | `sku`         | String | Item SKU                                  | "fkj31i"                                                 |
 
+</details>
+
+
 ### Inside Price (parameter)
+
+<details>
+<summary><strong>Inside Price (parameter)</strong></summary>
 
 | Parameter      | Type   | Description                                      | Example |
 | -------------- | ------ | ------------------------------------------------ | ------- |
 | `amount`       | Uint   | Amount in cent (min RM 0.10 <b>10 = RM 0.10</b>) | 100     |
 | `currencyType` | String | Current only support Ringgit Malaysia            | "MYR"   |
 
+</details>
+
+
 ### Inside Sides (parameter)
+
+<details>
+<summary><strong>Inside Sides (parameter)</strong></summary>
 
 | Parameter     | Type   | Description                | Example                      |
 | ------------- | ------ | -------------------------- | ---------------------------- |
@@ -304,6 +325,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 | `maxChoice`   | Uint   | Set maximum choice         | 2                            |
 | `isAvailable` | Bool   | Item sides is available    | true                         |
 | `items`       | Array  | Refer to explanation below | (Refer to explanation below) |
+
+</details>
+
 
 ### Inside items (parameter)
 
@@ -315,6 +339,9 @@ You still can change the `name` and `price`
 
 :::
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter         | Type   | Description                         | Example                         |
 | ----------------- | ------ | ----------------------------------- | ------------------------------- |
 | `referenceItemId` | String | Item reference ID                   | "5eaa7b72e0e9cd7b01a3a2b2"      |
@@ -322,7 +349,13 @@ You still can change the `name` and `price`
 | `price`           | Array  | Refer to the <b>Price parameter</b> | ( Refer to the Price parameter) |
 | `isAvailable`     | Bool   | Item sides is available             | true                            |
 
+</details>
+
+
 ### Inside Preferences (parameter)
+
+<details>
+<summary><strong>Inside Preferences (parameter)</strong></summary>
 
 | Parameter   | Type   | Description                | Example                      |
 | ----------- | ------ | -------------------------- | ---------------------------- |
@@ -331,13 +364,25 @@ You still can change the `name` and `price`
 | `maxChoice` | Uint   | Set maximum choice         | 3                            |
 | `labels`    | Array  | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Labels (parameter)
+
+<details>
+<summary><strong>Inside Labels (parameter)</strong></summary>
 
 | Parameter | Type   | Description | Example |
 | --------- | ------ | ----------- | ------- |
 | `name`    | String | Label name  | "Basic" |
 
+</details>
+
+
 ### Response Parameters
+
+<details>
+<summary><strong>Response Parameters</strong></summary>
 
 | Parameter      | Type     | Description                               | Example                                                  |
 | -------------- | -------- | ----------------------------------------- | -------------------------------------------------------- | --- |
@@ -358,7 +403,13 @@ You still can change the `name` and `price`
 | `sku`          | String   | Item SKU                                  | "fkj31i"                                                 |     |
 | `updatedAt`    | DateTime | Last update date time                     | "2020-09-22T04:44:57.950398414Z"                         |
 
+</details>
+
+
 ### Inside Preferences (parameter)
+
+<details>
+<summary><strong>Inside Preferences (parameter)</strong></summary>
 
 | Parameter   | Type   | Description                | Example                      |
 | ----------- | ------ | -------------------------- | ---------------------------- |
@@ -368,21 +419,39 @@ You still can change the `name` and `price`
 | `maxChoice` | Uint   | Set maximum choice         | 3                            |
 | `labels`    | Array  | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Labels (parameter)
+
+<details>
+<summary><strong>Inside Labels (parameter)</strong></summary>
 
 | Parameter | Type   | Description | Example                    |
 | --------- | ------ | ----------- | -------------------------- |
 | `id`      | String | Label ID    | "5f698149585d7cc1ae35a38e" |
 | `name`    | String | Label name  | "Basic"                    |
 
+</details>
+
+
 ### Inside Price (parameter)
+
+<details>
+<summary><strong>Inside Price (parameter)</strong></summary>
 
 | Parameter      | Type   | Description                                      | Example |
 | -------------- | ------ | ------------------------------------------------ | ------- |
 | `amount`       | Uint   | Amount in cent (min RM 0.10 <b>10 = RM 0.10</b>) | 100     |
 | `currencyType` | String | Current only support Ringgit Malaysia            | "MYR"   |
 
+</details>
+
+
 ### Inside Sides (parameter)
+
+<details>
+<summary><strong>Inside Sides (parameter)</strong></summary>
 
 | Parameter     | Type   | Description                | Example                      |
 | ------------- | ------ | -------------------------- | ---------------------------- |
@@ -393,7 +462,13 @@ You still can change the `name` and `price`
 | `maxChoice`   | Uint   | Set maximum choice         | 3                            |
 | `sideItems`   | Array  | Refer to explanation below | (Refer to explanation below) |
 
+</details>
+
+
 ### Inside Side Items (parameter)
+
+<details>
+<summary><strong>Inside Side Items (parameter)</strong></summary>
 
 | Parameter         | Type   | Description                         | Example                         |
 | ----------------- | ------ | ----------------------------------- | ------------------------------- |
@@ -402,3 +477,6 @@ You still can change the `name` and `price`
 | `name`            | String | Side Item name                      | "Coke"                          |
 | `price`           | Object | Refer to the <b>Price parameter</b> | ( Refer to the Price parameter) |
 | `isAvailable`     | Bool   | Side Item is available              | true                            |
+
+</details>
+

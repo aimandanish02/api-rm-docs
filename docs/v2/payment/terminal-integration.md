@@ -76,6 +76,9 @@ performance.
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter              | Type   | Validation            | Required | Description                                                                                                                |
 | ---------------------- | ------ | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `terminalId`           | String |                       | Yes      | Terminal ID                                                                                                                |
@@ -88,6 +91,9 @@ performance.
 | `order.amount`         | Uint64 |                       | Yes      | Order Amount                                                                                                               |
 | `order.detail`         | String | Length(600)           | No       | Order Detail                                                                                                               |
 | `order.additionalData` | String | Length(128)           | No       | Order Additional Data                                                                                                      |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -108,6 +114,9 @@ performance.
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -115,6 +124,9 @@ performance.
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ---
 api:
@@ -162,6 +174,9 @@ api:
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter              | Type   | Validation            | Required | Description                                                                                                                |
 | ---------------------- | ------ | --------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `terminalId`           | String |                       | Yes      | Terminal ID                                                                                                                |
@@ -174,6 +189,9 @@ api:
 | `order.amount`         | Uint64 |                       | Yes      | Order Amount                                                                                                               |
 | `order.detail`         | String | Length(600)           | No       | Order Detail                                                                                                               |
 | `order.additionalData` | String | Length(128)           | No       | Order Additional Data                                                                                                      |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -194,6 +212,9 @@ api:
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -202,10 +223,16 @@ api:
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
 
+</details>
+
+
 ## Event: Card Refund
 
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter            | Type   | Validation     | Required | Description                                                                                                                |
 | -------------------- | ------ | -------------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -216,6 +243,9 @@ api:
 | `data.reason`        | String |                |          |                                                                                                                            |
 | `data.email`         | String |                | Yes      | Email match with the refund pin                                                                                            |
 | `data.pin`           | String | LENGTH(6)      | Yes      | Refund Pin                                                                                                                 |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -233,6 +263,9 @@ api:
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -241,16 +274,25 @@ api:
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
 
+</details>
+
+
 ## Event: Card Settlement
 
 
 **Request Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter          | Type   | Validation         | Required | Description                                                                                                                |
 | ------------------ | ------ | ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `terminalId`       | String |                    | Yes      | Terminal ID                                                                                                                |
 | `type`             | String | ENUM("SETTLEMENT") | Yes      | Event Type                                                                                                                 |
 | `data.receiptType` | Uint   | ENUM(1,2,3)        |          | 1 : Print Merchant Copy and Customer copy<br />2 : Print Customer copy<br />3 : Do not print Merchant Copy & Customer Copy |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -263,6 +305,9 @@ api:
 ```
 
 **Response Parameters**
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                       | Type   | Validation          | Description                                               |
 | ------------------------------- | ------ | ------------------- | --------------------------------------------------------- |
@@ -281,15 +326,24 @@ api:
 | `transactions[*].transactionId` | String |                     | Transaction ID                                            |
 | `transactions[*].type`          | String | ENUM("SALE","VOID") | Transaction type                                          |
 
+</details>
+
+
 ## Event: Cancel Event
 
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter    | Type   | Validation     | Required | Description |
 | ------------ | ------ | -------------- | -------- | ----------- |
 | `terminalId` | String |                | Yes      | Terminal ID |
 | `type`       | String | ENUM("CANCEL") | Yes      | Event Type  |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -300,12 +354,18 @@ api:
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation      | Description                    |
 | --------------- | ------ | --------------- | ------------------------------ |
 | `code`          | String | ENUM("SUCCESS") | Determine request have success |
 | `error.code`    | String |                 | Error code                     |
 | `error.message` | String |                 | Error message                  |
 | `error.debug`   | String |                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ## Server: Payment Refund
 

@@ -255,14 +255,23 @@ Upadte Account Info
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type     | Description                                                                                               | Example                      |
 | --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `item`    | Object[] |                                                                                                           | (Refer to explanation below) |
 | `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 
+</details>
+
+
 <br />
 
 <strong>Accoount Info (item):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                 | Type             | Description                             | Example                                 |
 | ------------------------- | ---------------- | --------------------------------------- | --------------------------------------- |
@@ -302,9 +311,15 @@ Upadte Account Info
 | `createdAt`               | DateTime         | Creation date time of merchant          | "2021-01-13T04:35:32Z"                  |
 | `updatedAt`               | DateTime         | Last update date time of merchant       | "2021-01-13T04:35:32Z"                  |
 
+</details>
+
+
 <br/>
 
 <strong>Document object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type   | Description | Example |
 | ----------------------------- | ------ | ----------- | ------- |
@@ -323,9 +338,15 @@ Upadte Account Info
 | `essmDocumentFileUrl`         | String |             | ""      |
 | `letterOfConsentFileUrl`      | String |             | ""      |
 
+</details>
+
+
 <br />
 
 <strong>DocumentFile object :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter                     | Type              | Description | Example |
 | ----------------------------- | ----------------- | ----------- | ------- |
@@ -342,9 +363,15 @@ Upadte Account Info
 | `Form44FileUrl`               | String (nullable) |             | null    |
 | `BusinessSitePhotoFileUrl`    | String (nullable) |             | null    |
 
+</details>
+
+
 <br />
 
 <strong>invoiceAddress (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter      | Type   | Description     | Example |
 | -------------- | ------ | --------------- | ------- |
@@ -355,9 +382,15 @@ Upadte Account Info
 | `state`        | String | Address State   | ""      |
 | `country`      | String | Country         | ""      |
 
+</details>
+
+
 <br/>
 
 <strong>inspectList (parameter) :</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type   | Example |
 | --------------- | ------ | ------- |
@@ -373,5 +406,8 @@ Upadte Account Info
 | `iDNo`          | String | ""      |
 | `beginDateTime` | String | ""      |
 | `endDateTime`   | String | ""      |
+
+</details>
+
 
 <br/>

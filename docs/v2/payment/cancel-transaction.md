@@ -57,9 +57,15 @@ If a transaction is timed out, the merchant should perform a reverse order befor
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter | Type   | Validation | Required | Description |
 | --------- | ------ | ---------- | -------- | ----------- |
 | `orderId` | String |            | Yes      | Order ID    |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -69,6 +75,9 @@ If a transaction is timed out, the merchant should perform a reverse order befor
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -76,6 +85,9 @@ If a transaction is timed out, the merchant should perform a reverse order befor
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>
+
 
 ## Refund
 
@@ -96,6 +108,9 @@ Reason for refund request/s: Exceed refund period and would like to request manu
 
 **Request Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter             | Type   | Validation   | Required | Description          |
 | --------------------- | ------ | ------------ | -------- | -------------------- |
 | `transactionId`       | String |              | Yes      | Transaction ID       |
@@ -103,6 +118,9 @@ Reason for refund request/s: Exceed refund period and would like to request manu
 | `refund.currencyType` | String | ENUM("MYR")  | Yes      | Refund currency type |
 | `refund.amount`       | Uint64 |              | Yes      | Refund amount        |
 | `reason`              | String |              | Yes      |                      |
+
+</details>
+
 
 ```json title="Example Request"
 {
@@ -118,6 +136,9 @@ Reason for refund request/s: Exceed refund period and would like to request manu
 
 **Response Parameters**
 
+<details>
+<summary><strong>Details</strong></summary>
+
 | Parameter       | Type   | Validation                                                      | Description                    |
 | --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
 | `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
@@ -125,3 +146,5 @@ Reason for refund request/s: Exceed refund period and would like to request manu
 | `error.code`    | String |                                                                 | Error code                     |
 | `error.message` | String |                                                                 | Error message                  |
 | `error.debug`   | String |                                                                 | Debug message ( sandbox only ) |
+
+</details>

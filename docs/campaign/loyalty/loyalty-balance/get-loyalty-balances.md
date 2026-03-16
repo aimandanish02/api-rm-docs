@@ -135,13 +135,22 @@ Get loyalty balances
 
 ### Response Parameters
 
+<details>
+<summary><strong>Response Parameters</strong></summary>
+
 | Parameter | Type   | Description                                                                                               | Example                      |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | `items`   | Array  |                                                                                                           | (Refer to explanation below) |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
 | `meta`    | Object | Inside `meta` have `count`and `cursor`                                                                    | { "count": 2 , "cursor":""}  |
 
+</details>
+
+
 <br />
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter       | Type     | Description                       | Example                 |
 | --------------- | -------- | --------------------------------- | ----------------------- |
@@ -158,9 +167,15 @@ Get loyalty balances
 | `createdAt`     | DateTime | Creation date time of merchant    | "2022-01-27T04:02:46Z"  |
 | `updatedAt`     | DateTime | Last update date time of merchant | "2022-01-27T04:02:46Z"  |
 
+</details>
+
+
 <br />
 
 <strong>Store object (store):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter              | Type     | Description                                    | Example                                                      |
 | ---------------------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
@@ -181,9 +196,15 @@ Get loyalty balances
 | `createdAt`            | DateTime | Creation date time of store                    | "2020-09-14T03:01:20Z"                                       |
 | `updatedAt`            | DateTime | Last update date time of store                 | "2020-09-14T03:01:20Z"                                       |
 
+</details>
+
+
 <br />
 
 <strong>Order object (order):</strong>
+
+<details>
+<summary><strong>Details</strong></summary>
 
 | Parameter | Type   | Required | Description                                         | Example              |
 | --------- | ------ | -------- | --------------------------------------------------- | -------------------- |
@@ -191,3 +212,6 @@ Get loyalty balances
 | `title`   | String | Yes      |                                                     | ""                   |
 | `detail`  | String | Yes      |                                                     | ""                   |
 | `amount`  | Uint   | Yes      | Amount of order in cent (min RM 0.10 or amount: 10) | 100                  |
+
+</details>
+
