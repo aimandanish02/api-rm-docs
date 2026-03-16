@@ -61,11 +61,3 @@ Deleted stores cannot be revoked!
 | Parameter | Type   | Description                                                                                               | Example   |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------- | --------- |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS" |
-
-> Example Response
-
-```json
-{
-  "code": "SUCCESS"
-}
-```

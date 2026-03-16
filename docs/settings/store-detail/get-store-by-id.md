@@ -101,31 +101,3 @@ Use `Store ID` to check a particular store details.
 | `status`               | String            | Current status of store                        | "ACTIVE"                                                     |
 | `createdAt`            | DateTime          | Creation date time of store                    | "2018-02-12T08:53:13Z"                                       |
 | `updatedAt`            | DateTime          | Last update date time of store                 | "2018-02-12T08:53:13Z"                                       |
-
-> Example Response
-
-```json
-{
-  "item": {
-    "id": "1553067214325776225",
-    "name": "Starbucks",
-    "imageUrl": "https://storage.googleapis.com/rm-prod-asset/img/store.png",
-    "addressLine1": "Berjaya Times Square,  Imbi",
-    "addressLine2": "",
-    "postCode": "55100",
-    "city": "Kuala Lumpur",
-    "state": "W.P. Kuala Lumpur",
-    "country": "Malaysia",
-    "countryCode": "60",
-    "phoneNumber": "1234567890",
-    "geoLocation": {
-      "latitude": 3.1421984,
-      "longitude": 101.71055120000005
-    },
-    "status": "ACTIVE",
-    "createdAt": "2019-03-20T07:33:34Z",
-    "updatedAt": "2019-03-20T07:33:34Z"
-  },
-  "code": "SUCCESS"
-}
-```

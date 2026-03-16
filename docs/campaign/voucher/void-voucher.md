@@ -105,20 +105,6 @@ To void voucher(s) of customer.
 | -------------- | -------- | ------ | --------------------------------------- | --------------------- |
 | `storeId`      | Optional | String | ID of the Store that Create from RM     | "1556079400120532579" |
 
-> Example Request
-
-```json
-curl --location --request POST "https://sb-open.revenuemonster.my/v3/voucher/NAklEfbVdV/void" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiYXBpX2NsaWVudEBFaGNLQzA5QmRYUm9RMnhwWlc1MEVNV2E1NHl5dE1QSUZnIl0sImV4cCI6MTc0NTA1MDY2MCwiaWF0IjoxNzQyNDU4NjYwLCJpc3MiOiJodHRwczovL3NiLW9hdXRoLnJldmVudWVtb25zdGVyLm15IiwianRpIjoiRWh3S0VFOUJkWFJvUVdOalpYTnpWRzlyWlc0UW5vcURvcm1kblpjWSIsIm5iZiI6MTc0MjQ1ODY2MCwic3ViIjoiRWhRS0NFMWxjbU5vWVc1MEVKWFZ6ZDN3cmFxVE9SSVFDZ1JWYzJWeUVJeUpxSXp2eU1QVmNRIn0.T-6nuPM-V0dMV6cgFrfzznx-pdOwyUVvM6EdIxpsQYu8GWjGIN6xrZzBbldy7Fafp2zuhKLfRkE6G-FVuSfV3Qg_S8hDJD4SpB0_bawuXwNmq-tMp1WOFkE0IOfMtfCowp4z6arDayhQTIT0qO36aQ1XzZrsPwqvRJ8fo_YfsurE8Z1UnSXukZWPTpjDs7fio8ZEVcNlWDWuimGHJcpYuH4FgvIdMJ1oWqnwZtvf9gDqmig5ddSpPEVTjf9cGMVBdZlwPXXw0mRuI0ClKMbBgrgUwmnYnIT3zPTRxNwMPKj4AkI3QnLbFkLvTDpk9wrIgrXLFNEZ37j9mQtehuTSgQ" \
---header "X-Signature: sha256 Sty3LNcKA8+WlMHtAgIY+y1xbwnzKsN0UdyKaW+yYIgcTkBAtF7G5Lx251qQITURJ4wiXPDODxhs1nFVmBBing==" \
---header "X-Nonce-Str: VYNknZohxwicZMaWbNdBKUrnrxDtaRhN" \
---header "X-Timestamp: 1717039047" \
---data-raw "{
- \"storeId\": \"1331862367915081342\"
-}"
-```
-
 ### Response Parameters
 
 | Parameter | Type   | Description                                                                                               | Example                      |
@@ -164,42 +150,3 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/voucher/NAk
 | `type`     | String   | "DYNAMIC" (days from now), "FIXED" (specific fixed date)                                  | "DYNAMIC"                          |
 | `day`      | Uint     | Only required by "DYNAMIC" expiry type. To indicate number of days from now until expiry. | 30                                 |
 | `expiryAt` | DateTime | Only required by "FIXED". To indicate specific expiry date.                               | "2020-10-07T17:44:26.679908+08:00" |
-
-> Example Response
-
-```json
-{
-  "item": {
-    "key": "EhQKCE1lcmNoYW50EJXVzd3wraqTORIVCgdWb3VjaGVyGgpOQWtsRWZiVmRW",
-    "label": "oijfge",
-    "redemptionRuleKey": null,
-    "voucherBatchKey": "EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQkvnGweaB2uQg",
-    "type": "GIFT",
-    "amount": 0,
-    "discountRate": 0,
-    "minimumSpendAmount": 0,
-    "origin": "SYSTEM",
-    "imageUrl": "",
-    "memberProfile": null,
-    "redemptionRule": null,
-    "assignedAt": "2018-09-28T17:15:17Z",
-    "payload": null,
-    "qrUrl": "http://api.revenuemonster.my/qr/4118165203679668885/voucher/NAklEfbVdV",
-    "code": "NAklEfbVdV",
-    "isShipping": false,
-    "address": null,
-    "expiry": {
-      "type": "DYNAMIC",
-      "day": 100,
-      "expiredAt": "2019-01-06T17:19:35Z"
-    },
-    "usedAt": "2018-09-28T17:19:44.686549737Z",
-    "redeemedAt": "2018-09-28T17:19:35Z",
-    "isDeviceRedeem": false,
-    "status": "VOID",
-    "createdAt": "2018-06-21T11:08:00Z",
-    "updatedAt": "2018-09-28T17:19:44.686549977Z"
-  },
-  "code": "SUCCESS"
-}
-```

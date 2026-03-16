@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {glob} = require('glob');
+const { glob } = require('glob');
 
 const DOCS_PATH = path.join(__dirname, 'docs');
 
@@ -13,21 +13,40 @@ function extractCodeBlock(content, label) {
   return match ? match[1].trim() : null;
 }
 
+function removeExampleBlocks(content) {
+  const labels = ['Example Request', 'Example Body Request', 'Example Response'];
+  let result = content;
+  for (const label of labels) {
+    const regex = new RegExp(
+      `\\n?> ${label}\\s*\\n\\s*\\n\`\`\`[a-zA-Z]*\\n[\\s\\S]*?\`\`\`\\n?`,
+      'g'
+    );
+    result = result.replace(regex, '');
+  }
+  return result;
+}
+
 function processFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
 
-  // Check frontmatter
   const frontmatterMatch = raw.match(/^---\n([\s\S]*?)\n---/);
   if (!frontmatterMatch) return;
 
   const frontmatter = frontmatterMatch[1];
-
-  // Only process files with api:
   if (!frontmatter.includes('api:')) return;
 
-  // Skip if examples already exist
-  if (frontmatter.includes('examples:')) return;
+  // Skip if examples already exist in frontmatter
+  if (frontmatter.includes('examples:')) {
+    // Still clean up inline example blocks even if frontmatter already has examples
+    const cleaned = removeExampleBlocks(raw);
+    if (cleaned !== raw) {
+      fs.writeFileSync(filePath, cleaned, 'utf8');
+      console.log(`CLEANED inline blocks: ${filePath}`);
+    }
+    return;
+  }
 
+  // Extract from inline blocks
   const request = extractCodeBlock(raw, 'Example Request');
   const body = extractCodeBlock(raw, 'Example Body Request');
   const response = extractCodeBlock(raw, 'Example Response');
@@ -42,16 +61,15 @@ ${indent(body || 'There is no example body request.')}
 ${indent(response || 'There is no example response provided.')}
 `;
 
-  const newFrontmatter =
-    `---\n${frontmatter.trim()}\n${examplesBlock}---`;
+  const newFrontmatter = `---\n${frontmatter.trim()}\n${examplesBlock}---`;
+  let updated = raw.replace(/^---\n[\s\S]*?\n---/, newFrontmatter);
 
-  const updated = raw.replace(/^---\n[\s\S]*?\n---/, newFrontmatter);
+  // Remove the inline blocks after migrating to frontmatter
+  updated = removeExampleBlocks(updated);
 
   fs.writeFileSync(filePath, updated, 'utf8');
-
-  console.log(`Updated: ${filePath}`);
+  console.log(`MIGRATED + CLEANED: ${filePath}`);
 }
-
 
 function indent(text) {
   return text
@@ -64,4 +82,3 @@ function indent(text) {
   const files = await glob(`${DOCS_PATH}/**/*.{md,mdx}`);
   files.forEach(processFile);
 })();
-

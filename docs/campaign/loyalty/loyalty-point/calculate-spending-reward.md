@@ -67,22 +67,6 @@ Use amount sales to Calculate Spending Reward points
 | `currencyType` | String | Currently `MYR` only | MYR     |
 | `amount`       | int    | Amount Sales         | 300     |
 
-> Example Request
-
-```json
-curl --location --request GET "{{open_base_path}}/v3/loyalty/spending-reward/calculate" \
-  --header "Content-Type: application/json" \
-  --header "Authorization: Bearer {{clientToken}}" \
-  --header "X-Signature: sha256 Sty3LNcKA8+WlMHtAgIY+y1xbwnzKsN0UdyKaW+yYIgcTkBAtF7G5Lx251qQITURJ4wiXPDODxhs1nFVmBBing==" \
-  --header "X-Nonce-Str: VYNknZohxwicZMaWbNdBKUrnrxDtaRhN" \
-  --header "X-Timestamp: 1528450585" \
-  --data "{
-    \"currencyType\": \"MYR\",
-    \"amount\": 300
-
-}"
-```
-
 ### Response Parameters
 
 | Parameter | Type   | Description                                                                                                                                                      | Example                      |
@@ -99,14 +83,3 @@ curl --location --request GET "{{open_base_path}}/v3/loyalty/spending-reward/cal
 | `point`       | Int  | Loyalty point given to customers. | 3       |
 
 Currency notation (currently only support MYR)
-
-> Example Response
-
-```json
-{
-  "item": {
-    "point": 3
-  },
-  "code": "SUCCESS"
-}
-```

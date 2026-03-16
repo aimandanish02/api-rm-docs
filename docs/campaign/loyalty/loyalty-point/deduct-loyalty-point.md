@@ -78,12 +78,4 @@ curl --location --request DELETE "https://sb-open.revenuemonster.my/v3/loyalty/r
 | --------- | ------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------: | --------- |
 | `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer [Appendix 1: Error Codes](https://doc.revenuemonster.my/#appendix-1-error-codes)) | "SUCCESS" |
 
-> Example Response
-
-```json
-{
-  "code": "SUCCESS"
-}
-```
-
 <hr/>

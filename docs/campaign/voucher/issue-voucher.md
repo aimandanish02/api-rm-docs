@@ -77,15 +77,3 @@ To issue vouchers for customer.
 | --------- | ------ | ---------------------------------------------------------------------------------------------------------------------- | :-------------------------------- |
 | `code`    | String | Voucher Code, members can keep this code for future redemption. Same as the qrURL below except this code is not a URL. | "NAklEfbVdV"                      |
 | `qrUrl`   | String | QR code for user to scan with Wechat or Facebook to add the voucher into their member account.                         | QR Url link (refer to below code) |
-
-> Example Response
-
-```json
-{
-  "item": {
-    "code": "NAklEfbVdV",
-    "qrUrl": "http://api.local.rm:8080/qr/4118165203679668885/voucher/NAklEfbVdV"
-  },
-  "code": "SUCCESS"
-}
-```
