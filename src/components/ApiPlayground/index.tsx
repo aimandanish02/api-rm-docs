@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { lookupError, extractErrorCodes } from "../../utils/errorCodes";
 import TokenBanner from "./TokenBanner";
 import PrivateKeyBanner from "./PrivateKeyBanner";
-import CodeSnippets from "./CodeSnippet";
-import { useApiPlayground, PlaygroundProps } from "./UseApiPlayground";
+import { SharedState } from "./UseApiSharedState";
 import styles from "./styles.module.css";
-
-/* ================= JSON HIGHLIGHT ================= */
 
 const highlightJson = (json: string) =>
   json
@@ -26,11 +23,11 @@ const highlightJson = (json: string) =>
       `: <span class="${styles.jsonValue}">$1</span>`
     );
 
-/* ================= COMPONENT ================= */
+type Props = {
+  shared: SharedState;
+};
 
-export default function ApiPlayground(props: PlaygroundProps) {
-  if (!props.url) return null;
-
+export default function ApiPlayground({ shared }: Props) {
   const {
     env, setEnv, hasEnv, baseUrl,
     params, setParams,
@@ -38,14 +35,35 @@ export default function ApiPlayground(props: PlaygroundProps) {
     handleClearToken, handleLoadKey, handleClearKey,
     headers, setHeaders, jsonBody, setJsonBody,
     requiresSignature, requiresAccessToken, notReady,
-    response, status, loading, missedSignature,
-    send,
-  } = useApiPlayground(props);
+    method, send,
+  } = shared;
+
+  const [response, setResponse] = useState<any>(null);
+  const [status, setStatus] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [missedSignature, setMissedSignature] = useState(false);
+
+  const handleSend = async () => {
+    try {
+      setLoading(true);
+      setResponse(null);
+      setStatus(null);
+      setMissedSignature(false);
+      const result = await send();
+      setResponse(result.response);
+      setStatus(result.status);
+      setMissedSignature(result.missedSignature);
+    } catch (err: any) {
+      alert("Request failed: " + (err?.message || String(err)));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!baseUrl) return null;
 
   return (
     <div className={styles.wrapper}>
-
-      {/* ENV SWITCH */}
       {hasEnv && (
         <div className={styles.envSwitch}>
           <button
@@ -63,10 +81,9 @@ export default function ApiPlayground(props: PlaygroundProps) {
         </div>
       )}
 
-      {/* URL */}
       <div className={styles.header}>
-        <span className={`${styles.method} ${styles[props.method.toLowerCase()]}`}>
-          {props.method}
+        <span className={`${styles.method} ${styles[method.toLowerCase()]}`}>
+          {method}
         </span>
         <span className={styles.url}>
           {baseUrl.split(/({[^}]+})/g).map((part, i) => {
@@ -90,7 +107,6 @@ export default function ApiPlayground(props: PlaygroundProps) {
         </span>
       </div>
 
-      {/* AUTH BANNERS */}
       {requiresAccessToken && (
         <TokenBanner status={tokenStatus} env={env} onClear={handleClearToken} />
       )}
@@ -102,7 +118,6 @@ export default function ApiPlayground(props: PlaygroundProps) {
         />
       )}
 
-      {/* HEADERS */}
       <div className={styles.blockHeader}>
         <label className={styles.label}>Headers</label>
       </div>
@@ -118,8 +133,7 @@ export default function ApiPlayground(props: PlaygroundProps) {
         }}
       />
 
-      {/* BODY */}
-      {props.method !== "GET" && (
+      {method !== "GET" && (
         <>
           <div className={styles.blockHeader}>
             <label className={styles.label}>Body</label>
@@ -134,37 +148,27 @@ export default function ApiPlayground(props: PlaygroundProps) {
         </>
       )}
 
-      {/* STATIC CODE SNIPPETS — from frontmatter examples.request */}
-      {props.exampleRequest && (
-        <CodeSnippets rawCurl={props.exampleRequest} />
-      )}
-
-      {/* SEND */}
       <button
         className={`${styles.send} ${notReady ? styles.sendBlocked : ""}`}
-        onClick={send}
+        onClick={handleSend}
         disabled={loading}
         title={notReady ? "Resolve the warnings above before sending" : undefined}
       >
         {loading ? "Sending…" : "▶ Send Request"}
       </button>
 
-      {/* NO SIGNATURE WARNING — shown after a request sent without a key */}
       {missedSignature && (
         <div className={`${styles.banner} ${styles.bannerWarning}`} style={{ marginTop: 12 }}>
           <span className={styles.bannerDot} />
           <span>
             Request sent <strong>without a signature</strong> — the server will likely reject it.
-            Paste your private key above and send again to include <code>X-Signature</code> headers.
+            Paste your private key above and send again.
           </span>
         </div>
       )}
 
-      {/* RESPONSE */}
       {status !== null && (
         <div>
-
-          {/* Status badge */}
           <div className={styles.statusLine}>
             <span className={status >= 200 && status < 300 ? styles.statusOk : styles.statusErr}>
               {status}
@@ -173,15 +177,11 @@ export default function ApiPlayground(props: PlaygroundProps) {
               <span className={styles.statusHint}>{response._error}</span>
             )}
           </div>
-
-          {/* Raw JSON */}
           {!response?._error && (
             <pre className={styles.response}>
               {JSON.stringify(response, null, 2)}
             </pre>
           )}
-
-          {/* Error lookup panel */}
           {status >= 300 && !response?._error && (() => {
             const codes = extractErrorCodes(response);
             if (codes.length === 0) return null;
@@ -209,7 +209,7 @@ export default function ApiPlayground(props: PlaygroundProps) {
                       ) : (
                         <div className={styles.errorLookupDesc}>
                           No description found.{" "}
-                          <a href="/docs/error-codes" target="_blank" rel="noopener noreferrer" className={styles.errorLookupLink}>
+                          <a href="/docs/error-codes" className={styles.errorLookupLink}>
                             View all error codes →
                           </a>
                         </div>
@@ -218,14 +218,13 @@ export default function ApiPlayground(props: PlaygroundProps) {
                   );
                 })}
                 <div className={styles.errorLookupFooter}>
-                  <a href="/docs/error-codes" target="_blank" rel="noopener noreferrer" className={styles.errorLookupLink}>
+                  <a href="/docs/error-codes" className={styles.errorLookupLink}>
                     View full error code reference →
                   </a>
                 </div>
               </div>
             );
           })()}
-
         </div>
       )}
     </div>

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import CodeBlock from "@theme/CodeBlock";
+import React, { useState, useEffect, useRef } from "react";
 import { useDoc } from "@docusaurus/theme-common/internal";
 import { SNIPPET_LANGS, SnippetLang, generateSnippet } from "../../utils/snippets";
+import { SharedState } from "../ApiPlayground/UseApiSharedState";
 import styles from "./styles.module.css";
 
 function toString(val: any): string | undefined {
@@ -17,65 +17,134 @@ function isBlank(val: any): boolean {
   return str.toLowerCase().startsWith("there is no");
 }
 
-/**
- * If the cURL string has no --data / -d flag but a body exists separately,
- * append it so all generated snippets include the request body.
- */
-function mergeBodyIntoCurl(curl: string, body?: string): string {
-  if (!body || isBlank(body)) return curl;
-  const hasData = /--data|-d\s+['{]/.test(curl);
-  if (hasData) return curl;
+type Props = {
+  shared: SharedState;
+};
 
-  // Collapse the body to a single line for --data
-  const oneLine = body.trim().replace(/\n\s*/g, " ");
-  return `${curl.trimEnd()} \\\n    --data '${oneLine}'`;
-}
+type TerminalLine =
+  | { type: "prompt"; text: string }
+  | { type: "output"; text: string }
+  | { type: "success"; text: string }
+  | { type: "error"; text: string };
 
-export default function ApiExamples() {
+export default function ApiExamples({ shared }: Props) {
   const { frontMatter } = useDoc();
   const examples = (frontMatter as any).examples;
-
-  const rawRequest  = toString(examples?.request);
-  const rawBody     = toString(examples?.body);
   const exampleResponse = toString(examples?.response);
 
-  // Produce a complete cURL that always includes the body
-  const completeCurl = rawRequest
-    ? mergeBodyIntoCurl(rawRequest, rawBody)
-    : undefined;
-
-  const [openReq, setOpenReq] = useState(true);
-  const [openRes, setOpenRes] = useState(true);
   const [lang, setLang] = useState<SnippetLang>("cURL");
   const [copied, setCopied] = useState(false);
 
-  if (isBlank(completeCurl) && isBlank(exampleResponse)) return null;
+  // Terminal state
+  const [lines, setLines] = useState<TerminalLine[]>([]);
+  const [typedText, setTypedText] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
+  const [hasRun, setHasRun] = useState(false);
+  const [cursorVisible, setCursorVisible] = useState(true);
+  const [openRes, setOpenRes] = useState(true);
+  const terminalRef = useRef<HTMLDivElement>(null);
 
-  const snippet = completeCurl ? generateSnippet(lang, completeCurl) : "";
+  const snippet = generateSnippet(lang, "");
+  const curlCommand = generateSnippet("cURL", examples?.request ? toString(examples.request) || "" : "");
+
+  // Blink cursor
+  useEffect(() => {
+    const interval = setInterval(() => setCursorVisible(v => !v), 530);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto scroll terminal
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [lines, typedText]);
+
+  const typeCommand = async (command: string) => {
+    setIsTyping(true);
+    setTypedText("");
+    for (let i = 0; i <= command.length; i++) {
+      await new Promise(r => setTimeout(r, 18 + Math.random() * 20));
+      setTypedText(command.slice(0, i));
+    }
+    setIsTyping(false);
+  };
+
+  const handleRun = async () => {
+    if (isRunning || isTyping) return;
+    setIsRunning(true);
+    setHasRun(true);
+    setLines([]);
+
+    // Type the command
+    await typeCommand(curlCommand);
+
+    // Commit command to lines
+    setLines([{ type: "prompt", text: curlCommand }]);
+    setTypedText("");
+
+    // Add running indicator
+    setLines(prev => [...prev, { type: "output", text: "Sending request..." }]);
+
+    try {
+      const result = await shared.send();
+
+      // Remove "Sending request..."
+      setLines(prev => prev.filter(l => l.text !== "Sending request..."));
+
+      const statusLine = `HTTP ${result.status} ${result.status >= 200 && result.status < 300 ? "OK" : "Error"}`;
+      setLines(prev => [
+        ...prev,
+        {
+          type: result.status >= 200 && result.status < 300 ? "success" : "error",
+          text: statusLine,
+        },
+        {
+          type: "output",
+          text: JSON.stringify(result.response, null, 2),
+        },
+      ]);
+    } catch (err: any) {
+      setLines(prev => [
+        ...prev.filter(l => l.text !== "Sending request..."),
+        { type: "error", text: `Error: ${err?.message || "Unknown error"}` },
+      ]);
+    } finally {
+      setIsRunning(false);
+    }
+  };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(snippet).then(() => {
+    const code = generateSnippet(lang, toString(examples?.request) || "");
+    navigator.clipboard.writeText(code).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
   };
 
+  if (isBlank(toString(examples?.request)) && isBlank(exampleResponse)) return null;
+
   return (
     <div className={styles.wrapper}>
 
-      {/* ── EXAMPLE REQUEST ── */}
-      {!isBlank(completeCurl) && (
-        <div className={styles.card}>
-          <div className={styles.header} onClick={() => setOpenReq(!openReq)}>
-            <span>Example Request</span>
-            <div className={styles.headerRight} onClick={(e) => e.stopPropagation()}>
+      {/* ── TERMINAL ── */}
+      {!isBlank(toString(examples?.request)) && (
+        <div className={styles.terminal}>
+          {/* Title bar */}
+          <div className={styles.terminalBar}>
+            <div className={styles.terminalDots}>
+              <span className={styles.dotRed} />
+              <span className={styles.dotYellow} />
+              <span className={styles.dotGreen} />
+            </div>
+            <span className={styles.terminalTitle}>Terminal</span>
+            <div className={styles.terminalActions}>
+              {/* Language switcher */}
               <select
                 className={styles.langDropdown}
                 value={lang}
-                onChange={(e) => {
-                  setLang(e.target.value as SnippetLang);
-                  if (!openReq) setOpenReq(true);
-                }}
+                onChange={(e) => setLang(e.target.value as SnippetLang)}
               >
                 {SNIPPET_LANGS.map((l) => (
                   <option key={l} value={l}>{l}</option>
@@ -87,15 +156,66 @@ export default function ApiExamples() {
               >
                 {copied ? "✓" : "Copy"}
               </button>
-              <span className={styles.chevron}>{openReq ? "▾" : "▸"}</span>
+              <button
+                className={`${styles.runBtn} ${isRunning ? styles.runBtnActive : ""}`}
+                onClick={handleRun}
+                disabled={isRunning || isTyping}
+              >
+                {isRunning ? "Running…" : "▶ Run"}
+              </button>
             </div>
           </div>
 
-          {openReq && (
-            <CodeBlock language={langToHighlight(lang)}>
-              {snippet}
-            </CodeBlock>
-          )}
+          {/* Terminal body */}
+          <div className={styles.terminalBody} ref={terminalRef}>
+            {/* Idle state — show prompt waiting */}
+            {!hasRun && !isTyping && (
+              <div className={styles.terminalLine}>
+                <span className={styles.terminalPrompt}>$</span>
+                <span
+                  className={`${styles.terminalCursor} ${!cursorVisible ? styles.terminalCursorHidden : ""}`}
+                />
+              </div>
+            )}
+
+            {/* Typing animation */}
+            {isTyping && (
+              <div className={styles.terminalLine}>
+                <span className={styles.terminalPrompt}>$</span>
+                <span className={styles.terminalCmd}>{typedText}</span>
+                <span className={`${styles.terminalCursor} ${!cursorVisible ? styles.terminalCursorHidden : ""}`} />
+              </div>
+            )}
+
+            {/* Committed lines */}
+            {lines.map((line, i) => (
+              <div key={i} className={styles.terminalLine}>
+                {line.type === "prompt" && (
+                  <>
+                    <span className={styles.terminalPrompt}>$</span>
+                    <span className={styles.terminalCmd}>{line.text}</span>
+                  </>
+                )}
+                {line.type === "output" && (
+                  <span className={styles.terminalOutput}>{line.text}</span>
+                )}
+                {line.type === "success" && (
+                  <span className={styles.terminalSuccess}>{line.text}</span>
+                )}
+                {line.type === "error" && (
+                  <span className={styles.terminalError}>{line.text}</span>
+                )}
+              </div>
+            ))}
+
+            {/* Idle cursor after run */}
+            {hasRun && !isTyping && !isRunning && (
+              <div className={styles.terminalLine}>
+                <span className={styles.terminalPrompt}>$</span>
+                <span className={`${styles.terminalCursor} ${!cursorVisible ? styles.terminalCursorHidden : ""}`} />
+              </div>
+            )}
+          </div>
         </div>
       )}
 
@@ -107,22 +227,10 @@ export default function ApiExamples() {
             <span className={styles.chevron}>{openRes ? "▾" : "▸"}</span>
           </div>
           {openRes && (
-            <CodeBlock language="json">{exampleResponse!}</CodeBlock>
+            <pre className={styles.responseCode}>{exampleResponse}</pre>
           )}
         </div>
       )}
-
     </div>
   );
-}
-
-function langToHighlight(lang: SnippetLang): string {
-  switch (lang) {
-    case "cURL":         return "bash";
-    case "JS Fetch":     return "javascript";
-    case "Node / Axios": return "javascript";
-    case "Python":       return "python";
-    case "PHP":          return "php";
-    default:             return "bash";
-  }
 }
