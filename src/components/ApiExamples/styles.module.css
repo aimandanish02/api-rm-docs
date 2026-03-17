@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-/* ── CARD (example response) ── */
+/* ── CARD ── */
 
 .card {
   border: 1px solid var(--ifm-color-emphasis-300);
@@ -116,8 +116,8 @@
 .terminalBody {
   background: #0d1117;
   padding: 14px 16px;
-  min-height: 120px;
-  max-height: 400px;
+  min-height: 100px;
+  max-height: 360px;
   overflow-y: auto;
   line-height: 1.7;
 }
@@ -145,16 +145,6 @@
   word-break: break-all;
 }
 
-.terminalSuccess {
-  color: #22c55e;
-  font-weight: 600;
-}
-
-.terminalError {
-  color: #ef4444;
-  font-weight: 600;
-}
-
 .terminalCursor {
   display: inline-block;
   width: 7px;
@@ -167,6 +157,16 @@
 
 .terminalCursorHidden {
   opacity: 0;
+}
+
+.terminalNotice {
+  padding: 8px 16px;
+  font-size: 11px;
+  color: var(--ifm-font-color-base);
+  opacity: 0.45;
+  background: var(--ifm-color-emphasis-100);
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  font-family: var(--ifm-font-family-base);
 }
 
 /* ── CONTROLS ── */
@@ -208,30 +208,4 @@
 .copyBtnCopied {
   border-color: #22c55e !important;
   color: #22c55e !important;
-}
-
-.runBtn {
-  padding: 3px 12px;
-  border-radius: 6px;
-  border: none;
-  background: #22c55e;
-  color: white;
-  font-size: 11.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-
-.runBtn:hover {
-  background: #16a34a;
-}
-
-.runBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.runBtnActive {
-  background: #16a34a;
 }
