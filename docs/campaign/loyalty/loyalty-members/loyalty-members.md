@@ -106,8 +106,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/members"
-  prod="https://open.revenuemonster.my/v3/loyalty/members"
+  sandbox="/v3/loyalty/members"
+  prod="/v3/loyalty/members"
 />
 
 

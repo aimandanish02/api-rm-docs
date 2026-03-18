@@ -80,8 +80,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="PATCH"
-  sandbox="https://sb-open.revenuemonster.my/v3/store/{store_id}"
-  prod="https://open.revenuemonster.my/v3/store/{store_id}"
+  sandbox="/v3/store/{store_id}"
+  prod="/v3/store/{store_id}"
 />
 
 

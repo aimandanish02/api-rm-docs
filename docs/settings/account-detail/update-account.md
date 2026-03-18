@@ -238,8 +238,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="PUT"
-  sandbox="https://sb-open.revenuemonster.my/v3/accounts/{id}"
-  prod="https://open.revenuemonster.my/v3/accounts/{id}"
+  sandbox="/v3/accounts/{id}"
+  prod="/v3/accounts/{id}"
 />
 
 

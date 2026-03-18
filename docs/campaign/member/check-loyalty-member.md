@@ -48,8 +48,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/member/check"
-  prod="https://open.revenuemonster.my/v3/loyalty/member/check"
+  sandbox="/v3/loyalty/member/check"
+  prod="/v3/loyalty/member/check"
 />
 
 `

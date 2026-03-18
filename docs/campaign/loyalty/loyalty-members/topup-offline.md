@@ -100,8 +100,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/member/:memberId/topup-offline"
-  prod="https://open.revenuemonster.my/v3/loyalty/member/:memberId/topup-offline"
+  sandbox="/v3/loyalty/member/:memberId/topup-offline"
+  prod="/v3/loyalty/member/:memberId/topup-offline"
 />
 
 

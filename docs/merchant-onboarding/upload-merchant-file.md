@@ -47,8 +47,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/partner/file/upload"
-  prod="https://open.revenuemonster.my/v3/partner/file/upload"
+  sandbox="/v3/partner/file/upload"
+  prod="/v3/partner/file/upload"
 />
 
 

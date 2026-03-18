@@ -75,8 +75,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="PATCH"
-  sandbox="https://sb-open.revenuemonster.my/v3/voucher/{code}/reinstate"
-  prod="https://open.revenuemonster.my/v3/voucher/{code}/reinstate"
+  sandbox="/v3/voucher/{code}/reinstate"
+  prod="/v3/voucher/{code}/reinstate"
 />
 
 

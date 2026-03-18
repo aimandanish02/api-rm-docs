@@ -110,8 +110,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/voucher-batches"
-  prod="https://open.revenuemonster.my/v3/voucher-batches"
+  sandbox="/v3/voucher-batches"
+  prod="/v3/voucher-batches"
 />
 
 

@@ -121,8 +121,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/account/{id}"
-  prod="https://open.revenuemonster.my/v3/account/{id}"
+  sandbox="/v3/account/{id}"
+  prod="/v3/account/{id}"
 />
 
 

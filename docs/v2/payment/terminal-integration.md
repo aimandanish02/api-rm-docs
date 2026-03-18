@@ -40,8 +40,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay"
-  prod="https://open.revenuemonster.my/v3/payment/terminal/quickpay"
+  sandbox="/v3/payment/terminal/quickpay"
+  prod="/v3/payment/terminal/quickpay"
 />
 
 

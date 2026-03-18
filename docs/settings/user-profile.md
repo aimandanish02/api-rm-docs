@@ -43,8 +43,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/user"
-  prod="https://open.revenuemonster.my/v3/user"
+  sandbox="/v3/user"
+  prod="/v3/user"
 />
 
 

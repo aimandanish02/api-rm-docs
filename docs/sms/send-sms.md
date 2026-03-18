@@ -47,8 +47,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/sms"
-  prod="https://open.revenuemonster.my/v3/sms"
+  sandbox="/v3/sms"
+  prod="/v3/sms"
 />
 
 

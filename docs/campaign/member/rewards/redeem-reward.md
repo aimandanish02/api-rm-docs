@@ -39,8 +39,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/me/reward/{reward-id}/redeem?countryCode=60&phoneNumber=187824152"
-  prod="https://open.revenuemonster.my/v3/loyalty/me/reward/{reward-id}/redeem?countryCode=60&phoneNumber=187824152"
+  sandbox="/v3/loyalty/me/reward/{reward-id}/redeem?countryCode=60&phoneNumber=187824152"
+  prod="/v3/loyalty/me/reward/{reward-id}/redeem?countryCode=60&phoneNumber=187824152"
 />
 
 

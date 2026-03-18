@@ -30,8 +30,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/payment/transaction/{id}"
-  prod="https://open.revenuemonster.my/v3/payment/transaction/{id}"
+  sandbox="/v3/payment/transaction/{id}"
+  prod="/v3/payment/transaction/{id}"
 />
 
 

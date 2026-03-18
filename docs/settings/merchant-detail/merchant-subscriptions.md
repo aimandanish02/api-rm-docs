@@ -52,8 +52,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/merchant/subscriptions"
-  prod="https://open.revenuemonster.my/v3/merchant/subscriptions"
+  sandbox="/v3/merchant/subscriptions"
+  prod="/v3/merchant/subscriptions"
 />
 
 

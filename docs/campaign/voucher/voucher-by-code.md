@@ -62,8 +62,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/voucher/{voucher_code}"
-  prod="https://open.revenuemonster.my/v3/voucher/{voucher_code}"
+  sandbox="/v3/voucher/{voucher_code}"
+  prod="/v3/voucher/{voucher_code}"
 />
 
 

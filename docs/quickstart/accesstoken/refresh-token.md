@@ -45,8 +45,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-oauth.revenuemonster.my/v1/token"
-  prod="https://oauth.revenuemonster.my/v1/token"
+  sandbox="/v1/token"
+  prod="/v1/token"
 />
 
 

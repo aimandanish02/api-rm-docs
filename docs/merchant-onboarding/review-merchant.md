@@ -99,8 +99,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantID}"
-  prod="https://open.revenuemonster.my/v3/partner/merchant/{merchantID}"
+  sandbox="/v3/partner/merchant/{merchantID}"
+  prod="/v3/partner/merchant/{merchantID}"
 />
 
 

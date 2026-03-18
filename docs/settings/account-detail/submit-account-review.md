@@ -238,8 +238,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/account/{id}/review"
-  prod="https://open.revenuemonster.my/v3/account/{id}/review"
+  sandbox="/v3/account/{id}/review"
+  prod="/v3/account/{id}/review"
 />
 
 

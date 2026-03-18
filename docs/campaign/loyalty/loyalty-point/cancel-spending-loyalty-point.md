@@ -42,8 +42,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/loyalty/spending-reward/cancel"
-  prod="https://open.revenuemonster.my/v3/loyalty/spending-reward/cancel"
+  sandbox="/v3/loyalty/spending-reward/cancel"
+  prod="/v3/loyalty/spending-reward/cancel"
 />
 
 

@@ -93,8 +93,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="GET"
-  sandbox="https://sb-open.revenuemonster.my/v3/stores"
-  prod="https://open.revenuemonster.my/v3/stores"
+  sandbox="/v3/stores"
+  prod="/v3/stores"
 />
 
 Get Store By ID

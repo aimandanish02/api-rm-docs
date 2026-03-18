@@ -33,8 +33,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
   method="POST"
-  sandbox="https://sb-open.revenuemonster.my/v3/voucher-batch/{batchkey}/issue"
-  prod="https://open.revenuemonster.my/v3/voucher-batch/{batchkey}/issue"
+  sandbox="/v3/voucher-batch/{batchkey}/issue"
+  prod="/v3/voucher-batch/{batchkey}/issue"
 />
 
 
