@@ -181,27 +181,52 @@
   background: #000000;
 }
 
+/* ================= SEND BUTTON ================= */
+
+.send {
+  margin-top: 20px;
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  color: #ffffff;
+  z-index: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  isolation: isolate;
+}
+
+:root[data-theme="light"] .send {
+  background: #111111;
+}
+
+:root[data-theme="dark"] .send {
+  background: #000000;
+}
+
 .send::before {
   content: "";
   position: absolute;
-  inset: -2px;
-  border-radius: 14px;
-  padding: 2px;
-  background: linear-gradient(135deg, #00f5ff, #7c3aed, #f472b6, #00f5ff);
-  background-size: 300% 300%;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  inset: -1.5px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
+  z-index: -1;
+}
+
+.send::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: inherit;
   z-index: -1;
 }
 
 .send:hover {
   transform: translateY(-2px);
-  box-shadow:
-    0 0 12px rgba(0, 245, 255, 0.6),
-    0 0 25px rgba(124, 58, 237, 0.4);
+  opacity: 0.9;
 }
 
 .send:active {
@@ -211,10 +236,8 @@
 .send:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
-/* Visually dim but not disable when auth prereqs aren't met */
 .sendBlocked {
   opacity: 0.55;
 }
