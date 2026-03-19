@@ -167,6 +167,7 @@ For Merchant that has a Partner account
 </details>
 
 
+
 ### Response Parameters
 
 <details>

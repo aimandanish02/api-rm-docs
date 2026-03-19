@@ -16,8 +16,9 @@ module.exports = {
     path.resolve(__dirname, "./node_modules/docusaurus-lunr-search/"),
   ],
 
-
-
+  clientModules: [
+    require.resolve("./src/clientModules/autoOpenDetails.js"),
+  ],
 
   themeConfig: {
     metadata: [
@@ -91,36 +92,28 @@ module.exports = {
         src: "/img/rm-logo.svg",
         href: "https://revenuemonster.my",
       },
-items: [
-
-{
-  type: "custom-explore",
-  position: "left",
-},
-
-
-  {
-    to: "docs/introduction/overview",
-    activeBasePath: "docs",
-    label: "Docs",
-    position: "right",
-  },
-
-  {
-    to: "/docs/quickstart/sdk",
-    label: "SDK",
-    position: "right",
-  },
-
- 
-
-  {
-    to: "https://github.com/RevenueMonster",
-    label: "GitHub",
-    position: "right",
-  },
-],
-
+      items: [
+        {
+          type: "custom-explore",
+          position: "left",
+        },
+        {
+          to: "docs/introduction/overview",
+          activeBasePath: "docs",
+          label: "Docs",
+          position: "right",
+        },
+        {
+          to: "/docs/quickstart/sdk",
+          label: "SDK",
+          position: "right",
+        },
+        {
+          to: "https://github.com/RevenueMonster",
+          label: "GitHub",
+          position: "right",
+        },
+      ],
     },
 
     footer: {
@@ -137,11 +130,8 @@ items: [
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
-
-          // ✅ already correct
           remarkPlugins: [apiPlaygroundRemark],
         },
-
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
         },

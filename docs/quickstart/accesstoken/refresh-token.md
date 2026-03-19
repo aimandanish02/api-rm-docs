@@ -114,7 +114,8 @@ More info: [Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Au
 ### Response Parameters
 
 <details>
-<summary><strong>Response Parameters</strong></summary>
+<summary>
+<strong>Response Parameters</strong></summary>
 
 | Parameter               |  Type  | Description                                                                  |              Example |
 | :---------------------- | :----: | ---------------------------------------------------------------------------- | -------------------: |

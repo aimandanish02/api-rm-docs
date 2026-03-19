@@ -266,4 +266,41 @@ aside.theme-doc-sidebar-container,
   min-width: 420px !important;
 }
 
+/* ================================
+   DETAILS / SUMMARY ANIMATION
+================================ */
+
+details {
+  overflow: hidden;
+}
+
+details summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "▶";
+  font-size: 11px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+details[open]>summary::before {
+  transform: rotate(90deg);
+}
+
+.details-inner {
+  overflow: hidden;
+}
+
 @import "./api-playground.css";
