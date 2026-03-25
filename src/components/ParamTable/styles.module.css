@@ -1,0 +1,176 @@
+/* ─── Wrapper ─────────────────────────────────────────── */
+.wrapper {
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1.25rem 0;
+  font-size: 0.875rem;
+}
+
+/* ─── Animated body ───────────────────────────────────── */
+.body {
+  display: grid;
+  transition:
+    grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.24s ease;
+}
+
+.bodyOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.bodyClose {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* THIS is what makes the animation work — do not remove */
+.inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* ─── Row ─────────────────────────────────────────────── */
+.row {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: background 0.1s ease;
+}
+
+.row:hover {
+  background: var(--ifm-color-emphasis-50, rgba(0, 0, 0, 0.012));
+}
+
+.rowLast {
+  border-bottom: none;
+}
+
+/* ─── Meta line: name + type + required ───────────────── */
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.paramName {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+  background: none;
+  padding: 0;
+  border: none;
+}
+
+/* ─── Type label ──────────────────────────────────────── */
+.typeLabel {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.08rem 0.4rem;
+  border-radius: 4px;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* Type colours — light */
+.type_string  { background: #dbeafe; color: #1d4ed8; }
+.type_integer { background: #dcfce7; color: #15803d; }
+.type_number  { background: #dcfce7; color: #15803d; }
+.type_boolean { background: #fef9c3; color: #854d0e; }
+.type_array   { background: #ede9fe; color: #6d28d9; }
+.type_object  { background: #fce7f3; color: #be185d; }
+
+/* Type colours — dark */
+[data-theme="dark"] .type_string  { background: #1e3a5f; color: #93c5fd; }
+[data-theme="dark"] .type_integer { background: #14532d; color: #86efac; }
+[data-theme="dark"] .type_number  { background: #14532d; color: #86efac; }
+[data-theme="dark"] .type_boolean { background: #713f12; color: #fde68a; }
+[data-theme="dark"] .type_array   { background: #2e1065; color: #c4b5fd; }
+[data-theme="dark"] .type_object  { background: #500724; color: #f9a8d4; }
+
+/* ─── Required label ──────────────────────────────────── */
+.requiredLabel {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.08rem 0.4rem;
+  border-radius: 4px;
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+[data-theme="dark"] .requiredLabel {
+  background: #450a0a;
+  color: #fca5a5;
+}
+
+/* ─── Description ─────────────────────────────────────── */
+.description {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* ─── Example ─────────────────────────────────────────── */
+.example {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-500);
+}
+
+.exampleLabel {
+  font-style: italic;
+}
+
+.exampleValue {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.76rem;
+  background: var(--ifm-color-emphasis-200);
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+}
+
+/* ─── Toggle footer button ────────────────────────────── */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.6rem 1.1rem;
+  background: var(--ifm-color-emphasis-100);
+  border: none;
+  border-top: 1px solid var(--ifm-color-emphasis-200);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-600);
+  transition: background 0.15s ease, color 0.15s ease;
+  text-align: left;
+}
+
+.toggle:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-800);
+}
+
+.toggleIcon {
+  transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.toggleIconOpen {
+  transform: rotate(180deg);
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+@media (max-width: 640px) {
+  .meta {
+    flex-wrap: wrap;
+  }
+}
