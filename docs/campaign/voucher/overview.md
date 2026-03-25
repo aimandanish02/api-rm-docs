@@ -20,14 +20,15 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ![image](/img/voucher/issue-voucher-api.png)
 
-| Parameter  | Type   | Description                                                                                            | Example             |
-| ---------- | ------ | ------------------------------------------------------------------------------------------------------ | ------------------- |
-| `VALID`    | String | Voucher is still valid, waiting for user to redeem.                                                    | status : "VALID"    |
-| `ISSUE`    | String | Click “Issue” button from RM Merchant App/Terminal.                                                    | status : "ISSUE"    |
-| `REDEEMED` | String | **Optional**: User scan with RM Loyalty Program, and this voucher can now be viewed under “My Rewards” | status : "REDEEMED" |
-| `VOID`     | String | User used voucher at merchant shop. Merchant has scanned this voucher.                                 | status : "VOID"     |
-| `EXPIRED`  | String | Voucher has reached its expiry date. It cannot be used anymore                                         | status : "EXPIRED"  |
-
+<ParamTable
+  rows={[
+    { name: "VALID", type: "String", description: "Voucher is still valid, waiting for user to redeem.", example: "status : \"VALID\"" },
+    { name: "ISSUE", type: "String", description: "Click “Issue” button from RM Merchant App/Terminal.", example: "status : \"ISSUE\"" },
+    { name: "REDEEMED", type: "String", description: "Optional: User scan with RM Loyalty Program, and this voucher can now be viewed under “My Rewards”", example: "status : \"REDEEMED\"" },
+    { name: "VOID", type: "String", description: "User used voucher at merchant shop. Merchant has scanned this voucher.", example: "status : \"VOID\"" },
+    { name: "EXPIRED", type: "String", description: "Voucher has reached its expiry date. It cannot be used anymore", example: "status : \"EXPIRED\"" }
+  ]}
+/>
 <hr/>
 
 ### Voucher Marketplace
@@ -40,15 +41,16 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ![image](/img/voucher/marketplace-voucher.png)
 
-| Parameter      | Type   | Description                                                                                            | Example                 |
-| -------------- | ------ | ------------------------------------------------------------------------------------------------------ | ----------------------- |
-| `VALID`        | String | Voucher is still valid, waiting for user to redeem.                                                    | status : "VALID"        |
-| `ISSUE`        | String | Click “Issue” button from RM Merchant App/Terminal.                                                    | status : "ISSUE"        |
-| `REDEEMED`     | String | **Optional**: User scan with RM Loyalty Program, and this voucher can now be viewed under “My Rewards” | status : "REDEEMED"     |
-| `VOID`         | String | User used voucher at merchant shop. Merchant has scanned this voucher.                                 | status : "VOID"         |
-| `EXPIRED`      | String | Voucher has reached its expiry date. It cannot be used anymore                                         | status : "EXPIRED"      |
-| `MARKET_PLACE` | String | Send/Share voucher to other merchant                                                                   | status : "MARKET_PLACE" |
-
+<ParamTable
+  rows={[
+    { name: "VALID", type: "String", description: "Voucher is still valid, waiting for user to redeem.", example: "status : \"VALID\"" },
+    { name: "ISSUE", type: "String", description: "Click “Issue” button from RM Merchant App/Terminal.", example: "status : \"ISSUE\"" },
+    { name: "REDEEMED", type: "String", description: "Optional: User scan with RM Loyalty Program, and this voucher can now be viewed under “My Rewards”", example: "status : \"REDEEMED\"" },
+    { name: "VOID", type: "String", description: "User used voucher at merchant shop. Merchant has scanned this voucher.", example: "status : \"VOID\"" },
+    { name: "EXPIRED", type: "String", description: "Voucher has reached its expiry date. It cannot be used anymore", example: "status : \"EXPIRED\"" },
+    { name: "MARKET_PLACE", type: "String", description: "Send/Share voucher to other merchant", example: "status : \"MARKET_PLACE\"" }
+  ]}
+/>
 <hr/>
 
 ### Sample Response

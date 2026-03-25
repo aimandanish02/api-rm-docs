@@ -164,15 +164,16 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter     | Type   | Description                | Example                      |
-| ------------- | ------ | -------------------------- | ---------------------------- |
-| `id`          | String | Side Category ID           | "5f698149585d7cc1ae35a395"   |
-| `name`        | String | Side Category name         | "Side Category 1"            |
-| `isAvailable` | Bool   | Side Category available    | true                         |
-| `minChoice`   | Uint   | Set minimum choice         | 1                            |
-| `maxChoice`   | Uint   | Set maximum choice         | 3                            |
-| `sideItems`   | Array  | Refer to explanation below | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Side Category ID", example: "\"5f698149585d7cc1ae35a395\"" },
+    { name: "name", type: "String", description: "Side Category name", example: "\"Side Category 1\"" },
+    { name: "isAvailable", type: "Bool", description: "Side Category available", example: "true" },
+    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "sideItems", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
+  ]}
+/>
 
 
 
@@ -181,14 +182,15 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter         | Type   | Description                         | Example                         |
-| ----------------- | ------ | ----------------------------------- | ------------------------------- |
-| `referenceItemId` | String | Optional, Item reference ID         | "5eaa7b72e0e9cd7b01a3a2b2"      |
-| `id`              | String | Side Item ID                        | "5f698149585d7cc1ae35a392"      |
-| `name`            | String | Side Item name                      | "Coke"                          |
-| `price`           | Object | Refer to the <b>Price parameter</b> | ( Refer to the Price parameter) |
-| `isAvailable`     | Bool   | Side Item is available              | true                            |
-
+<ParamTable
+  rows={[
+    { name: "referenceItemId", type: "String", description: "Optional, Item reference ID", example: "\"5eaa7b72e0e9cd7b01a3a2b2\"" },
+    { name: "id", type: "String", description: "Side Item ID", example: "\"5f698149585d7cc1ae35a392\"" },
+    { name: "name", type: "String", description: "Side Item name", example: "\"Coke\"" },
+    { name: "price", type: "Object", description: "Refer to the Price parameter", example: "( Refer to the Price parameter)" },
+    { name: "isAvailable", type: "Bool", description: "Side Item is available", example: "true" }
+  ]}
+/>
 
 
 
@@ -197,11 +199,12 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter      | Type   | Description                                      | Example |
-| -------------- | ------ | ------------------------------------------------ | ------- |
-| `amount`       | Uint   | Amount in cent (min RM 0.10 <b>10 = RM 0.10</b>) | 100     |
-| `currencyType` | String | Current only support Ringgit Malaysia            | "MYR"   |
-
+<ParamTable
+  rows={[
+    { name: "amount", type: "Uint", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
+    { name: "currencyType", type: "String", description: "Current only support Ringgit Malaysia", example: "\"MYR\"" }
+  ]}
+/>
 
 
 
@@ -210,14 +213,15 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter   | Type   | Description                | Example                      |
-| ----------- | ------ | -------------------------- | ---------------------------- |
-| `id`        | String | Preferences ID             | "5f698149585d7cc1ae35a38d"   |
-| `name`      | String | Preferences name           | "Sweetness"                  |
-| `minChoice` | Uint   | Set minimum choice         | 1                            |
-| `maxChoice` | Uint   | Set maximum choice         | 3                            |
-| `labels`    | Array  | Refer to explanation below | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Preferences ID", example: "\"5f698149585d7cc1ae35a38d\"" },
+    { name: "name", type: "String", description: "Preferences name", example: "\"Sweetness\"" },
+    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "labels", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
+  ]}
+/>
 
 
 
@@ -226,10 +230,11 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter | Type   | Description | Example                    |
-| --------- | ------ | ----------- | -------------------------- |
-| `id`      | String | Label ID    | "5f698149585d7cc1ae35a38e" |
-| `name`    | String | Label name  | "Basic"                    |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Label ID", example: "\"5f698149585d7cc1ae35a38e\"" },
+    { name: "name", type: "String", description: "Label name", example: "\"Basic\"" }
+  ]}
+/>
 
 

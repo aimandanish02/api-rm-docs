@@ -12,11 +12,12 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 ### Request Parameters
 
-| Parameter    | Type   | Required | Description  | Example               |
-| ------------ | ------ | :------: | ------------ | --------------------- |
-| `terminalId` | String |   Yes    | Terminal ID  | "1582107209454501456" |
-| `type`       | String |   Yes    | Request type | "CANCEL"              |
-
+<ParamTable
+  rows={[
+    { name: "terminalId", type: "String", required: true, description: "Terminal ID", example: "\"1582107209454501456\"" },
+    { name: "type", type: "String", required: true, description: "Request type", example: "\"CANCEL\"" }
+  ]}
+/>
 > Example Request
 
 ```json
@@ -34,11 +35,12 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example   |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | --------- |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS" |
-| `error`   | String | (Refer `Appendix: Error Codes`)                                                                           | {}        |
-
+<ParamTable
+  rows={[
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" },
+    { name: "error", type: "String", description: "(Refer Appendix: Error Codes)", example: "{}" }
+  ]}
+/>
 <br/>
 
 > Example Response

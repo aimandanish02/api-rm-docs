@@ -22,73 +22,78 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | Transaction object                                                                                        | (Refer to explanation below) |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "Transaction object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br/>
 <strong>Transaction object (item):</strong>
 
-| Parameter       | Type     | Description                                                                                                             | Example                               |
-| --------------- | -------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `store`         | Object   | Store object                                                                                                            | (Refer to explanation below)          |
-| `referenceId`   | String   | Transaction ID (from Payment server)                                                                                    | "20201217211212800110171725600805232" |
-| `transactionId` | String   | Transaction ID (from RM server)                                                                                         | "152161448229438994"                  |
-| `order`         | Object   | Order object                                                                                                            | (Refer to explanation below)          |
-| `terminalId`    | String   | Terminal ID                                                                                                             | ""                                    |
-| `payee`         | Object   | Object of userID made payment (payment sender)                                                                          | {"userId": "1000000806040489"}        |
-| `currencyType`  | String   | Currency Type                                                                                                           | "MYR"                                 |
-| `balanceAmount` | Uint     | Is Sales Amount - Refunded Amount                                                                                       | 1865                                  |
-| `voucher`       | Object   | Voucher                                                                                                                 | null                                  |
-| `transactionAt` | DateTime | Date time of transaction                                                                                                | "2018-03-21T06:41:22Z"                |
-| `platform`      | String   | Currently only support "OPEN_API"                                                                                       | "OPEN_API"                            |
-| `method`        | String   | [RM currently supported method](../payment-method.mdx)                                                                  | "TNG"                                 |
-| `type`          | String   | Currently only support "QUICKPAY" , "WEB_PAYMENT"                                                                       | "WEB_PAYMENT"                         |
-| `status`        | String   | Status returned from server, "SUCCESS" or "IN_PROCESS" or "FAILED". "IN_PROCESS" means user scanned and making payment. | "SUCCESS"                             |
-| `region`        | String   | Region of wallet, "MALAYSIA" or "CHINA"                                                                                 | "MALAYSIA"                            |
-| `extraInfo`     | Object   |                                                                                                                         | (Refer to explanation below)          |
-| `createdAt`     | DateTime | Creation date time of transaction                                                                                       | "2018-03-21T06:41:22Z"                |
-| `updatedAt`     | DateTime | Last update date time of transaction                                                                                    | "2018-03-21T06:41:22Z"                |
-
+<ParamTable
+  rows={[
+    { name: "store", type: "Object", description: "Store object", example: "(Refer to explanation below)" },
+    { name: "referenceId", type: "String", description: "Transaction ID (from Payment server)", example: "\"20201217211212800110171725600805232\"" },
+    { name: "transactionId", type: "String", description: "Transaction ID (from RM server)", example: "\"152161448229438994\"" },
+    { name: "order", type: "Object", description: "Order object", example: "(Refer to explanation below)" },
+    { name: "terminalId", type: "String", description: "Terminal ID", example: "\"\"" },
+    { name: "payee", type: "Object", description: "Object of userID made payment (payment sender)", example: "{\"userId\": \"1000000806040489\"}" },
+    { name: "currencyType", type: "String", description: "Currency Type", example: "\"MYR\"" },
+    { name: "balanceAmount", type: "Uint", description: "Is Sales Amount - Refunded Amount", example: "1865" },
+    { name: "voucher", type: "Object", description: "Voucher", example: "null" },
+    { name: "transactionAt", type: "DateTime", description: "Date time of transaction", example: "\"2018-03-21T06:41:22Z\"" },
+    { name: "platform", type: "String", description: "Currently only support \"OPEN_API\"", example: "\"OPEN_API\"" },
+    { name: "method", type: "String", description: "RM currently supported method", example: "\"TNG\"" },
+    { name: "type", type: "String", description: "Currently only support \"QUICKPAY\" , \"WEB_PAYMENT\"", example: "\"WEB_PAYMENT\"" },
+    { name: "status", type: "String", description: "Status returned from server, \"SUCCESS\" or \"IN_PROCESS\" or \"FAILED\". \"IN_PROCESS\" means user scanned and making payment.", example: "\"SUCCESS\"" },
+    { name: "region", type: "String", description: "Region of wallet, \"MALAYSIA\" or \"CHINA\"", example: "\"MALAYSIA\"" },
+    { name: "extraInfo", type: "Object", example: "(Refer to explanation below)" },
+    { name: "createdAt", type: "DateTime", description: "Creation date time of transaction", example: "\"2018-03-21T06:41:22Z\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update date time of transaction", example: "\"2018-03-21T06:41:22Z\"" }
+  ]}
+/>
 <br/>
 <strong>Store object (store):</strong>
 
-| Parameter      | Type     | Description                                    | Example                                                      |
-| -------------- | -------- | ---------------------------------------------- | ------------------------------------------------------------ |
-| `id`           | String   | Store ID                                       | "2808912573238362402"                                        |
-| `name`         | String   | Store Name                                     | "REVENUE MONSTER"                                            |
-| `imageUrl`     | String   | Yes                                            | "https://storage.googleapis.com/rm-prod-asset/img/store.png" |
-| `addressLine1` | String   | Store Address 1                                | "B-5-30, 5th Floor, Block Bougainvillea,"                    |
-| `addressLine2` | String   | Store Address 2                                | "PJU 6A, Lebuhraya SPRINT, 10 Boulevard,"                    |
-| `postCode`     | String   | Postcode of store                              | "47400"                                                      |
-| `city`         | String   | City of store                                  | "Petaling Jaya"                                              |
-| `state`        | String   | State of store                                 | "Selangor"                                                   |
-| `country`      | String   | Country of store                               | "Malaysia"                                                   |
-| `countryCode`  | String   | Country code of store contact number           | "60"                                                         |
-| `phoneNumber`  | String   | Phone number of store                          | "377334080"                                                  |
-| `geoLocation`  | Object   | Geo Location (latitude and longitude) of store | {"latitude": 3.1349857, "longitude": 101.6136659 }           |
-| `status`       | String   | Current status of store                        | "ACTIVE"                                                     |
-| `createdAt`    | DateTime | Creation date time of store                    | "2020-09-14T03:01:20Z"                                       |
-| `updatedAt`    | DateTime | Last update date time of store                 | "2020-09-14T03:01:20Z"                                       |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Store ID", example: "\"2808912573238362402\"" },
+    { name: "name", type: "String", description: "Store Name", example: "\"REVENUE MONSTER\"" },
+    { name: "imageUrl", type: "String", description: "Yes", example: "\"https://storage.googleapis.com/rm-prod-asset/img/store.png\"" },
+    { name: "addressLine1", type: "String", description: "Store Address 1", example: "\"B-5-30, 5th Floor, Block Bougainvillea,\"" },
+    { name: "addressLine2", type: "String", description: "Store Address 2", example: "\"PJU 6A, Lebuhraya SPRINT, 10 Boulevard,\"" },
+    { name: "postCode", type: "String", description: "Postcode of store", example: "\"47400\"" },
+    { name: "city", type: "String", description: "City of store", example: "\"Petaling Jaya\"" },
+    { name: "state", type: "String", description: "State of store", example: "\"Selangor\"" },
+    { name: "country", type: "String", description: "Country of store", example: "\"Malaysia\"" },
+    { name: "countryCode", type: "String", description: "Country code of store contact number", example: "\"60\"" },
+    { name: "phoneNumber", type: "String", description: "Phone number of store", example: "\"377334080\"" },
+    { name: "geoLocation", type: "Object", description: "Geo Location (latitude and longitude) of store", example: "{\"latitude\": 3.1349857, \"longitude\": 101.6136659 }" },
+    { name: "status", type: "String", description: "Current status of store", example: "\"ACTIVE\"" },
+    { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2020-09-14T03:01:20Z\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update date time of store", example: "\"2020-09-14T03:01:20Z\"" }
+  ]}
+/>
 <br/>
 <strong>Order object (order):</strong>
 
-| Parameter | Type   | Description              | Example                        |
-| --------- | ------ | ------------------------ | ------------------------------ |
-| `id`      | String | Order ID (from Merchant) | "134850717797247290"           |
-| `title`   | String | Order title              | "Sales"                        |
-| `detail`  | String | Order details            | "1 x iPhone X; 2 x SAMSUNG S8" |
-| `amount`  | Uint   | Amount of order          | 1865                           |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Order ID (from Merchant)", example: "\"134850717797247290\"" },
+    { name: "title", type: "String", description: "Order title", example: "\"Sales\"" },
+    { name: "detail", type: "String", description: "Order details", example: "\"1 x iPhone X; 2 x SAMSUNG S8\"" },
+    { name: "amount", type: "Uint", description: "Amount of order", example: "1865" }
+  ]}
+/>
 <br/>
 <strong>ExtraInfo object (extraInfo):</strong>
 
-| Parameter | Type   | Description | Example |
-| --------- | ------ | ----------- | ------- |
-| `card`    | Object |             | {}      |
-
+<ParamTable
+  rows={[
+    { name: "card", type: "Object", example: "{}" }
+  ]}
+/>
 > Example Response
 
 ```json

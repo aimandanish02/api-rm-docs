@@ -39,36 +39,39 @@ To create a unified payment checkout page for your website.
 
 ### Request Parameters
 
-| Parameter    | Type         | Description                                                                        | Example               |
-| ------------ | ------------ | ---------------------------------------------------------------------------------- | --------------------- |
-| `checkoutId` | String       | refer to [web-payment](./web-payment#response-parameters) to get your `checkoutId` | "1547775958720585401" |
-| `method`     | String       | [RM currently supported method](../.././payment-method.mdx)                        | "WECHATPAY_MY"        |
-| `type`       | String       | `URL` or `QRCODE`                                                                  | "URL"                 |
-| `gobiz`      | Gobiz Object | Specific setting for method GOBIZ_MY                                               | {}                    |
-| `card`       | Card Object  | Card information for method GOBIZ_MY only                                          | {}                    |
-
+<ParamTable
+  rows={[
+    { name: "checkoutId", type: "String", description: "refer to web-payment to get your checkoutId", example: "\"1547775958720585401\"" },
+    { name: "method", type: "String", description: "RM currently supported method", example: "\"WECHATPAY_MY\"" },
+    { name: "type", type: "String", description: "URL or QRCODE", example: "\"URL\"" },
+    { name: "gobiz", type: "Gobiz Object", description: "Specific setting for method GOBIZ_MY", example: "{}" },
+    { name: "card", type: "Card Object", description: "Card information for method GOBIZ_MY only", example: "{}" }
+  ]}
+/>
 <br/>
 <strong>Gobiz Object (data):</strong>
 
-| Parameter  | Type   | Description                               | Example                                             |
-| ---------- | ------ | ----------------------------------------- | --------------------------------------------------- |
-| `type`     | String | Type of gobiz payment                     | "DIRECT_DEBIT" / "UNIVERSAL_PAYMENT"                |
-| `bankCode` | String | Required only when type is "DIRECT_DEBIT" | [RM currently supported bank code](../../bank-code) |
-
+<ParamTable
+  rows={[
+    { name: "type", type: "String", description: "Type of gobiz payment", example: "\"DIRECT_DEBIT\" / \"UNIVERSAL_PAYMENT\"" },
+    { name: "bankCode", type: "String", description: "Required only when type is \"DIRECT_DEBIT\"", example: "RM currently supported bank code" }
+  ]}
+/>
 <br/>
 <strong>Card Object (data):</strong>
 
-| Parameter     | Type    | Description                                                        | Example          |
-| ------------- | ------- | ------------------------------------------------------------------ | ---------------- |
-| `isToken`     | boolean | To determine is it using customer token                            | false            |
-| `isSave`      | boolean | To determine token will be save for next usage                     | true             |
-| `no`          | String  | Customer token or Card Number                                      | 4100000000000100 |
-| `cvc`         | String  | Card verification code                                             | 123              |
-| `name`        | String  | Card Name (Optional when customer token is used)                   | CitiBank         |
-| `month`       | uint32  | Card expiry month 1-12 only (Optional when customer token is used) | 8                |
-| `year`        | uint32  | Card expiry year (Optional when customer token is used)            | 2021             |
-| `countryCode` | String  | Country code (Optional when customer token is used)                | MY               |
-
+<ParamTable
+  rows={[
+    { name: "isToken", type: "boolean", description: "To determine is it using customer token", example: "false" },
+    { name: "isSave", type: "boolean", description: "To determine token will be save for next usage", example: "true" },
+    { name: "no", type: "String", description: "Customer token or Card Number", example: "4100000000000100" },
+    { name: "cvc", type: "String", description: "Card verification code", example: "123" },
+    { name: "name", type: "String", description: "Card Name (Optional when customer token is used)", example: "CitiBank" },
+    { name: "month", type: "uint32", description: "Card expiry month 1-12 only (Optional when customer token is used)", example: "8" },
+    { name: "year", type: "uint32", description: "Card expiry year (Optional when customer token is used)", example: "2021" },
+    { name: "countryCode", type: "String", description: "Country code (Optional when customer token is used)", example: "MY" }
+  ]}
+/>
 ```json
 curl --location --request POST '{{open_base_path}}/v3/payment/online/checkout' \
 --header 'Content-Type: application/json' \
@@ -85,20 +88,22 @@ curl --location --request POST '{{open_base_path}}/v3/payment/online/checkout' \
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                   | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | Object of refund details.                                                                     | (Refer to explanation below) |
-| `code`    | String | Status returned from Revenue Monster server, whether successfully called our endpoint or not. | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "Object of refund details.", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Status returned from Revenue Monster server, whether successfully called our endpoint or not.", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br/>
 
 <strong>Item Object (item):</strong>
 
-| Parameter | Type   | Description                                              | Example                  |
-| --------- | ------ | -------------------------------------------------------- | ------------------------ |
-| `type`    | String | `URL` or `QRCODE`                                        | "URL"                    |
-| `url`     | String | Once you press this link it will redirect to the wallet. | "Url link show as below" |
-
+<ParamTable
+  rows={[
+    { name: "type", type: "String", description: "URL or QRCODE", example: "\"URL\"" },
+    { name: "url", type: "String", description: "Once you press this link it will redirect to the wallet.", example: "\"Url link show as below\"" }
+  ]}
+/>
 > Example Response for URL
 
 ```json

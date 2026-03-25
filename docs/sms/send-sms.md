@@ -84,6 +84,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                              | Example   |
-| --------- | ------ | -------------------------------------------------------------------------------------------------------- | --------- |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix : Error Codes`) | "SUCCESS" |
+<ParamTable
+  rows={[
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix : Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>

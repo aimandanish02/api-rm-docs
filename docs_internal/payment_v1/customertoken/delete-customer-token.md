@@ -16,10 +16,11 @@ Delete Customer Token
 
 ### Request Parameters
 
-| Parameter | Type   | Description    | Example                              |
-| --------- | ------ | -------------- | ------------------------------------ |
-| `token`   | String | Customer Token | tk1072e12a1df2d4367fa30c7246ce86c2e5 |
-
+<ParamTable
+  rows={[
+    { name: "token", type: "String", description: "Customer Token", example: "tk1072e12a1df2d4367fa30c7246ce86c2e5" }
+  ]}
+/>
 <br/>
 
 > Example Request

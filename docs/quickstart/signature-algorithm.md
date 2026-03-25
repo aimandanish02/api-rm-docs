@@ -28,50 +28,54 @@ sidebar_label: Signature Algorithm
 
 #### Example of Web/Mobile Payment
 
-| Parameter       | Type     | Required | Description                                                                                        | Example                                                                      |
-| --------------- | -------- | -------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `order`         | Object   | Yes      | Object of order                                                                                    | (Refer to explanation below)                                                 |
-| `customer`      | Object   | Yes      | Object of customer                                                                                 | (Refer to explanation below)                                                 |
-| `method`        | []String | Yes      | [RM currently supported method](https://doc.revenuemonster.my/docs/payment-method.mdx)             | []                                                                           |
-| `type`          | String   | Yes      | Object of type                                                                                     | (Refer to explanation below)                                                 |
-| `storeId`       | String   | Yes      | ID of the store to create QR code                                                                  | "10946114768247530"                                                          |
-| `redirectUrl`   | String   | Yes      | URL to redirect after payment is made                                                              | "https://google.com"                                                         |
-| `notifyUrl`     | String   | Yes      | Example of [Notify URL Response](https://doc.revenuemonster.my/docs/payment/webpayment/notify-url) | "https://google.com"                                                         |
-| `layoutVersion` | String   | Optional | Select layout for Web payment                                                                      | v1 / **v2 (Supported Credit Card)** / **v3 (Supported Credit Card and FPX)** |
-
+<ParamTable
+  rows={[
+    { name: "order", type: "Object", required: true, description: "Object of order", example: "(Refer to explanation below)" },
+    { name: "customer", type: "Object", required: true, description: "Object of customer", example: "(Refer to explanation below)" },
+    { name: "method", type: "[]String", required: true, description: "RM currently supported method", example: "[]" },
+    { name: "type", type: "String", required: true, description: "Object of type", example: "(Refer to explanation below)" },
+    { name: "storeId", type: "String", required: true, description: "ID of the store to create QR code", example: "\"10946114768247530\"" },
+    { name: "redirectUrl", type: "String", required: true, description: "URL to redirect after payment is made", example: "\"https://google.com\"" },
+    { name: "notifyUrl", type: "String", required: true, description: "Example of Notify URL Response", example: "\"https://google.com\"" },
+    { name: "layoutVersion", type: "String", description: "Select layout for Web payment", example: "v1 / v2 (Supported Credit Card) / v3 (Supported Credit Card and FPX)" }
+  ]}
+/>
 <br />
 
 <strong>Order object (order):</strong>
 
-| Parameter        | Type   | Required | Description                                                                                       | Example                        |
-| ---------------- | ------ | -------- | ------------------------------------------------------------------------------------------------- | ------------------------------ |
-| `title`          | String | Yes      | Order title, max: 32                                                                              | "Sales"                        |
-| `detail`         | String | Yes      | Order detail, max: 600                                                                            | "1 x iPhone X; 2 x SAMSUNG S8" |
-| `additionalData` | String | Yes      | Order description                                                                                 | "Sales"                        |
-| `amount`         | Uint   | Yes      | Amount of order in cent. Only required when "isPrefillAmount" = true. (min RM 0.10 or amount: 10) | 100                            |
-| `currencyType`   | String | Yes      | Currency notation (currently only support `MYR`)                                                  | "MYR"                          |
-| `id`             | String | Order ID | "6170506694335521334"                                                                             |
-
+<ParamTable
+  rows={[
+    { name: "title", type: "String", required: true, description: "Order title, max: 32", example: "\"Sales\"" },
+    { name: "detail", type: "String", required: true, description: "Order detail, max: 600", example: "\"1 x iPhone X; 2 x SAMSUNG S8\"" },
+    { name: "additionalData", type: "String", required: true, description: "Order description", example: "\"Sales\"" },
+    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent. Only required when \"isPrefillAmount\" = true. (min RM 0.10 or amount: 10)", example: "100" },
+    { name: "currencyType", type: "String", required: true, description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
+    { name: "id", type: "String", description: "\"6170506694335521334\"" }
+  ]}
+/>
 <br />
 
 <strong>Customer object (customer):</strong>
 
-| Parameter     | Type   | Required | Description                            | Example    |
-| ------------- | ------ | -------- | -------------------------------------- | ---------- |
-| `userId`      | String | Yes      | if tokenization enable need **userId** | "13245876" |
-| `email`       | String | Optional | Customer Email                         | ""         |
-| `countryCode` | String | Optional | Customer Country Code                  | ""         |
-| `phoneNumber` | String | Optional | Customer Phone Number                  | ""         |
-
+<ParamTable
+  rows={[
+    { name: "userId", type: "String", required: true, description: "if tokenization enable need userId", example: "\"13245876\"" },
+    { name: "email", type: "String", description: "Customer Email", example: "\"\"" },
+    { name: "countryCode", type: "String", description: "Customer Country Code", example: "\"\"" },
+    { name: "phoneNumber", type: "String", description: "Customer Phone Number", example: "\"\"" }
+  ]}
+/>
 <br />
 
 <strong>Type Object (type):</strong> <br />
 
-| Parameter | Type   | Required | Example          |
-| --------- | ------ | -------- | ---------------- |
-| `type`    | String | Yes      | "WEB_PAYMENT"    |
-| `type`    | String | Yes      | "MOBILE_PAYMENT" |
-
+<ParamTable
+  rows={[
+    { name: "type", type: "String", required: true, example: "\"WEB_PAYMENT\"" },
+    { name: "type", type: "String", required: true, example: "\"MOBILE_PAYMENT\"" }
+  ]}
+/>
 > Example Request
 
 ```json
@@ -124,15 +128,16 @@ ewogICAgIm9yZGVyIjogewogICAgCSJ0aXRsZSI6ICJoZWxsbyIsCiAgICAJImRldGFpbCI6ICIiLAog
 
 :::
 
-| Parameter    | Type   | Required | Description                                                        | Example                                             |
-| ------------ | ------ | -------- | ------------------------------------------------------------------ | --------------------------------------------------- |
-| `data`       | String | Yes      | Base64 data body from Step 2.                                      | Refer to **Step 2**                                 |
-| `method`     | String | Yes      | HTTP call method used                                              | "post"                                              |
-| `nonceStr`   | String | Yes      | Random string                                                      | "VYNknZohxwicZMaWbNdBKUrnrxDtaRhN"                  |
-| `requestUrl` | String | Yes      | API URL that you call must be exactly the same, together with URL. | https://sb-open.revenuemonster.my/v3/payment/online |
-| `signType`   | String | Yes      | Sign Type, prefer SHA-256                                          | "sha256"                                            |
-| `timestamp`  | String | Yes      | UNIX timestamp of request                                          | "1527407052"                                        |
-
+<ParamTable
+  rows={[
+    { name: "data", type: "String", required: true, description: "Base64 data body from Step 2.", example: "Refer to Step 2" },
+    { name: "method", type: "String", required: true, description: "HTTP call method used", example: "\"post\"" },
+    { name: "nonceStr", type: "String", required: true, description: "Random string", example: "\"VYNknZohxwicZMaWbNdBKUrnrxDtaRhN\"" },
+    { name: "requestUrl", type: "String", required: true, description: "API URL that you call must be exactly the same, together with URL.", example: "https://sb-open.revenuemonster.my/v3/payment/online" },
+    { name: "signType", type: "String", required: true, description: "Sign Type, prefer SHA-256", example: "\"sha256\"" },
+    { name: "timestamp", type: "String", required: true, description: "UNIX timestamp of request", example: "\"1527407052\"" }
+  ]}
+/>
 **Example**
 :::note
 data=ewogICAgIm9yZGVyIjogewogICAgCSJ0aXRsZSI6ICJoZWxsbyIsCiAgICAJImRldGFpbCI6ICIiLAogICAgCSJhZGRpdGlvbmFsRGF0YSI6ICJ3b3JsZCIsCgkgICAgImFtb3VudCI6IDEwLAoJICAgICJjdXJyZW5jeVR5cGUiOiAiTVlSIiwKCSAgICAiaWQiOiAgIjcyMTEiCiAgICB9LAogICAgImN1c3RvbWVyIjogewogICAgInVzZXJJZCI6ICIiLAogICAgImVtYWlsIjogIiIKfSwKICAgICJtZXRob2QiOltdLAogICAgInR5cGUiOiAiV0VCX1BBWU1FTlQiLAogICAgInN0b3JlSWQiOiAiMTYwODEyMzAzNTU2NDUzODEyMSIsCiAgICAicmVkaXJlY3RVcmwiOiAiaHR0cHM6Ly9yZXZlbnVlbW9uc3Rlci5teSIsCiAgICAibm90aWZ5VXJsIjogImh0dHBzOi8vZGV2LXJtLWFwaS5hcC5uZ3Jvay5pbyIsCiAgICAibGF5b3V0VmVyc2lvbiI6InYzIgp9&#38;method=post&#38;nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&#38;requestUrl=https://sb-open.revenuemonster.my/v3/payment/online&#38;signType=sha256&#38;timestamp=1527407052
@@ -194,19 +199,21 @@ curl --request POST
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | item object                                                                                               | (Refer to explanation below) |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "item object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 <strong>item Object (item):</strong>
 
-| Parameter    | Type   | Description                                                            | Example                                                                   |
-| ------------ | ------ | ---------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| `checkoutId` | String | Code to identify web payment url                                       | "1548316308361173347"                                                     |
-| `url`        | String | Example to form checkout URL. Note: to change base URL to desired URL. | "https://sb-pg.revenuemonster.my/checkout?checkoutId=1548316308361173347" |
-
+<ParamTable
+  rows={[
+    { name: "checkoutId", type: "String", description: "Code to identify web payment url", example: "\"1548316308361173347\"" },
+    { name: "url", type: "String", description: "Example to form checkout URL. Note: to change base URL to desired URL.", example: "\"https://sb-pg.revenuemonster.my/checkout?checkoutId=1548316308361173347\"" }
+  ]}
+/>
 > Example Response
 
 ```json

@@ -16,14 +16,15 @@ To get Daily Payment report
 
 ### Request Parameters
 
-| Parameter         | Type     | Required | Description                                            | Example      |
-| ----------------- | -------- | -------- | ------------------------------------------------------ | ------------ |
-| `transactionType` | String   | Yes      | "PAYMENT" or "REFUND"                                  | "PAYMENT"    |
-| `date`            | String   | Yes      | Date of the report                                     | "2019-12-31" |
-| `method`          | []String | Yes      | [RM currently supported method](../payment-method.mdx) | []           |
-| `region`          | []String | Yes      | Region of wallet, "MALAYSIA" or "CHINA"                | []           |
-| `cursor`          | String   | Yes      | Optional, if pagination exists                         | ""           |
-
+<ParamTable
+  rows={[
+    { name: "transactionType", type: "String", required: true, description: "\"PAYMENT\" or \"REFUND\"", example: "\"PAYMENT\"" },
+    { name: "date", type: "String", required: true, description: "Date of the report", example: "\"2019-12-31\"" },
+    { name: "method", type: "[]String", required: true, description: "RM currently supported method", example: "[]" },
+    { name: "region", type: "[]String", required: true, description: "Region of wallet, \"MALAYSIA\" or \"CHINA\"", example: "[]" },
+    { name: "cursor", type: "String", required: true, description: "Optional, if pagination exists", example: "\"\"" }
+  ]}
+/>
 > Example Request
 
 ```json
@@ -44,35 +45,37 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/rec
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `items`   | Object | Transaction object                                                                                        | (Refer to explanation below) |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-| `meta`    | Object | Database object                                                                                           | {}                           |
-
+<ParamTable
+  rows={[
+    { name: "items", type: "Object", description: "Transaction object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" },
+    { name: "meta", type: "Object", description: "Database object", example: "{}" }
+  ]}
+/>
 <br/>
 
 <strong>Transaction object (item):</strong>
 
-| Parameter          | Type     | Description                                                                    | Example                    |
-| ------------------ | -------- | ------------------------------------------------------------------------------ | -------------------------- |
-| `transactionAt`    | DateTime | Transaction date time of transaction                                           | "2019-12-31T07:00:10Z"     |
-| `merchantId`       | String   | (Can view From RM Portal)                                                      | "4118165203679668885"      |
-| `merchantName`     | String   | (Can view From RM Portal)                                                      | "Revenue Monster Sdn Bhd"  |
-| `storeId`          | String   | Store ID                                                                       | "4949529109748431621"      |
-| `storeName`        | String   | Store Name                                                                     | "Kim's Food Corner"        |
-| `region`           | String   | Region of wallet, "MALAYSIA" or "CHINA"                                        | "MALAYSIA"                 |
-| `method`           | String   | [RM currently supported method](../payment-method.mdx)                         | "TNG"                      |
-| `transactionType`  | String   | "PAYMENT" or "REFUND"                                                          | "PAYMENT"                  |
-| `type`             | String   | "QUICK_PAY" , "QR_PAY","Web_Payment" , "Mobile_Payment" , "Mobile_Web_Payment" | "QUICK_PAY"                |
-| `transactionId`    | String   | Transaction ID (from RM server)                                                | "152161448229438994"       |
-| `orderId`          | String   | Order ID (from Merchant), max: 24                                              | "1577775608765190100M6010" |
-| `currencyType`     | String   | Currency notation (currently only support `MYR`)                               | "MYR"                      |
-| `grossAmount`      | Double   | Gross Amount QR pay                                                            | "0.10"                     |
-| `mdr`              | Double   | MDR (from RM server)                                                           | "0.70"                     |
-| `serviceFee`       | Double   | Service Fee (from RM server)                                                   | "-0.00"                    |
-| `settlementAmount` | Double   | Settlement Amount                                                              | "0.10"                     |
-
+<ParamTable
+  rows={[
+    { name: "transactionAt", type: "DateTime", description: "Transaction date time of transaction", example: "\"2019-12-31T07:00:10Z\"" },
+    { name: "merchantId", type: "String", description: "(Can view From RM Portal)", example: "\"4118165203679668885\"" },
+    { name: "merchantName", type: "String", description: "(Can view From RM Portal)", example: "\"Revenue Monster Sdn Bhd\"" },
+    { name: "storeId", type: "String", description: "Store ID", example: "\"4949529109748431621\"" },
+    { name: "storeName", type: "String", description: "Store Name", example: "\"Kim's Food Corner\"" },
+    { name: "region", type: "String", description: "Region of wallet, \"MALAYSIA\" or \"CHINA\"", example: "\"MALAYSIA\"" },
+    { name: "method", type: "String", description: "RM currently supported method", example: "\"TNG\"" },
+    { name: "transactionType", type: "String", description: "\"PAYMENT\" or \"REFUND\"", example: "\"PAYMENT\"" },
+    { name: "type", type: "String", description: "\"QUICK_PAY\" , \"QR_PAY\",\"Web_Payment\" , \"Mobile_Payment\" , \"Mobile_Web_Payment\"", example: "\"QUICK_PAY\"" },
+    { name: "transactionId", type: "String", description: "Transaction ID (from RM server)", example: "\"152161448229438994\"" },
+    { name: "orderId", type: "String", description: "Order ID (from Merchant), max: 24", example: "\"1577775608765190100M6010\"" },
+    { name: "currencyType", type: "String", description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
+    { name: "grossAmount", type: "Double", description: "Gross Amount QR pay", example: "\"0.10\"" },
+    { name: "mdr", type: "Double", description: "MDR (from RM server)", example: "\"0.70\"" },
+    { name: "serviceFee", type: "Double", description: "Service Fee (from RM server)", example: "\"-0.00\"" },
+    { name: "settlementAmount", type: "Double", description: "Settlement Amount", example: "\"0.10\"" }
+  ]}
+/>
 <br/>
 
 > Example Response

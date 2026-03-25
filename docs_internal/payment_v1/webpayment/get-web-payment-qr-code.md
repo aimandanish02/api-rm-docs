@@ -39,20 +39,22 @@ Generate a QR code to display on your web or mobile for user to scan
 
 ### Request Parameters
 
-| Parameter    | Type   | Description                                                 | Example               |
-| ------------ | ------ | ----------------------------------------------------------- | --------------------- |
-| `checkoutId` | String | Code to identify web payment url                            | "1547775958720585401" |
-| `method`     | String | [RM currently supported method](../.././payment-method.mdx) | ["WECHATPAY_MY"]      |
-
+<ParamTable
+  rows={[
+    { name: "checkoutId", type: "String", description: "Code to identify web payment url", example: "\"1547775958720585401\"" },
+    { name: "method", type: "String", description: "RM currently supported method", example: "[\"WECHATPAY_MY\"]" }
+  ]}
+/>
 <br/>
 
 ### Response Parameters
 
-| Parameter           | Type   | Description                           | Example                       |
-| ------------------- | ------ | ------------------------------------- | ----------------------------- |
-| `qrCodeImageBase64` | String | Decoder the Url by using Base64 Image | Example will display at above |
-| `url`               | String | payment Url                           | Example will display at below |
-
+<ParamTable
+  rows={[
+    { name: "qrCodeImageBase64", type: "String", description: "Decoder the Url by using Base64 Image", example: "Example will display at above" },
+    { name: "url", type: "String", description: "payment Url", example: "Example will display at below" }
+  ]}
+/>
 > Example Response
 
 ```json

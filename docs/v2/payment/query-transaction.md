@@ -137,43 +137,44 @@ URL with limit : `https://sb-open.revenuemonster.my/v3/payment/transactions?limi
 
 
 
-| Parameter                   | Type   | Validation                                                                            | Required | Description                                                |
-| --------------------------- | ------ | ------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------- |
-| `store`                     | JSON   | [Transaction Object: Store](#store)                                                   | No       | Store details                                              |
-| `referenceId`               | String |                                                                                       | No       | Reference ID                                               |
-| `transactionId`             | String |                                                                                       | Yes      | Transaction ID                                             |
-| `terminalId`                | String |                                                                                       | No       | Terminal ID                                                |
-| `currencyType`              | String | ENUM("MYR")                                                                           | Yes      | Currency Type ( currently supported MYR only)              |
-| `balanceAmount`             | Uint64 |                                                                                       | Yes      | Remaining balance amount for initiate refund               |
-| `finalAmount`               | Uint64 |                                                                                       | Yes      | Amount after all deductions ( voucher, membership)         |
-| `platform`                  | String | ENUM("TERMINAL", "MOBILE_APP", "OPEN_API", "WEB_LOYALTY")                             | Yes      | Transaction platform                                       |
-| `type`                      | String | [Appendix: Type](#transaction-type)                                                   | Yes      | Transaction type                                           |
-| `method`                    | String | [Appendix: Method](#transaction-method--region)                                       | Yes      | Transaction payment method                                 |
-| `region`                    | String | [Appendix: Region](#transaction-method--region)                                       | Yes      | Transaction pament region                                  |
-| `status`                    | String | [Appendix: Status](#transaction-status)                                               | Yes      | Transaction payment status                                 |
-| `source`                    | String | ENUM("RECURRING", "ALACARTE")                                                         | Yes      | (Internal) Determine initiator source                      |
-| `transactionAt`             | String | RFC3339                                                                               | No       | Transaction payment date time ( exists only when SUCCESS ) |
-| `createdAt`                 | String | RFC3339                                                                               | Yes      | Transaction created date time                              |
-| `updatedAt`                 | String | RFC3339                                                                               | Yes      | Transaction last updated date time                         |
-| `error.message`             | String |                                                                                       | No       | Transaction error message ( exists only when FAIELD )      |
-| `payee.userId`              | String |                                                                                       | No       | Payment provider user id                                   |
-| `payee.subUserId`           | String |                                                                                       | No       | Payment provider sub user id                               |
-| `order.id`                  | String |                                                                                       | Yes      | Order ID                                                   |
-| `order.title`               | String | Length(32)                                                                            | Yes      | Order Title                                                |
-| `order.currencyType`        | String | ENUM("MYR")                                                                           | Yes      | Order Currency Type ( currently supported MYR only)        |
-| `order.amount`              | Uint64 |                                                                                       | Yes      | Order Amount                                               |
-| `order.detail`              | String | Length(600)                                                                           | No       | Order Detail                                               |
-| `order.additionalData`      | String | Length(128)                                                                           | No       | Order Additional Data                                      |
-| `voucher.key`               | String |                                                                                       | No       | (Internal) Determine have any vouchers                     |
-| `voucher.discountAmount`    | Uint64 |                                                                                       | No       | Total discounted amount from all voucher deductions        |
-| `voucher.wallet`            | JSON   | [Transaction Object: Payment Provider Discount Info](#payment-provider-discount-info) | No       | Payment provider discount info                             |
-| `voucher.membership`        | JSON   | [Transaction Object: Membership Discount Info](#membership-discount-info)             | No       | Membership discount info                                   |
-| `extendInfo.buyNowPayLater` | JSON   | [Transaction Object: BuyNowPayLater](#buynowpaylater--bnpl)                           | No       | BNPL transaction info                                      |
-| `extendInfo.inHousePromo`   | JSON   | [Transaction Object: In House Promotion](#internal-inhouse-promotion)                 | No       | (Internal) In house promotion                              |
-| `extraInfo.card`            | JSON   | [Transaction Object: Card Payment](#card-payment)                                     | No       | Card payment info                                          |
-| `extraInfo.onlineBanking`   | JSON   | [Transaction Object: Online Banking](#online-banking--fpx-)                           | No       | FPX online banking transaction info                        |
-| `extraInfo.loyalty`         | JSON   | [Transaction Object: Spending Loyalty](#spending-loyalty)                             | No       | Spending loyalty info                                      |
-
+<ParamTable
+  rows={[
+    { name: "store", type: "JSON", description: "Store details" },
+    { name: "referenceId", type: "String", description: "Reference ID" },
+    { name: "transactionId", type: "String", required: true, description: "Transaction ID" },
+    { name: "terminalId", type: "String", description: "Terminal ID" },
+    { name: "currencyType", type: "String", required: true, description: "Currency Type ( currently supported MYR only)" },
+    { name: "balanceAmount", type: "Uint64", required: true, description: "Remaining balance amount for initiate refund" },
+    { name: "finalAmount", type: "Uint64", required: true, description: "Amount after all deductions ( voucher, membership)" },
+    { name: "platform", type: "String", required: true, description: "Transaction platform" },
+    { name: "type", type: "String", required: true, description: "Transaction type" },
+    { name: "method", type: "String", required: true, description: "Transaction payment method" },
+    { name: "region", type: "String", required: true, description: "Transaction pament region" },
+    { name: "status", type: "String", required: true, description: "Transaction payment status" },
+    { name: "source", type: "String", required: true, description: "(Internal) Determine initiator source" },
+    { name: "transactionAt", type: "String", description: "Transaction payment date time ( exists only when SUCCESS )" },
+    { name: "createdAt", type: "String", required: true, description: "Transaction created date time" },
+    { name: "updatedAt", type: "String", required: true, description: "Transaction last updated date time" },
+    { name: "error.message", type: "String", description: "Transaction error message ( exists only when FAIELD )" },
+    { name: "payee.userId", type: "String", description: "Payment provider user id" },
+    { name: "payee.subUserId", type: "String", description: "Payment provider sub user id" },
+    { name: "order.id", type: "String", required: true, description: "Order ID" },
+    { name: "order.title", type: "String", required: true, description: "Order Title" },
+    { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type ( currently supported MYR only)" },
+    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
+    { name: "order.detail", type: "String", description: "Order Detail" },
+    { name: "order.additionalData", type: "String", description: "Order Additional Data" },
+    { name: "voucher.key", type: "String", description: "(Internal) Determine have any vouchers" },
+    { name: "voucher.discountAmount", type: "Uint64", description: "Total discounted amount from all voucher deductions" },
+    { name: "voucher.wallet", type: "JSON", description: "Payment provider discount info" },
+    { name: "voucher.membership", type: "JSON", description: "Membership discount info" },
+    { name: "extendInfo.buyNowPayLater", type: "JSON", description: "BNPL transaction info" },
+    { name: "extendInfo.inHousePromo", type: "JSON", description: "(Internal) In house promotion" },
+    { name: "extraInfo.card", type: "JSON", description: "Card payment info" },
+    { name: "extraInfo.onlineBanking", type: "JSON", description: "FPX online banking transaction info" },
+    { name: "extraInfo.loyalty", type: "JSON", description: "Spending loyalty info" }
+  ]}
+/>
 
 
 
@@ -216,25 +217,26 @@ URL with limit : `https://sb-open.revenuemonster.my/v3/payment/transactions?limi
 
 
 
-| Parameter               | Type    | Validation | Required | Description                        |
-| ----------------------- | ------- | ---------- | -------- | ---------------------------------- |
-| `id`                    | String  |            | Yes      | Store id                           |
-| `name`                  | String  |            | No       | Store name                         |
-| `imageUrl`              | String  |            | No       | Store image url                    |
-| `addressLine1`          | String  |            | No       | Store address line 1               |
-| `addressLine2`          | String  |            | No       | Store address line 2               |
-| `postCode`              | String  |            | No       | Store postal code                  |
-| `city`                  | String  |            | No       | Store city                         |
-| `state`                 | String  |            | No       | Store state                        |
-| `country`               | String  |            | No       | Store country                      |
-| `countryCode`           | String  |            | No       | Store country code of phone number |
-| `phoneNumber`           | String  |            | No       | Store phone number                 |
-| `geoLocation.latitude`  | Float64 |            | No       | Store latitude                     |
-| `geoLocation.longitude` | Float64 |            | No       | Store longitude                    |
-| `status`                | String  |            |          | Store status                       |
-| `createdAt`             | String  | RFC3339    |          | Store created time                 |
-| `updatedAt`             | String  | RFC3339    |          | Store last updated time            |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", required: true, description: "Store id" },
+    { name: "name", type: "String", description: "Store name" },
+    { name: "imageUrl", type: "String", description: "Store image url" },
+    { name: "addressLine1", type: "String", description: "Store address line 1" },
+    { name: "addressLine2", type: "String", description: "Store address line 2" },
+    { name: "postCode", type: "String", description: "Store postal code" },
+    { name: "city", type: "String", description: "Store city" },
+    { name: "state", type: "String", description: "Store state" },
+    { name: "country", type: "String", description: "Store country" },
+    { name: "countryCode", type: "String", description: "Store country code of phone number" },
+    { name: "phoneNumber", type: "String", description: "Store phone number" },
+    { name: "geoLocation.latitude", type: "Float64", description: "Store latitude" },
+    { name: "geoLocation.longitude", type: "Float64", description: "Store longitude" },
+    { name: "status", type: "String", description: "Store status" },
+    { name: "createdAt", type: "String", description: "Store created time" },
+    { name: "updatedAt", type: "String", description: "Store last updated time" }
+  ]}
+/>
 
 
 
@@ -267,11 +269,12 @@ URL with limit : `https://sb-open.revenuemonster.my/v3/payment/transactions?limi
 
 
 
-| Parameter          | Type   | Validation | Required | Description                                       |
-| ------------------ | ------ | ---------- | -------- | ------------------------------------------------- |
-| `isBuyNowPayLater` | bool   |            | No       | Determine wether is buy now pay later transaction |
-| `installmentMonth` | Uint64 |            | No       | How many month selected for BNPL transaction      |
-
+<ParamTable
+  rows={[
+    { name: "isBuyNowPayLater", type: "bool", description: "Determine wether is buy now pay later transaction" },
+    { name: "installmentMonth", type: "Uint64", description: "How many month selected for BNPL transaction" }
+  ]}
+/>
 
 
 
@@ -287,11 +290,12 @@ URL with limit : `https://sb-open.revenuemonster.my/v3/payment/transactions?limi
 
 
 
-| Parameter   | Type   | Validation | Required | Description    |
-| ----------- | ------ | ---------- | -------- | -------------- |
-| `buyerName` | String |            | No       | FPX Buyer Name |
-| `bankID`    | String |            | No       | FPX Bank ID    |
-
+<ParamTable
+  rows={[
+    { name: "buyerName", type: "String", description: "FPX Buyer Name" },
+    { name: "bankID", type: "String", description: "FPX Bank ID" }
+  ]}
+/>
 
 
 
@@ -308,23 +312,24 @@ URL with limit : `https://sb-open.revenuemonster.my/v3/payment/transactions?limi
 
 
 
-| Parameter              | Type   | Validation                   | Required | Description                                   |
-| ---------------------- | ------ | ---------------------------- | -------- | --------------------------------------------- |
-| `cardType.brand`       | String |                              | No       | Card brand                                    |
-| `cardType.type`        | String |                              | No       | Card type                                     |
-| `cardType.issuer`      | String |                              | No       | Card issuer                                   |
-| `cardType.alpha2`      | String | ISO3166                      | No       | Card country in alpha2 code                   |
-| `cardType.alpha3`      | String | ISO3166                      | No       | Card country in alpha3 code                   |
-| `cardType.country`     | String |                              | No       | Card country full name                        |
-| `provider`             | String | ENUM("SC","GOBIZ", "PAYDEE") | No       | (Internal) Determine from which card provider |
-| `isTokenization`       | bool   |                              | No       | Determine payment using token or PAN          |
-| `token`                | String |                              | No       | Token used for payment                        |
-| `maskNo`               | String | Length(4)                    | No       | Masked PAN, last four digits                  |
-| `inputType`            | String | ENUM("MAG", "IC", "NFC")     | No       | Card input type                               |
-| `referenceId`          | String |                              | No       | Card transaction reference number             |
-| `secondaryReferenceId` | String |                              | No       | Card transaction invoice number               |
-| `domain`               | String |                              | No       | Online card payment domain                    |
-
+<ParamTable
+  rows={[
+    { name: "cardType.brand", type: "String", description: "Card brand" },
+    { name: "cardType.type", type: "String", description: "Card type" },
+    { name: "cardType.issuer", type: "String", description: "Card issuer" },
+    { name: "cardType.alpha2", type: "String", description: "Card country in alpha2 code" },
+    { name: "cardType.alpha3", type: "String", description: "Card country in alpha3 code" },
+    { name: "cardType.country", type: "String", description: "Card country full name" },
+    { name: "provider", type: "String", description: "(Internal) Determine from which card provider" },
+    { name: "isTokenization", type: "bool", description: "Determine payment using token or PAN" },
+    { name: "token", type: "String", description: "Token used for payment" },
+    { name: "maskNo", type: "String", description: "Masked PAN, last four digits" },
+    { name: "inputType", type: "String", description: "Card input type" },
+    { name: "referenceId", type: "String", description: "Card transaction reference number" },
+    { name: "secondaryReferenceId", type: "String", description: "Card transaction invoice number" },
+    { name: "domain", type: "String", description: "Online card payment domain" }
+  ]}
+/>
 
 
 
@@ -386,12 +391,13 @@ If you're using QRCODE mode when doing payment, you will receive this object in 
 
 
 
-| Parameter        | Type   | Validation | Required | Description                        |
-| ---------------- | ------ | ---------- | -------- | ---------------------------------- |
-| `salesAmount`    | Uint64 |            | No       | Original sales amount              |
-| `discountAmount` | Uint64 |            | No       | Payment provider discount amount   |
-| `grossAmount`    | Uint64 |            | No       | Sales amount after discount amount |
-
+<ParamTable
+  rows={[
+    { name: "salesAmount", type: "Uint64", description: "Original sales amount" },
+    { name: "discountAmount", type: "Uint64", description: "Payment provider discount amount" },
+    { name: "grossAmount", type: "Uint64", description: "Sales amount after discount amount" }
+  ]}
+/>
 
 
 
@@ -408,12 +414,13 @@ If you're using QRCODE mode when doing payment, you will receive this object in 
 
 
 
-| Parameter        | Type   | Validation | Required | Description                |
-| ---------------- | ------ | ---------- | -------- | -------------------------- |
-| `memberId`       | String |            | No       | Membership Member ID       |
-| `voucherId`      | String |            | No       | Membership Voucher ID      |
-| `discountAmount` | Uint64 |            | No       | Membership Discount Amount |
-
+<ParamTable
+  rows={[
+    { name: "memberId", type: "String", description: "Membership Member ID" },
+    { name: "voucherId", type: "String", description: "Membership Voucher ID" },
+    { name: "discountAmount", type: "Uint64", description: "Membership Discount Amount" }
+  ]}
+/>
 
 
 
@@ -430,14 +437,15 @@ If you're using QRCODE mode when doing payment, you will receive this object in 
 
 
 
-| Parameter          | Type   | Validation | Required | Description                           |
-| ------------------ | ------ | ---------- | -------- | ------------------------------------- |
-| `amount`           | Uint64 |            | No       | (Internal) Inhosue promo total amount |
-| `info[*].label`    | String |            | No       | (Internal) Inhouse promo info label   |
-| `info[*].uniqueID` | String |            | No       | (Internal) Inhouse promo unique id    |
-| `info[*].source`   | String |            | No       | (Internal) Inhouse promo info source  |
-| `info[*].amount`   | String |            | No       | (Internal) Inhouse promo info amount  |
-
+<ParamTable
+  rows={[
+    { name: "amount", type: "Uint64", description: "(Internal) Inhosue promo total amount" },
+    { name: "info[*].label", type: "String", description: "(Internal) Inhouse promo info label" },
+    { name: "info[*].uniqueID", type: "String", description: "(Internal) Inhouse promo unique id" },
+    { name: "info[*].source", type: "String", description: "(Internal) Inhouse promo info source" },
+    { name: "info[*].amount", type: "String", description: "(Internal) Inhouse promo info amount" }
+  ]}
+/>
 
 
 

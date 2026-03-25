@@ -14,16 +14,17 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Request Parameters
 
-| Parameter              | Type   | Required | Description                 | Example               |
-| ---------------------- | ------ | -------- | --------------------------- | --------------------- |
-| `userId`               | String | Yes      | User ID                     | "1693590750219574539" |
-| `cardId`               | String | Yes      | User Card ID                | "1693590754940319811" |
-| `transactionId`        | String | Yes      | Transaction ID              | "1693591501957443719" |
-| `transactionAt`        | String | Yes      | Transaction Time (ISO 8601) | "2023-08-30T09:39:15" |
-| `amount`               | uint64 | Yes      | Transaction Amount          | 1128                  |
-| `currency`             | String | Yes      | Transaction Amount          | "840"                 |
-| `merchantCategoryCode` | String | Yes      | Merchant Category Code      | "0000"                |
-
+<ParamTable
+  rows={[
+    { name: "userId", type: "String", required: true, description: "User ID", example: "\"1693590750219574539\"" },
+    { name: "cardId", type: "String", required: true, description: "User Card ID", example: "\"1693590754940319811\"" },
+    { name: "transactionId", type: "String", required: true, description: "Transaction ID", example: "\"1693591501957443719\"" },
+    { name: "transactionAt", type: "String", required: true, description: "Transaction Time (ISO 8601)", example: "\"2023-08-30T09:39:15\"" },
+    { name: "amount", type: "uint64", required: true, description: "Transaction Amount", example: "1128" },
+    { name: "currency", type: "String", required: true, description: "Transaction Amount", example: "\"840\"" },
+    { name: "merchantCategoryCode", type: "String", required: true, description: "Merchant Category Code", example: "\"0000\"" }
+  ]}
+/>
 <br />
 
 > Example Request

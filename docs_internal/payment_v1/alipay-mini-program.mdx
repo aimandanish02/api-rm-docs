@@ -16,12 +16,13 @@ Create a payment in Alipay Mini Program
 
 ### Request Parameters
 
-| Parameter    | Type   | Description                                                                                   | Example               |
-| ------------ | ------ | --------------------------------------------------------------------------------------------- | --------------------- |
-| `checkoutId` | String | refer to [web-payment](./webpayment/web-payment#response-parameters) to get your `checkoutId` | "1607935374438928096" |
-| `method`     | String | [RM currently supported method](../payment-method.mdx)                                        | "ALIPAY_CN"           |
-| `type`       | String | `MINI_PROGRAM`                                                                                | "MINI_PROGRAM"        |
-
+<ParamTable
+  rows={[
+    { name: "checkoutId", type: "String", description: "refer to web-payment to get your checkoutId", example: "\"1607935374438928096\"" },
+    { name: "method", type: "String", description: "RM currently supported method", example: "\"ALIPAY_CN\"" },
+    { name: "type", type: "String", description: "MINI_PROGRAM", example: "\"MINI_PROGRAM\"" }
+  ]}
+/>
 ```json
 curl --location --request POST '{{open_base_path}}/v3/payment/online/checkout' \
 --header 'Content-Type: application/json' \
@@ -38,20 +39,22 @@ curl --location --request POST '{{open_base_path}}/v3/payment/online/checkout' \
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                   | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | Object of refund details.                                                                     | (Refer to explanation below) |
-| `code`    | String | Status returned from Revenue Monster server, whether successfully called our endpoint or not. | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "Object of refund details.", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Status returned from Revenue Monster server, whether successfully called our endpoint or not.", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 
 <strong>Item Object (item):</strong>
 
-| Parameter | Type   | Description             | Example        |
-| --------- | ------ | ----------------------- | -------------- |
-| `type`    | String | `MINI_PROGRAM`          | "MINI_PROGRAM" |
-| `data`    | String | Is a base64 encode data | show as below  |
-
+<ParamTable
+  rows={[
+    { name: "type", type: "String", description: "MINI_PROGRAM", example: "\"MINI_PROGRAM\"" },
+    { name: "data", type: "String", description: "Is a base64 encode data", example: "show as below" }
+  ]}
+/>
 > Example Response for URL
 
 ```json

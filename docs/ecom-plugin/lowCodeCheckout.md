@@ -102,27 +102,29 @@ Alternatively, if you are developing for sandbox environment, please amend the l
 
 **Button Parameters**
 
-| Parameter        | Type   | Required | Description                            | Example                               |
-| ---------------- | ------ | -------- | -------------------------------------- | ------------------------------------- |
-| `clientId`       | Uint   | Yes      | Client ID of your application          | 1698131134927762904                   |
-| `orderId`        | Uint   | No       | Order ID, unique for each order        | 1234567890                            |
-| `storeId`        | Uint   | Yes      | Store ID for the order                 | 10946114768247530                     |
-| `currency`       | String | Yes      | Currency                               | "MYR"                                 |
-| `amount`         | Uint   | Yes      | Amount in cents                        | 1390 => <i>RM13.90</i>                |
-| `title`          | String | Yes      | Order title                            | "Product X"                           |
-| `detail`         | String | No       | Order detail                           | "Detail of the order"                 |
-| `additionalData` | String | No       | Order additional data                  | <i>Any data relevant to the order</i> |
-| `customerId`     | Uint   | No       | Customer ID, required for tokenization | 1234567890                            |
-| `customerName`   | String | No       | Customer name                          | "John"                                |
-| `customerEmail`  | String | No       | Customer email                         | "john@example.com"                    |
-
+<ParamTable
+  rows={[
+    { name: "clientId", type: "Uint", required: true, description: "Client ID of your application", example: "1698131134927762904" },
+    { name: "orderId", type: "Uint", description: "Order ID, unique for each order", example: "1234567890" },
+    { name: "storeId", type: "Uint", required: true, description: "Store ID for the order", example: "10946114768247530" },
+    { name: "currency", type: "String", required: true, description: "Currency", example: "\"MYR\"" },
+    { name: "amount", type: "Uint", required: true, description: "Amount in cents", example: "1390 => RM13.90" },
+    { name: "title", type: "String", required: true, description: "Order title", example: "\"Product X\"" },
+    { name: "detail", type: "String", description: "Order detail", example: "\"Detail of the order\"" },
+    { name: "additionalData", type: "String", description: "Order additional data", example: "Any data relevant to the order" },
+    { name: "customerId", type: "Uint", description: "Customer ID, required for tokenization", example: "1234567890" },
+    { name: "customerName", type: "String", description: "Customer name", example: "\"John\"" },
+    { name: "customerEmail", type: "String", description: "Customer email", example: "\"john@example.com\"" }
+  ]}
+/>
 **Styling Paramters**
 
-| Parameter | Type   | Description                     |
-| --------- | ------ | ------------------------------- |
-| `variant` | String | Button variant types            |
-| `class`   | String | Custom class for custom styling |
-
+<ParamTable
+  rows={[
+    { name: "variant", type: "String", description: "Button variant types" },
+    { name: "class", type: "String", description: "Custom class for custom styling" }
+  ]}
+/>
 **Example (Variants)**
 
 | Variant     | Button                                                |

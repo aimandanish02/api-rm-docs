@@ -211,11 +211,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter      | Type    | Description                        | Example |
-| -------------- | ------- | ---------------------------------- | ------- |
-| `isSamePerson` | Boolean | Check result which is same person  | false   |
-| `similarity`   | Float   | Similarity of face image and mykad | 0       |
-
+<ParamTable
+  rows={[
+    { name: "isSamePerson", type: "Boolean", description: "Check result which is same person", example: "false" },
+    { name: "similarity", type: "Float", description: "Similarity of face image and mykad", example: "0" }
+  ]}
+/>
 
 
 
@@ -224,14 +225,15 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter       | Type   | Description                               | Example                      |
-| --------------- | ------ | ----------------------------------------- | ---------------------------- |
-| `duration`      | Float  | Mykad Recognition Duration                | 3.2886                       |
-| `data`          | Object | Refer to the <b>Results Data</b>          | (Refer to explanation below) |
-| `faces`         | Array  | Refer to the <b>Results Faces</b>         | (Refer to explanation below) |
-| `object`        | Object | Refer to the <b>Results Object</b>        | (Refer to explanation below) |
-| `scores`        | Object | Refer to the <b>Results Scores</b>        | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "duration", type: "Float", description: "Mykad Recognition Duration", example: "3.2886" },
+    { name: "data", type: "Object", description: "Refer to the Results Data", example: "(Refer to explanation below)" },
+    { name: "faces", type: "Array", description: "Refer to the Results Faces", example: "(Refer to explanation below)" },
+    { name: "object", type: "Object", description: "Refer to the Results Object", example: "(Refer to explanation below)" },
+    { name: "scores", type: "Object", description: "Refer to the Results Scores", example: "(Refer to explanation below)" }
+  ]}
+/>
 
 
 
@@ -240,14 +242,15 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter  | Type    | Description                 | Example                      |
-| ---------- | ------- | --------------------------- | ---------------------------- |
-| `address`  | Object  | Refer to the <b>Address</b> | (Refer to explanation below) |
-| `gender`   | String  | Gender information of mykad | "MALE"                       |
-| `ic`       | String  | Mykad ID                    | "550106-12-5821"             |
-| `isMuslim` | Boolean | Is muslim                   | false                        |
-| `name`     | String  | Name in the mykad           | "ROWAN SEBASTIAN ATKINSON"   |
-
+<ParamTable
+  rows={[
+    { name: "address", type: "Object", description: "Refer to the Address", example: "(Refer to explanation below)" },
+    { name: "gender", type: "String", description: "Gender information of mykad", example: "\"MALE\"" },
+    { name: "ic", type: "String", description: "Mykad ID", example: "\"550106-12-5821\"" },
+    { name: "isMuslim", type: "Boolean", description: "Is muslim", example: "false" },
+    { name: "name", type: "String", description: "Name in the mykad", example: "\"ROWAN SEBASTIAN ATKINSON\"" }
+  ]}
+/>
 
 
 
@@ -256,15 +259,16 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter      | Type   | Description            | Example                |
-| -------------- | ------ | ---------------------- | ---------------------- |
-| `addressLine1` | String | First line of address  | "GDW KAMPUNG BAYANGAN" |
-| `addressLine2` | String | Second line of address | "80000 KENINGAU"       |
-| `addressLine3` | String | Third line of address  | "SABAH"                |
-| `city`         | String | City name              | "KENINGAU"             |
-| `postcode`     | String | Postcode               | "80000"                |
-| `state`        | String | State name             | "SABAH"                |
-
+<ParamTable
+  rows={[
+    { name: "addressLine1", type: "String", description: "First line of address", example: "\"GDW KAMPUNG BAYANGAN\"" },
+    { name: "addressLine2", type: "String", description: "Second line of address", example: "\"80000 KENINGAU\"" },
+    { name: "addressLine3", type: "String", description: "Third line of address", example: "\"SABAH\"" },
+    { name: "city", type: "String", description: "City name", example: "\"KENINGAU\"" },
+    { name: "postcode", type: "String", description: "Postcode", example: "\"80000\"" },
+    { name: "state", type: "String", description: "State name", example: "\"SABAH\"" }
+  ]}
+/>
 
 
 
@@ -274,11 +278,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type  | Description                 | Example |
-| ------------ | ----- | --------------------------- | ------- |
-| `boxes`      | Array | Refer to the <b>boxes</b>   | []      |
-| `confidence` | Float | Confidence of detected face | 1       |
-
+<ParamTable
+  rows={[
+    { name: "boxes", type: "Array", description: "Refer to the boxes", example: "[]" },
+    { name: "confidence", type: "Float", description: "Confidence of detected face", example: "1" }
+  ]}
+/>
 
 
 
@@ -287,11 +292,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type   | Description                  | Example      |
-| ------------ | ------ | ---------------------------- | ------------ |
-| `confidence` | Float  | Confidence of detected mykad | 0.9609       |
-| `prediction` | String | Type of mykad                | "ic_1_front" |
-
+<ParamTable
+  rows={[
+    { name: "confidence", type: "Float", description: "Confidence of detected mykad", example: "0.9609" },
+    { name: "prediction", type: "String", description: "Type of mykad", example: "\"ic_1_front\"" }
+  ]}
+/>
 
 
 
@@ -300,12 +306,13 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter   | Type  | Description          | Example |
-| ----------- | ----- | -------------------- | ------- |
-| `landmarks` | Float | Landmark score       | 0.5441  |
-| `ocr`       | Float | OCR score            | 0.9033  |
-| `searcher`  | Float | Mykad searcher score | 0.9     |
-| `total`     | Float | Total score          | 0.8295  |
-
+<ParamTable
+  rows={[
+    { name: "landmarks", type: "Float", description: "Landmark score", example: "0.5441" },
+    { name: "ocr", type: "Float", description: "OCR score", example: "0.9033" },
+    { name: "searcher", type: "Float", description: "Mykad searcher score", example: "0.9" },
+    { name: "total", type: "Float", description: "Total score", example: "0.8295" }
+  ]}
+/>
 
 

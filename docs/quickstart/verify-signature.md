@@ -28,19 +28,21 @@ sidebar_label: Verify Signature
 
 #### Example of Web/Mobile Payment
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | item object                                                                                               | (Refer to explanation below) |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "item object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 <strong>item Object (item):</strong>
 
-| Parameter    | Type   | Description                                                            | Example                                                                      |
-| ------------ | ------ | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `checkoutId` | String | Code to identify web payment url                                       | "1617985392758071583"                                                        |
-| `url`        | String | Example to form checkout URL. Note: to change base URL to desired URL. | "https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583" |
-
+<ParamTable
+  rows={[
+    { name: "checkoutId", type: "String", description: "Code to identify web payment url", example: "\"1617985392758071583\"" },
+    { name: "url", type: "String", description: "Example to form checkout URL. Note: to change base URL to desired URL.", example: "\"https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583\"" }
+  ]}
+/>
 > Example Response
 
 ```json
@@ -75,15 +77,16 @@ eyJpdGVtIjp7ImNoZWNrb3V0SWQiOiIxNjE3OTg1MzkyNzU4MDcxNTgzIiwidXJsIjoiaHR0cHM6Ly9z
 
 :::
 
-| Parameter    | Type   | Required | Description                                                        | Example                                             |
-| ------------ | ------ | -------- | ------------------------------------------------------------------ | --------------------------------------------------- |
-| `data`       | String | Yes      | Base64 data body from Step 2.                                      | Refer to **Step 2**                                 |
-| `method`     | String | Yes      | HTTP call method used                                              | "post"                                              |
-| `nonceStr`   | String | Yes      | Get from Response Header                                           | "VYNknZohxwicZMaWbNdBKUrnrxDtaRhN"                  |
-| `requestUrl` | String | Yes      | API URL that you call must be exactly the same, together with URL. | https://sb-open.revenuemonster.my/v3/payment/online |
-| `signType`   | String | Yes      | Sign Type, prefer SHA-256                                          | "sha256"                                            |
-| `timestamp`  | String | Yes      | Get from Response Header                                           | "1527407052"                                        |
-
+<ParamTable
+  rows={[
+    { name: "data", type: "String", required: true, description: "Base64 data body from Step 2.", example: "Refer to Step 2" },
+    { name: "method", type: "String", required: true, description: "HTTP call method used", example: "\"post\"" },
+    { name: "nonceStr", type: "String", required: true, description: "Get from Response Header", example: "\"VYNknZohxwicZMaWbNdBKUrnrxDtaRhN\"" },
+    { name: "requestUrl", type: "String", required: true, description: "API URL that you call must be exactly the same, together with URL.", example: "https://sb-open.revenuemonster.my/v3/payment/online" },
+    { name: "signType", type: "String", required: true, description: "Sign Type, prefer SHA-256", example: "\"sha256\"" },
+    { name: "timestamp", type: "String", required: true, description: "Get from Response Header", example: "\"1527407052\"" }
+  ]}
+/>
 **Example**
 :::note
 data=eyJpdGVtIjp7ImNoZWNrb3V0SWQiOiIxNjE3OTg1MzkyNzU4MDcxNTgzIiwidXJsIjoiaHR0cHM6Ly9zYi1wZy5yZXZlbnVlbW9uc3Rlci5teS92Mi9jaGVja291dD9jaGVja291dElkPTE2MTc5ODUzOTI3NTgwNzE1ODMifSwiY29kZSI6IlNVQ0NFU1MifQ==&#38;method=post&#38;nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&#38;signType=sha256&#38;timestamp=1527407052&#38;requestUrl=https://sb-open.revenuemonster.my/v3/payment/online

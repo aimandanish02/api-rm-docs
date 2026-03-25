@@ -12,81 +12,87 @@ Notify URL or callback URL to inform server on transaction status after payment 
 
 ### Response Parameters
 
-| Parameter   | Type   | Required | Example              |
-| ----------- | ------ | -------- | -------------------- |
-| `data`      | -      | Yes      | Refer to the below   |
-| `eventType` | String | Yes      | "PAYMENT_WEB_ONLINE" |
-
+<ParamTable
+  rows={[
+    { name: "data", type: "-", required: true, example: "Refer to the below" },
+    { name: "eventType", type: "String", required: true, example: "\"PAYMENT_WEB_ONLINE\"" }
+  ]}
+/>
 <br/>
 <strong>Data Object (data):</strong>
 
-| Parameter       | Type   | Required | Example                              |
-| --------------- | ------ | -------- | ------------------------------------ |
-| `balanceAmount` | Uint   | Yes      | 100                                  |
-| `createdAt`     | String | Yes      | "2019-03-01T05:51:20Z"               |
-| `currencyType`  | String | Yes      | "MYR"                                |
-| `method`        | String | Yes      | "WECHATPAY"                          |
-| `order`         | -      | Yes      | Refer to the below                   |
-| `payee`         | -      | Yes      | Refer to the below                   |
-| `platform`      | String | Yes      | "OPEN_API"                           |
-| `referenceId`   | String | Yes      | "1010014200000026201903016100904600" |
-| `region`        | String | Yes      | "MALAYSIA"                           |
-| `status`        | String | Yes      | "SUCCESS"                            |
-| `store`         | String | Yes      | Refer to the below                   |
-| `terminalId`    | String | Yes      | ""                                   |
-| `transactionAt` | String | Yes      | "2019-03-01T05:51:59Z"               |
-| `transactionId` | String | Yes      | "190301055133300427675601"           |
-| `type`          | String | Yes      | "WEB_PAYMENT"                        |
-| `updatedAt`     | String | Yes      | "2019-03-01T05:52:00.897920132Z"     |
-| `voucher`       | String | Yes      | null                                 |
-
+<ParamTable
+  rows={[
+    { name: "balanceAmount", type: "Uint", required: true, example: "100" },
+    { name: "createdAt", type: "String", required: true, example: "\"2019-03-01T05:51:20Z\"" },
+    { name: "currencyType", type: "String", required: true, example: "\"MYR\"" },
+    { name: "method", type: "String", required: true, example: "\"WECHATPAY\"" },
+    { name: "order", type: "-", required: true, example: "Refer to the below" },
+    { name: "payee", type: "-", required: true, example: "Refer to the below" },
+    { name: "platform", type: "String", required: true, example: "\"OPEN_API\"" },
+    { name: "referenceId", type: "String", required: true, example: "\"1010014200000026201903016100904600\"" },
+    { name: "region", type: "String", required: true, example: "\"MALAYSIA\"" },
+    { name: "status", type: "String", required: true, example: "\"SUCCESS\"" },
+    { name: "store", type: "String", required: true, example: "Refer to the below" },
+    { name: "terminalId", type: "String", required: true, example: "\"\"" },
+    { name: "transactionAt", type: "String", required: true, example: "\"2019-03-01T05:51:59Z\"" },
+    { name: "transactionId", type: "String", required: true, example: "\"190301055133300427675601\"" },
+    { name: "type", type: "String", required: true, example: "\"WEB_PAYMENT\"" },
+    { name: "updatedAt", type: "String", required: true, example: "\"2019-03-01T05:52:00.897920132Z\"" },
+    { name: "voucher", type: "String", required: true, example: "null" }
+  ]}
+/>
 <br/>
 <strong>Order Object (order):</strong>
 
-| Parameter        | Type   | Required | Example               |
-| ---------------- | ------ | -------- | --------------------- |
-| `additionalData` | String | Yes      | "Payment to 11street" |
-| `amount`         | Uint   | Yes      | 100                   |
-| `detail`         | String | Yes      | "Payment to 11street" |
-| `id`             | String | Yes      | "P000000660800"       |
-| `title`          | String | Yes      | "Payment to 11street" |
-
+<ParamTable
+  rows={[
+    { name: "additionalData", type: "String", required: true, example: "\"Payment to 11street\"" },
+    { name: "amount", type: "Uint", required: true, example: "100" },
+    { name: "detail", type: "String", required: true, example: "\"Payment to 11street\"" },
+    { name: "id", type: "String", required: true, example: "\"P000000660800\"" },
+    { name: "title", type: "String", required: true, example: "\"Payment to 11street\"" }
+  ]}
+/>
 <br/>
 <strong>Payee Object (payee):</strong>
 
-| Parameter | Type   | Required | Example                        |
-| --------- | ------ | -------- | ------------------------------ |
-| `userId`  | String | Yes      | "oKz050cwbEJwKAnKZgbD24UYibHQ" |
-
+<ParamTable
+  rows={[
+    { name: "userId", type: "String", required: true, example: "\"oKz050cwbEJwKAnKZgbD24UYibHQ\"" }
+  ]}
+/>
 <br/>
 <strong>Store Object (store):</strong>
 
-| Parameter      | Type   | Required | Example                                                      |
-| -------------- | ------ | -------- | ------------------------------------------------------------ |
-| `addressLine1` | String | Yes      | ""                                                           |
-| `addressLine2` | String | Yes      | ""                                                           |
-| `city`         | String | Yes      | ""                                                           |
-| `country`      | String | Yes      | ""                                                           |
-| `countryCode`  | String | Yes      | ""                                                           |
-| `createdAt`    | String | Yes      | "2018-10-02T10:52:03Z"                                       |
-| `geoLocation`  | -      | Yes      | Refer to the below                                           |
-| `id`           | String | Yes      | "2551293210619662240"                                        |
-| `imageUrl`     | String | Yes      | "https://storage.googleapis.com/rm-prod-asset/img/store.png" |
-| `name`         | String | Yes      | "11Street"                                                   |
-| `phoneNumber`  | String | Yes      | ""                                                           |
-| `postCode`     | String | Yes      | ""                                                           |
-| `state`        | String | Yes      | ""                                                           |
-| `status`       | String | Yes      | "ACTIVE"                                                     |
-| `updatedAt`    | String | Yes      | "2018-10-02T10:52:03Z"                                       |
-
+<ParamTable
+  rows={[
+    { name: "addressLine1", type: "String", required: true, example: "\"\"" },
+    { name: "addressLine2", type: "String", required: true, example: "\"\"" },
+    { name: "city", type: "String", required: true, example: "\"\"" },
+    { name: "country", type: "String", required: true, example: "\"\"" },
+    { name: "countryCode", type: "String", required: true, example: "\"\"" },
+    { name: "createdAt", type: "String", required: true, example: "\"2018-10-02T10:52:03Z\"" },
+    { name: "geoLocation", type: "-", required: true, example: "Refer to the below" },
+    { name: "id", type: "String", required: true, example: "\"2551293210619662240\"" },
+    { name: "imageUrl", type: "String", required: true, example: "\"https://storage.googleapis.com/rm-prod-asset/img/store.png\"" },
+    { name: "name", type: "String", required: true, example: "\"11Street\"" },
+    { name: "phoneNumber", type: "String", required: true, example: "\"\"" },
+    { name: "postCode", type: "String", required: true, example: "\"\"" },
+    { name: "state", type: "String", required: true, example: "\"\"" },
+    { name: "status", type: "String", required: true, example: "\"ACTIVE\"" },
+    { name: "updatedAt", type: "String", required: true, example: "\"2018-10-02T10:52:03Z\"" }
+  ]}
+/>
 <br/>
 <strong>Geolocation Object (geoLocation):</strong>
 
-| Parameter   | Type  | Required | Example |
-| ----------- | ----- | -------- | ------- |
-| `latitude`  | Float | Yes      | 0       |
-| `longitude` | Float | Yes      | 0       |
-
+<ParamTable
+  rows={[
+    { name: "latitude", type: "Float", required: true, example: "0" },
+    { name: "longitude", type: "Float", required: true, example: "0" }
+  ]}
+/>
 > Example Response
 
 ```json

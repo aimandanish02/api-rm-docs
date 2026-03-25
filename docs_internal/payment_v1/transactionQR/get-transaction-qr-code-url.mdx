@@ -28,48 +28,52 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
-| Parameter | Type     | Description                                                                                               | Example                      |
-| --------- | -------- | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `items`   | []Object | Transaction object                                                                                        | (Refer to explanation below) |
-| `code`    | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "items", type: "[]Object", description: "Transaction object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 <strong>Transaction object array (items):</strong>
 
-| Parameter         | Type     | Description                                                                              | Example                                                                                         |
-| ----------------- | -------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `storeId`         | String   | ID of store                                                                              | 10946114768247530                                                                               |
-| `type`            | String   | "DYNAMIC" (days from now), "FIXED" (specific fixed date) or "PERMANENT" (never expire)   | "PERMANENT"                                                                                     |
-| `isPreFillAmount` | Bool     | To indicate QR code has pre-fill amount                                                  | true                                                                                            |
-| `currencyType`    | String   | Currency notation                                                                        | "MYR"                                                                                           |
-| `amount`          | Uint     | Amount of order in cent. Only required when "isPrefillAmount" = true.                    | 100                                                                                             |
-| `platform`        | String   | "OPEN_API" (generated through API calls) or "PORTAL" (generated through merchant portal) | "PORTAL"                                                                                        |
-| `method`          | []String | [RM currently supported method](../.././payment-method.mdx)                           | ["WECHATPAY","WECHATPAY_MY", <br/> "WECHATPAY_CN","PRESTO_MY",<br/>"BOOST_MY",<br/>"ALIPAY_CN"] |
-| `expiry`          | Object   | Object of expiry                                                                         | (Refer to explanation above)                                                                    |
-| `code`            | String   | Embedded code in QR                                                                      | "c8ff3df0605a5f20cd6476661072eade"                                                              |
-| `status`          | String   | "VALID" (always valid for static QR) or "REDEEMED" (only applicable to dynamic QR)       | "VALID"                                                                                         |
-| `qrCodeUrl`       | String   | Embedded URL in QR                                                                       | "https://dev-rm-api.ap.ngrok.io/payment/unified?code=c8ff3df0605a5f20cd6476661072eade"          |
-| `redirectUrl`     | String   | Redirect URL after QR payment is made                                                    | "https://www.apple.com/my/iphone/"                                                              |
-| `createdAt`       | DateTime | Creation date time of transaction                                                        | "2018-03-21T06:41:22Z"                                                                          |
-| `updatedAt`       | DateTime | Last update date time of transaction                                                     | "2018-03-21T06:41:22Z"                                                                          |
-
+<ParamTable
+  rows={[
+    { name: "storeId", type: "String", description: "ID of store", example: "10946114768247530" },
+    { name: "type", type: "String", description: "\"DYNAMIC\" (days from now), \"FIXED\" (specific fixed date) or \"PERMANENT\" (never expire)", example: "\"PERMANENT\"" },
+    { name: "isPreFillAmount", type: "Bool", description: "To indicate QR code has pre-fill amount", example: "true" },
+    { name: "currencyType", type: "String", description: "Currency notation", example: "\"MYR\"" },
+    { name: "amount", type: "Uint", description: "Amount of order in cent. Only required when \"isPrefillAmount\" = true.", example: "100" },
+    { name: "platform", type: "String", description: "\"OPEN_API\" (generated through API calls) or \"PORTAL\" (generated through merchant portal)", example: "\"PORTAL\"" },
+    { name: "method", type: "[]String", description: "RM currently supported method", example: "[\"WECHATPAY\",\"WECHATPAY_MY\",  \"WECHATPAY_CN\",\"PRESTO_MY\",\"BOOST_MY\",\"ALIPAY_CN\"]" },
+    { name: "expiry", type: "Object", description: "Object of expiry", example: "(Refer to explanation above)" },
+    { name: "code", type: "String", description: "Embedded code in QR", example: "\"c8ff3df0605a5f20cd6476661072eade\"" },
+    { name: "status", type: "String", description: "\"VALID\" (always valid for static QR) or \"REDEEMED\" (only applicable to dynamic QR)", example: "\"VALID\"" },
+    { name: "qrCodeUrl", type: "String", description: "Embedded URL in QR", example: "\"https://dev-rm-api.ap.ngrok.io/payment/unified?code=c8ff3df0605a5f20cd6476661072eade\"" },
+    { name: "redirectUrl", type: "String", description: "Redirect URL after QR payment is made", example: "\"https://www.apple.com/my/iphone/\"" },
+    { name: "createdAt", type: "DateTime", description: "Creation date time of transaction", example: "\"2018-03-21T06:41:22Z\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update date time of transaction", example: "\"2018-03-21T06:41:22Z\"" }
+  ]}
+/>
 <br />
 
 <strong>Expiry object (expiry):</strong>
 
-| Parameter   | Type     | Description                                                                               | Example                            |
-| ----------- | -------- | ----------------------------------------------------------------------------------------- | ---------------------------------- |
-| `type`      | String   | "DYNAMIC" (days from now), "FIX" (specific fixed date) or "PERMANENT" (never expire)      | "PERMANENT"                        |
-| `day`       | Uint     | Only required by "DYNAMIC" expiry type. To indicate number of days from now until expiry. | 3                                  |
-| `expiredAt` | DateTime | Only required by "FIXED". To indicate specific expiry date.                               | "2020-10-07T17:44:26.679908+08:00" |
-
+<ParamTable
+  rows={[
+    { name: "type", type: "String", description: "\"DYNAMIC\" (days from now), \"FIX\" (specific fixed date) or \"PERMANENT\" (never expire)", example: "\"PERMANENT\"" },
+    { name: "day", type: "Uint", description: "Only required by \"DYNAMIC\" expiry type. To indicate number of days from now until expiry.", example: "3" },
+    { name: "expiredAt", type: "DateTime", description: "Only required by \"FIXED\". To indicate specific expiry date.", example: "\"2020-10-07T17:44:26.679908+08:00\"" }
+  ]}
+/>
 <br />
 <strong>Database object (meta):</strong>
 
-| Parameter | Type | Description         | Example |
-| --------- | ---- | ------------------- | ------- |
-| `count`   | Uint  | Current page record | 1       |
-
+<ParamTable
+  rows={[
+    { name: "count", type: "Uint", description: "Current page record", example: "1" }
+  ]}
+/>
 > Example Response
 
 ```json

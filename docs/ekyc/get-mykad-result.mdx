@@ -350,11 +350,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter  | Type  | Description                      | Example |
-| ---------- | ----- | -------------------------------- | ------- |
-| `data`     | Array | Refer to the <b>Objects Data</b> | []      |
-| `duration` | Float | Landmark Detection Duration      | 0.0165  |
-
+<ParamTable
+  rows={[
+    { name: "data", type: "Array", description: "Refer to the Objects Data", example: "[]" },
+    { name: "duration", type: "Float", description: "Landmark Detection Duration", example: "0.0165" }
+  ]}
+/>
 
 
 
@@ -363,12 +364,13 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type   | Description                     | Example         |
-| ------------ | ------ | ------------------------------- | --------------- |
-| `boxes`      | Array  | Refer to the <b>boxes</b>       | []              |
-| `confidence` | Float  | Confidence of detected landmark | 0.9609          |
-| `prediction` | String | Prediction of detected landmark | "hibiscus_logo" |
-
+<ParamTable
+  rows={[
+    { name: "boxes", type: "Array", description: "Refer to the boxes", example: "[]" },
+    { name: "confidence", type: "Float", description: "Confidence of detected landmark", example: "0.9609" },
+    { name: "prediction", type: "String", description: "Prediction of detected landmark", example: "\"hibiscus_logo\"" }
+  ]}
+/>
 
 
 
@@ -377,11 +379,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter | Type | Description                         | Example |
-| --------- | ---- | ----------------------------------- | ------- |
-| `x`       | Int  | x-coordinate of object in the image | 196     |
-| `y`       | Int  | y-coordinate of object in the image | 200     |
-
+<ParamTable
+  rows={[
+    { name: "x", type: "Int", description: "x-coordinate of object in the image", example: "196" },
+    { name: "y", type: "Int", description: "y-coordinate of object in the image", example: "200" }
+  ]}
+/>
 
 
 
@@ -390,19 +393,20 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter       | Type   | Description                               | Example                      |
-| --------------- | ------ | ----------------------------------------- | ---------------------------- |
-| `duration`      | Float  | Mykad Recognition Duration                | 3.2886                       |
-| `colour`        | Object | Refer to the <b>Results Colour</b>        | (Refer to explanation below) |
-| `data`          | Object | Refer to the <b>Results Data</b>          | (Refer to explanation below) |
-| `faces`         | Array  | Refer to the <b>Results Faces</b>         | (Refer to explanation below) |
-| `glare`         | Object | Refer to the <b>Results Glare</b>         | (Refer to explanation below) |
-| `meta`          | Object | Refer to the <b>Results Meta</b>          | (Refer to explanation below) |
-| `object`        | Object | Refer to the <b>Results Object</b>        | (Refer to explanation below) |
-| `ocrRequestIds` | Object | Refer to the <b>Results OcrRequestIds</b> | (Refer to explanation below) |
-| `scores`        | Object | Refer to the <b>Results Scores</b>        | (Refer to explanation below) |
-| `tamperCheck`   | Object | Refer to the <b>Results TamperCheck</b>   | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "duration", type: "Float", description: "Mykad Recognition Duration", example: "3.2886" },
+    { name: "colour", type: "Object", description: "Refer to the Results Colour", example: "(Refer to explanation below)" },
+    { name: "data", type: "Object", description: "Refer to the Results Data", example: "(Refer to explanation below)" },
+    { name: "faces", type: "Array", description: "Refer to the Results Faces", example: "(Refer to explanation below)" },
+    { name: "glare", type: "Object", description: "Refer to the Results Glare", example: "(Refer to explanation below)" },
+    { name: "meta", type: "Object", description: "Refer to the Results Meta", example: "(Refer to explanation below)" },
+    { name: "object", type: "Object", description: "Refer to the Results Object", example: "(Refer to explanation below)" },
+    { name: "ocrRequestIds", type: "Object", description: "Refer to the Results OcrRequestIds", example: "(Refer to explanation below)" },
+    { name: "scores", type: "Object", description: "Refer to the Results Scores", example: "(Refer to explanation below)" },
+    { name: "tamperCheck", type: "Object", description: "Refer to the Results TamperCheck", example: "(Refer to explanation below)" }
+  ]}
+/>
 
 
 
@@ -411,11 +415,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type   | Description                       | Example |
-| ------------ | ------ | --------------------------------- | ------- |
-| `detected`   | String | Colour detected                   | "BLUE"  |
-| `percentage` | Float  | Percentage of colour in the image | 0.6008  |
-
+<ParamTable
+  rows={[
+    { name: "detected", type: "String", description: "Colour detected", example: "\"BLUE\"" },
+    { name: "percentage", type: "Float", description: "Percentage of colour in the image", example: "0.6008" }
+  ]}
+/>
 
 
 
@@ -424,14 +429,15 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter  | Type    | Description                 | Example                      |
-| ---------- | ------- | --------------------------- | ---------------------------- |
-| `address`  | Object  | Refer to the <b>Address</b> | (Refer to explanation below) |
-| `gender`   | String  | Gender information of mykad | "MALE"                       |
-| `ic`       | String  | Mykad ID                    | "550106-12-5821"             |
-| `isMuslim` | Boolean | Is muslim                   | false                        |
-| `name`     | String  | Name in the mykad           | "ROWAN SEBASTIAN ATKINSON"   |
-
+<ParamTable
+  rows={[
+    { name: "address", type: "Object", description: "Refer to the Address", example: "(Refer to explanation below)" },
+    { name: "gender", type: "String", description: "Gender information of mykad", example: "\"MALE\"" },
+    { name: "ic", type: "String", description: "Mykad ID", example: "\"550106-12-5821\"" },
+    { name: "isMuslim", type: "Boolean", description: "Is muslim", example: "false" },
+    { name: "name", type: "String", description: "Name in the mykad", example: "\"ROWAN SEBASTIAN ATKINSON\"" }
+  ]}
+/>
 
 
 
@@ -440,15 +446,16 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter      | Type   | Description            | Example                |
-| -------------- | ------ | ---------------------- | ---------------------- |
-| `addressLine1` | String | First line of address  | "GDW KAMPUNG BAYANGAN" |
-| `addressLine2` | String | Second line of address | "80000 KENINGAU"       |
-| `addressLine3` | String | Third line of address  | "SABAH"                |
-| `city`         | String | City name              | "KENINGAU"             |
-| `postcode`     | String | Postcode               | "80000"                |
-| `state`        | String | State name             | "SABAH"                |
-
+<ParamTable
+  rows={[
+    { name: "addressLine1", type: "String", description: "First line of address", example: "\"GDW KAMPUNG BAYANGAN\"" },
+    { name: "addressLine2", type: "String", description: "Second line of address", example: "\"80000 KENINGAU\"" },
+    { name: "addressLine3", type: "String", description: "Third line of address", example: "\"SABAH\"" },
+    { name: "city", type: "String", description: "City name", example: "\"KENINGAU\"" },
+    { name: "postcode", type: "String", description: "Postcode", example: "\"80000\"" },
+    { name: "state", type: "String", description: "State name", example: "\"SABAH\"" }
+  ]}
+/>
 
 
 
@@ -457,11 +464,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type  | Description                 | Example |
-| ------------ | ----- | --------------------------- | ------- |
-| `boxes`      | Array | Refer to the <b>boxes</b>   | []      |
-| `confidence` | Float | Confidence of detected face | 1       |
-
+<ParamTable
+  rows={[
+    { name: "boxes", type: "Array", description: "Refer to the boxes", example: "[]" },
+    { name: "confidence", type: "Float", description: "Confidence of detected face", example: "1" }
+  ]}
+/>
 
 
 
@@ -470,11 +478,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter | Type    | Description                   | Example |
-| --------- | ------- | ----------------------------- | ------- |
-| `details` | Array   | Detailed information of glare | []      |
-| `present` | Boolean | Present of glare              | false   |
-
+<ParamTable
+  rows={[
+    { name: "details", type: "Array", description: "Detailed information of glare", example: "[]" },
+    { name: "present", type: "Boolean", description: "Present of glare", example: "false" }
+  ]}
+/>
 
 
 
@@ -483,10 +492,11 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter     | Type  | Description                        | Example |
-| ------------- | ----- | ---------------------------------- | ------- |
-| `resizeScale` | Float | Resize scale of mykad in the image | 0       |
-
+<ParamTable
+  rows={[
+    { name: "resizeScale", type: "Float", description: "Resize scale of mykad in the image", example: "0" }
+  ]}
+/>
 
 
 
@@ -495,11 +505,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type   | Description                  | Example      |
-| ------------ | ------ | ---------------------------- | ------------ |
-| `confidence` | Float  | Confidence of detected mykad | 0.9609       |
-| `prediction` | String | Type of mykad                | "ic_1_front" |
-
+<ParamTable
+  rows={[
+    { name: "confidence", type: "Float", description: "Confidence of detected mykad", example: "0.9609" },
+    { name: "prediction", type: "String", description: "Type of mykad", example: "\"ic_1_front\"" }
+  ]}
+/>
 
 
 
@@ -508,12 +519,13 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter | Type | Description | Example |
-| --------- | ---- | ----------- | ------- |
-| region1 | String | ID of region 1 | "62201d4b4fddc13446bd6d0e" |
-| region2 | String | ID of region 2 | "62201d4b4fddc13446bd6d0f" |
-| region3 | String | ID of region 3 | "62201d4b4fddc13446bd6d10" |
-
+<ParamTable
+  rows={[
+    { name: "region1", type: "String", description: "ID of region 1", example: "\"62201d4b4fddc13446bd6d0e\"" },
+    { name: "region2", type: "String", description: "ID of region 2", example: "\"62201d4b4fddc13446bd6d0f\"" },
+    { name: "region3", type: "String", description: "ID of region 3", example: "\"62201d4b4fddc13446bd6d10\"" }
+  ]}
+/>
 
 
 
@@ -522,13 +534,14 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter   | Type  | Description          | Example |
-| ----------- | ----- | -------------------- | ------- |
-| `landmarks` | Float | Landmark score       | 0.5441  |
-| `ocr`       | Float | OCR score            | 0.9033  |
-| `searcher`  | Float | Mykad searcher score | 0.9     |
-| `total`     | Float | Total score          | 0.8295  |
-
+<ParamTable
+  rows={[
+    { name: "landmarks", type: "Float", description: "Landmark score", example: "0.5441" },
+    { name: "ocr", type: "Float", description: "OCR score", example: "0.9033" },
+    { name: "searcher", type: "Float", description: "Mykad searcher score", example: "0.9" },
+    { name: "total", type: "Float", description: "Total score", example: "0.8295" }
+  ]}
+/>
 
 
 
@@ -537,16 +550,17 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter          | Type   | Description                              | Example                      |
-| ------------------ | ------ | ---------------------------------------- | ---------------------------- |
-| `faceVerification` | Object | Refer to the <b>TamperCheck Face Verification Result</b>   | (Refer to explanation below) |
-| `frontalFace`      | Object | Refer to the <b>TamperCheck Result</b>   | (Refer to explanation below) |
-| `physical`         | Object | Refer to the <b>TamperCheck Physical</b> | (Refer to explanation below) |
-| `prediction`       | String | Prediction of tamper check               | "ORIGINAL"                   |
-| `region1`          | Object | Refer to the <b>TamperCheck Result</b>   | (Refer to explanation below) |
-| `region2`          | Object | Refer to the <b>TamperCheck Result</b>   | (Refer to explanation below) |
-| `region3`          | Object | Refer to the <b>TamperCheck Result</b>   | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "faceVerification", type: "Object", description: "Refer to the TamperCheck Face Verification Result", example: "(Refer to explanation below)" },
+    { name: "frontalFace", type: "Object", description: "Refer to the TamperCheck Result", example: "(Refer to explanation below)" },
+    { name: "physical", type: "Object", description: "Refer to the TamperCheck Physical", example: "(Refer to explanation below)" },
+    { name: "prediction", type: "String", description: "Prediction of tamper check", example: "\"ORIGINAL\"" },
+    { name: "region1", type: "Object", description: "Refer to the TamperCheck Result", example: "(Refer to explanation below)" },
+    { name: "region2", type: "Object", description: "Refer to the TamperCheck Result", example: "(Refer to explanation below)" },
+    { name: "region3", type: "Object", description: "Refer to the TamperCheck Result", example: "(Refer to explanation below)" }
+  ]}
+/>
 
 
 
@@ -555,12 +569,13 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter | Type    | Description                                               | Example                      |
-| --------- | ------- | --------------------------------------------------------- | ---------------------------- |
-| `message` | String  | Message from tamper check response                        | ""                           |
-| `result`  | Object  | Refer to the <b>Tamper Check Face Verification Result</b> | (Refer to explanation below) |
-| `success` | Boolean | Success status of tamper check                            | false                        |
-
+<ParamTable
+  rows={[
+    { name: "message", type: "String", description: "Message from tamper check response", example: "\"\"" },
+    { name: "result", type: "Object", description: "Refer to the Tamper Check Face Verification Result", example: "(Refer to explanation below)" },
+    { name: "success", type: "Boolean", description: "Success status of tamper check", example: "false" }
+  ]}
+/>
 
 
 
@@ -569,11 +584,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter      | Type    | Description                       | Example |
-| -------------- | ------- | --------------------------------- | ------- |
-| `isSamePerson` | Boolean | Check result which is same person | false   |
-| `similarity`   | Float   | Similarity of two faces           | 0       |
-
+<ParamTable
+  rows={[
+    { name: "isSamePerson", type: "Boolean", description: "Check result which is same person", example: "false" },
+    { name: "similarity", type: "Float", description: "Similarity of two faces", example: "0" }
+  ]}
+/>
 
 
 
@@ -582,12 +598,13 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter | Type    | Description                             | Example                      |
-| --------- | ------- | --------------------------------------- | ---------------------------- |
-| `message` | String  | Message from tamper check response      | ""                           |
-| `result`  | Object  | Refer to the <b>Tamper Check Result</b> | (Refer to explanation below) |
-| `success` | Boolean | Success status of tamper check          | false                        |
-
+<ParamTable
+  rows={[
+    { name: "message", type: "String", description: "Message from tamper check response", example: "\"\"" },
+    { name: "result", type: "Object", description: "Refer to the Tamper Check Result", example: "(Refer to explanation below)" },
+    { name: "success", type: "Boolean", description: "Success status of tamper check", example: "false" }
+  ]}
+/>
 
 
 
@@ -596,12 +613,13 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type    | Description                            | Example    |
-| ------------ | ------- | -------------------------------------- | ---------- |
-| `alternated` | Boolean | Alternated trace of tamper check       | false      |
-| `confidence` | Float   | Confidence score of tamperCheck result | 0.9999     |
-| `prediction` | String  | Prediction of tamper check             | "ORIGINAL" |
-
+<ParamTable
+  rows={[
+    { name: "alternated", type: "Boolean", description: "Alternated trace of tamper check", example: "false" },
+    { name: "confidence", type: "Float", description: "Confidence score of tamperCheck result", example: "0.9999" },
+    { name: "prediction", type: "String", description: "Prediction of tamper check", example: "\"ORIGINAL\"" }
+  ]}
+/>
 
 
 
@@ -610,11 +628,12 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 
 
-| Parameter    | Type    | Description                              | Example    |
-| ------------ | ------- | ---------------------------------------- | ---------- |
-| `confidence` | Float   | Confidence score of tamperCheck physical | 0          |
-| `prediction` | String  | Prediction of tamper check               | "ORIGINAL" |
-| `success`    | Boolean | Success status of tamper check physical  | false      |
-
+<ParamTable
+  rows={[
+    { name: "confidence", type: "Float", description: "Confidence score of tamperCheck physical", example: "0" },
+    { name: "prediction", type: "String", description: "Prediction of tamper check", example: "\"ORIGINAL\"" },
+    { name: "success", type: "Boolean", description: "Success status of tamper check physical", example: "false" }
+  ]}
+/>
 
 

@@ -31,29 +31,31 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/transaction" \
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `items`   | Object | Transaction History object                                                                                | (Refer to explanation below) |
-| `cursor`  | String | Cursor for next page                                                                                      |
-
+<ParamTable
+  rows={[
+    { name: "items", type: "Object", description: "Transaction History object", example: "(Refer to explanation below)" },
+    { name: "cursor", type: "String", description: "Cursor for next page" }
+  ]}
+/>
 
 <br />
 
 <strong>Transaction History object (item):</strong>
 
 
-| Parameter     | Type   | Description                           | Example                      |
-| ------------- | ------ | ------------------------------------- | ---------------------------- |
-| `id`          | String | Transaction History ID                | 1598969381529317751          |
-| `walletId`    | String | Wallet ID                             | 1585119930335618836          |
-| `referenceId` | String | Reference ID usually it's merchant id | 4118165203679668885          |
-| `adminId`     | String | Admin ID                              | 1610358903738245784          |
-| `detail`      | String | Transaction Detail                    | online payment gateway topup |
-| `method`      | String | Payment Method                        | "ONLINE", "MANUAL", "BANKIN" |
-| `status`      | String | Transaction Status                    | "IN_PROCESS", "SUCCESS"      |
-| `credit`      | String | Credit                                | 10                           |
-| `createdAt`   | DateTime | Transaction time                      | online payment gateway topup |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Transaction History ID", example: "1598969381529317751" },
+    { name: "walletId", type: "String", description: "Wallet ID", example: "1585119930335618836" },
+    { name: "referenceId", type: "String", description: "Reference ID usually it's merchant id", example: "4118165203679668885" },
+    { name: "adminId", type: "String", description: "Admin ID", example: "1610358903738245784" },
+    { name: "detail", type: "String", description: "Transaction Detail", example: "online payment gateway topup" },
+    { name: "method", type: "String", description: "Payment Method", example: "\"ONLINE\", \"MANUAL\", \"BANKIN\"" },
+    { name: "status", type: "String", description: "Transaction Status", example: "\"IN_PROCESS\", \"SUCCESS\"" },
+    { name: "credit", type: "String", description: "Credit", example: "10" },
+    { name: "createdAt", type: "DateTime", description: "Transaction time", example: "online payment gateway topup" }
+  ]}
+/>
 > Example Response
 
 ```json

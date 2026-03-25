@@ -23,30 +23,32 @@ No request parameter is required for this endpoint.
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `items`   | Object | Orders object                                                                                             | (Refer to explanation below) |
-| `cursor`  | String | Pagination Cursor                                                                                         | ""                           |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "items", type: "Object", description: "Orders object", example: "(Refer to explanation below)" },
+    { name: "cursor", type: "String", description: "Pagination Cursor", example: "\"\"" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 
 <strong>Customer object (item):</strong>
 
-| Parameter             | Type   | Description                                    | Example                  |
-| --------------------- | ------ | ---------------------------------------------- | ------------------------ |
-| `id`                  | String | Order ID                                       | 1668148680519476516      |
-| `merchantId`          | String | Merchant ID                                    | 4118165203679668885      |
-| `storeId`             | String | Store ID                                       | 1602660043994159611      |
-| `recurringCustomerId` | String | Customer ID                                    | 1667293245664231338      |
-| `transactionId`       | String | Payment Transaction ID                         | 221111000209600428405230 |
-| `status`              | String | Payment Status                                 | FAILED                   |
-| `recurringReference`  | String | Recurring reference ( internal use only )      | 20221111                 |
-| `createdAt`           | String | Created DateTime timstamp in RFC3339 formatted | 2022-11-11T06:38:00Z     |
-| `updatedAt`           | String | Updated DateTime timstamp in RFC3339 formatted | 2022-11-11T06:38:00Z     |
-| `currency`            | String | Recurring payment currency                     | MYR                      |
-| `amount`              | Int64  | Recurring payment amount                       | 1000                     |
-> Example Response
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Order ID", example: "1668148680519476516" },
+    { name: "merchantId", type: "String", description: "Merchant ID", example: "4118165203679668885" },
+    { name: "storeId", type: "String", description: "Store ID", example: "1602660043994159611" },
+    { name: "recurringCustomerId", type: "String", description: "Customer ID", example: "1667293245664231338" },
+    { name: "transactionId", type: "String", description: "Payment Transaction ID", example: "221111000209600428405230" },
+    { name: "status", type: "String", description: "Payment Status", example: "FAILED" },
+    { name: "recurringReference", type: "String", description: "Recurring reference ( internal use only )", example: "20221111" },
+    { name: "createdAt", type: "String", description: "Created DateTime timstamp in RFC3339 formatted", example: "2022-11-11T06:38:00Z" },
+    { name: "updatedAt", type: "String", description: "Updated DateTime timstamp in RFC3339 formatted", example: "2022-11-11T06:38:00Z" },
+    { name: "currency", type: "String", description: "Recurring payment currency", example: "MYR" },
+    { name: "amount", type: "Int64", description: "Recurring payment amount", example: "1000" }
+  ]}
+/>> Example Response
 
 ```json
 {

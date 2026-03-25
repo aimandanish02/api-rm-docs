@@ -12,22 +12,24 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 ### Request Parameters
 
-| Parameter    | Type   | Required | Description     | Example               |
-| ------------ | ------ | :------: | --------------- | --------------------- |
-| `terminalId` | String |   Yes    | Terminal ID     | "1582107209454501456" |
-| `type`       | String |   Yes    | Request type    | "REFUND"              |
-| `data`       | String |   Yes    | (Refer `data` ) | {}                    |
-
+<ParamTable
+  rows={[
+    { name: "terminalId", type: "String", required: true, description: "Terminal ID", example: "\"1582107209454501456\"" },
+    { name: "type", type: "String", required: true, description: "Request type", example: "\"REFUND\"" },
+    { name: "data", type: "String", required: true, description: "(Refer data )", example: "{}" }
+  ]}
+/>
 <strong>Data object (data):</strong>
 
-| Parameter       | Type   | Required | Description                                                                                                                 | Example                     |
-| --------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `transactionId` | String | Yes      | Transaction ID generated from Revenue Monster.                                                                              | "1582107209454501456"       |
-| `receiptType`   | Uint   | Yes      | 1 : Print Merchant Copy and Customer copy <br/> 2 : Print Customer copy <br/>3 : Do not print Merchant Copy & Customer Copy | 1                           |
-| `reason`        | String | Yes      | Refund reason                                                                                                               | "Wrong Item"                |
-| `email`         | String | Yes      | Refund email                                                                                                                | "oska.ng@revenuemonster.my" |
-| `pin`           | String | Yes      | Refund pin                                                                                                                  | "321123"                    |
-
+<ParamTable
+  rows={[
+    { name: "transactionId", type: "String", required: true, description: "Transaction ID generated from Revenue Monster.", example: "\"1582107209454501456\"" },
+    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Merchant Copy and Customer copy  2 : Print Customer copy 3 : Do not print Merchant Copy & Customer Copy", example: "1" },
+    { name: "reason", type: "String", required: true, description: "Refund reason", example: "\"Wrong Item\"" },
+    { name: "email", type: "String", required: true, description: "Refund email", example: "\"oska.ng@revenuemonster.my\"" },
+    { name: "pin", type: "String", required: true, description: "Refund pin", example: "\"321123\"" }
+  ]}
+/>
 > Example Request
 
 ```json
@@ -54,53 +56,57 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 
 ### Response Parameters
 
-| Parameter       | Type     | Description                                                                                               | Example                               |
-| --------------- | -------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `balanceAmount` | Uint     | Amount of order in cent                                                                                   | 10                                    |
-| `createdAt`     | DateTime | Creation date time of store                                                                               | "2020-02-13T07:08:56Z"                |
-| `currencyType`  | String   | Currency notation (currently only support `MYR`)                                                          | "MYR"                                 |
-| `extraInfo`     | Object   | (Refer to extraInfo)                                                                                      | {}                                    |
-| `method`        | String   | [RM currently supported method](../payment-method.mdx)                                                    | "CARD"                                |
-| `order`         | String   | (Refer to order)                                                                                          | {}                                    |
-| `platform`      | String   | Only "TERMINAL"                                                                                           | "TERMINAL"                            |
-| `referenceId`   | String   | Transaction ID (from server)                                                                              | "00000000000791320002737201919250001" |
-| `region`        | String   | Region of wallet                                                                                          | "MALAYSIA"                            |
-| `status`        | String   | Status returned from WeChat server                                                                        | "SUCCESS"                             |
-| `transactionAt` | DateTime | Transaction date time of store                                                                            | "2020-10-25T04:35:22Z"                |
-| `transactionId` | DateTime | Transaction ID generated from Revenue Monster.                                                            | "200213070856100322408442"            |
-| `type`          | String   | "QUICKPAY" or "BANK_CARD"                                                                                 | "BANK_CARD"                           |
-| `updatedAt`     | DateTime | Last update date time of store                                                                            | "2020-02-13T07:08:56Z"                |
-| `code`          | String   | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                             |
-| `error`         | Object   | (Refer `Appendix: Error Codes`)                                                                           | {}                                    |
-
+<ParamTable
+  rows={[
+    { name: "balanceAmount", type: "Uint", description: "Amount of order in cent", example: "10" },
+    { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2020-02-13T07:08:56Z\"" },
+    { name: "currencyType", type: "String", description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
+    { name: "extraInfo", type: "Object", description: "(Refer to extraInfo)", example: "{}" },
+    { name: "method", type: "String", description: "RM currently supported method", example: "\"CARD\"" },
+    { name: "order", type: "String", description: "(Refer to order)", example: "{}" },
+    { name: "platform", type: "String", description: "Only \"TERMINAL\"", example: "\"TERMINAL\"" },
+    { name: "referenceId", type: "String", description: "Transaction ID (from server)", example: "\"00000000000791320002737201919250001\"" },
+    { name: "region", type: "String", description: "Region of wallet", example: "\"MALAYSIA\"" },
+    { name: "status", type: "String", description: "Status returned from WeChat server", example: "\"SUCCESS\"" },
+    { name: "transactionAt", type: "DateTime", description: "Transaction date time of store", example: "\"2020-10-25T04:35:22Z\"" },
+    { name: "transactionId", type: "DateTime", description: "Transaction ID generated from Revenue Monster.", example: "\"200213070856100322408442\"" },
+    { name: "type", type: "String", description: "\"QUICKPAY\" or \"BANK_CARD\"", example: "\"BANK_CARD\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update date time of store", example: "\"2020-02-13T07:08:56Z\"" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" },
+    { name: "error", type: "Object", description: "(Refer Appendix: Error Codes)", example: "{}" }
+  ]}
+/>
 <br/>
 <strong>Extra Info object (extraInfo):</strong>
 
-| Parameter | Type   | Required | Description         | Example                      |
-| --------- | ------ | -------- | ------------------- | ---------------------------- |
-| `card`    | Object | Yes      | Object of card Info | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "card", type: "Object", required: true, description: "Object of card Info", example: "(Refer to explanation below)" }
+  ]}
+/>
 <br/>
 <strong>Card object (card):</strong>
 
-| Parameter              | Type   | Required | Description                  | Example               |
-| ---------------------- | ------ | -------- | ---------------------------- | --------------------- |
-| `inputType`            | String | Yes      | Type of card payment         | "NFC"                 |
-| `maskNo`               | String | Yes      | Masked card no               | "XXXX-XXXX-XXXX-9081" |
-| `referenceId`          | String | Yes      | Card payment ref on server   | "104974001774"        |
-| `secondaryReferenceId` | String | Yes      | Card payment ref on terminal | "001774"              |
-
+<ParamTable
+  rows={[
+    { name: "inputType", type: "String", required: true, description: "Type of card payment", example: "\"NFC\"" },
+    { name: "maskNo", type: "String", required: true, description: "Masked card no", example: "\"XXXX-XXXX-XXXX-9081\"" },
+    { name: "referenceId", type: "String", required: true, description: "Card payment ref on server", example: "\"104974001774\"" },
+    { name: "secondaryReferenceId", type: "String", required: true, description: "Card payment ref on terminal", example: "\"001774\"" }
+  ]}
+/>
 <br/>
 <strong>Order object (order):</strong>
 
-| Parameter        | Type   | Required | Description                                         | Example               |
-| ---------------- | ------ | -------- | --------------------------------------------------- | --------------------- |
-| `amount`         | Uint   | Yes      | Amount of order in cent (min RM 0.10 or amount: 10) | 10                    |
-| `id`             | String | Yes      | Order ID (from Merchant), max: 24                   | "201919250001"        |
-| `title`          | String | Yes      | Order title, max: 32                                | "SALE"                |
-| `details`        | String | Yes      | Order details, max: 600                             | "XXXX-XXXX-XXXX-3121" |
-| `additionalData` | String | Yes      | For merchant's remark, max 128                      | "000008"              |
-
+<ParamTable
+  rows={[
+    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "10" },
+    { name: "id", type: "String", required: true, description: "Order ID (from Merchant), max: 24", example: "\"201919250001\"" },
+    { name: "title", type: "String", required: true, description: "Order title, max: 32", example: "\"SALE\"" },
+    { name: "details", type: "String", required: true, description: "Order details, max: 600", example: "\"XXXX-XXXX-XXXX-3121\"" },
+    { name: "additionalData", type: "String", required: true, description: "For merchant's remark, max 128", example: "\"000008\"" }
+  ]}
+/>
 > Example Response
 
 ```json

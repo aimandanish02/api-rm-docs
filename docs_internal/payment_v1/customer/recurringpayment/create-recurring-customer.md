@@ -16,23 +16,24 @@ Create Recurring Customer
 
 ### Request Parameters
 
-| Parameter             | Type    | Required | Description                                                         | Example               |
-| --------------------- | ------- | -------- | ------------------------------------------------------------------- | --------------------- |
-| `storeId`             | String  | Yes      | Store Identifier                                                    | "134850717797247290"  |
-| `email`               | String  | Yes      | Customer email                                                      | dev@revenuemonster.my |
-| `name`                | String  | No       | Customer name                                                       | RM Developer          |
-| `countryCode`         | String  | No       | Customer country code                                               | 60                    |
-| `phoneNumber`         | String  | No       | Customer phone number                                               | 103603440             |
-| `productName`         | String  | No       | Recurring product title                                             | Recurring Product     |
-| `productDescription`  | String  | No       | Recurring product description                                       | Recurring description |
-| `currency`            | String  | Yes      | Recurring payment currency                                          | MYR                   |
-| `amount`              | String  | Yes      | Recurring payment amount                                            | 100                   |
-| `redirectUrl`         | String  | Yes      | Redirect URL after customer bind card                               | https://google.com    |
-| `notifyUrl`           | String  | Yes      | Notify URL when payment has made                                    | https://google.com    |
-| `recurringInterval`   | String  | Yes      | Recurring payment interval could be `MONTHLY`, `WEEKLY`, `DAILY`    | WEEKLY                |
-| `recurringTarget`     | String  | No       | Recurring target rules can be different values based on interval    | 1                     |
-| `recurringRepetition` | Integer | No       | Recurring repetition rules, how many times charge the customer card | 1                     |
-
+<ParamTable
+  rows={[
+    { name: "storeId", type: "String", required: true, description: "Store Identifier", example: "\"134850717797247290\"" },
+    { name: "email", type: "String", required: true, description: "Customer email", example: "dev@revenuemonster.my" },
+    { name: "name", type: "String", description: "Customer name", example: "RM Developer" },
+    { name: "countryCode", type: "String", description: "Customer country code", example: "60" },
+    { name: "phoneNumber", type: "String", description: "Customer phone number", example: "103603440" },
+    { name: "productName", type: "String", description: "Recurring product title", example: "Recurring Product" },
+    { name: "productDescription", type: "String", description: "Recurring product description", example: "Recurring description" },
+    { name: "currency", type: "String", required: true, description: "Recurring payment currency", example: "MYR" },
+    { name: "amount", type: "String", required: true, description: "Recurring payment amount", example: "100" },
+    { name: "redirectUrl", type: "String", required: true, description: "Redirect URL after customer bind card", example: "https://google.com" },
+    { name: "notifyUrl", type: "String", required: true, description: "Notify URL when payment has made", example: "https://google.com" },
+    { name: "recurringInterval", type: "String", required: true, description: "Recurring payment interval could be MONTHLY, WEEKLY, DAILY", example: "WEEKLY" },
+    { name: "recurringTarget", type: "String", description: "Recurring target rules can be different values based on interval", example: "1" },
+    { name: "recurringRepetition", type: "Integer", description: "Recurring repetition rules, how many times charge the customer card", example: "1" }
+  ]}
+/>
 <strong>Recurring Target Rules:</strong>
 
 | Interval | Target | Payment Behaviour                     |
@@ -51,38 +52,40 @@ Create Recurring Customer
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | Customer object                                                                                           | (Refer to explanation below) |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "Customer object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 
 <strong>Customer object (item):</strong>
 
-| Parameter            | Type   | Description                                                      | Example                                                                     |
-| -------------------- | ------ | ---------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `id`                 | String | Customer ID                                                      | 1668148680519476516                                                         |
-| `merchantId`         | String | Merchant ID                                                      | 4118165203679668885                                                         |
-| `storeId`            | String | Store ID                                                         | 1602660043994159611                                                         |
-| `email`              | String | Customer email                                                   | dev@revenuemonster.my                                                       |
-| `name`               | String | Customer name                                                    | RM Developer                                                                |
-| `label`              | String | Customer PAN Label                                               |                                                                             |
-| `countryCode`        | String | Customer country code                                            | 60                                                                          |
-| `phoneNumber`        | String | Customer phone number                                            | 103603440                                                                   |
-| `isActive`           | bool   | Customer active status ( no card bind will always be false )     | true                                                                        |
-| `createdAt`          | String | Created DateTime timstamp in RFC3339 formatted                   | 2022-11-11T06:38:00Z                                                        |
-| `updatedAt`          | String | Updated DateTime timstamp in RFC3339 formatted                   | 2022-11-11T06:38:00Z                                                        |
-| `clientKey`          | String | Customer client key ( internal usage only )                      | EhcKC09BdXRoQ2xpZW50EMWa54yytMPIFg                                          |
-| `amount`             | Int64  | Recurring payment amount                                         | 1000                                                                        |
-| `redirectUrl`        | String | Redirect URL after customer bind card                            | https://google.com                                                          |
-| `notifyUrl`          | String | Notify URL when payment has made                                 | https://google.com                                                          |
-| `recurringInterval`  | String | Recurring payment interval could be `MONTHLY`, `WEEKLY`          | WEEKLY                                                                      |
-| `recurringTarget`    | String | Recurring target rules can be different values based on interval | 1                                                                           |
-| `productName`        | String | Recurring product title                                          | Recurring Product                                                           |
-| `productDescription` | String | Recurring product description                                    | Recurring description                                                       |
-| `paymentUrl`         | String | Payment URL for Customer bind their Card Information             | https://sb-pg.revenuemonster.my/v1/recurring?customerId=1668148680519476516 |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Customer ID", example: "1668148680519476516" },
+    { name: "merchantId", type: "String", description: "Merchant ID", example: "4118165203679668885" },
+    { name: "storeId", type: "String", description: "Store ID", example: "1602660043994159611" },
+    { name: "email", type: "String", description: "Customer email", example: "dev@revenuemonster.my" },
+    { name: "name", type: "String", description: "Customer name", example: "RM Developer" },
+    { name: "label", type: "String", description: "Customer PAN Label" },
+    { name: "countryCode", type: "String", description: "Customer country code", example: "60" },
+    { name: "phoneNumber", type: "String", description: "Customer phone number", example: "103603440" },
+    { name: "isActive", type: "bool", description: "Customer active status ( no card bind will always be false )", example: "true" },
+    { name: "createdAt", type: "String", description: "Created DateTime timstamp in RFC3339 formatted", example: "2022-11-11T06:38:00Z" },
+    { name: "updatedAt", type: "String", description: "Updated DateTime timstamp in RFC3339 formatted", example: "2022-11-11T06:38:00Z" },
+    { name: "clientKey", type: "String", description: "Customer client key ( internal usage only )", example: "EhcKC09BdXRoQ2xpZW50EMWa54yytMPIFg" },
+    { name: "amount", type: "Int64", description: "Recurring payment amount", example: "1000" },
+    { name: "redirectUrl", type: "String", description: "Redirect URL after customer bind card", example: "https://google.com" },
+    { name: "notifyUrl", type: "String", description: "Notify URL when payment has made", example: "https://google.com" },
+    { name: "recurringInterval", type: "String", description: "Recurring payment interval could be MONTHLY, WEEKLY", example: "WEEKLY" },
+    { name: "recurringTarget", type: "String", description: "Recurring target rules can be different values based on interval", example: "1" },
+    { name: "productName", type: "String", description: "Recurring product title", example: "Recurring Product" },
+    { name: "productDescription", type: "String", description: "Recurring product description", example: "Recurring description" },
+    { name: "paymentUrl", type: "String", description: "Payment URL for Customer bind their Card Information", example: "https://sb-pg.revenuemonster.my/v1/recurring?customerId=1668148680519476516" }
+  ]}
+/>
 > Example Response
 
 ```json

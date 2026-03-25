@@ -83,13 +83,14 @@ startActivity(i)
 val jsonString = intent?.getStringExtra("result")
 ```
 
-| Parameter       | Type   | Validation                                                      | Description                    |
-| --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
-| `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
-| `code`          | String | ENUM("SUCCESS")                                                 | Determine request have success |
-| `error.code`    | String |                                                                 | Error code                     |
-| `error.message` | String |                                                                 | Error message                  |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "JSON", description: "Transaction response" },
+    { name: "code", type: "String", description: "Determine request have success" },
+    { name: "error.code", type: "String", description: "Error code" },
+    { name: "error.message", type: "String", description: "Error message" }
+  ]}
+/>
 ## Deeplink: Card Payment
 
 ```kotlin
@@ -113,13 +114,14 @@ Note: For terminal MF919 we had no control for the receipt printing.
 val jsonString = intent?.getStringExtra("result")
 ```
 
-| Parameter       | Type   | Validation                                                      | Description                    |
-| --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
-| `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
-| `code`          | String | ENUM("SUCCESS")                                                 | Determine request have success |
-| `error.code`    | String |                                                                 | Error code                     |
-| `error.message` | String |                                                                 | Error message                  |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "JSON", description: "Transaction response" },
+    { name: "code", type: "String", description: "Determine request have success" },
+    { name: "error.code", type: "String", description: "Error code" },
+    { name: "error.message", type: "String", description: "Error message" }
+  ]}
+/>
 ## Deeplink: Void Transaction
 
 ```kotlin
@@ -142,13 +144,14 @@ startActivity(i)
 val jsonString = intent?.getStringExtra("result")
 ```
 
-| Parameter       | Type   | Validation                                                      | Description                    |
-| --------------- | ------ | --------------------------------------------------------------- | ------------------------------ |
-| `item`          | JSON   | [Transaction Object](./query-transaction.md#transaction-object) | Transaction response           |
-| `code`          | String | ENUM("SUCCESS")                                                 | Determine request have success |
-| `error.code`    | String |                                                                 | Error code                     |
-| `error.message` | String |                                                                 | Error message                  |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "JSON", description: "Transaction response" },
+    { name: "code", type: "String", description: "Determine request have success" },
+    { name: "error.code", type: "String", description: "Error code" },
+    { name: "error.message", type: "String", description: "Error message" }
+  ]}
+/>
 ## Deeplink: Wallet Settlement
 
 ```kotlin
@@ -167,21 +170,22 @@ startActivity(i)
 val jsonString = intent?.getStringExtra("result")
 ```
 
-| Parameter                   | Type   | Validation | Description               |
-| --------------------------- | ------ | ---------- | ------------------------- |
-| `totalSalesAmount`          | Uint64 |            | Total sales amount        |
-| `totalSalesCount`           | Uint64 |            | Total sales count         |
-| `totalRefundedAmount`       | Uint64 |            | Total refunded amount     |
-| `totalRefundedCount`        | Uint64 |            | Total refunded count      |
-| `wallet[*].name`            | String |            | Wallet name               |
-| `wallet[*].method`          | String |            | Wallet method             |
-| `wallet[*].region`          | String |            | Wallet region             |
-| `wallet[*].sales.count`     | Uint64 |            | Wallet sales count        |
-| `wallet[*].sales.amount`    | Uint64 |            | Wallet sales amount       |
-| `wallet[*].refunded.count`  | Uint64 |            | Wallet refunded count     |
-| `wallet[*].refunded.amount` | Uint64 |            | Wallet refunded amount    |
-| `range[*]`                  | String | RFC3339    | Range of settlement dates |
-
+<ParamTable
+  rows={[
+    { name: "totalSalesAmount", type: "Uint64", description: "Total sales amount" },
+    { name: "totalSalesCount", type: "Uint64", description: "Total sales count" },
+    { name: "totalRefundedAmount", type: "Uint64", description: "Total refunded amount" },
+    { name: "totalRefundedCount", type: "Uint64", description: "Total refunded count" },
+    { name: "wallet[*].name", type: "String", description: "Wallet name" },
+    { name: "wallet[*].method", type: "String", description: "Wallet method" },
+    { name: "wallet[*].region", type: "String", description: "Wallet region" },
+    { name: "wallet[*].sales.count", type: "Uint64", description: "Wallet sales count" },
+    { name: "wallet[*].sales.amount", type: "Uint64", description: "Wallet sales amount" },
+    { name: "wallet[*].refunded.count", type: "Uint64", description: "Wallet refunded count" },
+    { name: "wallet[*].refunded.amount", type: "Uint64", description: "Wallet refunded amount" },
+    { name: "range[*]", type: "String", description: "Range of settlement dates" }
+  ]}
+/>
 ## Deeplink: Card Settlement
 
 ```kotlin
@@ -199,21 +203,22 @@ startActivity(i)
 val jsonString = intent?.getStringExtra("result")
 ```
 
-| Parameter                       | Type   | Validation          | Description                                               |
-| ------------------------------- | ------ | ------------------- | --------------------------------------------------------- |
-| `code`                          | String | ENUM("SUCCESS")     | Determine request have success                            |
-| `error.code`                    | String |                     | Error code                                                |
-| `error.message`                 | String |                     | Error message                                             |
-| `error.debug`                   | String |                     | Debug message ( sandbox only )                            |
-| `summary.batchNo`               | String |                     | Sequence no. of the terminal settlement                   |
-| `summary.currencyType`          | String | ENUM("MYR")         | Settlement Currency Type ( currently supported MYR only)  |
-| `summary.noOfTransactions`      | Uint64 |                     | Count of settled transactions                             |
-| `summary.settlementAt`          | String | RFC3339             | Date and time of the settlement                           |
-| `summary.totalSalesAmount`      | Uint64 |                     | Total sales amount in cents                               |
-| `transactions[*].amount`        | Uint64 |                     | Transactions amount in cents                              |
-| `transactions[*].currencyType`  | Uint64 | ENUM("MYR")         | Transaction Currency Type ( currently supported MYR only) |
-| `transactions[*].transactionAt` | String | RFC3339             | Date and time of the transaction                          |
-| `transactions[*].transactionId` | String |                     | Transaction ID                                            |
-| `transactions[*].type`          | String | ENUM("SALE","VOID") | Transaction type                                          |
-
+<ParamTable
+  rows={[
+    { name: "code", type: "String", description: "Determine request have success" },
+    { name: "error.code", type: "String", description: "Error code" },
+    { name: "error.message", type: "String", description: "Error message" },
+    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" },
+    { name: "summary.batchNo", type: "String", description: "Sequence no. of the terminal settlement" },
+    { name: "summary.currencyType", type: "String", description: "Settlement Currency Type ( currently supported MYR only)" },
+    { name: "summary.noOfTransactions", type: "Uint64", description: "Count of settled transactions" },
+    { name: "summary.settlementAt", type: "String", description: "Date and time of the settlement" },
+    { name: "summary.totalSalesAmount", type: "Uint64", description: "Total sales amount in cents" },
+    { name: "transactions[*].amount", type: "Uint64", description: "Transactions amount in cents" },
+    { name: "transactions[*].currencyType", type: "Uint64", description: "Transaction Currency Type ( currently supported MYR only)" },
+    { name: "transactions[*].transactionAt", type: "String", description: "Date and time of the transaction" },
+    { name: "transactions[*].transactionId", type: "String", description: "Transaction ID" },
+    { name: "transactions[*].type", type: "String", description: "Transaction type" }
+  ]}
+/>
 

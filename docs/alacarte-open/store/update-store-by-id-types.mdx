@@ -142,11 +142,12 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter | Type   | Description                                                                        | Example                      |
-| --------- | ------ | ---------------------------------------------------------------------------------- | ---------------------------- |
-| `method`  | String | Current delivery service for merchant to select "OWN" , "MRSPEEDY" , "GRABEXPRESS" | "OWN"                        |
-| `cost`    | Array  | Refer to explanation below                                                         | (Refer to explanation below) |
-
+<ParamTable
+  rows={[
+    { name: "method", type: "String", description: "Current delivery service for merchant to select \"OWN\" , \"MRSPEEDY\" , \"GRABEXPRESS\"", example: "\"OWN\"" },
+    { name: "cost", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
+  ]}
+/>
 
 
 
@@ -155,12 +156,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 
-| Parameter              | Type   | Description                     | Example |
-| ---------------------- | ------ | ------------------------------- | ------- |
-| `type`                 | String | we have "DYNAMIC" , "FIXED"     | "FIXED" |
-| `startDistanceInMeter` | Uint   | Set a Start Distance (In Meter) | 0       |
-| `endDistanceInMeter`   | Uint   | Set a End Distance (In Meter)   | 5000    |
-| `amount`               | Uint   | Set Distance amount             | 0       |
-
+<ParamTable
+  rows={[
+    { name: "type", type: "String", description: "we have \"DYNAMIC\" , \"FIXED\"", example: "\"FIXED\"" },
+    { name: "startDistanceInMeter", type: "Uint", description: "Set a Start Distance (In Meter)", example: "0" },
+    { name: "endDistanceInMeter", type: "Uint", description: "Set a End Distance (In Meter)", example: "5000" },
+    { name: "amount", type: "Uint", description: "Set Distance amount", example: "0" }
+  ]}
+/>
 
 

@@ -12,18 +12,20 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 ### Request Parameters
 
-| Parameter    | Type   | Required | Description     | Example               |
-| ------------ | ------ | :------: | --------------- | --------------------- |
-| `terminalId` | String |   Yes    | Terminal ID     | "1582107209454501456" |
-| `type`       | String |   Yes    | Request type    | "SETTLEMENT"          |
-| `data`       | String |   Yes    | (Refer `data` ) | {}                    |
-
+<ParamTable
+  rows={[
+    { name: "terminalId", type: "String", required: true, description: "Terminal ID", example: "\"1582107209454501456\"" },
+    { name: "type", type: "String", required: true, description: "Request type", example: "\"SETTLEMENT\"" },
+    { name: "data", type: "String", required: true, description: "(Refer data )", example: "{}" }
+  ]}
+/>
 <strong>Data object (data):</strong>
 
-| Parameter     | Type | Required | Description                                                                                                      | Example |
-| ------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------- | ------- |
-| `receiptType` | Uint | Yes      | 1 : Print Settlement summary and Settlement detail <br/>3 : Perform settlement in the background without receipt | 3       |
-
+<ParamTable
+  rows={[
+    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Settlement summary and Settlement detail 3 : Perform settlement in the background without receipt", example: "3" }
+  ]}
+/>
 > Example Request
 
 ```json
@@ -44,33 +46,36 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 
 ### Response Parameters
 
-| Parameter      | Type   | Description            | Example |
-| -------------- | ------ | ---------------------- | ------- |
-| `summary`      | Object | (Refer summary)        | {}      |
-| `transactions` | Array  | (Refer to transaction) | []      |
-
+<ParamTable
+  rows={[
+    { name: "summary", type: "Object", description: "(Refer summary)", example: "{}" },
+    { name: "transactions", type: "Array", description: "(Refer to transaction)", example: "[]" }
+  ]}
+/>
 <br/>
 <strong>Summary object (summary):</strong>
 
-| Parameter          | Type     | Required | Description                             | Example                |
-| ------------------ | -------- | -------- | --------------------------------------- | ---------------------- |
-| `batchNo`          | String   | Yes      | Sequence no. of the terminal settlement | "000311"               |
-| `currencyType`     | String   | Yes      | Current only support Ringgit Malaysia   | "MYR"                  |
-| `noOfTransactions` | Uint     | Yes      | Count of settled transactions           | 2                      |
-| `settlementAt`     | DateTime | Yes      | Date and time of the settlement         | "2021-02-17T18:06:47Z" |
-| `totalSalesAmount` | Uint     | Yes      | Balance in cents                        | 0                      |
-
+<ParamTable
+  rows={[
+    { name: "batchNo", type: "String", required: true, description: "Sequence no. of the terminal settlement", example: "\"000311\"" },
+    { name: "currencyType", type: "String", required: true, description: "Current only support Ringgit Malaysia", example: "\"MYR\"" },
+    { name: "noOfTransactions", type: "Uint", required: true, description: "Count of settled transactions", example: "2" },
+    { name: "settlementAt", type: "DateTime", required: true, description: "Date and time of the settlement", example: "\"2021-02-17T18:06:47Z\"" },
+    { name: "totalSalesAmount", type: "Uint", required: true, description: "Balance in cents", example: "0" }
+  ]}
+/>
 <br/>
 <strong>Transaction object (transaction):</strong>
 
-| Parameter       | Type     | Required | Description                           | Example                    |
-| --------------- | -------- | -------- | ------------------------------------- | -------------------------- |
-| `amount`        | Uint     | Yes      | Amount in cent                        | 10                         |
-| `currencyType`  | String   | Yes      | Current only support Ringgit Malaysia | "MYR"                      |
-| `transactionAt` | DateTime | Yes      | Date time of transaction on terminal  | "2021-02-16T17:44:02Z"     |
-| `transactionId` | String   | Yes      | Transaction ID (from RM server)       | "210217174359100325085446" |
-| `type`          | String   | Yes      | Transaction type SALE or VOID         | "SALE"                     |
-
+<ParamTable
+  rows={[
+    { name: "amount", type: "Uint", required: true, description: "Amount in cent", example: "10" },
+    { name: "currencyType", type: "String", required: true, description: "Current only support Ringgit Malaysia", example: "\"MYR\"" },
+    { name: "transactionAt", type: "DateTime", required: true, description: "Date time of transaction on terminal", example: "\"2021-02-16T17:44:02Z\"" },
+    { name: "transactionId", type: "String", required: true, description: "Transaction ID (from RM server)", example: "\"210217174359100325085446\"" },
+    { name: "type", type: "String", required: true, description: "Transaction type SALE or VOID", example: "\"SALE\"" }
+  ]}
+/>
 > Example Response
 
 ```json

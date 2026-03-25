@@ -31,21 +31,23 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/credit" \
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example                      |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `item`    | Object | Wallet object                                                                                             | (Refer to explanation below) |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS"                    |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "Object", description: "Wallet object", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 <br />
 
 <strong>Wallet object (item):</strong>
 
-| Parameter     | Type   | Description                                     | Example             |
-| ------------- | ------ | ----------------------------------------------- | ------------------- |
-| `id`          | String | Wallet ID                                       | 1585119930335618836 |
-| `referenceId` | String | Wallet reference ID usually is your Merchant ID | 4118165203679668885 |
-| `credit`      | uint64 | Merchant wallet credit amount                   | 1952                |
-
+<ParamTable
+  rows={[
+    { name: "id", type: "String", description: "Wallet ID", example: "1585119930335618836" },
+    { name: "referenceId", type: "String", description: "Wallet reference ID usually is your Merchant ID", example: "4118165203679668885" },
+    { name: "credit", type: "uint64", description: "Merchant wallet credit amount", example: "1952" }
+  ]}
+/>
 > Example Response
 
 ```json

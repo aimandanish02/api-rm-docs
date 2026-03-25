@@ -16,11 +16,12 @@ Topup merchant wallet
 
 ### Request Parameters
 
-| Parameter  | Type   | Description          | Example                     |
-| ---------- | ------ | -------------------- | --------------------------- |
-| `redirect` | String | Redirect after topup | "https://revenuemonster.my" |
-| `amount`   | uint64 | Topup Amount         | 10                          |
-
+<ParamTable
+  rows={[
+    { name: "redirect", type: "String", description: "Redirect after topup", example: "\"https://revenuemonster.my\"" },
+    { name: "amount", type: "uint64", description: "Topup Amount", example: "10" }
+  ]}
+/>
 > Example Request
 
 ```json
@@ -35,11 +36,12 @@ curl --location --request POST "{{open_base_path}}/v3/wallet/topup" \
 
 ### Response Parameters
 
-| Parameter | Type   | Description                                                                                               | Example   |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------- | --------- |
-| `item`    | String | Topup payment url                                                                                         |           |
-| `code`    | String | Successfully call this endpoint. If fail, will return error code object (Refer `Appendix 1: Error Codes`) | "SUCCESS" |
-
+<ParamTable
+  rows={[
+    { name: "item", type: "String", description: "Topup payment url" },
+    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+  ]}
+/>
 
 > Example Response
 
