@@ -13,6 +13,26 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 12px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  /* fixed height — adjust to taste */
+}
+
+/* scrollable body, no horizontal overflow */
+.card> :not(.header) {
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* kill horizontal scroll */
+  flex: 1;
+}
+
+.card pre {
+  white-space: pre-wrap !important;
+  /* wrap long lines */
+  word-break: break-all !important;
+  /* break URLs / long tokens */
+  overflow-x: hidden !important;
 }
 
 .header {
