@@ -4,140 +4,49 @@ title: Business Use Case
 sidebar_label: Business Use Case
 ---
 
-import { Box, Heading, Card, Image, Button, Flex } from "rebass";
-import styles from "../../src/pages/styles.module.css";
+## Step 1 — Learn the Signature Algorithm
 
-### Step 1 : Get Signature Algorithm
+Before making any API call, you must understand how RM signs requests. The Signature Algorithm is required because RM APIs have higher security requirements than standard APIs.
 
-Go through [Signature Algorithm](../quickstart/signature-algorithm) to see our signing mechanism before proceeding to call RM API endpoint(s). RM API have higher security requirements than the rest.
+> [→ Read the Signature Algorithm documentation](../quickstart/signature-algorithm)
 
-### Step 2 : Select Revenue Monster (RM) API
+## Step 2 — Choose Your Integration Path
 
-<Flex flexWrap="wrap" mx={-2}>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open(
-          "https://doc.revenuemonster.my/docs/v2/payment/quick-pay",
-          "_blank"
-        );
-      }}
-    >
-      <Text className={styles.text}>Payment</Text>
-    </Box>
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open(
-          "https://doc.revenuemonster.my/docs/campaign/loyalty/loyalty-point/give-loyalty-point/",
-          "_blank"
-        );
-      }}
-    >
-      <Text className={styles.text}>Loyalty</Text>
-    </Box>
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open(
-          "https://doc.revenuemonster.my/docs/campaign/voucher/overview/",
-          "_blank"
-        );
-      }}
-    >
-      <Text className={styles.text}>Voucher</Text>
-    </Box>
-  </Box>
-</Flex>
+Select the API that matches your business need. Click the link to view the full documentation for that endpoint.
 
-<Flex flexWrap="wrap" mx={-2}>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open(
-          "https://doc.revenuemonster.my/docs/campaign/gourmet-card/",
-          "_blank"
-        );
-      }}
-    >
-      <Text className={styles.text}>Gourmet Card</Text>
-    </Box>
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open(
-          "https://doc.revenuemonster.my/docs/settings/store-detail/store-details/",
-          "_blank"
-        );
-      }}
-    >
-      <Text className={styles.text}> Merchant / Store / User Details</Text>
-    </Box>
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open(
-          "https://doc.revenuemonster.my/docs/quickstart/sdk/",
-          "_blank"
-        );
-      }}
-    >
-      <Text className={styles.text}>Software Development Kit (SDK)</Text>
-    </Box>
-  </Box>
-</Flex>
+### Payment
 
-<Flex flexWrap="wrap" mx={-2}>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open("https://doc.revenuemonster.my/docs/alacarte-open/introduction", "_blank");
-      }}
-    >
-      <Text className={styles.text}>à la carte</Text>
-    </Box>
+| API | Use Case | Documentation |
+|---|---|---|
+| **Quick Pay** | Accept payments via QR code scan | [View →](../v2/payment/quick-pay) |
+| **Online Payment** | Browser-based checkout flow | [View →](../v2/payment/online-payment) |
+| **Terminal Integration** | POS terminal payments | [View →](../v2/payment/terminal-integration) |
+| **Tokenization Payment** | Recurring or saved card payments | [View →](../v2/payment/tokenization-payment) |
 
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open("https://doc.revenuemonster.my/docs/v2/payment/terminal-integration/", "_blank");
-      }}
-    >
-      <Text className={styles.text}>POS Integration</Text>
-    </Box>
+### Loyalty & Vouchers
 
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open("https://doc.revenuemonster.my/docs/error-codes/", "_blank");
-      }}
-    >
-      <Text className={styles.text}>Error Codes</Text>
-    </Box>
-  </Box>
-  <Box p={2} width={[1, 1 / 3]}>
-    <Box
-      className={styles.box}
-      onClick={() => {
-        window.open("https://doc.revenuemonster.my/docs/push-notification/push-to-merchant/", "_blank");
-      }}
-    >
-      <Text className={styles.text}>Push Notification</Text>
-    </Box>
-  </Box>
-</Flex>
+| API | Use Case | Documentation |
+|---|---|---|
+| **Loyalty Point** | Give, deduct, or track loyalty points | [View →](../campaign/loyalty/loyalty-point/give-loyalty-point) |
+| **Voucher** | Issue, void, or redeem vouchers | [View →](../campaign/voucher/overview) |
+| **Gourmet Card** | Alipay gourmet card integration | [View →](../campaign/gourmet-card) |
+
+### Store & Account Management
+
+| API | Use Case | Documentation |
+|---|---|---|
+| **Store Details** | Manage store information | [View →](../settings/store-detail/store-details) |
+| **Merchant Profile** | View merchant account details | [View →](../settings/merchant-detail/merchant-profile) |
+
+### Additional Services
+
+| API | Use Case | Documentation |
+|---|---|---|
+| **SDK Reference** | Language-specific SDKs (Node.js, PHP, Python, etc.) | [View →](../quickstart/sdk) |
+| **à la carte** | Restaurant order management system | [View →](../alacarte-open/introduction) |
+| **Error Codes** | Troubleshooting API errors | [View →](../error-codes) |
+| **Push Notification** | Send push notifications to merchants | [View →](../push-notification/push-to-merchant) |
+
+:::tip Not Sure Where to Start?
+Begin with the [Quick Start: Signature Algorithm](../quickstart/signature-algorithm) to understand how authentication works, then move on to [Quick Pay](../v2/payment/quick-pay) to process your first payment.
+:::

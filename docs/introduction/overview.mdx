@@ -4,63 +4,68 @@ title: Overview
 sidebar_label: Overview
 ---
 
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-export const Highlight = ({ children, color }) => (
-  <span
-    style={{
-      backgroundColor: color,
-      borderRadius: "2px",
-      color: "#fff",
-      padding: "0.2rem",
-    }}
-  >
-    {children}
-  </span>
-);
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-Revenue Monster (mentioned as RM) Open APIs allow developers to manage payments, users, stores, loyalty, and social media through RESTful API or SDK. All RM products have API for most of its core functionalities. Start with our comprehensive API to reimagine your business.
+# Overview
 
-**API Environment Summary** <br />
+Revenue Monster (RM) Open APIs let developers integrate payments, user management, store operations, loyalty programs, and more — via RESTful API or SDK.
 
-There are two services for our API (OAuth and Open API), both for sandbox and production environment. OAuth server is for authentication, Open API server is for core functions. You may test with sandbox endpoints before going production. You can self-sign up for sandbox access and contact <support@revenuemonster.my> to activate your sandbox account.
+## Environments
 
-##### Sandbox Environment
+<Tabs groupId="env">
+  <TabItem value="sandbox" label="Sandbox">
 
-Authentication Server -> https://sb-oauth.revenuemonster.my  
-API Server -> https://sb-open.revenuemonster.my
+| Service | URL |
+|---|---|
+| **OAuth Server** (Authentication) | `https://sb-oauth.revenuemonster.my` |
+| **Open API Server** (Core Functionality) | `https://sb-open.revenuemonster.my` |
 
-##### Production Environment
+  </TabItem>
+  <TabItem value="production" label="Production">
 
-Authentication Server -> https://oauth.revenuemonster.my  
-API Server -> https://open.revenuemonster.my
+| Service | URL |
+|---|---|
+| **OAuth Server** (Authentication) | `https://oauth.revenuemonster.my` |
+| **Open API Server** (Core Functionality) | `https://open.revenuemonster.my` |
 
-**Before You Start**
+  </TabItem>
+</Tabs>
 
-Go to [Merchant Portal](https://merchant.revenuemonster.my/) or [Sandbox Merchant Portal](https://sb-merchant.revenuemonster.my/) to sign up as merchant.
-
-Submit all required documents as shown in the merchant portal and get approval from our admin. If you need more assistance, please contact us at <bd@revenuemonster.my>.
-
-<Flex justifyContent="center">
-  <Button
-    width="100%"
-    sx={{
-      ":hover": {
-        backgroundColor: "blue",
-      },
-      backgroundColor: "#528ef7",
-      borderRadius: 15,
-    }}
-    onClick={() => {
-      window.location.href =
-        "https://doc.revenuemonster.my/docs/introduction/usecase";
-    }}
-  >
-    Let's Start !
-  </Button>
-</Flex>
-<br />
-
-:::note
-The following steps document the RESTful API. For language specific
-SDK(s), please refer to the [SDK section](../quickstart/sdk). need to change URL
+:::tip Test Before Going Live
+Test your integration in the sandbox environment before going production. Contact [support@revenuemonster.my](mailto:support@revenuemonster.my) to activate your sandbox account.
 :::
+
+## Prerequisites
+
+### Step 1 — Create a Merchant Account
+
+Sign up on the merchant portal for your target environment:
+
+| Environment | Portal URL |
+|---|---|
+| **Sandbox** | [Sandbox Merchant Portal](https://sb-merchant.revenuemonster.my/) |
+| **Production** | [Merchant Portal](https://merchant.revenuemonster.my/) |
+
+### Step 2 — Submit Required Documents
+
+Complete all required document submissions shown in the portal. Your account will be reviewed and approved by an administrator.
+
+### Step 3 — Get Help (Optional)
+
+Need assistance? Contact our business development team:
+
+- **Email:** [bd@revenuemonster.my](mailto:bd@revenuemonster.my)
+- **Support:** [support@revenuemonster.my](mailto:support@revenuemonster.my)
+
+:::info SDK vs REST API
+This documentation covers the **RESTful API**. For language-specific SDKs, see the [SDK section](../quickstart/sdk).
+:::
+
+## Next Steps
+
+Start integrating with Revenue Monster:
+
+- [Quick Start: Signature Algorithm](../quickstart/signature-algorithm) — Learn how to sign API requests
+- [Merchant Onboarding](../merchant-onboarding/introduction) — Set up your merchant account
+- [SDK Reference](../quickstart/sdk) — Use our language-specific SDKs
