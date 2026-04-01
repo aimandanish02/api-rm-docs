@@ -2,35 +2,40 @@
 id: authorization-code
 title: Authorization Code
 sidebar_label: Authorization Code
-
 api:
   method: POST
-
   url:
     sandbox: https://sb-oauth.revenuemonster.my/v1/token
     prod: https://oauth.revenuemonster.my/v1/token
-
   requiresSignature: false
   requiresAccessToken: false
-
   headers:
     Content-Type: application/json
     Authorization: Basic <BASE64_CLIENT_ID_AND_SECRET>
-
   body: |
     {
       "grantType": "authorization_code",
       "code": "<AUTHORIZATION_CODE>",
       "redirectUri": "<REDIRECT_URI>"
     }
-
 examples:
   request: |
-    There is no example request provided.
-  body: |
-    There is no example body request.
+    curl --location --request POST "https://sb-oauth.revenuemonster.my/v1/token" \
+      --header "Content-Type: application/json" \
+      --header "Authorization: Basic <BASE64_CLIENT_ID_AND_SECRET>" \
+      --data '{
+        "grantType": "authorization_code",
+        "code": "<AUTHORIZATION_CODE>",
+        "redirectUri": "<REDIRECT_URI>"
+      }'
   response: |
-    There is no example response provided.
+    {
+      "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMy0xOCIsInR5cCI6IkpXVCJ9...",
+      "tokenType": "Bearer",
+      "expiresIn": 2591999,
+      "refreshToken": "OgoHjoZyLZPnHemifOrHIwStdeyzKuFo...",
+      "refreshTokenExpiresIn": 1576799999
+    }
 ---
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -41,73 +46,90 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v1/token"
 />
 
-
-
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
 :::note
-<span style={{ color: "red", fontWeight: "bold" }}>This page is for plugin developer only</span><br/><br/>
+This page is for **plugin and integration developers** building applications that act on behalf of a merchant.
 :::
 
+## Get Access Token (Authorization Code)
 
-**Process flow for Grant Type:** `auth_code` <br/>
-This is for the scenario where a partner wants to request permission to develop an application of a merchant.
+Use the `authorization_code` grant type when a **third-party developer** (such as a plugin or integration partner) needs to request access to a merchant's account on their behalf. Unlike client credentials, this flow involves redirecting the merchant to an RM consent screen where they approve the requested permissions.
 
-For authorization code, only `client_id` is needed. You are required to use the following request parameters as Query String. Go to [RM Merchant Portal](https://merchant.revenuemonster.my/) to get your **Client ID**
+**Flow overview:**
+1. Redirect the merchant to the RM authorization URL with your requested scopes.
+2. The merchant logs in and approves access.
+3. RM redirects back to your `redirectUri` with a temporary `code`.
+4. Exchange the `code` for an access token using this endpoint.
 
-### Request Parameters
+---
+
+### Step 1: Get Your Client ID
+
+Go to [RM Merchant Portal](https://merchant.revenuemonster.my/) > **Developer** > **Application** to find your `clientId`.
+
+Only `clientId` is needed for this step — you do not need `clientSecret` to build the authorization URL.
+
+---
+
+### Step 2: Redirect the Merchant to the Authorization URL
+
+Build the authorization URL using the parameters below and redirect the merchant's browser to it.
 
 <ParamTable
-  title="Request Parameters"
+  title="Query Parameters"
   rows={[
-    { name: "responseType", type: "String", required: true, description: "Only support authorization code", example: "code" },
-    { name: "clientId", type: "String", required: true, description: "Client ID or AppID as obtained from RM Merchant Portal.", example: "3675930941412424316" },
-    { name: "redirectUri", type: "String", required: true, description: "Specify your desired redirect Uri after request successful. This Uri must be EXACTLY the same as the one entered in RM Merchant Portal" },
-    { name: "scope", type: "String", required: true, description: "Scope of authorization granted to user, to perform action(s) when calling other API endpoints. (Currently only support manage_payment, get_merchant_profile, get_user_profile, manage_store). Separated by comma(s) without space.", example: "manage_payment" },
-    { name: "state", type: "String", description: "Optional field for user reference, will be passed back in response", example: "Anything" }
+    { name: "responseType", type: "String", required: true, description: "Must be set to \"code\".", example: "\"code\"" },
+    { name: "clientId", type: "String", required: true, description: "Your application's Client ID from the Merchant Portal.", example: "\"3675930941412424316\"" },
+    { name: "redirectUri", type: "String", required: true, description: "The URL to redirect the merchant to after approval. Must exactly match the redirect URI registered in the Merchant Portal.", example: "\"https://example.com/oauth/callback\"" },
+    { name: "scope", type: "String", required: true, description: "Permissions to request, as a comma-separated list with no spaces. Supported values: manage_payment, get_merchant_profile, get_user_profile, manage_store.", example: "\"manage_payment,get_merchant_profile\"" },
+    { name: "state", type: "String", description: "An optional value you define. RM will include it in the redirect response unchanged — useful for CSRF protection or tracking session state.", example: "\"abc123\"" }
   ]}
 />
 
+**Example authorization URL:**
 
-**Example Request URL :**
+```
+https://sb-oauth.revenuemonster.my/authorize
+  ?responseType=code
+  &clientId=3675930941412424316
+  &redirectUri=https://example.com/oauth/callback
+  &scope=manage_payment
+  &state=abc123
+```
 
-<a href="https://sb-oauth.revenuemonster.my/authorize?responseType=code&clientId=3675930941412424316& redirectUri=https://www.google.com&scope=manage_payment&state=123456">
-https://sb-oauth.revenuemonster.my/authorize?responseType=code&clientId=3675930941412424316&redirectUri=
-https://www.google.com&scope=manage_payment&
-state=123456</a>
+After the merchant approves, RM redirects them to your `redirectUri` with a `code` query parameter:
 
-![image](/img/developer-application/auth-respond.png)
+```
+https://example.com/oauth/callback?code=<AUTHORIZATION_CODE>&state=abc123
+```
 
-<hr/>
+---
 
-### Response Parameters
+### Step 3: Exchange the Code for an Access Token
+
+Use the `code` from the redirect to request an access token. Include your Base64-encoded `clientId:clientSecret` in the `Authorization` header (same as the [Client Credentials](./client-credentials) flow).
+
+## Request Parameters
 
 <ParamTable
-  title="Response Parameters"
+  title="Request Body"
   rows={[
-    { name: "code", type: "String", description: "Required for subsequent request(s)", example: "Random string" },
-    { name: "state", type: "String", description: "Optional field for user reference", example: "Anything" }
+    { name: "grantType", type: "String", required: true, description: "Must be set to \"authorization_code\".", example: "\"authorization_code\"" },
+    { name: "code", type: "String", required: true, description: "The authorization code received from the redirect in Step 2.", example: "\"<AUTHORIZATION_CODE>\"" },
+    { name: "redirectUri", type: "String", required: true, description: "Must exactly match the redirect URI used in Step 2.", example: "\"https://example.com/oauth/callback\"" }
   ]}
 />
 
+---
 
-**Example Response URL :**
+## Response Parameters
 
-<a href="https://www.google.com/?code=iEWqJsA5KVEsWF11xTphDIx8vbUqomsiW2vT4KClOFaVqiGh517dDCfgPlHlqZUeP5atf0SnwiMO8P2X06md8Muv4nEWRW9nro6a5ef0M1jD7k1EFOh9fPV7Jvoe7wIRoVY6JYCSzHuWItQ3Un9J137smxcdSkZ8GKs14vDmREtwFsn8a0SSKBvgfjXEJGrWnCZaCOpEhXPDNzIfo71n0p8p38d9mUyNqxYpQ8UzlPpfAKEr0fiGIFTf6RakxUp&state=123456">https://www.google.com/?code=iEWqJsA5KVEsWF11xTphDIx8vbUqomsiW2vT4KClOFaVqiGh517
-dDCfgPlHlqZUeP5atf0SnwiMO8P2X06md8Muv4nEWRW9nro6a5ef0M1jD7k1EFOh9f
-PV7Jvoe7wIRoVY6JYCSzHuWItQ3Un9J137smxcdSkZ8GKs14vDmREtwFsn8a0SSKBvg
-fjXEJGrWnCZaCOpEhXPDNzIfo71n0p8p38d9mUyNqxYpQ8UzlPpfAKEr0fiGIF
-Tf6RakxUp&state=123456</a>
-<br/>
-<br/>
-
-:::note
-
-- From the redirected response URI, we can get authorization code from the query string, as follows: <br />
-  `iEWqJsA5KVEsWF11xTphDIx8vbUqomsiW2vT4KClOFaVqiGh517dDCfgPlHlqZUeP5atf0SnwiMO8P2X06md8Muv4nEWRW9nro6a5ef0M1jD7k1EFOh9fPV7Jvoe7wIRoVY6JYCSzHuWItQ3Un9J137smxcdSkZ8GKs14vDmREtwFsn8a0SSKBvgfjXEJGrWnCZaCOpEhXPDNzIfo71n0p8p38d9mUyNqxYpQ8UzlPpfAKEr0fiGIFTf6RakxUp`<br /><br />
-
-- Thereafter, user may use this code to generate an access token and proceed to call other endpoints.<br /><br />
-
-- This code is valid for <b>ONE-TIME</b> only. Once used <b>(either successful or failed)</b>, you are required to request a new authorization code using the steps before.
-
-:::
+<ParamTable
+  title="Response"
+  rows={[
+    { name: "accessToken", type: "String", description: "Bearer token to include in all subsequent API requests.", example: "eyJhbGci..." },
+    { name: "tokenType", type: "String", description: "Token scheme. Always \"Bearer\".", example: "\"Bearer\"" },
+    { name: "expiresIn", type: "Number", description: "Access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
+    { name: "refreshToken", type: "String", description: "Use this to get a new access token once the current one expires. See Refresh Token.", example: "OgoHjoZy..." },
+    { name: "refreshTokenExpiresIn", type: "Number", description: "Refresh token lifetime in seconds.", example: "1576799999" }
+  ]}
+/>

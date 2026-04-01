@@ -39,8 +39,6 @@ examples:
         "lastName":"Testing",
         "phoneNumber":"164699177"
     }'
-  body: |
-    There is no example body request.
   response: |
     {
       "item": {
@@ -137,17 +135,8 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/partner/merchant"
 />
 
-
-
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
-
 :::note
-
-For Merchant that has a Partner account
-
-**For Active a Partner account [(contact us)](https://revenuemonster.my/about-us)**
-
+This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
 ### Request Parameters
@@ -164,8 +153,6 @@ For Merchant that has a Partner account
   ]}
 />
 
-
-
 ### Response Parameters
 
 <ParamTable
@@ -176,54 +163,48 @@ For Merchant that has a Partner account
   ]}
 />
 
-
-<br/>
-
-<strong>Merchant Object (item):</strong>
+**Merchant object (merchant):**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "id", type: "String", description: "Store ID", example: "\"6170506694335521334\"" },
+    { name: "id", type: "String", description: "Merchant ID", example: "\"6170506694335521334\"" },
     { name: "companyName", type: "String", description: "Company name of merchant", example: "\"REVENUE MONSTER\"" },
     { name: "brandName", type: "String", description: "Brand name of merchant", example: "\"REVENUE MONSTER\"" },
     { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"SOLE PROPRIETOR\"" },
     { name: "companyLogoUrl", type: "String", description: "Public URL to show merchant's logo", example: "\"https://storage.googleapis.com/rm-dev-asset/img/merchant.png\"" },
-    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "“12344”" },
+    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "\"12344\"" },
     { name: "businessCategory", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "businessScope", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "sourceOfFunds", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "customerOrigin", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "websiteUrl", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
+    { name: "businessScope", type: "String", description: "Business scope of merchant", example: "\"SOFTWARE AND IT\"" },
+    { name: "sourceOfFunds", type: "String", description: "Source of funds of merchant", example: "\"SOFTWARE AND IT\"" },
+    { name: "customerOrigin", type: "String", description: "Customer origin of merchant", example: "\"SOFTWARE AND IT\"" },
+    { name: "websiteUrl", type: "String", description: "Website URL of merchant", example: "\"https://revenuemonster.my\"" },
     { name: "establishedAt", type: "DateTime", description: "Established date time of merchant", example: "\"2018-03-26T04:50:57Z\"" },
     { name: "countryCode", type: "String", description: "Country code of merchant contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of merchant", example: "\"377334080\"" },
     { name: "addressLine1", type: "String", description: "Address 1 of merchant", example: "\"20, JALAN JASA 38, TAMAN MUTIARA RINI\"" },
     { name: "addressLine2", type: "String", description: "Address 2 of merchant", example: "\"\"" },
-    { name: "postcode", type: "String", description: "Postcode of merchant", example: "“81300”" },
+    { name: "postcode", type: "String", description: "Postcode of merchant", example: "\"81300\"" },
     { name: "city", type: "String", description: "City of merchant", example: "\"Selangor\"" },
     { name: "state", type: "String", description: "State of merchant", example: "\"Selangor\"" },
     { name: "country", type: "String", description: "Country of merchant", example: "\"Malaysia\"" },
     { name: "invoiceAddress", type: "Object", description: "Object of Invoice Address", example: "(Refer below)" },
     { name: "isActive", type: "Boolean", description: "Merchant active or deactivated status", example: "true" },
-    { name: "status", type: "String", description: "Current status of merchant", example: "“REVIEWING”" },
+    { name: "status", type: "String", description: "Current status of merchant", example: "\"REVIEWING\"" },
     { name: "isMasterMerchant", type: "Bool", description: "Master Merchant flag", example: "true" },
     { name: "masterMerchantId", type: "String", description: "Master Merchant ID, if any", example: "\"2301663653361832803\"" },
     { name: "isPartner", type: "Bool", description: "Partner Merchant flag", example: "true" },
     { name: "partnerId", type: "String", description: "Partner Merchant ID, if any", example: "\"2301663653361832803\"" },
     { name: "gstNo", type: "String", description: "GST No, if any", example: "\"\"" },
     { name: "paymentSubscription", type: "String", example: "\"\"" },
-    { name: "subscription", type: "Object", example: "Refer Below" },
+    { name: "subscription", type: "Object", example: "(Refer below)" },
     { name: "registrationSource", type: "String", description: "Register From", example: "\"OPEN_API\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of merchant", example: "\"2018-02-12T08:53:13Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of merchant", example: "\"2018-02-12T08:53:13Z\"" }
   ]}
 />
 
-
-<br/>
-
-<strong>Subscription object :</strong>
+**Subscription object:**
 
 <ParamTable
   title="Details"
@@ -234,55 +215,48 @@ For Merchant that has a Partner account
   ]}
 />
 
-
-<br />
-
-<strong>Store object (store):</strong>
+**Store object (store):**
 
 <ParamTable
   title="Details"
   rows={[
     { name: "id", type: "String", description: "Store ID", example: "\"6170506694335521334\"" },
-    { name: "merchantSettlementId", type: "String", description: "Merchant Settlement Id", example: "\"1596124530153936377\"" },
-    { name: "name", type: "String", description: "Store Name", example: "\"REVENUE MONSTER\"" },
-    { name: "imageUrl", type: "String", description: "Default Image", example: "\"https://storage.googleapis.com/rm-prod-asset/img/store.png\"" },
-    { name: "addressLine1", type: "String", description: "Store Address 1", example: "\"B-5-30, 5th Floor, Block Bougainvillea,\"" },
-    { name: "addressLine2", type: "String", description: "Store Address 2", example: "\"PJU 6A, Lebuhraya SPRINT, 10 Boulevard,\"" },
+    { name: "merchantSettlementId", type: "String", description: "Merchant Settlement ID", example: "\"1596124530153936377\"" },
+    { name: "name", type: "String", description: "Store name", example: "\"REVENUE MONSTER\"" },
+    { name: "imageUrl", type: "String", description: "Default image", example: "\"https://storage.googleapis.com/rm-prod-asset/img/store.png\"" },
+    { name: "addressLine1", type: "String", description: "Store address 1", example: "\"B-5-30, 5th Floor, Block Bougainvillea,\"" },
+    { name: "addressLine2", type: "String", description: "Store address 2", example: "\"PJU 6A, Lebuhraya SPRINT, 10 Boulevard,\"" },
     { name: "postCode", type: "String", description: "Postcode of store", example: "\"47400\"" },
     { name: "city", type: "String", description: "City of store", example: "\"Petaling Jaya\"" },
     { name: "state", type: "String", description: "State of store", example: "\"Selangor\"" },
     { name: "country", type: "String", description: "Country of store", example: "\"Malaysia\"" },
     { name: "countryCode", type: "String", description: "Country code of store contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of store", example: "\"377334080\"" },
-    { name: "geoLocation", type: "Object of [Float]", description: "Geo Location (latitude and longtitude) of store", example: "{\"latitude\": 3.1349857, \"longtitude\": 101.6136659 }" },
+    { name: "geoLocation", type: "Object of [Float]", description: "Geo location (latitude and longitude) of store", example: "{\"latitude\": 3.1349857, \"longitude\": 101.6136659}" },
     { name: "status", type: "String", description: "Current status of store", example: "\"ACTIVE\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2018-02-12T08:53:13Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of store", example: "\"2018-02-12T08:53:13Z\"" }
   ]}
 />
 
-
-<br />
-
-<strong>User object (store):</strong>
+**User object (user):**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "id", type: "String", description: "User ID", example: "“8190656045166232716”" },
-    { name: "firstName", type: "String", description: "First name of user", example: "“MOHAMED”" },
-    { name: "lastName", type: "String", description: "Last name of user", example: "“YUSSUF”" },
+    { name: "id", type: "String", description: "User ID", example: "\"8190656045166232716\"" },
+    { name: "firstName", type: "String", description: "First name of user", example: "\"MOHAMED\"" },
+    { name: "lastName", type: "String", description: "Last name of user", example: "\"YUSSUF\"" },
     { name: "countryCode", type: "String", description: "Country code of user contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of user", example: "\"377334080\"" },
     { name: "email", type: "String", description: "Email address of user", example: "\"yussuf@revenuemonster.my\"" },
-    { name: "avatarUrl", type: "String", description: "Public URL to show user’s avatar", example: "\"https://storage.googleapis.com/rm-prod-asset/img/avatar.png\"" },
-    { name: "status", type: "String", description: "Current status of user", example: "“ACTIVE”" },
-    { name: "SettlementAccountId", type: "Object", description: "Settlement Account ID", example: "[]" },
+    { name: "avatarUrl", type: "String", description: "Public URL to show user's avatar", example: "\"https://storage.googleapis.com/rm-prod-asset/img/avatar.png\"" },
+    { name: "status", type: "String", description: "Current status of user", example: "\"ACTIVE\"" },
+    { name: "settlementAccountId", type: "Object", description: "Settlement account ID", example: "[]" },
     { name: "storeId", type: "Object", description: "Store ID", example: "[]" },
     { name: "isActive", type: "Boolean", description: "User active or deactivated status", example: "true" },
-    { name: "currentStoreId", type: "String", description: "Current Store ID", example: "\"\"" },
+    { name: "currentStoreId", type: "String", description: "Current store ID", example: "\"\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of user", example: "\"2018-02-12T08:53:13Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of user", example: "\"2018-02-12T08:53:13Z\"" }
   ]}
 />
-

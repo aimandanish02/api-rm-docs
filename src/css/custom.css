@@ -17,6 +17,7 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+
 }
 
 .footer.footer--dark {
@@ -302,5 +303,10 @@ details[open]>summary::before {
 .details-inner {
   overflow: hidden;
 }
+
+/* 
+.markdown {
+  font-family: ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace;
+} */
 
 @import "./api-playground.css";

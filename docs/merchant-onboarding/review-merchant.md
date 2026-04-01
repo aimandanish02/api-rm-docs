@@ -13,6 +13,10 @@ api:
     X-Signature: sha256 {{signature}}
     X-Nonce-Str: {{nonce}}
     X-Timestamp: {{timestamp}}
+  body: |
+    {
+      "comment": "Submitting merchant for review"
+    }
 
 examples:
   request: |
@@ -21,9 +25,10 @@ examples:
     --header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMy0xOCIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsiYXBpX2NsaWVudEBFaGNLQzA5QmRYUm9RMnhwWlc1MEVQZUEyYXJ4dk1PSUZnIl0sImV4cCI6MTU5MzU4MDY0NSwiaWF0IjoxNTkwOTg4NjQ1LCJpc3MiOiJodHRwczovL29hdXRoLnJldmVudWVtb25zdGVyLm15IiwianRpIjoiRWh3S0VFOUJkWFJvUVdOalpYTnpWRzlyWlc0UXMtNnI5LVgzbElvVyIsIm5iZiI6MTU5MDk4ODY0NSwic3ViIjoiRWhRS0NFMWxjbU5vWVc1MEVMUF9wNlNKNnFQN0ZSSVFDZ1JWYzJWeUVPaXZfb1dKNnFQN0ZRIn0.RKtXykw3y0ov3mKKa_K2h5FZB2jXtqf3gNRwwnzzA4xTMdY09mEHlFupMeUmchFW2XHYK254LdMYbF4ZhjxK9K51UUdQBYH-zZpo0WWtPSZqrPGtT-c4z_sEO73EDVcek3rDwyWiXvjSKDpsZM7NOdKRm5tvT3qNK-7C7WMUjSXDcBzbTFhwfOAOO1n-wMR9H_w0DuIE-yMjEZkOdt7GUIBC8F5izATlZH0FRTx4VAwQWY4gjjQ9-3PbUbHx-NKiFXwCOAsxu-79PiF0HDEHb6ZOCGywNmKuanEXqLonli0caZiUZfrdT53y3Xnd3W2SEr6s7ZQxWnQO5PeOU7BQYA" \
     --header "X-Signature: sha256 bFGc2JOEFqdI91DE5VXYBUllr+9DHcrrylRFU3i1r72aPmJreljn0dU+nwPSwTH/dTQUiZ9C2aQSF8AuT959EW4WEyEZ6VWgt9gCyZaU/bcOQ/ZIhKc06+uwzivVhAzpbUtG5tm5/sBp4ig6Sk7L6SE0Ecu6Tm0FhYl0qdgZvrTh4EEpLs3kHIuYL9QXKJILfKlu4gTX1Exrt7nNyEr8ndeUMaKYrj3FckMbRtmCwc829SsVp6FAgvoDPnguUJ+VjLF1e9NXhar2JwYjuqMkwsmUWRDbittqCgCCfaPF8anarlLsoXbdYEa7bp9BYp2U/Dw3Xd2MlamEZSR8H+Dosw==" \
     --header "X-Nonce-Str: VYNknZohxwicZMaWbNdBKUrnrxDtaRhN" \
-    --header "X-Timestamp: 1528450585"
-  body: |
-    There is no example body request.
+    --header "X-Timestamp: 1528450585" \
+    --data '{
+      "comment": "Submitting merchant for review"
+    }'
   response: |
     {
       "item": {
@@ -103,55 +108,64 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/partner/merchant/{merchantID}"
 />
 
-
-
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
-
 :::note
+This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
+:::
 
-Submit Merchant for Revenue Monster to Review
+---
 
+### Request Parameters
+
+Pass the `merchantID` as a path parameter in the URL. No request body is required.
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `merchantID` | String | Yes | The ID of the merchant to submit for review. Pass it in the URL path. |
+
+---
 
 ### Response Parameters
 
 <ParamTable
+  title="Response"
   rows={[
-    { name: "item", type: "Object", example: "(Refer to explanation below)" },
-    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+    { name: "item", type: "Object", description: "Contains the settlement/merchant details.", example: "(See below)" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the call succeeded. Otherwise returns an error code object. See Appendix 1: Error Codes.", example: "\"SUCCESS\"" }
   ]}
 />
-<br/>
 
-<strong>Item Object :</strong>
+---
+
+**Settlement object (item):**
 
 <ParamTable
+  title="Details"
   rows={[
-    { name: "id", type: "String", description: "Store ID", example: "\"1629258558902992793\"" },
-    { name: "MerchantId", type: "String", description: "Merchant ID", example: "\"1629258448138509563\"" },
-    { name: "isDefault", type: "bool", description: "Default Settlement", example: "true" },
+    { name: "id", type: "String", description: "Settlement ID", example: "\"1629258558902992793\"" },
+    { name: "merchantId", type: "String", description: "Merchant ID", example: "\"1629258448138509563\"" },
+    { name: "isDefault", type: "Bool", description: "Whether this is the default settlement account", example: "true" },
     { name: "companyName", type: "String", description: "Company name of merchant", example: "\"REVENUE MONSTER\"" },
     { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"SOLE PROPRIETOR\"" },
-    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "“12344”" },
+    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "\"12344\"" },
     { name: "businessCategory", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "businessScope", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "sourceOfFunds", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "customerOrigin", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
+    { name: "businessScope", type: "String", description: "Business scope of merchant", example: "\"SOFTWARE AND IT\"" },
+    { name: "sourceOfFunds", type: "String", description: "Source of funds of merchant", example: "\"\"" },
+    { name: "customerOrigin", type: "String", description: "Customer origin of merchant", example: "\"\"" },
     { name: "establishedAt", type: "DateTime", description: "Established date time of merchant", example: "\"2018-03-26T04:50:57Z\"" },
     { name: "countryCode", type: "String", description: "Country code of merchant contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of merchant", example: "\"377334080\"" },
     { name: "addressLine1", type: "String", description: "Address 1 of merchant", example: "\"20, JALAN JASA 38, TAMAN MUTIARA RINI\"" },
     { name: "addressLine2", type: "String", description: "Address 2 of merchant", example: "\"\"" },
-    { name: "postcode", type: "String", description: "Postcode of merchant", example: "“81300”" },
+    { name: "postcode", type: "String", description: "Postcode of merchant", example: "\"81300\"" },
     { name: "city", type: "String", description: "City of merchant", example: "\"Selangor\"" },
     { name: "state", type: "String", description: "State of merchant", example: "\"Selangor\"" },
     { name: "country", type: "String", description: "Country of merchant", example: "\"Malaysia\"" },
     { name: "isSameBusinessAddress", type: "Boolean", example: "false" },
-    { name: "invoiceAddress", type: "String (nullable)", example: "null" },
-    { name: "inspectList", type: "String (nullable)", example: "null" },
-    { name: "status", type: "String", description: "Current status of merchant", example: "“REVIEWING”" },
-    { name: "document", type: "Object", example: "Refer Below" },
-    { name: "documentFile", type: "Object", example: "Refer Below" },
+    { name: "invoiceAddress", type: "Object (nullable)", example: "null" },
+    { name: "inspectList", type: "Object (nullable)", example: "null" },
+    { name: "status", type: "String", description: "Current status of settlement. Changes to \"REVIEWING\" after submission.", example: "\"REVIEWING\"" },
+    { name: "document", type: "Object", description: "Uploaded document URLs. See document object below.", example: "(See below)" },
+    { name: "documentFile", type: "Object", description: "Uploaded document files. See documentFile object below.", example: "(See below)" },
     { name: "bankAccountNo", type: "String", example: "\"\"" },
     { name: "bankAccountType", type: "String", example: "\"\"" },
     { name: "bankAccountHolderName", type: "String", example: "\"\"" },
@@ -160,8 +174,53 @@ Submit Merchant for Revenue Monster to Review
     { name: "averageTicketSize", type: "Uint", example: "0" },
     { name: "averageTurnoverPerMonth", type: "Uint", example: "0" },
     { name: "paymentSubscription", type: "String", example: "\"\"" },
-    { name: "createdAt", type: "DateTime", description: "Creation date time of merchant", example: "\"2021-02-12T08:53:13Z\"" },
-    { name: "updatedAt", type: "DateTime", description: "Last update date time of merchant", example: "\"2021-02-12T08:53:13Z\"" }
+    { name: "createdAt", type: "DateTime", description: "Creation date time of settlement", example: "\"2021-08-18T14:33:49Z\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update date time of settlement", example: "\"2021-08-18T14:33:49Z\"" }
   ]}
 />
-<br/>
+
+---
+
+**document object:**
+
+<ParamTable
+  title="Details"
+  rows={[
+    { name: "ctosFileUrl", type: "String", example: "\"\"" },
+    { name: "ownerICFileUrl", type: "String", example: "\"\"" },
+    { name: "directorICFileUrl", type: "String", example: "\"\"" },
+    { name: "shareHolderICFileUrl", type: "String", example: "\"\"" },
+    { name: "businessRegistrationFileUrl", type: "String", example: "\"\"" },
+    { name: "bankStatementFileUrl", type: "String", example: "\"\"" },
+    { name: "moaFileUrl", type: "String", example: "\"\"" },
+    { name: "form24FileUrl", type: "String", example: "\"\"" },
+    { name: "form49FileUrl", type: "String", example: "\"\"" },
+    { name: "section14FileUrl", type: "String", example: "\"\"" },
+    { name: "form44FileUrl", type: "String", example: "\"\"" },
+    { name: "businessSitePhotoFileUrl", type: "String", example: "\"\"" },
+    { name: "essmDocumentFileUrl", type: "String", example: "\"\"" },
+    { name: "letterOfConsentFileUrl", type: "String", example: "\"\"" }
+  ]}
+/>
+
+---
+
+**documentFile object:**
+
+<ParamTable
+  title="Details"
+  rows={[
+    { name: "CTOSFileURL", type: "String (nullable)", example: "null" },
+    { name: "OwnerICFileURL", type: "String (nullable)", example: "null" },
+    { name: "DirectorICFileURL", type: "String (nullable)", example: "null" },
+    { name: "ShareHolderICFileURL", type: "String (nullable)", example: "null" },
+    { name: "BusinessRegistrationFileURL", type: "String (nullable)", example: "null" },
+    { name: "BankStatementFileURL", type: "String (nullable)", example: "null" },
+    { name: "MOAFileURL", type: "String (nullable)", example: "null" },
+    { name: "Form24FileURL", type: "String (nullable)", example: "null" },
+    { name: "Form49FileURL", type: "String (nullable)", example: "null" },
+    { name: "Section14FileURL", type: "String (nullable)", example: "null" },
+    { name: "Form44FileURL", type: "String (nullable)", example: "null" },
+    { name: "BusinessSitePhotoFileURL", type: "String (nullable)", example: "null" }
+  ]}
+/>

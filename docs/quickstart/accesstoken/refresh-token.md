@@ -7,10 +7,8 @@ api:
   url:
     sandbox: https://sb-oauth.revenuemonster.my/v1/token
     prod: https://oauth.revenuemonster.my/v1/token
-
   requiresSignature: false
   requiresAccessToken: false
-
   headers:
     Content-Type: application/json
     Authorization: Basic <BASE64_CLIENT_ID_AND_SECRET>
@@ -19,23 +17,20 @@ api:
       "grantType": "refresh_token",
       "refreshToken": "YOUR_REFRESH_TOKEN"
     }
-
 examples:
   request: |
     curl --location --request POST "https://sb-oauth.revenuemonster.my/v1/token" \
       --header "Content-Type: application/json" \
       --header "Authorization: Basic MTM5NjMxNzEzNjIyMzY4MzExMjpEWGxaTWpQem96dXh2Z2JRRmtYWmFDcnFoRmliS3B4ZQ==" \
-      --data "{
-      \"grantType\": \"refresh_token\",
-      \"refreshToken\": \"OgoHjoZyLZPnHemifOrHIwStdeyzKuFoDaJBtBRULxEIJgANlhsLgFuBFiVTtqiQgmYDOTBkakwXZWfcLqXQTUTiqCpQTAEVHuqshWdiuvtGMIYztLiVfEmLEoXNlALi\"
-    }"
-  body: |
-    There is no example body request.
+      --data '{
+        "grantType": "refresh_token",
+        "refreshToken": "OgoHjoZyLZPnHemifOrHIwStdeyzKuFoDaJBtBRULxEIJgANlhsLgFuBFiVTtqiQgmYDOTBkakwXZWfcLqXQTUTiqCpQTAEVHuqshWdiuvtGMIYztLiVfEmLEoXNlALi"
+      }'
   response: |
     {
-      "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiYXBpX2NsaWVudEBFaGNLQzA5QmRYUm9RMnhwWlc1MEVJbmVpOW5mbE9DN0ZRIl0sImV4cCI6MjM0NDQyOTc0OSwiaWF0IjoxNTU2MDI5NzQ5LCJpc3MiOiJodHRwczovL3NiLW9hdXRoLnJldmVudWVtb25zdGVyLm15IiwianRpIjoiRWh3S0VFOUJkWFJvUVdOalpYTnpWRzlyWlc0UXJ1dkxrSUthaU13ViIsIm5iZiI6MTU1NjAyOTc0OSwic3ViIjoiRWhRS0NFMWxjbU5vWVc1MEVKWFZ6ZDN3cmFxVE9SSVFDZ1JWYzJWeUVJeUpxSXp2eU1QVmNRIn0.PL3u_qTOw1c51HWNJsgTVDQBIZssLMRT2Nuo95_qyHHRTOhYz_LPtFdnICabU8P77lBOtZR5rMTuw3jzFFUopu3mCfT6ULzLtbBMVtlwXRdAZAw-kecYIhG5AmkT7H7Iwskvpitkqp1G31xb6PPOEhNTiO3iUY_Q-o3lsjn8uAWdDn7oXdWSmTMCI-1Mo0eYpWIQxsMI6HdQKXzhn1NELE1zvedyUhb6syw3oIocL7yll2eMg_LcYMdTOh26Ae614an8m7zSxgSBydwMHC0gjf7mzYEgqUzJ0M7zg_-vHy67u5UrysXQXDx-1MVHXaetzh3RriCR0R0_qESnIge3SQ",
+      "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ...",
       "tokenType": "Bearer",
-      "expiresIn": 72591999,
+      "expiresIn": 2591999,
       "refreshToken": "XtBwKribhoPsoEbhHnLNJSjkSuskqsRIpTnvVxmOTyQhenqlgGQisbtbpcjcapmhPEaHrJZVbPGvkvaTwWozamuCBUfvWdWQzHJSnjpuurEACugOZssEpUffUSDoSxLz",
       "refreshTokenExpiresIn": 1576799999
     }
@@ -49,74 +44,81 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v1/token"
 />
 
+## Refresh an Access Token
 
+:::note
+Use this endpoint to exchange a refresh token for a new access token. You should do this when:
 
+- The access token has expired (~30 days)
+- The access token has been compromised and needs to be rotated
 
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
-
-:::note Refresh token is used to get new access token
-
-- When Access Token has expired (29 days)
-- Access token is compromised/hacked/stolen/destroyed
-
-In case you lost your refresh token or do not want to deal with refresh token, you may opt to get new access token/refresh token using client credentials again. But this is not a suggested practice. (You don't want your clientid/clientsecret always exposed in network traffic. That is why you should use refresh tokens.)
-
+Avoid re-authenticating with your `clientId` and `clientSecret` on every request — refresh tokens exist to keep those credentials out of frequent network traffic.
 :::
 
-### Step 1 : Get Client ID and Client Secret
+A refresh token is returned alongside the access token when you first authenticate via [Client Credentials](./client-credentials) or [Authorization Code](./authorization-code). Store both tokens securely.
 
-To get your **Client ID** and **Client Secret** , go to [RM Merchant Portal](https://merchant.revenuemonster.my/) > **Developer** > **Application**
+---
+
+### Step 1: Get Your Client ID and Client Secret
+
+Go to [RM Merchant Portal](https://merchant.revenuemonster.my/) > **Developer** > **Application**.
 
 <ParamTable
-  title="Details"
+  title="Credentials"
   rows={[
-    { name: "ClientID", type: "String", required: true, description: "Client ID or AppID as obtained from RM Merchant Portal.", example: "3208919753194101125" },
-    { name: "ClientSecret", type: "String", required: true, description: "Client secret or AppSecret as obtained from RM Merchant Portal.", example: "mglve4W3UhPSGOV7gnwoYKyvbRCe83zZ" }
+    { name: "clientId", type: "String", required: true, description: "Your application's Client ID from the Merchant Portal.", example: "3208919753194101125" },
+    { name: "clientSecret", type: "String", required: true, description: "Your application's Client Secret from the Merchant Portal.", example: "mglve4W3UhPSGOV7gnwoYKyvbRCe83zZ" }
   ]}
 />
 
+---
 
-### Step 2 : Encode the parameters from Step 1 in Base 64 format
+### Step 2: Base64-encode Your Credentials
 
-Structure: <br />
-`clientID`:`clientSecret`
+Concatenate your `clientId` and `clientSecret` with a colon, then Base64-encode the result.
 
-Example: <br />
-Before Base64 encoding: <br />
-`3675930941412424316:wmn7FUauXHdkoYa9182kCMkjGnNJVgin`
+```
+Before encoding:
+3675930941412424316:wmn7FUauXHdkoYa9182kCMkjGnNJVgin
 
-After Base64 encoding: <br />
-`MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==`
+After Base64 encoding:
+MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
+```
 
-### Step 3 : Put the Base64 encoded in Headers
+---
 
-**Content-Type** : application/json <br />
-**Authorization** : Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
+### Step 3: Make the Request
 
-More info: [Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication)
+Include the Base64-encoded credentials in the `Authorization` header, and pass the refresh token in the request body.
 
-**In Body Request** :
+**Headers:**
+
+```
+Content-Type: application/json
+Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
+```
+
+**Body:**
 
 <ParamTable
-  title="Details"
+  title="Request Body"
   rows={[
-    { name: "grantType", type: "String", required: true, description: "Only support refresh_token", example: "refresh_token" },
-    { name: "refreshToken", type: "String", required: true, description: "Refresh token is obtained from response parameter when access token is generated.", example: "Random String" }
+    { name: "grantType", type: "String", required: true, description: "Must be set to \"refresh_token\".", example: "\"refresh_token\"" },
+    { name: "refreshToken", type: "String", required: true, description: "The refresh token returned when you last authenticated.", example: "\"OgoHjoZy...\"" }
   ]}
 />
 
+---
 
-### Response Parameters
+## Response Parameters
 
 <ParamTable
-  title="Response Parameters"
+  title="Response"
   rows={[
-    { name: "accessToken", type: "String", description: "Required for subsequent request(s)", example: "Access Token" },
-    { name: "tokenType", type: "String", description: "We only support “Bearer” type", example: "Bearer" },
-    { name: "expiresIn", type: "String", description: "Token expiry, in seconds format. “72591999” means 72591999 seconds or 30 day", example: "72591999" },
-    { name: "refreshToken", type: "String", description: "Required for getting new access token after expiry", example: "Refresh token string" },
-    { name: "refreshTokenExpiresIn", type: "String", description: "Token expiry, in seconds format. “1576799999” means 1576799999 seconds", example: "1576799999" }
+    { name: "accessToken", type: "String", description: "New Bearer token to use in subsequent API requests.", example: "eyJhbGci..." },
+    { name: "tokenType", type: "String", description: "Token scheme. Always \"Bearer\".", example: "\"Bearer\"" },
+    { name: "expiresIn", type: "Number", description: "New access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
+    { name: "refreshToken", type: "String", description: "A new refresh token. Replace your stored refresh token with this value.", example: "XtBwKrib..." },
+    { name: "refreshTokenExpiresIn", type: "Number", description: "New refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
   ]}
 />
-

@@ -94,8 +94,6 @@ examples:
         "terminalOfflineCreditCard": false,
         "onlineCreditCard": false
     }'
-  body: |
-    There is no example body request.
   response: |
     {
       "item": {
@@ -195,253 +193,248 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/partner/merchant/{merchantID}"
 />
 
-
-
-
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
-
 :::note
-Update Merchant By ID
+This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
+---
+
 ### Request Parameters
+
+Pass the merchant ID as a path parameter in the URL.
 
 <ParamTable
   title="Request Parameters"
   rows={[
-    { name: "brandName", type: "String", example: "\"\"" },
-    { name: "websiteURL", type: "String", example: "\"\"" },
-    { name: "registrationNumber", type: "String", example: "\"\"" },
-    { name: "establishedAt", type: "DateTime", example: "\"\"" },
-    { name: "addressLine1", type: "String", example: "\"\"" },
-    { name: "addressLine2", type: "String", example: "\"\"" },
-    { name: "postCode", type: "String", example: "\"\"" },
-    { name: "city", type: "String", example: "\"\"" },
-    { name: "state", type: "String", example: "\"\"" },
-    { name: "countryCode", type: "String", example: "\"\"" },
-    { name: "phoneNumber", type: "String", example: "\"\"" },
-    { name: "companyName", type: "String", example: "\"\"" },
-    { name: "companyType", type: "String", example: "\"\"" },
-    { name: "businessCategory", type: "String", example: "\"\"" },
-    { name: "averageTicketSize", type: "String", example: "\"\"" },
-    { name: "averageTurnoverPerMonth", type: "String", example: "\"\"" },
-    { name: "businessScope", type: "String", example: "\"\"" },
-    { name: "invoiceAddress", type: "Object (nullable)", example: "Refer Below" },
-    { name: "document", type: "Object", example: "Refer Below" },
-    { name: "inspectList", type: "Array (nullable)", example: "Refer Below" },
-    { name: "bankAccountType", type: "String", example: "\"\"" },
-    { name: "bankAccountHolderName", type: "String", example: "\"\"" },
-    { name: "bankAccountNo", type: "String", example: "\"\"" },
-    { name: "bankCode", type: "String", example: "\"\"" },
-    { name: "latitude", type: "Float", example: "\"\"" },
-    { name: "longitude", type: "Float", example: "\"\"" },
-    { name: "paymentSubscription", type: "String", example: "\"\"" },
-    { name: "terminalOfflineEWallet", type: "String", example: "\"\"" },
-    { name: "terminalOfflineCreditCard", type: "String", example: "\"\"" },
-    { name: "onlineCreditCard", type: "String", example: "\"\"" }
+    { name: "brandName", type: "String", example: "\"Revenue Monster\"" },
+    { name: "websiteUrl", type: "String", example: "\"https://revenuemonster.my\"" },
+    { name: "registrationNumber", type: "String", example: "\"XAS1233123\"" },
+    { name: "establishedAt", type: "DateTime", example: "\"2006-01-02T15:04:05Z\"" },
+    { name: "addressLine1", type: "String", example: "\"1, Jalan Pertanian 25\"" },
+    { name: "addressLine2", type: "String", example: "\"Taman Universiti\"" },
+    { name: "postCode", type: "String", example: "\"81300\"" },
+    { name: "city", type: "String", example: "\"SKUDAI\"" },
+    { name: "state", type: "String", example: "\"JOHOR\"" },
+    { name: "country", type: "String", example: "\"MALAYSIA\"" },
+    { name: "countryCode", type: "String", example: "\"60\"" },
+    { name: "phoneNumber", type: "String", example: "\"187824152\"" },
+    { name: "companyName", type: "String", example: "\"Revenue Monster\"" },
+    { name: "companyType", type: "String", example: "\"PRIVATE LIMITED COMPANY (SDN BHD)\"" },
+    { name: "businessCategory", type: "String", example: "\"COMPUTER AND ELECTRONICS\"" },
+    { name: "averageTicketSize", type: "Uint", example: "1000000" },
+    { name: "averageTurnoverPerMonth", type: "Uint", example: "1000000" },
+    { name: "businessScope", type: "String", example: "\"some business scope\"" },
+    { name: "invoiceAddress", type: "Object (nullable)", description: "See invoiceAddress object below.", example: "(Refer below)" },
+    { name: "document", type: "Object", description: "See document object below.", example: "(Refer below)" },
+    { name: "inspectList", type: "Array (nullable)", description: "See inspectList object below.", example: "(Refer below)" },
+    { name: "bankAccountType", type: "String", example: "\"CORPORATE\"" },
+    { name: "bankAccountHolderName", type: "String", example: "\"Revenue Monster\"" },
+    { name: "bankAccountNo", type: "String", example: "\"32312323\"" },
+    { name: "bankCode", type: "String", example: "\"HLBB\"" },
+    { name: "latitude", type: "Float", example: "0.0" },
+    { name: "longitude", type: "Float", example: "0.0" },
+    { name: "paymentSubscription", type: "String", example: "\"BOTH\"" },
+    { name: "terminalOfflineEWallet", type: "Bool", example: "false" },
+    { name: "terminalOfflineCreditCard", type: "Bool", example: "false" },
+    { name: "onlineCreditCard", type: "Bool", example: "false" }
   ]}
 />
 
+---
 
-<br/>
-
-<strong>invoiceAddress (parameter) :</strong>
+**invoiceAddress object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "addressLine1", type: "String", description: "AddressLine1", example: "\"\"" },
-    { name: "addressLine2", type: "String", description: "AddressLine2", example: "\"\"" },
-    { name: "postCode", type: "String", description: "Customer Remark", example: "\"\"" },
-    { name: "city", type: "String", description: "City", example: "\"\"" },
-    { name: "state", type: "String", description: "Address State", example: "\"\"" },
-    { name: "country", type: "String", description: "Country", example: "\"\"" }
+    { name: "addressLine1", type: "String", description: "Address line 1", example: "\"1, Jalan Pertanian 25\"" },
+    { name: "addressLine2", type: "String", description: "Address line 2", example: "\"Taman Universiti\"" },
+    { name: "postCode", type: "String", description: "Postcode", example: "\"81300\"" },
+    { name: "city", type: "String", description: "City", example: "\"SKUDAI\"" },
+    { name: "state", type: "String", description: "State", example: "\"JOHOR\"" },
+    { name: "country", type: "String", description: "Country", example: "\"MALAYSIA\"" }
   ]}
 />
 
+---
 
-<br/>
-
-<strong>inspectList (parameter) :</strong>
+**inspectList object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "fullName", type: "String", example: "\"\"" },
+    { name: "fullName", type: "String", example: "\"NG SZE CHEN\"" },
     { name: "email", type: "String", example: "\"\"" },
     { name: "position", type: "String", example: "\"\"" },
-    { name: "countryCode", type: "String", example: "\"\"" },
+    { name: "countryCode", type: "String", example: "\"60\"" },
     { name: "phoneNumber", type: "String", example: "\"\"" },
-    { name: "gender", type: "String", example: "\"\"" },
-    { name: "birthday", type: "String", example: "\"\"" },
-    { name: "nationality", type: "String", example: "\"\"" },
-    { name: "iDType", type: "String", example: "\"\"" },
-    { name: "iDNo", type: "String", example: "\"\"" },
+    { name: "gender", type: "String", example: "\"MALE\"" },
+    { name: "birthday", type: "DateTime", example: "\"1999-07-14T15:59:59Z\"" },
+    { name: "nationality", type: "String", example: "\"MALAYSIAN\"" },
+    { name: "iDType", type: "String", example: "\"IC\"" },
+    { name: "iDNo", type: "String", example: "\"2131290134\"" },
     { name: "beginDateTime", type: "String", example: "\"\"" },
     { name: "endDateTime", type: "String", example: "\"\"" }
   ]}
 />
 
+---
 
-<br/>
-<strong>document (parameter) :</strong>
+**document object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "ctosFileUrl", type: "String", example: "\"\"" },
-    { name: "ownerICFileUrl", type: "String", example: "\"\"" },
-    { name: "directorICFileUrl", type: "String", example: "\"\"" },
-    { name: "shareHolderICFileUrl", type: "String", example: "\"\"" },
-    { name: "businessRegistrationFileUrl", type: "String", example: "\"\"" },
-    { name: "bankStatementFileUrl", type: "String", example: "\"\"" },
-    { name: "moaFileUrl", type: "String", example: "\"\"" },
-    { name: "form24FileUrl", type: "String", example: "\"\"" },
-    { name: "form49FileUrl", type: "String", example: "\"\"" },
-    { name: "section14FileUrl", type: "String", example: "\"\"" },
-    { name: "form44FileUrl", type: "String", example: "\"\"" },
-    { name: "businessSitePhotoFileUrl", type: "String", example: "\"\"" }
+    { name: "ctosFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "ownerICFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "directorICFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "shareHolderICFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "businessRegistrationFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "bankStatementFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "moaFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "form24FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "form49FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "section14FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "form44FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "businessSitePhotoFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" }
   ]}
 />
 
+---
 
 ### Response Parameters
 
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "item", type: "Object", example: "(Refer to explanation below)" },
-    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+    { name: "item", type: "Object", description: "The updated settlement record.", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the call succeeded. Otherwise returns an error code object. See Appendix 1: Error Codes.", example: "\"SUCCESS\"" }
   ]}
 />
 
+---
 
-<br/>
-<strong>Item Object :</strong>
+**Settlement object (item):**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "id", type: "String", description: "Store ID", example: "\"1629258558902992793\"" },
-    { name: "MerchantId", type: "String", description: "Merchant ID", example: "\"1629258448138509563\"" },
-    { name: "isDefault", type: "bool", description: "Default Settlement", example: "true" },
+    { name: "id", type: "String", description: "Settlement ID", example: "\"1629258558902992793\"" },
+    { name: "merchantId", type: "String", description: "Merchant ID", example: "\"1629258448138509563\"" },
+    { name: "isDefault", type: "Bool", description: "Whether this is the default settlement account", example: "true" },
     { name: "companyName", type: "String", description: "Company name of merchant", example: "\"REVENUE MONSTER\"" },
-    { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"SOLE PROPRIETOR\"" },
-    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "“12344”" },
+    { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"PRIVATE LIMITED COMPANY (SDN BHD)\"" },
+    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "\"12344\"" },
     { name: "businessCategory", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "businessScope", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "sourceOfFunds", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "customerOrigin", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "establishedAt", type: "DateTime", description: "Established date time of merchant", example: "\"2018-03-26T04:50:57Z\"" },
+    { name: "businessScope", type: "String", description: "Business scope of merchant", example: "\"some business scope\"" },
+    { name: "sourceOfFunds", type: "String", description: "Source of funds of merchant", example: "\"\"" },
+    { name: "customerOrigin", type: "String", description: "Customer origin of merchant", example: "\"\"" },
+    { name: "establishedAt", type: "DateTime", description: "Established date time of merchant", example: "\"2006-01-02T15:04:05Z\"" },
     { name: "countryCode", type: "String", description: "Country code of merchant contact number", example: "\"60\"" },
-    { name: "phoneNumber", type: "String", description: "Phone number of merchant", example: "\"377334080\"" },
-    { name: "addressLine1", type: "String", description: "Address 1 of merchant", example: "\"20, JALAN JASA 38, TAMAN MUTIARA RINI\"" },
-    { name: "addressLine2", type: "String", description: "Address 2 of merchant", example: "\"\"" },
-    { name: "postcode", type: "String", description: "Postcode of merchant", example: "“81300”" },
-    { name: "city", type: "String", description: "City of merchant", example: "\"Selangor\"" },
-    { name: "state", type: "String", description: "State of merchant", example: "\"Selangor\"" },
-    { name: "country", type: "String", description: "Country of merchant", example: "\"Malaysia\"" },
+    { name: "phoneNumber", type: "String", description: "Phone number of merchant", example: "\"187824152\"" },
+    { name: "addressLine1", type: "String", description: "Address 1 of merchant", example: "\"1, Jalan Pertanian 25\"" },
+    { name: "addressLine2", type: "String", description: "Address 2 of merchant", example: "\"Taman Universiti\"" },
+    { name: "postcode", type: "String", description: "Postcode of merchant", example: "\"81300\"" },
+    { name: "city", type: "String", description: "City of merchant", example: "\"SKUDAI\"" },
+    { name: "state", type: "String", description: "State of merchant", example: "\"JOHOR\"" },
+    { name: "country", type: "String", description: "Country of merchant", example: "\"MALAYSIA\"" },
     { name: "isSameBusinessAddress", type: "Boolean", example: "false" },
-    { name: "invoiceAddress", type: "Object (nullable)", example: "Refer Below" },
-    { name: "inspectList", type: "Array (nullable)", example: "Refer Below" },
-    { name: "status", type: "String", description: "Current status of merchant", example: "“REVIEWING”" },
-    { name: "document", type: "Object", example: "Refer Below" },
-    { name: "documentFile", type: "Object", example: "Refer Below" },
-    { name: "bankAccountNo", type: "String", example: "\"\"" },
-    { name: "bankAccountType", type: "String", example: "\"\"" },
-    { name: "bankAccountHolderName", type: "String", example: "\"\"" },
-    { name: "bankName", type: "String", example: "\"\"" },
-    { name: "bankCode", type: "String", example: "\"\"" },
+    { name: "invoiceAddress", type: "Object (nullable)", description: "See invoiceAddress object below.", example: "(Refer below)" },
+    { name: "inspectList", type: "Array (nullable)", description: "See inspectList object below.", example: "(Refer below)" },
+    { name: "status", type: "String", description: "Current status of settlement", example: "\"UNVERIFIED\"" },
+    { name: "document", type: "Object", description: "See document object below.", example: "(Refer below)" },
+    { name: "documentFile", type: "Object", description: "See documentFile object below.", example: "(Refer below)" },
+    { name: "bankAccountNo", type: "String", example: "\"32312323\"" },
+    { name: "bankAccountType", type: "String", example: "\"CORPORATE\"" },
+    { name: "bankAccountHolderName", type: "String", example: "\"Revenue Monster\"" },
+    { name: "bankName", type: "String", example: "\"HONG LEONG BANK\"" },
+    { name: "bankCode", type: "String", example: "\"HLBB\"" },
     { name: "averageTicketSize", type: "Uint", example: "0" },
     { name: "averageTurnoverPerMonth", type: "Uint", example: "0" },
     { name: "paymentSubscription", type: "String", example: "\"\"" },
-    { name: "createdAt", type: "DateTime", description: "Creation date time of merchant", example: "\"2021-02-12T08:53:13Z\"" },
-    { name: "updatedAt", type: "DateTime", description: "Last update date time of merchant", example: "\"2021-02-12T08:53:13Z\"" }
+    { name: "createdAt", type: "DateTime", description: "Creation date time of settlement", example: "\"2021-06-02T14:37:25+08:00\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update date time of settlement", example: "\"2021-06-02T14:37:25+08:00\"" }
   ]}
 />
 
+---
 
-<br/>
-
-<strong>invoiceAddress (parameter) :</strong>
+**invoiceAddress object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "addressLine1", type: "String", description: "AddressLine1", example: "\"\"" },
-    { name: "addressLine2", type: "String", description: "AddressLine2", example: "\"\"" },
-    { name: "postCode", type: "String", description: "Customer Remark", example: "\"\"" },
-    { name: "city", type: "String", description: "City", example: "\"\"" },
-    { name: "state", type: "String", description: "Address State", example: "\"\"" },
-    { name: "country", type: "String", description: "Country", example: "\"\"" }
+    { name: "addressLine1", type: "String", description: "Address line 1", example: "\"1, Jalan Pertanian 25\"" },
+    { name: "addressLine2", type: "String", description: "Address line 2", example: "\"Taman Universiti\"" },
+    { name: "postcode", type: "String", description: "Postcode", example: "\"81300\"" },
+    { name: "city", type: "String", description: "City", example: "\"SKUDAI\"" },
+    { name: "state", type: "String", description: "State", example: "\"JOHOR\"" },
+    { name: "country", type: "String", description: "Country", example: "\"MALAYSIA\"" }
   ]}
 />
 
+---
 
-<br/>
-
-<strong>inspectList (parameter) :</strong>
+**inspectList object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "fullName", type: "String", example: "\"\"" },
+    { name: "fullName", type: "String", example: "\"NG SZE CHEN\"" },
     { name: "email", type: "String", example: "\"\"" },
     { name: "position", type: "String", example: "\"\"" },
-    { name: "countryCode", type: "String", example: "\"\"" },
+    { name: "countryCode", type: "String", example: "\"60\"" },
     { name: "phoneNumber", type: "String", example: "\"\"" },
-    { name: "gender", type: "String", example: "\"\"" },
-    { name: "birthday", type: "String", example: "\"\"" },
-    { name: "nationality", type: "String", example: "\"\"" },
-    { name: "iDType", type: "String", example: "\"\"" },
-    { name: "iDNo", type: "String", example: "\"\"" },
-    { name: "beginDateTime", type: "String", example: "\"\"" },
-    { name: "endDateTime", type: "String", example: "\"\"" }
+    { name: "gender", type: "String", example: "\"MALE\"" },
+    { name: "birthday", type: "DateTime", example: "\"1999-07-14T15:59:59Z\"" },
+    { name: "nationality", type: "String", example: "\"MALAYSIAN\"" },
+    { name: "idType", type: "String", example: "\"IC\"" },
+    { name: "idNo", type: "String", example: "\"2131290134\"" },
+    { name: "beginAt", type: "String", example: "\"\"" },
+    { name: "endAt", type: "String", example: "\"\"" }
   ]}
 />
 
+---
 
-<br/>
-<strong>document (parameter) :</strong>
+**document object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "ctosFileUrl", type: "String", example: "\"\"" },
-    { name: "ownerICFileUrl", type: "String", example: "\"\"" },
-    { name: "directorICFileUrl", type: "String", example: "\"\"" },
-    { name: "shareHolderICFileUrl", type: "String", example: "\"\"" },
-    { name: "businessRegistrationFileUrl", type: "String", example: "\"\"" },
-    { name: "bankStatementFileUrl", type: "String", example: "\"\"" },
-    { name: "moaFileUrl", type: "String", example: "\"\"" },
-    { name: "form24FileUrl", type: "String", example: "\"\"" },
-    { name: "form49FileUrl", type: "String", example: "\"\"" },
-    { name: "section14FileUrl", type: "String", example: "\"\"" },
-    { name: "form44FileUrl", type: "String", example: "\"\"" },
-    { name: "businessSitePhotoFileUrl", type: "String", example: "\"\"" }
+    { name: "ctosFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "ownerICFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "directorICFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "shareHolderICFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "businessRegistrationFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "bankStatementFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "moaFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "form24FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "form49FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "section14FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "form44FileUrl", type: "String", example: "\"https://somefileendpoint.com\"" },
+    { name: "businessSitePhotoFileUrl", type: "String", example: "\"https://somefileendpoint.com\"" }
   ]}
 />
 
+---
 
-<br/>
-<strong>documentFile (parameter) :</strong>
+**documentFile object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "CTOSFileURL", type: "String", example: "\"\"" },
-    { name: "OwnerICFileURL", type: "String", example: "\"\"" },
-    { name: "DirectorICFileURL", type: "String", example: "\"\"" },
-    { name: "ShareHolderICFileURL", type: "String", example: "\"\"" },
-    { name: "BusinessRegistrationFileURL", type: "String", example: "\"\"" },
-    { name: "BankStatementFileURL", type: "String", example: "\"\"" },
-    { name: "MOAFileURL", type: "String", example: "\"\"" },
-    { name: "Form24FileURL", type: "String", example: "\"\"" },
-    { name: "Form49FileURL", type: "String", example: "\"\"" },
-    { name: "Section14FileURL", type: "String", example: "\"\"" },
-    { name: "Form44FileURL", type: "String", example: "\"\"" },
-    { name: "BusinessSitePhotoFileURL", type: "String", example: "\"\"" }
+    { name: "CTOSFileURL", type: "String (nullable)", example: "null" },
+    { name: "OwnerICFileURL", type: "String (nullable)", example: "null" },
+    { name: "DirectorICFileURL", type: "String (nullable)", example: "null" },
+    { name: "ShareHolderICFileURL", type: "String (nullable)", example: "null" },
+    { name: "BusinessRegistrationFileURL", type: "String (nullable)", example: "null" },
+    { name: "BankStatementFileURL", type: "String (nullable)", example: "null" },
+    { name: "MOAFileURL", type: "String (nullable)", example: "null" },
+    { name: "Form24FileURL", type: "String (nullable)", example: "null" },
+    { name: "Form49FileURL", type: "String (nullable)", example: "null" },
+    { name: "Section14FileURL", type: "String (nullable)", example: "null" },
+    { name: "Form44FileURL", type: "String (nullable)", example: "null" },
+    { name: "BusinessSitePhotoFileURL", type: "String (nullable)", example: "null" }
   ]}
 />
-

@@ -5,96 +5,113 @@ sidebar_label: Verify Signature
 ---
 
 :::note
+When RM sends a callback (webhook) to your `notifyUrl`, the response includes an `X-Signature` header. You should verify this signature using the **RM Server Public Key** to confirm the callback genuinely came from Revenue Monster and was not tampered with.
 
-- Verify Signature is used to verify your signature.
-
+You can find the RM Server Public Key in **Merchant Portal > Developer > Applications > Server Public Key**.
 :::
 
 :::important
-
-- <span style={{ color: "black", fontWeight: "bold" }}>Data object</span> needs to be sorted, the <span style={{ color: "black", fontWeight: "bold" }}>Nested object</span> also needs to be sorted.
-
+All JSON keys — including keys inside nested objects — must be sorted **alphabetically** before encoding.
 :::
 
-### Step 1 : Response Parameter
+---
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
+## Verifying a Callback Signature
 
-:::note
+### Step 1: Get the Callback Response Body
 
-- Refer to which API endpoint you are calling , below response parameter is just an **EXAMPLE**
-
-:::
-
-#### Example of Web/Mobile Payment
+When RM calls your `notifyUrl`, the request body will be a JSON object. The following is an example for a Web/Mobile Payment callback:
 
 <ParamTable
   rows={[
-    { name: "item", type: "Object", description: "item object", example: "(Refer to explanation below)" },
-    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+    { name: "item", type: "Object", description: "Response payload", example: "(See below)" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the payment succeeded. Otherwise an error code.", example: "\"SUCCESS\"" }
   ]}
 />
-<br />
-<strong>item Object (item):</strong>
+
+**item object:**
 
 <ParamTable
   rows={[
-    { name: "checkoutId", type: "String", description: "Code to identify web payment url", example: "\"1617985392758071583\"" },
-    { name: "url", type: "String", description: "Example to form checkout URL. Note: to change base URL to desired URL.", example: "\"https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583\"" }
+    { name: "checkoutId", type: "String", description: "Identifier for the checkout session", example: "\"1617985392758071583\"" },
+    { name: "url", type: "String", description: "Checkout URL", example: "\"https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583\"" }
   ]}
 />
-> Example Response
 
 ```json
 {
+  "code": "SUCCESS",
   "item": {
     "checkoutId": "1617985392758071583",
     "url": "https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583"
-  },
-  "code": "SUCCESS"
+  }
 }
 ```
 
-:::important
+---
 
-- Sort the above json key **alphabetically** and make it **compact**
+### Step 2: Base64-encode the Response JSON
 
-:::
+Sort the JSON keys alphabetically (including nested objects), make it compact, then Base64-encode it.
 
-### Step 2 : Encode the data using Base64 format
+**Sorted, compact JSON:**
 
-:::note
+```json
+{"code":"SUCCESS","item":{"checkoutId":"1617985392758071583","url":"https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583"}}
+```
 
-eyJpdGVtIjp7ImNoZWNrb3V0SWQiOiIxNjE3OTg1MzkyNzU4MDcxNTgzIiwidXJsIjoiaHR0cHM6Ly9zYi1wZy5yZXZlbnVlbW9uc3Rlci5teS92Mi9jaGVja291dD9jaGVja291dElkPTE2MTc5ODUzOTI3NTgwNzE1ODMifSwiY29kZSI6IlNVQ0NFU1MifQ==
-:::
+**Base64 result:**
 
-### Step 3: Construct plain text parameters
+```
+eyJjb2RlIjoiU1VDQ0VTUyIsIml0ZW0iOnsiY2hlY2tvdXRJZCI6IjE2MTc5ODUzOTI3NTgwNzE1ODMiLCJ1cmwiOiJodHRwczovL3NiLXBnLnJldmVudWVtb25zdGVyLm15L3YyL2NoZWNrb3V0P2NoZWNrb3V0SWQ9MTYxNzk4NTM5Mjc1ODA3MTU4MyJ9fQ==
+```
 
-:::important
+---
 
-- if the body is empty then the `data` parameter can be skip
-- if it's verifying our callback then the `requestUrl` can be skip
+### Step 3: Construct the Verification String
 
-:::
+Build the same signing string format used for requests. The values of `nonceStr` and `timestamp` come from the **RM callback request headers** (`X-Nonce-Str` and `X-Timestamp`).
 
 <ParamTable
   rows={[
-    { name: "data", type: "String", required: true, description: "Base64 data body from Step 2.", example: "Refer to Step 2" },
-    { name: "method", type: "String", required: true, description: "HTTP call method used", example: "\"post\"" },
-    { name: "nonceStr", type: "String", required: true, description: "Get from Response Header", example: "\"VYNknZohxwicZMaWbNdBKUrnrxDtaRhN\"" },
-    { name: "requestUrl", type: "String", required: true, description: "API URL that you call must be exactly the same, together with URL.", example: "https://sb-open.revenuemonster.my/v3/payment/online" },
-    { name: "signType", type: "String", required: true, description: "Sign Type, prefer SHA-256", example: "\"sha256\"" },
-    { name: "timestamp", type: "String", required: true, description: "Get from Response Header", example: "\"1527407052\"" }
+    { name: "data", type: "String", required: true, description: "Base64-encoded response body from Step 2. Omit if the body is empty.", example: "(See Step 2)" },
+    { name: "method", type: "String", required: true, description: "HTTP method of the callback, lowercase", example: "\"post\"" },
+    { name: "nonceStr", type: "String", required: true, description: "Value of X-Nonce-Str from the RM callback request header.", example: "\"VYNknZohxwicZMaWbNdBKUrnrxDtaRhN\"" },
+    { name: "requestUrl", type: "String", description: "Omit this parameter when verifying a callback — it is not included in the callback signature.", example: "N/A" },
+    { name: "signType", type: "String", required: true, description: "Signing algorithm", example: "\"sha256\"" },
+    { name: "timestamp", type: "String", required: true, description: "Value of X-Timestamp from the RM callback request header.", example: "\"1527407052\"" }
   ]}
 />
-**Example**
-:::note
-data=eyJpdGVtIjp7ImNoZWNrb3V0SWQiOiIxNjE3OTg1MzkyNzU4MDcxNTgzIiwidXJsIjoiaHR0cHM6Ly9zYi1wZy5yZXZlbnVlbW9uc3Rlci5teS92Mi9jaGVja291dD9jaGVja291dElkPTE2MTc5ODUzOTI3NTgwNzE1ODMifSwiY29kZSI6IlNVQ0NFU1MifQ==&#38;method=post&#38;nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&#38;signType=sha256&#38;timestamp=1527407052&#38;requestUrl=https://sb-open.revenuemonster.my/v3/payment/online
 
+:::note
+**Example verification string:**
+
+```
+data=eyJjb2Rl...&method=post&nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&signType=sha256&timestamp=1527407052
+```
+
+Note: `requestUrl` is omitted when verifying callback signatures.
 :::
+
+---
+
+### Step 4: Verify Using the RM Server Public Key
+
+Verify the `X-Signature` header from the RM callback against your constructed string using the **RM Server Public Key**.
 
 :::important
+Use the **RM Server Public Key** (not your own public key) to verify callbacks. Find it in **Merchant Portal > Developer > Applications > Server Public Key**.
 
-- Verify the content string using **public key** ( Can get From Merchant Portal => Developer => Applications => Server public key)
+Wrap it in standard PEM format before use:
 
+```
+-----BEGIN PUBLIC KEY-----
+<server_public_key_content>
+-----END PUBLIC KEY-----
+```
 :::
+
+The verification process:
+1. Extract the signature value from the `X-Signature` header (strip the `sha256 ` prefix).
+2. Verify the signature against your constructed string from Step 3 using the RM Server Public Key and `sha256`.
+3. If verification passes, the callback is authentic. If it fails, discard the request.
