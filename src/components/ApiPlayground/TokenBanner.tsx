@@ -1,5 +1,5 @@
-import React from "react";
-import { tokenExpiryLabel } from "../../utils/auth";
+import React, { useEffect, useState } from "react";
+import { tokenExpiryLabel, deriveTokenStatus } from "../../utils/auth";
 import styles from "./styles.module.css";
 
 export type TokenStatus = "missing" | "expired" | "active";
@@ -10,8 +10,21 @@ type Props = {
   onClear: () => void;
 };
 
+const openModal = () => window.dispatchEvent(new CustomEvent("rm-open-auth"));
+
 export default function TokenBanner({ status, env, onClear }: Props) {
+  const [currentStatus, setCurrentStatus] = useState<TokenStatus>(status);
   const isProd = env === "prod";
+
+  useEffect(() => {
+    setCurrentStatus(status);
+  }, [status]);
+
+  useEffect(() => {
+    const sync = () => setCurrentStatus(deriveTokenStatus());
+    window.addEventListener("rm-auth-changed", sync);
+    return () => window.removeEventListener("rm-auth-changed", sync);
+  }, []);
 
   const ProdWarning = () => (
     <div className={`${styles.banner} ${styles.bannerError}`}>
@@ -23,7 +36,7 @@ export default function TokenBanner({ status, env, onClear }: Props) {
     </div>
   );
 
-  if (status === "active") {
+  if (currentStatus === "active") {
     const label = tokenExpiryLabel();
     return (
       <>
@@ -41,16 +54,18 @@ export default function TokenBanner({ status, env, onClear }: Props) {
     );
   }
 
-  if (status === "expired") {
+  if (currentStatus === "expired") {
     return (
       <>
         {isProd && <ProdWarning />}
         <div className={`${styles.banner} ${styles.bannerError}`}>
           <span className={styles.bannerDot} />
           <span>
-            Access token <strong>expired</strong> — re-run the{" "}
-            <em>Client Credentials</em> endpoint to refresh it
+            Access token <strong>expired</strong>
           </span>
+          <button className={styles.bannerAction} onClick={openModal}>
+            Reconnect ↗
+          </button>
           <button className={styles.bannerAction} onClick={onClear}>
             Clear
           </button>
@@ -64,9 +79,10 @@ export default function TokenBanner({ status, env, onClear }: Props) {
       {isProd && <ProdWarning />}
       <div className={`${styles.banner} ${styles.bannerWarning}`}>
         <span className={styles.bannerDot} />
-        <span>
-          No access token — run the <em>Client Credentials</em> endpoint first
-        </span>
+        <span>No access token</span>
+        <button className={styles.bannerAction} onClick={openModal}>
+          Connect ↗
+        </button>
       </div>
     </>
   );

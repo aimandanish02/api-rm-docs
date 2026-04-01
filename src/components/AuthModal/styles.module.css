@@ -1,0 +1,239 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 420px;
+  max-width: calc(100vw - 2rem);
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 4px;
+  color: var(--ifm-color-content);
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--ifm-color-content-secondary);
+  margin: 0;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--ifm-color-content-secondary);
+  padding: 0;
+  line-height: 1;
+}
+
+.envSwitch {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 1rem;
+}
+
+.envBtn {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-content-secondary);
+  cursor: pointer;
+}
+
+.envActive {
+  background: var(--ifm-color-primary-lightest, #e8f4fd);
+  color: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-lightest, #e8f4fd);
+  border: 1px solid var(--ifm-color-primary-light);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 1rem;
+}
+
+.errorBanner {
+  font-size: 13px;
+  color: var(--ifm-color-danger);
+  background: var(--ifm-color-danger-lightest, #fdecea);
+  border: 1px solid var(--ifm-color-danger-light);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 1rem;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 12px;
+  color: var(--ifm-color-content-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.labelBadge {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-content-secondary);
+}
+
+.input {
+  font-size: 13px;
+  font-family: var(--ifm-font-family-monospace);
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-content);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.textarea {
+  font-size: 12px;
+  font-family: var(--ifm-font-family-monospace);
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  color: var(--ifm-color-content);
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+}
+
+.connectBtn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.connectBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sessionNote {
+  font-size: 11px;
+  color: var(--ifm-color-content-secondary);
+  text-align: center;
+  margin: 0;
+}
+
+.successBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.successIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ifm-color-success-lightest, #edfaf1);
+  color: var(--ifm-color-success);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.successTitle {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--ifm-color-content);
+}
+
+.successDesc {
+  font-size: 13px;
+  color: var(--ifm-color-content-secondary);
+  margin: 0 0 1.25rem;
+}
+
+.doneBtn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  background: var(--ifm-color-primary);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.logoutBtn {
+  width: 100%;
+  padding: 9px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-content-secondary);
+  cursor: pointer;
+  margin-bottom: 8px;
+}

@@ -103,11 +103,18 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
         setTokenStatus(deriveTokenStatus());
     }, [env]);
 
-    useEffect(() => {
-        const check = () => setTokenStatus(deriveTokenStatus());
-        window.addEventListener("focus", check);
-        return () => window.removeEventListener("focus", check);
-    }, []);
+useEffect(() => {
+  const check = () => {
+    setTokenStatus(deriveTokenStatus());
+    setKeyLoaded(hasPrivateKey());
+  };
+  window.addEventListener("focus", check);
+  window.addEventListener("rm-auth-changed", check);
+  return () => {
+    window.removeEventListener("focus", check);
+    window.removeEventListener("rm-auth-changed", check);
+  };
+}, []);
 
     const handleClearToken = () => {
         clearTokenExpiry();

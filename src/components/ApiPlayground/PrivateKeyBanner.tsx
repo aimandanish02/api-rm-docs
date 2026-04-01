@@ -7,6 +7,8 @@ type Props = {
   onClear: () => void;
 };
 
+const openModal = () => window.dispatchEvent(new CustomEvent("rm-open-auth"));
+
 export default function PrivateKeyBanner({ loaded, onLoad, onClear }: Props) {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
@@ -27,12 +29,15 @@ export default function PrivateKeyBanner({ loaded, onLoad, onClear }: Props) {
     <div className={styles.keyPromptWrapper}>
       <div className={`${styles.banner} ${styles.bannerNeutral}`}>
         <span className={styles.bannerDot} />
-        <span>Private key required — paste it once to continue</span>
+        <span>Private key required</span>
+        <button className={styles.bannerAction} onClick={openModal}>
+          Connect ↗
+        </button>
         <button
           className={styles.bannerAction}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "Cancel" : "Paste key ↓"}
+          {open ? "Cancel" : "Paste manually ↓"}
         </button>
       </div>
 
@@ -45,7 +50,7 @@ export default function PrivateKeyBanner({ loaded, onLoad, onClear }: Props) {
           <textarea
             className={`${styles.textarea} ${styles.keyTextarea}`}
             placeholder={
-              "-----BEGIN RSA PRIVATE KEY----- \n...\n-----END RSA PRIVATE KEY-----"
+              "-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----"
             }
             value={draft}
             onChange={(e) => setDraft(e.target.value)}

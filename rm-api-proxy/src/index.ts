@@ -59,12 +59,34 @@ export default {
       return new Response(null, { status: 204, headers: corsHeaders })
     }
 
-    if (request.method === "GET") {
-      return new Response(JSON.stringify({ ok: true }), {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" }
-      })
-    }
+if (request.method === "GET") {
+  return new Response(JSON.stringify({ ok: true }), {
+    status: 200,
+    headers: { ...corsHeaders, "Content-Type": "application/json" }
+  })
+}
+
+if (request.method === "POST") {
+  const urlObj = new URL(request.url)
+  if (urlObj.pathname === "/logout") {
+const cookieParts = [
+  `${TOKEN_COOKIE}=`,
+  "HttpOnly",
+  "Max-Age=0",
+  "Path=/",
+  "Secure",
+  "SameSite=None",
+]
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: {
+        ...corsHeaders,
+        "Content-Type": "application/json",
+        "Set-Cookie": cookieParts.join("; "),
+      }
+    })
+  }
+}
 
     if (request.method !== "POST") {
       return new Response("Method Not Allowed", {
@@ -134,17 +156,14 @@ export default {
           if (token) {
             // On localhost: omit Secure and SameSite=None
             // because HTTP doesn't support Secure cookies
-            const cookieParts = [
-              `${TOKEN_COOKIE}=${token}`,
-              "HttpOnly",
-              `Max-Age=${expiresIn}`,
-              "Path=/",
-            ]
-
-            if (!local) {
-              cookieParts.push("Secure")
-              cookieParts.push("SameSite=None")
-            }
+const cookieParts = [
+  `${TOKEN_COOKIE}=${token}`,
+  "HttpOnly",
+  `Max-Age=${expiresIn}`,
+  "Path=/",
+  "Secure",
+  "SameSite=None",
+]
 
             const cookie = cookieParts.join("; ")
 
