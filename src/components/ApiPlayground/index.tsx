@@ -29,7 +29,7 @@ type Props = {
 
 export default function ApiPlayground({ shared }: Props) {
   const {
-    env, setEnv, hasEnv, baseUrl,
+    baseUrl,
     params, setParams,
     tokenStatus, keyLoaded,
     handleClearToken, handleLoadKey, handleClearKey,
@@ -64,23 +64,6 @@ export default function ApiPlayground({ shared }: Props) {
 
   return (
     <div className={styles.wrapper}>
-      {hasEnv && (
-        <div className={styles.envSwitch}>
-          <button
-            onClick={() => setEnv("sandbox")}
-            className={env === "sandbox" ? styles.activeEnv : ""}
-          >
-            SANDBOX
-          </button>
-          <button
-            onClick={() => setEnv("prod")}
-            className={env === "prod" ? styles.activeEnv : ""}
-          >
-            PROD
-          </button>
-        </div>
-      )}
-
       <div className={styles.header}>
         <span className={`${styles.method} ${styles[method.toLowerCase()]}`}>
           {method}
@@ -108,7 +91,7 @@ export default function ApiPlayground({ shared }: Props) {
       </div>
 
       {requiresAccessToken && (
-        <TokenBanner status={tokenStatus} env={env} onClear={handleClearToken} />
+        <TokenBanner status={tokenStatus} onClear={handleClearToken} />
       )}
       {requiresSignature && (
         <PrivateKeyBanner

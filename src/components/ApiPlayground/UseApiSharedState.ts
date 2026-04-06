@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
     deriveTokenStatus,
     setTokenExpiry,
@@ -12,24 +12,19 @@ import {
 } from "../../utils/privateKey";
 
 export type TokenStatus = "missing" | "expired" | "active";
-export type UrlConfig = string | { sandbox: string; prod: string };
-
 export type PlaygroundProps = {
     method: string;
     title?: string;
-    url?: UrlConfig;
+    url?: string;
     body?: string | { type: "json"; example?: string };
     requiresSignature?: boolean;
     requiresAccessToken?: boolean;
+    useServerSigning?: boolean;
     exampleRequest?: string;
 };
 
 export type SharedState = {
-    env: "sandbox" | "prod";
-    setEnv: (env: "sandbox" | "prod") => void;
-    hasEnv: boolean;
     baseUrl: string;
-    sandboxUrl: string;
     resolvedUrl: string;
     params: Record<string, string>;
     setParams: (p: Record<string, string>) => void;
@@ -67,14 +62,7 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
     const requiresAccessToken = props.requiresAccessToken ?? true;
     const isOAuth = !requiresSignature && !requiresAccessToken;
 
-    const hasEnv = typeof props.url !== "string";
-    const [env, setEnv] = useState<"sandbox" | "prod">("sandbox");
-    const baseUrl =
-        typeof props.url === "string" ? props.url : (props.url as any)?.[env] ?? "";
-    const sandboxUrl =
-        typeof props.url === "string"
-            ? props.url
-            : (props.url as any)?.sandbox ?? "";
+    const baseUrl = typeof props.url === "string" ? props.url : "";
 
     const paramKeys = useMemo(
         () => Array.from(baseUrl.matchAll(/{([^}]+)}/g)).map((m: any) => m[1]),
@@ -93,15 +81,6 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
         () => deriveTokenStatus()
     );
     const [keyLoaded, setKeyLoaded] = useState(hasPrivateKey);
-
-    const prevEnvRef = useRef<"sandbox" | "prod" | null>(null);
-    useEffect(() => {
-        if (prevEnvRef.current === "prod" && env === "sandbox") {
-            clearTokenExpiry();
-        }
-        prevEnvRef.current = env;
-        setTokenStatus(deriveTokenStatus());
-    }, [env]);
 
 useEffect(() => {
   const check = () => {
@@ -231,7 +210,7 @@ useEffect(() => {
             if (requiresAccessToken && tokenStatus !== "active") {
                 missedToken = true;
             }
-            if (requiresSignature) {
+            if (requiresSignature && !props.useServerSigning) {
                 if (hasPrivateKey()) {
                     const { signature, nonce, timestamp } = await signRSA(
                         getPrivateKey(),
@@ -245,6 +224,26 @@ useEffect(() => {
                 } else {
                     missedSignature = true;
                 }
+            }
+
+            if (requiresSignature && props.useServerSigning) {
+                const signRes = await fetch(
+                    "https://rm-api-proxy.aiman-danish.workers.dev/auth/sign",
+                    {
+                        method: "POST",
+                        credentials: "include",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            method: props.method,
+                            url: resolvedUrl,
+                            body: requestBody,
+                        }),
+                    }
+                );
+                const signData = await signRes.json();
+                finalHeaders["X-Timestamp"] = signData.timestamp;
+                finalHeaders["X-Nonce-Str"] = signData.nonceStr;
+                finalHeaders["X-Signature"] = `sha256 ${signData.signature}`;
             }
         }
 
@@ -287,10 +286,11 @@ useEffect(() => {
 
     const notReady =
         (requiresAccessToken && tokenStatus !== "active") ||
-        (requiresSignature && !keyLoaded);
+        (requiresSignature && !props.useServerSigning && !keyLoaded) ||
+        (requiresSignature && props.useServerSigning && tokenStatus !== "active");
 
     return {
-        env, setEnv, hasEnv, baseUrl, sandboxUrl, resolvedUrl,
+        baseUrl, resolvedUrl,
         params, setParams, paramKeys,
         tokenStatus, keyLoaded,
         handleClearToken, handleLoadKey, handleClearKey,

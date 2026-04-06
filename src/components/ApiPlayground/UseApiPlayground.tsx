@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   deriveTokenStatus,
   setTokenExpiry,
@@ -15,15 +15,14 @@ import {
 
 export type TokenStatus = "missing" | "expired" | "active";
 
-export type UrlConfig = string | { sandbox: string; prod: string };
-
 export type PlaygroundProps = {
   method: string;
   title?: string;
-  url?: UrlConfig;
+  url?: string;
   body?: string | { type: "json"; example?: string };
   requiresSignature?: boolean;
   requiresAccessToken?: boolean;
+  useServerSigning?: boolean;
   exampleRequest?: string;
 };
 
@@ -49,15 +48,8 @@ export function useApiPlayground(props: PlaygroundProps) {
   const requiresAccessToken = props.requiresAccessToken ?? true;
   const isOAuth = !requiresSignature && !requiresAccessToken;
 
-  /* ── env ── */
-  const hasEnv = typeof props.url !== "string";
-  const [env, setEnv] = useState<"sandbox" | "prod">("sandbox");
-  const baseUrl =
-    typeof props.url === "string" ? props.url : (props.url as any)?.[env] ?? "";
-  const sandboxUrl =
-    typeof props.url === "string"
-      ? props.url
-      : (props.url as any)?.sandbox ?? "";
+  /* ── url ── */
+  const baseUrl = props.url ?? "";
 
   /* ── url params ── */
   const paramKeys = useMemo(
@@ -79,18 +71,6 @@ export function useApiPlayground(props: PlaygroundProps) {
     () => deriveTokenStatus()
   );
   const [keyLoaded, setKeyLoaded] = useState(hasPrivateKey);
-
-  // Track previous env to only clear when switching FROM prod TO sandbox
-  // not on initial mount
-  const prevEnvRef = useRef<"sandbox" | "prod" | null>(null);
-
-  useEffect(() => {
-    if (prevEnvRef.current === "prod" && env === "sandbox") {
-      clearTokenExpiry();
-    }
-    prevEnvRef.current = env;
-    setTokenStatus(deriveTokenStatus());
-  }, [env]);
 
   // Re-check on tab focus
   useEffect(() => {
@@ -245,7 +225,28 @@ export function useApiPlayground(props: PlaygroundProps) {
         }
 
         if (requiresSignature) {
-          if (hasPrivateKey()) {
+          if (props.useServerSigning) {
+            // Server-side signing via Worker
+            const signRes = await fetch("https://rm-api-proxy.aiman-danish.workers.dev/auth/sign", {
+              method: "POST",
+              credentials: "include",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                method: props.method,
+                url: resolvedUrl,
+                body: requestBody
+              }),
+            });
+            if (signRes.ok) {
+              const { signature, nonceStr, timestamp } = await signRes.json();
+              finalHeaders["X-Timestamp"] = timestamp;
+              finalHeaders["X-Nonce-Str"] = nonceStr;
+              finalHeaders["X-Signature"] = signature;
+            } else {
+              setMissedSignature(true);
+            }
+          } else if (hasPrivateKey()) {
+            // Client-side signing
             const { signature, nonce, timestamp } = await signRSA(
               getPrivateKey(),
               props.method,
@@ -310,10 +311,10 @@ export function useApiPlayground(props: PlaygroundProps) {
   /* ── derived ── */
   const notReady =
     (requiresAccessToken && tokenStatus !== "active") ||
-    (requiresSignature && !keyLoaded);
+    (requiresSignature && !props.useServerSigning && !keyLoaded && !hasPrivateKey());
 
   return {
-    env, setEnv, hasEnv, baseUrl, sandboxUrl, resolvedUrl,
+    baseUrl, resolvedUrl,
     params, setParams, paramKeys,
     tokenStatus, keyLoaded,
     handleClearToken, handleLoadKey, handleClearKey,

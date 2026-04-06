@@ -8,7 +8,10 @@ declare namespace Cloudflare {
 	interface Env {
 	}
 }
-interface Env extends Cloudflare.Env {}
+interface Env extends Cloudflare.Env {
+  RM_KV: KVNamespace;
+  ENCRYPTION_KEY: string;
+}
 
 // Begin runtime types
 /*! *****************************************************************************

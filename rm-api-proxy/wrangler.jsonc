@@ -9,7 +9,17 @@
 	"compatibility_date": "2026-01-30",
 	"observability": {
 		"enabled": true
-	}
+	},
+	/**
+	 * Bindings
+	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
+	 */
+	"kv_namespaces": [
+		{
+			"binding": "RM_KV",
+			"id": "f1d18e1dbf52443d8d84226cb2d1b443"
+		}
+	]
 	/**
 	 * Smart Placement
 	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
