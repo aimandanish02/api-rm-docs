@@ -5,11 +5,10 @@ interface PlaygroundRequest {
   headers?: Record<string, string>
 }
 
-// ENCRYPTION_KEY is bound as a Cloudflare secret — available as a global at runtime
-declare const ENCRYPTION_KEY: string;
-
-// KV namespace binding
-declare const RM_KV: KVNamespace;
+interface Env {
+  ENCRYPTION_KEY: string;
+  RM_KV: KVNamespace;
+}
 
 const allowedHosts = [
   "sb-open.revenuemonster.my",
@@ -18,7 +17,7 @@ const allowedHosts = [
 
 const TOKEN_COOKIE = "rm_api_token"
 const SESSION_COOKIE = "rm_session_id"
-const SESSION_LENGTH = 64 // bytes for session ID
+const SESSION_LENGTH = 64
 const OAUTH_PATHS = ["/v1/token"]
 
 function isOAuthEndpoint(url: string): boolean {
@@ -58,8 +57,8 @@ function getCookieValue(cookieHeader: string | null, name: string): string | nul
 
 // ─── Encryption helpers (AES-256-GCM) ───────────────────────────────────
 
-async function getEncryptionKey(): Promise<CryptoKey> {
-  const secret = ENCRYPTION_KEY;
+async function getEncryptionKey(env: Env): Promise<CryptoKey> {
+  const secret = env.ENCRYPTION_KEY;
   const rawKey = Uint8Array.from(secret.slice(0, 32), (c) => c.charCodeAt(0));
   if (secret.length < 32) {
     const padded = new Uint8Array(32);
@@ -69,8 +68,8 @@ async function getEncryptionKey(): Promise<CryptoKey> {
   return crypto.subtle.importKey("raw", rawKey.buffer, "AES-GCM", false, ["encrypt", "decrypt"]);
 }
 
-async function encrypt(plaintext: string): Promise<string> {
-  const key = await getEncryptionKey();
+async function encrypt(plaintext: string, env: Env): Promise<string> {
+  const key = await getEncryptionKey(env);
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const encoded = new TextEncoder().encode(plaintext);
   const cipher = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, encoded);
@@ -80,8 +79,8 @@ async function encrypt(plaintext: string): Promise<string> {
   return btoa(String.fromCharCode(...combined));
 }
 
-async function decrypt(ciphertext: string): Promise<string> {
-  const key = await getEncryptionKey();
+async function decrypt(ciphertext: string, env: Env): Promise<string> {
+  const key = await getEncryptionKey(env);
   const combined = Uint8Array.from(atob(ciphertext), (c) => c.charCodeAt(0));
   const iv = combined.slice(0, 12);
   const data = combined.slice(12);
@@ -137,7 +136,7 @@ async function importPrivateKeyWorker(pem: string): Promise<CryptoKey> {
 }
 
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin") || "*"
     const corsHeaders = buildCorsHeaders(origin)
 
@@ -165,7 +164,9 @@ export default {
 
     if (urlObj.pathname === "/auth/login") {
       try {
-        const { clientId, clientSecret, privateKey, env } = await request.json() as any;
+        const body = await request.json() as any;
+        const { clientId, clientSecret, privateKey } = body;
+        const clientEnv = body.env; // renamed to avoid shadowing env param
 
         if (!clientId || !clientSecret || !privateKey) {
           return new Response(JSON.stringify({ error: "Missing credentials" }), {
@@ -175,12 +176,12 @@ export default {
         }
 
         const sessionId = generateSessionId();
-        const credJson = JSON.stringify({ clientId, clientSecret, privateKey, env: env || "sandbox" });
-        const encryptedCred = await encrypt(credJson);
-        await RM_KV.put(`cred:${sessionId}`, encryptedCred);
+        const credJson = JSON.stringify({ clientId, clientSecret, privateKey, env: clientEnv || "sandbox" });
+        const encryptedCred = await encrypt(credJson, env);
+        await env.RM_KV.put(`cred:${sessionId}`, encryptedCred);
 
         const base64 = btoa(`${clientId}:${clientSecret}`);
-        const oauthUrl = env === "sandbox"
+        const oauthUrl = clientEnv === "sandbox"
           ? "https://sb-oauth.revenuemonster.my/v1/token"
           : "https://oauth.revenuemonster.my/v1/token";
 
@@ -191,7 +192,7 @@ export default {
         });
 
         if (!oauthRes.ok) {
-          await RM_KV.delete(`cred:${sessionId}`);
+          await env.RM_KV.delete(`cred:${sessionId}`);
           return new Response(JSON.stringify({ error: "OAuth failed" }), {
             status: 401,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -200,8 +201,8 @@ export default {
 
         const oauthData = await oauthRes.json() as { accessToken: string; expiresIn: number; tokenType?: string };
         const tokenData = JSON.stringify({ accessToken: oauthData.accessToken, expiresIn: oauthData.expiresIn });
-        const encryptedToken = await encrypt(tokenData);
-        await RM_KV.put(`token:${sessionId}`, encryptedToken);
+        const encryptedToken = await encrypt(tokenData, env);
+        await env.RM_KV.put(`token:${sessionId}`, encryptedToken);
 
         const cookieParts = [
           `${SESSION_COOKIE}=${sessionId}`,
@@ -233,8 +234,8 @@ export default {
       const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
 
       if (sessionId) {
-        await RM_KV.delete(`cred:${sessionId}`);
-        await RM_KV.delete(`token:${sessionId}`);
+        await env.RM_KV.delete(`cred:${sessionId}`);
+        await env.RM_KV.delete(`token:${sessionId}`);
       }
 
       const cookieParts = [
@@ -267,14 +268,14 @@ export default {
       }
 
       try {
-        const encryptedToken = await RM_KV.get(`token:${sessionId}`);
+        const encryptedToken = await env.RM_KV.get(`token:${sessionId}`);
         if (!encryptedToken) {
           return new Response(JSON.stringify({ authenticated: false }), {
             status: 200,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
-        const tokenData = JSON.parse(await decrypt(encryptedToken));
+        const tokenData = JSON.parse(await decrypt(encryptedToken, env));
         return new Response(JSON.stringify({
           authenticated: true,
           expiresIn: tokenData.expiresIn
@@ -302,7 +303,7 @@ export default {
       }
 
       try {
-        const encryptedCred = await RM_KV.get(`cred:${sessionId}`);
+        const encryptedCred = await env.RM_KV.get(`cred:${sessionId}`);
         if (!encryptedCred) {
           return new Response(JSON.stringify({ error: "Unauthorized" }), {
             status: 401,
@@ -310,7 +311,7 @@ export default {
           });
         }
 
-        const { privateKey } = JSON.parse(await decrypt(encryptedCred)) as { clientId: string; clientSecret: string; privateKey: string; env: string };
+        const { privateKey } = JSON.parse(await decrypt(encryptedCred, env)) as { clientId: string; clientSecret: string; privateKey: string; env: string };
 
         const { method, url, body } = await request.json() as { method: string; url: string; body?: any };
 
@@ -375,8 +376,8 @@ export default {
         )
       }
 
-      const urlObj = new URL(url)
-      if (!allowedHosts.includes(urlObj.hostname)) {
+      const parsedUrl = new URL(url)
+      if (!allowedHosts.includes(parsedUrl.hostname)) {
         return new Response(
           JSON.stringify({ error: "Host not allowed" }),
           {
@@ -394,9 +395,9 @@ export default {
       const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
       if (sessionId && !isOAuthEndpoint(url)) {
         try {
-          const encryptedToken = await RM_KV.get(`token:${sessionId}`);
+          const encryptedToken = await env.RM_KV.get(`token:${sessionId}`);
           if (encryptedToken) {
-            const tokenData = JSON.parse(await decrypt(encryptedToken));
+            const tokenData = JSON.parse(await decrypt(encryptedToken, env));
             if (tokenData.accessToken && !finalHeaders["Authorization"]) {
               finalHeaders["Authorization"] = `Bearer ${tokenData.accessToken}`;
             }
@@ -449,8 +450,8 @@ export default {
             const sid = getCookieValue(cookieHeader, SESSION_COOKIE);
             if (sid) {
               const tokenData = JSON.stringify({ accessToken: token, expiresIn });
-              const encryptedToken = await encrypt(tokenData);
-              await RM_KV.put(`token:${sid}`, encryptedToken);
+              const encryptedToken = await encrypt(tokenData, env);
+              await env.RM_KV.put(`token:${sid}`, encryptedToken);
             }
 
             return new Response(
