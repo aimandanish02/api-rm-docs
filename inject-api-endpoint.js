@@ -25,22 +25,19 @@ function parseFrontmatter(content) {
 function extractApiFields(fmBody) {
     const methodMatch = fmBody.match(/^\s{0,2}api:\s*\n[\s\S]*?method:\s*(\S+)/m);
     const sandboxMatch = fmBody.match(/sandbox:\s*(\S+)/);
-    const prodMatch = fmBody.match(/prod:\s*(\S+)/);
-    if (!methodMatch || !sandboxMatch || !prodMatch) return null;
+    if (!methodMatch || !sandboxMatch) return null;
     return {
         method: methodMatch[1].trim(),
         sandbox: sandboxMatch[1].trim(),
-        prod: prodMatch[1].trim(),
     };
 }
 
-function buildInjection(method, sandbox, prod) {
+function buildInjection(method, sandbox) {
     return (
         `import ApiEndpoint from "@site/src/components/api/ApiEndpoint";\n\n` +
         `<ApiEndpoint\n` +
         `  method="${method}"\n` +
-        `  sandbox="${sandbox}"\n` +
-        `  prod="${prod}"\n` +
+        `  path="${sandbox}"\n` +
         `/>\n`
     );
 }
@@ -84,7 +81,7 @@ for (const file of files) {
         continue;
     }
 
-    const injection = buildInjection(fields.method, fields.sandbox, fields.prod);
+    const injection = buildInjection(fields.method, fields.sandbox);
     const afterFrontmatter = content.slice(fm.raw.length);
     const newContent = fm.raw + "\n\n" + injection + afterFrontmatter;
 
