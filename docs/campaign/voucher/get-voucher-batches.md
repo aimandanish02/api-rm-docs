@@ -6,7 +6,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/voucher-batches
-    prod: https://open.revenuemonster.my/v3/voucher-batches
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -105,6 +105,7 @@ examples:
       }
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

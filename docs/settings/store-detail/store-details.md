@@ -6,7 +6,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/stores
-    prod: https://open.revenuemonster.my/v3/stores
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Signature: sha256 {{signature}}
@@ -88,6 +88,7 @@ examples:
       }
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

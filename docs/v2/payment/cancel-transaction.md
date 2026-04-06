@@ -7,7 +7,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/payment/reverse
-    prod: https://open.revenuemonster.my/v3/payment/reverse
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Timestamp: {{timestamp}}
@@ -25,7 +25,9 @@ examples:
     There is no example body request.
   response: |
     There is no example response provided.
+    
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

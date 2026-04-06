@@ -30,7 +30,45 @@ Go to Extensions > Extensions > Choose payments > <b>Install</b> Revenue Monster
 ### Step 4 : Setup Payment Gateway
 
 | Title                  | Required | Example                                                                                                                      |
-| ---------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| 
+----
+----
+----
+----
+------ | 
+----
+---- | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+---- |
 | Sandbox Mode           | Optional | Yes                                                                                                                          |
 | Debug Model            | Optional | Disabled                                                                                                                     |
 | RM Client ID           | Yes      | <a href="https://doc.revenuemonster.my/docs/quickstart/signature-algorithm#step-1--create-new-application">Get Client ID</a> |

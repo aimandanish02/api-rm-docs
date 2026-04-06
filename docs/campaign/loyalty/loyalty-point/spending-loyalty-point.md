@@ -6,7 +6,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/spending-reward
-    prod: https://open.revenuemonster.my/v3/loyalty/spending-reward
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -30,6 +30,7 @@ examples:
   response: |
     There is no example response provided.
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

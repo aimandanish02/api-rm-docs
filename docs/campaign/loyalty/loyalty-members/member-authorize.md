@@ -6,7 +6,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/member/authorize
-    prod: https://open.revenuemonster.my/v3/loyalty/member/authorize
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -64,6 +64,7 @@ examples:
       "url": "http://sb-open.revenuemonster.my/loyalty-redirect?merchantId=4118165203679668885&accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOiIyMDIxLTAxLTExVDA4OjEwOjU5WiIsImtleSI6IkVoSUtCazFsYldKbGNoRE91T0t6MjRYV2tnNFNHUW9OVFdWdFltVnlVSEp2Wm1sc1pSRGwtTVR4aVBPUGp6WSIsInR5cGUiOiJtZW1iZXIifQ.IHmAKSJJYfKhev6Ccjve9kLfWwddzMuGQS2s7IUeCMA"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

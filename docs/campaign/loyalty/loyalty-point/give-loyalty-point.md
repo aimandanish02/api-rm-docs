@@ -7,7 +7,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/reward
-    prod: https://open.revenuemonster.my/v3/loyalty/reward
+
 
   headers:
     Content-Type: application/json
@@ -32,6 +32,7 @@ examples:
   response: |
     There is no example response provided.
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

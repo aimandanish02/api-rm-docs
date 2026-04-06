@@ -6,7 +6,7 @@ api:
   method: PUT
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/accounts/{id}
-    prod: https://open.revenuemonster.my/v3/accounts/{id}
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -233,6 +233,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

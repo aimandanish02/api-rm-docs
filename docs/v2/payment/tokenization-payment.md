@@ -7,7 +7,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/recurring-payment
-    prod: https://open.revenuemonster.my/v3/recurring-payment
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Signature: sha256 {{signature}}
@@ -42,6 +42,7 @@ examples:
   response: |
     There is no example response provided.
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
@@ -96,7 +97,19 @@ Recurring payment is for your customer to bind their card and our system able to
 
 
 | Interval | Target | Payment Behaviour                     |
-| -------- | ------ | ------------------------------------- |
+| 
+----
+---- | 
+------ | 
+----
+----
+----
+----
+----
+----
+----
+----
+----- |
 | WEEKLY   | 0      | Every week of Sunday                  |
 | WEEKLY   | 1      | Every week of Monday                  |
 | WEEKLY   | 2      | Every week of Tuesday                 |

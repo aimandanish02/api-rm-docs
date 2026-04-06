@@ -6,7 +6,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/partner/merchants/{merchantID}
-    prod: https://open.revenuemonster.my/v3/partner/merchants/{merchantID}
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -138,6 +138,7 @@ examples:
     }
 ---
 
+
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
@@ -157,7 +158,11 @@ This endpoint is for merchants with a Partner account. To activate a Partner acc
 This is a GET request with no request body. Pass the merchant ID as a path parameter.
 
 | Parameter | Type | Required | Description |
-|---|---|---|---|
+|
+---|
+---|
+---|
+---|
 | `merchantID` | String | Yes | The ID of the merchant to retrieve. Pass it in the URL path. |
 
 ---

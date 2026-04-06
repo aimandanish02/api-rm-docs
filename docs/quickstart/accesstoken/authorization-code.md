@@ -6,7 +6,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-oauth.revenuemonster.my/v1/token
-    prod: https://oauth.revenuemonster.my/v1/token
+
   requiresSignature: false
   requiresAccessToken: false
   headers:
@@ -37,6 +37,7 @@ examples:
       "refreshTokenExpiresIn": 1576799999
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

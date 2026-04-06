@@ -6,7 +6,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/partner/merchants
-    prod: https://open.revenuemonster.my/v3/partner/merchants
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -73,6 +73,7 @@ examples:
       "meta": {}
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

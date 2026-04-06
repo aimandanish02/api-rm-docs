@@ -6,7 +6,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/me/vouchers
-    prod: https://open.revenuemonster.my/v3/loyalty/me/vouchers
+
   query:
     countryCode: "60"
     phoneNumber: "187824152"
@@ -100,6 +100,7 @@ examples:
         ]
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

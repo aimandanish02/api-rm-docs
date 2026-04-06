@@ -16,13 +16,59 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/tokens/{customer_id}
 **Request Parameters**
 
 | Parameter     | Type  | Validation | Required | Description                                                   |
-| ------------- | ----- | ---------- | -------- | ------------------------------------------------------------- |
+| 
+----
+----
+----- | 
+----- | 
+----
+------ | 
+----
+---- | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----- |
 | `customer_id` | Param |            | Yes      | Customer ID you have used when create online payment checkout |
 
 **Response Paramters**
 
 | Parameter                | Type   | Validation                 | Description                             |
-| ------------------------ | ------ | -------------------------- | --------------------------------------- |
+| 
+----
+----
+----
+----
+----
+---- | 
+------ | 
+----
+----
+----
+----
+----
+------ | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+--- |
 | `item.*.id`              | String |                            | Token ID                                |
 | `item.*.label`           | String |                            | Token label                             |
 | `item.*.provider`        | String | ENUM("GOBIZ")              | Token provider                          |
@@ -49,7 +95,30 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/tokens/{customer_id}
 **Request Parameters**
 
 | Parameter     | Type   | Validation | Required | Description                                                   |
-| ------------- | ------ | ---------- | -------- | ------------------------------------------------------------- |
+| 
+----
+----
+----- | 
+------ | 
+----
+------ | 
+----
+---- | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----- |
 | `customer_id` | Param  |            | Yes      | Customer ID you have used when create online payment checkout |
 | `token`       | String |            | Yes      | Token                                                         |
 
@@ -62,7 +131,30 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/tokens/{customer_id}
 **Response Paramters**
 
 | Parameter                | Type   | Validation                 | Description                             |
-| ------------------------ | ------ | -------------------------- | --------------------------------------- |
+| 
+----
+----
+----
+----
+----
+---- | 
+------ | 
+----
+----
+----
+----
+----
+------ | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+--- |
 | `item.*.id`              | String |                            | Token ID                                |
 | `item.*.label`           | String |                            | Token label                             |
 | `item.*.provider`        | String | ENUM("GOBIZ")              | Token provider                          |

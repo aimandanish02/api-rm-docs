@@ -6,7 +6,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/voucher/{voucher_code}
-    prod: https://open.revenuemonster.my/v3/voucher/{voucher_code}
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -57,6 +57,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

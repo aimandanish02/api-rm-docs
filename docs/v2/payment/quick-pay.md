@@ -7,7 +7,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/payment/quickpay
-    prod: https://open.revenuemonster.my/v3/payment/quickpay
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Timestamp: {{timestamp}}
@@ -54,6 +54,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

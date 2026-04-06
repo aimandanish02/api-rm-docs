@@ -7,7 +7,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/payment/reconciliation
-    prod: https://open.revenuemonster.my/v3/payment/reconciliation
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Signature: sha256 {{signature}}
@@ -33,6 +33,7 @@ examples:
   response: |
     There is no example response provided.
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

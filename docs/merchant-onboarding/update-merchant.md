@@ -7,7 +7,7 @@ api:
   method: PATCH
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantID}
-    prod: https://open.revenuemonster.my/v3/partner/merchant/{merchantID}
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -184,6 +184,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

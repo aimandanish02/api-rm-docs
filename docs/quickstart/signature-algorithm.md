@@ -111,7 +111,13 @@ Before signing, you must:
 3. **Replace special characters:**
 
 | Character | Replace With |
-|-----------|-------------|
+|
+----
+----
+---|
+----
+----
+-----|
 | `<` | `\u003c` |
 | `>` | `\u003e` |
 | `&` | `\u0026` |
@@ -175,7 +181,9 @@ Sign this content using `sha256` with your **private key** and make sure the **p
 Place the signature in the `X-Signature` header, prefixed with the sign type:
 
 | Header | Value |
-|---|---|
+|
+---|
+---|
 | `X-Signature` | `sha256 <your_signature>` |
 | `X-Nonce-Str` | The nonce string you generated |
 | `X-Timestamp` | The Unix timestamp you generated |
@@ -353,7 +361,9 @@ Compare the `preVerifyContent` steps below with your own output to find where th
 ### Common Causes
 
 | Cause | Fix |
-|---|---|
+|
+---|
+---|
 | Private key doesn't match the public key uploaded to the Merchant Portal | Re-upload the correct public key |
 | JSON keys not sorted alphabetically | Check nested objects too |
 | JSON body still contains spaces or newlines before Base64 encoding | Make the JSON compact |

@@ -7,7 +7,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/payment/online
-    prod: https://open.revenuemonster.my/v3/payment/online
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -58,6 +58,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
@@ -171,7 +172,11 @@ Redirect URL redirects your customer back to your page after payment. It can be 
 **Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
 
 | Parameter | Type | Required | Description |
-|---|---|---|---|
+|
+---|
+---|
+---|
+---|
 | `status` | String | Yes | Payment status |
 | `orderId` | String | Yes | Payment order ID |
 | `reason` | String | No | Payment failure reason |
@@ -227,7 +232,11 @@ Payment checkout is not the same as payment transaction info. Checkout only retu
 **Request Parameters**
 
 | Parameter | Type | Required | Description |
-|---|---|---|---|
+|
+---|
+---|
+---|
+---|
 | `checkoutId` | QueryParam | Yes | Payment checkout ID |
 
 **Response Parameters**
@@ -518,7 +527,9 @@ wx.requestPayment({
 **Sandbox URL:** `https://sb-open.revenuemonster.my/v3/payment/fpx-bank`
 
 | Code | Name |
-|---|---|
+|
+---|
+---|
 | ABB0233:B2C | Affin Bank |
 | ABMB0212:B2C | Alliance Bank (Personal) |
 | AGRO01:B2C | AGRONet |

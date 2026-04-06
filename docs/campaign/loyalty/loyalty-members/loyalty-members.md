@@ -6,7 +6,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/members
-    prod: https://open.revenuemonster.my/v3/loyalty/members
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -101,6 +101,7 @@ examples:
       }
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

@@ -7,7 +7,7 @@ api:
   method: PUT
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantId}/application/{clientId}
-    prod: https://open.revenuemonster.my/v3/partner/merchant/{merchantId}/application/{clientId}
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Timestamp: {{timestamp}}
@@ -69,6 +69,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

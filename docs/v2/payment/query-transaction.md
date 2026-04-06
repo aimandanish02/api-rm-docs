@@ -7,7 +7,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/payment/transaction/{id}
-    prod: https://open.revenuemonster.my/v3/payment/transaction/{id}
+
   pathParams:
     id:
       type: string
@@ -24,7 +24,9 @@ examples:
     There is no example body request.
   response: |
     There is no example response provided.
+    
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
@@ -471,7 +473,25 @@ If you're using QRCODE mode when doing payment, you will receive this object in 
 
 
 | Value                | Description                                           |
-| -------------------- | ----------------------------------------------------- |
+| 
+----
+----
+----
+----
+---- | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----- |
 | `QUICK_PAY`          | QuickPay transaction                                  |
 | `RETAIL_QRPAY`       | (Coming-Soon): Offline RetailQR                       |
 | `BANK_CARD`          | Terminal card transaction                             |
@@ -492,7 +512,31 @@ If you're using QRCODE mode when doing payment, you will receive this object in 
 
 
 | Value              | Description                                                                       |
-| ------------------ | --------------------------------------------------------------------------------- |
+| 
+----
+----
+----
+------ | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----- |
 | `SUCCESS`          | Success transaction                                                               |
 | `FAILED`           | Failed transaction                                                                |
 | `IN_PROCESS`       | Transaction in process                                                            |
@@ -513,7 +557,47 @@ For online payment checkout you will need to append region name to system method
 
 
 | Method       | Region      | Description                                                                                                                                |
-| ------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| 
+----
+----
+---- | 
+----
+----
+--- | 
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+----
+------ |
 | `WECHATPAY`  | `MALAYSIA`  | Quick Pay: ❌<br />Web Payment: ✅<br />Web Mobile/Mobile Payment: ✅<br />Checkout By URL: ❌<br />Checkout By QRCode: ✅<br />Retail QRPay: ❌ |
 | `WECHATPAY`  | `CHINA`     | Quick Pay: ✅<br />Web Payment: ✅<br />Web Mobile/Mobile Payment: ✅<br />Checkout By URL: ❌<br />Checkout By QRCode: ✅<br />Retail QRPay: ❌ |
 | `ALIPAY`     | `CHINA`     | Quick Pay: ✅<br />Web Payment: ✅<br />Web Mobile/Mobile Payment: ✅<br />Checkout By URL: ✅<br />Checkout By QRCode: ❌<br />Retail QRPay: ❌ |

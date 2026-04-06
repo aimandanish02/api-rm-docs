@@ -6,7 +6,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/partner/merchant/{merchantID}
-    prod: https://open.revenuemonster.my/v3/partner/merchant/{merchantID}
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -100,6 +100,7 @@ examples:
     }
 ---
 
+
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 <ApiEndpoint
@@ -119,7 +120,11 @@ This endpoint is for merchants with a Partner account. To activate a Partner acc
 Pass the `merchantID` as a path parameter in the URL. No request body is required.
 
 | Parameter | Type | Required | Description |
-|---|---|---|---|
+|
+---|
+---|
+---|
+---|
 | `merchantID` | String | Yes | The ID of the merchant to submit for review. Pass it in the URL path. |
 
 ---

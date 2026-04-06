@@ -6,7 +6,7 @@ api:
   method: POST
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/member/:memberId/topup-offline
-    prod: https://open.revenuemonster.my/v3/loyalty/member/:memberId/topup-offline
+
   headers:
     Content-Type: application/json
     Authorization: Bearer {{access_token}}
@@ -95,6 +95,7 @@ examples:
         "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

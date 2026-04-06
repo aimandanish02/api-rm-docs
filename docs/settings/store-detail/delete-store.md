@@ -6,7 +6,7 @@ api:
   method: DELETE
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/store/{store_id}
-    prod: https://open.revenuemonster.my/v3/store/{store_id}
+
   headers:
     Authorization: Bearer {{access_token}}
     X-Signature: sha256 {{signature}}
@@ -24,6 +24,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 

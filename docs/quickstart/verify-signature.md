@@ -105,9 +105,13 @@ Use the **RM Server Public Key** (not your own public key) to verify callbacks. 
 Wrap it in standard PEM format before use:
 
 ```
------BEGIN PUBLIC KEY-----
+-
+----BEGIN PUBLIC KEY
+-----
 <server_public_key_content>
------END PUBLIC KEY-----
+-
+----END PUBLIC KEY
+-----
 ```
 :::
 

@@ -5,7 +5,7 @@ api:
   method: GET
   url:
     sandbox: https://sb-open.revenuemonster.my/v3/loyalty/me/voucher/{voucherCode}
-    prod: https://open.revenuemonster.my/v3/loyalty/me/voucher/{voucherCode}
+
 
   path:
     voucherCode: "rms@xR43u4bRhUU"
@@ -69,6 +69,7 @@ examples:
       }
     }
 ---
+
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
