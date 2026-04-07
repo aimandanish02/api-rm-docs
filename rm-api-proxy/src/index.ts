@@ -8,6 +8,7 @@ interface PlaygroundRequest {
 interface Env {
   ENCRYPTION_KEY: string;
   RM_KV: KVNamespace;
+  RM_RATE_LIMIT: RateLimit;
 }
 
 const allowedHosts = [
@@ -19,6 +20,7 @@ const TOKEN_COOKIE = "rm_api_token"
 const SESSION_COOKIE = "rm_session_id"
 const SESSION_LENGTH = 64
 const OAUTH_PATHS = ["/v1/token"]
+const KV_TTL = 2592000 // 30 days in seconds
 
 function isOAuthEndpoint(url: string): boolean {
   try {
@@ -88,6 +90,57 @@ async function decrypt(ciphertext: string, env: Env): Promise<string> {
   return new TextDecoder().decode(decrypted);
 }
 
+// ─── Token refresh helper ─────────────────────────────────────────────────
+
+async function refreshToken(sessionId: string, env: Env): Promise<string | null> {
+  try {
+    const encryptedCred = await env.RM_KV.get(`cred:${sessionId}`);
+    if (!encryptedCred) return null;
+
+    const { clientId, clientSecret, env: clientEnv } = JSON.parse(await decrypt(encryptedCred, env));
+
+    const base64 = btoa(`${clientId}:${clientSecret}`);
+    const oauthUrl = clientEnv === "sandbox"
+      ? "https://sb-oauth.revenuemonster.my/v1/token"
+      : "https://oauth.revenuemonster.my/v1/token";
+
+    const oauthRes = await fetch(oauthUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Basic ${base64}` },
+      body: JSON.stringify({ grantType: "client_credentials" })
+    });
+
+    if (!oauthRes.ok) return null;
+
+    const oauthData = await oauthRes.json() as { accessToken: string; expiresIn: number };
+    const tokenData = JSON.stringify({ accessToken: oauthData.accessToken, expiresIn: oauthData.expiresIn });
+    const encryptedToken = await encrypt(tokenData, env);
+    await env.RM_KV.put(`token:${sessionId}`, encryptedToken, { expirationTtl: KV_TTL });
+
+    return oauthData.accessToken;
+  } catch {
+    return null;
+  }
+}
+
+// ─── Get valid access token (refresh if expired) ──────────────────────────
+
+async function getValidToken(sessionId: string, env: Env): Promise<string | null> {
+  try {
+    const encryptedToken = await env.RM_KV.get(`token:${sessionId}`);
+    if (!encryptedToken) return await refreshToken(sessionId, env);
+
+    const tokenData = JSON.parse(await decrypt(encryptedToken, env));
+    const expiresAt = tokenData.storedAt + tokenData.expiresIn * 1000;
+    const isExpired = Date.now() > expiresAt;
+
+    if (isExpired) return await refreshToken(sessionId, env);
+    return tokenData.accessToken;
+  } catch {
+    return await refreshToken(sessionId, env);
+  }
+}
+
 // ─── RSA signing helpers ──────────────────────────────────────────────────
 
 function derLen(n: number): number[] {
@@ -113,7 +166,8 @@ async function importPrivateKeyWorker(pem: string): Promise<CryptoKey> {
     .replace(/-----BEGIN[^-]*-----/, "")
     .replace(/-----END[^-]*-----/, "")
     .replace(/\s/g, "");
-  const pkcs1 = Uint8Array.from(cleaned, (c) => c.charCodeAt(0));
+  // Fix: use atob() to properly decode base64, not charCodeAt on raw string
+  const pkcs1 = Uint8Array.from(atob(cleaned), (c) => c.charCodeAt(0));
   let der: Uint8Array;
   if (isPkcs1) {
     const algoId = new Uint8Array([
@@ -163,10 +217,25 @@ export default {
     // ── Auth endpoints ──────────────────────────────────────────────────
 
     if (urlObj.pathname === "/auth/login") {
+
+      // ── Rate limiting ──
+      if (env.RM_RATE_LIMIT) {
+        const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+        const rateLimitKey = `login:${ip}`;
+        const attempts = parseInt(await env.RM_KV.get(rateLimitKey) || "0");
+        if (attempts >= 10) {
+          return new Response(JSON.stringify({ error: "Too many attempts. Try again later." }), {
+            status: 429,
+            headers: { ...corsHeaders, "Content-Type": "application/json" }
+          });
+        }
+        await env.RM_KV.put(rateLimitKey, (attempts + 1).toString(), { expirationTtl: 300 }); // reset after 5 min
+      }
+
       try {
         const body = await request.json() as any;
         const { clientId, clientSecret, privateKey } = body;
-        const clientEnv = body.env; // renamed to avoid shadowing env param
+        const clientEnv = body.env;
 
         if (!clientId || !clientSecret || !privateKey) {
           return new Response(JSON.stringify({ error: "Missing credentials" }), {
@@ -178,7 +247,9 @@ export default {
         const sessionId = generateSessionId();
         const credJson = JSON.stringify({ clientId, clientSecret, privateKey, env: clientEnv || "sandbox" });
         const encryptedCred = await encrypt(credJson, env);
-        await env.RM_KV.put(`cred:${sessionId}`, encryptedCred);
+
+        // ── KV TTL applied ──
+        await env.RM_KV.put(`cred:${sessionId}`, encryptedCred, { expirationTtl: KV_TTL });
 
         const base64 = btoa(`${clientId}:${clientSecret}`);
         const oauthUrl = clientEnv === "sandbox"
@@ -200,9 +271,15 @@ export default {
         }
 
         const oauthData = await oauthRes.json() as { accessToken: string; expiresIn: number; tokenType?: string };
-        const tokenData = JSON.stringify({ accessToken: oauthData.accessToken, expiresIn: oauthData.expiresIn });
+        const tokenData = JSON.stringify({
+          accessToken: oauthData.accessToken,
+          expiresIn: oauthData.expiresIn,
+          storedAt: Date.now(), // store time so we can check expiry later
+        });
         const encryptedToken = await encrypt(tokenData, env);
-        await env.RM_KV.put(`token:${sessionId}`, encryptedToken);
+
+        // ── KV TTL applied ──
+        await env.RM_KV.put(`token:${sessionId}`, encryptedToken, { expirationTtl: KV_TTL });
 
         const cookieParts = [
           `${SESSION_COOKIE}=${sessionId}`,
@@ -213,7 +290,7 @@ export default {
           "SameSite=None",
         ];
 
-        return new Response(JSON.stringify({ success: true }), {
+        return new Response(JSON.stringify({ success: true, expiresIn: oauthData.expiresIn }), {
           status: 200,
           headers: {
             ...corsHeaders,
@@ -276,9 +353,17 @@ export default {
           });
         }
         const tokenData = JSON.parse(await decrypt(encryptedToken, env));
+
+        // Auto-refresh if expired
+        const expiresAt = tokenData.storedAt + tokenData.expiresIn * 1000;
+        const isExpired = Date.now() > expiresAt;
+        const effectiveExpiresIn = isExpired
+          ? await refreshToken(sessionId, env).then(() => tokenData.expiresIn)
+          : Math.floor((expiresAt - Date.now()) / 1000);
+
         return new Response(JSON.stringify({
           authenticated: true,
-          expiresIn: tokenData.expiresIn
+          expiresIn: effectiveExpiresIn,
         }), {
           status: 200,
           headers: { ...corsHeaders, "Content-Type": "application/json" }
@@ -388,26 +473,18 @@ export default {
       }
 
       const finalHeaders: Record<string, string> = { ...headers }
-
       const cookieHeader = request.headers.get("Cookie")
-
-      // Inject token from KV via session cookie
       const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
+
+      // Inject token — auto-refresh if expired
       if (sessionId && !isOAuthEndpoint(url)) {
-        try {
-          const encryptedToken = await env.RM_KV.get(`token:${sessionId}`);
-          if (encryptedToken) {
-            const tokenData = JSON.parse(await decrypt(encryptedToken, env));
-            if (tokenData.accessToken && !finalHeaders["Authorization"]) {
-              finalHeaders["Authorization"] = `Bearer ${tokenData.accessToken}`;
-            }
-          }
-        } catch {
-          // session invalid, fall through
+        const accessToken = await getValidToken(sessionId, env);
+        if (accessToken && !finalHeaders["Authorization"]) {
+          finalHeaders["Authorization"] = `Bearer ${accessToken}`;
         }
       }
 
-      // Also check legacy TOKEN_COOKIE for backwards compatibility
+      // Legacy cookie fallback
       const tokenFromCookie = getCookieValue(cookieHeader, TOKEN_COOKIE)
       if (tokenFromCookie && !isOAuthEndpoint(url)) {
         if (!finalHeaders["Authorization"]) {
@@ -428,7 +505,6 @@ export default {
 
       const responseText = await response.text()
 
-      // Intercept OAuth token endpoint — set cookie, hide raw token
       if (isOAuthEndpoint(url) && response.ok) {
         try {
           const parsed = JSON.parse(responseText)
@@ -445,13 +521,11 @@ export default {
               "SameSite=None",
             ]
 
-            const cookie = cookieParts.join("; ")
-
             const sid = getCookieValue(cookieHeader, SESSION_COOKIE);
             if (sid) {
-              const tokenData = JSON.stringify({ accessToken: token, expiresIn });
+              const tokenData = JSON.stringify({ accessToken: token, expiresIn, storedAt: Date.now() });
               const encryptedToken = await encrypt(tokenData, env);
-              await env.RM_KV.put(`token:${sid}`, encryptedToken);
+              await env.RM_KV.put(`token:${sid}`, encryptedToken, { expirationTtl: KV_TTL });
             }
 
             return new Response(
@@ -465,7 +539,7 @@ export default {
                 headers: {
                   ...corsHeaders,
                   "Content-Type": "application/json",
-                  "Set-Cookie": cookie,
+                  "Set-Cookie": cookieParts.join("; "),
                 }
               }
             )

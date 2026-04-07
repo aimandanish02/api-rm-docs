@@ -3,6 +3,7 @@ import {
     deriveTokenStatus,
     setTokenExpiry,
     clearTokenExpiry,
+    syncAuthStatus,
 } from "../../utils/auth";
 import {
     getPrivateKey,
@@ -82,18 +83,26 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
     );
     const [keyLoaded, setKeyLoaded] = useState(hasPrivateKey);
 
-useEffect(() => {
-  const check = () => {
-    setTokenStatus(deriveTokenStatus());
-    setKeyLoaded(hasPrivateKey());
-  };
-  window.addEventListener("focus", check);
-  window.addEventListener("rm-auth-changed", check);
-  return () => {
-    window.removeEventListener("focus", check);
-    window.removeEventListener("rm-auth-changed", check);
-  };
-}, []);
+    useEffect(() => {
+        const check = () => {
+            setTokenStatus(deriveTokenStatus());
+            setKeyLoaded(hasPrivateKey());
+        };
+
+        // On page load, sync with worker session
+        // This restores active state after refresh if session cookie + KV still valid
+        syncAuthStatus(
+            () => setTokenStatus("active"),
+            () => setTokenStatus(deriveTokenStatus())
+        );
+
+        window.addEventListener("focus", check);
+        window.addEventListener("rm-auth-changed", check);
+        return () => {
+            window.removeEventListener("focus", check);
+            window.removeEventListener("rm-auth-changed", check);
+        };
+    }, []);
 
     const handleClearToken = () => {
         clearTokenExpiry();
@@ -190,8 +199,6 @@ useEffect(() => {
         return { signature, nonce, timestamp };
     };
 
-    // send() returns result instead of setting state
-    // so each consumer can manage its own response state
     const send = async () => {
         let missedSignature = false;
         let missedToken = false;
@@ -270,7 +277,6 @@ useEffect(() => {
             parsed = text;
         }
 
-        // Auto-store token from OAuth response
         if (
             isOAuth &&
             res.ok &&
