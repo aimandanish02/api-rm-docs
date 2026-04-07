@@ -243,7 +243,7 @@ useEffect(() => {
                 const signData = await signRes.json();
                 finalHeaders["X-Timestamp"] = signData.timestamp;
                 finalHeaders["X-Nonce-Str"] = signData.nonceStr;
-                finalHeaders["X-Signature"] = `sha256 ${signData.signature}`;
+                finalHeaders["X-Signature"] = signData.signature;
             }
         }
 

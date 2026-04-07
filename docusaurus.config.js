@@ -1,5 +1,4 @@
 const path = require("path");
-// const apiPlaygroundRemark = require("./src/remark/apiPlayground");
 
 module.exports = {
   title: "Revenue Monster",
@@ -130,7 +129,6 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
-          // remarkPlugins: [apiPlaygroundRemark],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

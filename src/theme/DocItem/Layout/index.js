@@ -6,13 +6,30 @@ import ApiExamples from "@site/src/components/ApiExamples";
 import { useApiSharedState } from "@site/src/components/ApiPlayground/UseApiSharedState";
 import styles from "./styles.module.css";
 
+// Separate component so hooks are always called unconditionally
+function ApiPanel({ api }) {
+  const shared = useApiSharedState({
+    method: api.method,
+    url: api.url?.sandbox ?? api.url ?? "",
+    body: api.body,
+    requiresSignature: true,
+    requiresAccessToken: true,
+    useServerSigning: true,
+  });
+
+  return (
+    <aside className={styles.playground}>
+      <ApiPlayground shared={shared} />
+      <ApiExamples />
+    </aside>
+  );
+}
+
 export default function LayoutWrapper(props) {
   const { frontMatter } = useDoc();
   const api = frontMatter?.api;
 
-  const sharedState = api ? useApiSharedState(api) : null;
-
-  if (!api || !sharedState) {
+  if (!api) {
     return <Layout {...props} />;
   }
 
@@ -21,10 +38,7 @@ export default function LayoutWrapper(props) {
       <div className={styles.docContent}>
         <Layout {...props} />
       </div>
-      <aside className={styles.playground}>
-        <ApiPlayground shared={sharedState} />
-        <ApiExamples shared={sharedState} />
-      </aside>
+      <ApiPanel api={api} />
     </div>
   );
 }

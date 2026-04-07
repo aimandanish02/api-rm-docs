@@ -11,7 +11,6 @@ type Props = {
 
 export default function ApiEndpoint({ method, path, sandbox }: Props) {
   const displayPath = path ?? sandbox ?? "";
-
   return (
     <div className={styles.wrapper}>
       <span className={clsx(styles.badge, styles[method.toLowerCase()])}>
