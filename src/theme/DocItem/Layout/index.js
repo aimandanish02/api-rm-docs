@@ -12,8 +12,8 @@ function ApiPanel({ api }) {
     method: api.method,
     url: api.url?.sandbox ?? api.url ?? "",
     body: api.body,
-    requiresSignature: true,
-    requiresAccessToken: true,
+    requiresSignature: api.requiresSignature ?? true,
+    requiresAccessToken: api.requiresAccessToken ?? true,
     useServerSigning: true,
   });
 

@@ -2,18 +2,39 @@ import React, { useState, useEffect } from "react";
 import OriginalNavbarContent from "@theme-original/Navbar/Content";
 import CardNavMenu from "@site/src/components/CardNavMenu";
 import AuthModal from "@site/src/components/AuthModal";
-import { deriveTokenStatus } from "@site/src/utils/auth";
+import { deriveTokenStatus, syncAuthStatus, getSessionId } from "@site/src/utils/auth";
 import { hasPrivateKey } from "@site/src/utils/privateKey";
 
 function AuthBadge() {
-  const [tokenStatus, setTokenStatus] = useState(() => deriveTokenStatus());
-  const [keyLoaded, setKeyLoaded] = useState(() => hasPrivateKey());
+  const [tokenStatus, setTokenStatus] = useState(() => {
+    // Initialize from localStorage immediately — no flash
+    const sessionId = typeof window !== "undefined" ? getSessionId() : null;
+    if (sessionId) return "active" as const;
+    return deriveTokenStatus();
+  });
 
   useEffect(() => {
     const sync = () => {
-      setTokenStatus(deriveTokenStatus());
-      setKeyLoaded(hasPrivateKey());
+      const sessionId = getSessionId();
+      if (sessionId) {
+        setTokenStatus("active");
+      } else {
+        setTokenStatus(deriveTokenStatus());
+      }
     };
+
+    // Validate with server on mount
+    syncAuthStatus(
+      () => setTokenStatus("active"),
+      () => {
+        const sessionId = getSessionId();
+        if (sessionId) {
+          setTokenStatus("active");
+        } else {
+          setTokenStatus(deriveTokenStatus());
+        }
+      }
+    );
 
     window.addEventListener("rm-auth-changed", sync);
     window.addEventListener("focus", sync);
@@ -64,13 +85,7 @@ function AuthBadge() {
       : "var(--ifm-color-emphasis-400)",
   };
 
-  const label = connected
-    ? keyLoaded
-      ? "Connected"
-      : "Token active"
-    : expired
-    ? "Token expired"
-    : "Connect";
+  const label = connected ? "Connected" : expired ? "Token expired" : "Connect";
 
   return (
     <button style={badgeStyle} onClick={openModal}>
