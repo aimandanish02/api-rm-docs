@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { lookupError, extractErrorCodes } from "../../utils/errorCodes";
 import TokenBanner from "./TokenBanner";
-import PrivateKeyBanner from "./PrivateKeyBanner";
+// import PrivateKeyBanner from "./PrivateKeyBanner";
 import { SharedState } from "./UseApiSharedState";
 import styles from "./styles.module.css";
 
@@ -31,8 +31,8 @@ export default function ApiPlayground({ shared }: Props) {
   const {
     baseUrl,
     params, setParams,
-    tokenStatus, keyLoaded,
-    handleClearToken, handleLoadKey, handleClearKey,
+    tokenStatus,
+    handleClearToken,
     headers, setHeaders, jsonBody, setJsonBody,
     requiresSignature, requiresAccessToken, notReady,
     method, send,
@@ -93,13 +93,13 @@ export default function ApiPlayground({ shared }: Props) {
       {requiresAccessToken && (
         <TokenBanner status={tokenStatus} onClear={handleClearToken} />
       )}
-      {requiresSignature && (
+      {/* {requiresSignature && (
         <PrivateKeyBanner
           loaded={keyLoaded}
           onLoad={handleLoadKey}
           onClear={handleClearKey}
         />
-      )}
+      )} */}
 
       <div className={styles.blockHeader}>
         <label className={styles.label}>Headers</label>

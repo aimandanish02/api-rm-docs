@@ -4,6 +4,7 @@ import {
     setTokenExpiry,
     clearTokenExpiry,
     syncAuthStatus,
+    getSessionId,
 } from "../../utils/auth";
 import {
     getPrivateKey,
@@ -31,10 +32,10 @@ export type SharedState = {
     setParams: (p: Record<string, string>) => void;
     paramKeys: string[];
     tokenStatus: TokenStatus;
-    keyLoaded: boolean;
+    // keyLoaded: boolean;
     handleClearToken: () => void;
-    handleLoadKey: (key: string) => void;
-    handleClearKey: () => void;
+    // handleLoadKey: (key: string) => void;
+    // handleClearKey: () => void;
     headers: Record<string, string>;
     setHeaders: (h: Record<string, string>) => void;
     jsonBody: string;
@@ -47,20 +48,32 @@ export type SharedState = {
     send: () => Promise<{ response: any; status: number; missedSignature: boolean; missedToken: boolean }>;
 };
 
-const sortObject = (obj: any): any => {
-    if (Array.isArray(obj)) return obj.map(sortObject);
-    if (obj !== null && typeof obj === "object") {
-        return Object.keys(obj).sort().reduce((acc: any, key) => {
-            acc[key] = sortObject(obj[key]);
-            return acc;
-        }, {});
-    }
-    return obj;
-};
+// const sortObject = (obj: any): any => {
+//     if (Array.isArray(obj)) return obj.map(sortObject);
+//     if (obj !== null && typeof obj === "object") {
+//         return Object.keys(obj).sort().reduce((acc: any, key) => {
+//             acc[key] = sortObject(obj[key]);
+//             return acc;
+//         }, {});
+//     }
+//     return obj;
+// };
+
+// Build worker request headers — always include X-Session-Id if available
+// so the worker can find the session even when the cookie is blocked (localhost)
+function workerHeaders(): Record<string, string> {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const sessionId = getSessionId();
+    if (sessionId) headers["X-Session-Id"] = sessionId;
+    return headers;
+}
 
 export function useApiSharedState(props: PlaygroundProps): SharedState {
     const requiresSignature = props.requiresSignature ?? true;
     const requiresAccessToken = props.requiresAccessToken ?? true;
+
+    const useServerSigning = true;
+
     const isOAuth = !requiresSignature && !requiresAccessToken;
 
     const baseUrl = typeof props.url === "string" ? props.url : "";
@@ -81,41 +94,65 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
     const [tokenStatus, setTokenStatus] = useState<TokenStatus>(
         () => deriveTokenStatus()
     );
-    const [keyLoaded, setKeyLoaded] = useState(hasPrivateKey);
+// const [keyLoaded, setKeyLoaded] = useState(() => hasPrivateKey());
+useEffect(() => {
+    const run = async () => {
+        console.log("[auth] syncing status...");
 
-    useEffect(() => {
-        const check = () => {
-            setTokenStatus(deriveTokenStatus());
-            setKeyLoaded(hasPrivateKey());
-        };
+        const sessionId = getSessionId();
 
-        // On page load, sync with worker session
-        // This restores active state after refresh if session cookie + KV still valid
-        syncAuthStatus(
-            () => setTokenStatus("active"),
-            () => setTokenStatus(deriveTokenStatus())
+        // ✅ HARD FALLBACK — if session exists, assume logged in
+        if (sessionId) {
+            console.log("[auth] found sessionId locally");
+            setTokenStatus("active");
+        }
+
+        // ✅ Try server validation
+        await syncAuthStatus(
+            () => {
+                console.log("[auth] server says authenticated");
+                setTokenStatus("active");
+            },
+            () => {
+                console.log("[auth] server says NOT authenticated");
+
+                // ✅ trust local session
+                if (sessionId) {
+                    console.log("[auth] fallback: trusting local session");
+                    setTokenStatus("active");
+                } else {
+                    setTokenStatus("missing");
+                }
+            }
         );
+    }; // ✅ THIS LINE WAS MISSING
 
-        window.addEventListener("focus", check);
-        window.addEventListener("rm-auth-changed", check);
-        return () => {
-            window.removeEventListener("focus", check);
-            window.removeEventListener("rm-auth-changed", check);
-        };
-    }, []);
+    run();
 
-    const handleClearToken = () => {
-        clearTokenExpiry();
-        setTokenStatus("missing");
+    window.addEventListener("focus", run);
+    window.addEventListener("rm-auth-changed", run);
+
+    return () => {
+        window.removeEventListener("focus", run);
+        window.removeEventListener("rm-auth-changed", run);
     };
-    const handleLoadKey = (key: string) => {
-        storePrivateKey(key);
-        setKeyLoaded(true);
-    };
-    const handleClearKey = () => {
-        clearPrivateKey();
-        setKeyLoaded(false);
-    };
+}, []);
+
+const handleClearToken = async () => {
+  try {
+    await fetch("https://rm-api-proxy.aiman-danish.workers.dev/auth/logout", {
+      method: "POST",
+      credentials: "include",
+      headers: workerHeaders(),
+    });
+  } catch {}
+
+  clearTokenExpiry();
+  localStorage.removeItem("rm_session_id"); // 🔥 IMPORTANT
+  setTokenStatus("missing");
+
+  window.dispatchEvent(new Event("rm-auth-changed"));
+};
 
     const initialHeaders = isOAuth
         ? { Authorization: "Basic base64(clientId:clientSecret)" }
@@ -129,75 +166,75 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
                 : "{}"
     );
 
-    const generateNonce = () => crypto.randomUUID().replace(/-/g, "");
-    const generateTimestamp = () => Math.floor(Date.now() / 1000).toString();
+    // const generateNonce = () => crypto.randomUUID().replace(/-/g, "");
+    // const generateTimestamp = () => Math.floor(Date.now() / 1000).toString();
 
-    const derLen = (n: number): number[] => {
-        if (n < 0x80) return [n];
-        if (n < 0x100) return [0x81, n];
-        return [0x82, (n >> 8) & 0xff, n & 0xff];
-    };
+    // const derLen = (n: number): number[] => {
+    //     if (n < 0x80) return [n];
+    //     if (n < 0x100) return [0x81, n];
+    //     return [0x82, (n >> 8) & 0xff, n & 0xff];
+    // };
 
-    const importPrivateKey = async (pem: string): Promise<CryptoKey> => {
-        const isPkcs1 = pem.includes("BEGIN RSA PRIVATE KEY");
-        const cleaned = pem
-            .replace(/-----BEGIN[^-]*-----/, "")
-            .replace(/-----END[^-]*-----/, "")
-            .replace(/\s/g, "");
-        const pkcs1 = Uint8Array.from(window.atob(cleaned), (c) => c.charCodeAt(0));
-        let der: Uint8Array;
-        if (isPkcs1) {
-            const algoId = new Uint8Array([
-                0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-                0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00,
-            ]);
-            const octetString = new Uint8Array([0x04, ...derLen(pkcs1.length), ...pkcs1]);
-            const version = new Uint8Array([0x02, 0x01, 0x00]);
-            const inner = new Uint8Array([...version, ...algoId, ...octetString]);
-            der = new Uint8Array([0x30, ...derLen(inner.length), ...inner]);
-        } else {
-            der = pkcs1;
-        }
-        return await crypto.subtle.importKey(
-            "pkcs8",
-            der.buffer as ArrayBuffer,
-            { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-            false,
-            ["sign"]
-        );
-    };
+    // const importPrivateKey = async (pem: string): Promise<CryptoKey> => {
+    //     const isPkcs1 = pem.includes("BEGIN RSA PRIVATE KEY");
+    //     const cleaned = pem
+    //         .replace(/-----BEGIN[^-]*-----/, "")
+    //         .replace(/-----END[^-]*-----/, "")
+    //         .replace(/\s/g, "");
+    //     const pkcs1 = Uint8Array.from(window.atob(cleaned), (c) => c.charCodeAt(0));
+    //     let der: Uint8Array;
+    //     if (isPkcs1) {
+    //         const algoId = new Uint8Array([
+    //             0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
+    //             0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00,
+    //         ]);
+    //         const octetString = new Uint8Array([0x04, ...derLen(pkcs1.length), ...pkcs1]);
+    //         const version = new Uint8Array([0x02, 0x01, 0x00]);
+    //         const inner = new Uint8Array([...version, ...algoId, ...octetString]);
+    //         der = new Uint8Array([0x30, ...derLen(inner.length), ...inner]);
+    //     } else {
+    //         der = pkcs1;
+    //     }
+    //     return await crypto.subtle.importKey(
+    //         "pkcs8",
+    //         der.buffer as ArrayBuffer,
+    //         { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    //         false,
+    //         ["sign"]
+    //     );
+    // };
 
-    const signRSA = async (
-        privateKeyPem: string,
-        method: string,
-        fullUrl: string,
-        body: any
-    ) => {
-        const nonce = generateNonce();
-        const timestamp = generateTimestamp();
-        let base64Data = "";
-        if (body && Object.keys(body).length > 0) {
-            base64Data = btoa(JSON.stringify(sortObject(body)));
-        }
-        let plainText = "";
-        if (base64Data) plainText += `data=${base64Data}&`;
-        plainText +=
-            `method=${method.toLowerCase()}` +
-            `&nonceStr=${nonce}` +
-            `&requestUrl=${fullUrl}` +
-            `&signType=sha256` +
-            `&timestamp=${timestamp}`;
-        const key = await importPrivateKey(privateKeyPem);
-        const signatureBuffer = await crypto.subtle.sign(
-            "RSASSA-PKCS1-v1_5",
-            key,
-            new TextEncoder().encode(plainText)
-        );
-        const signature = btoa(
-            String.fromCharCode(...new Uint8Array(signatureBuffer))
-        );
-        return { signature, nonce, timestamp };
-    };
+    // const signRSA = async (
+    //     privateKeyPem: string,
+    //     method: string,
+    //     fullUrl: string,
+    //     body: any
+    // ) => {
+    //     const nonce = generateNonce();
+    //     const timestamp = generateTimestamp();
+    //     let base64Data = "";
+    //     if (body && Object.keys(body).length > 0) {
+    //         base64Data = btoa(JSON.stringify(sortObject(body)));
+    //     }
+    //     let plainText = "";
+    //     if (base64Data) plainText += `data=${base64Data}&`;
+    //     plainText +=
+    //         `method=${method.toLowerCase()}` +
+    //         `&nonceStr=${nonce}` +
+    //         `&requestUrl=${fullUrl}` +
+    //         `&signType=sha256` +
+    //         `&timestamp=${timestamp}`;
+    //     const key = await importPrivateKey(privateKeyPem);
+    //     const signatureBuffer = await crypto.subtle.sign(
+    //         "RSASSA-PKCS1-v1_5",
+    //         key,
+    //         new TextEncoder().encode(plainText)
+    //     );
+    //     const signature = btoa(
+    //         String.fromCharCode(...new Uint8Array(signatureBuffer))
+    //     );
+    //     return { signature, nonce, timestamp };
+    // };
 
     const send = async () => {
         let missedSignature = false;
@@ -217,29 +254,13 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
             if (requiresAccessToken && tokenStatus !== "active") {
                 missedToken = true;
             }
-            if (requiresSignature && !props.useServerSigning) {
-                if (hasPrivateKey()) {
-                    const { signature, nonce, timestamp } = await signRSA(
-                        getPrivateKey(),
-                        props.method,
-                        resolvedUrl,
-                        requestBody
-                    );
-                    finalHeaders["X-Timestamp"] = timestamp;
-                    finalHeaders["X-Nonce-Str"] = nonce;
-                    finalHeaders["X-Signature"] = `sha256 ${signature}`;
-                } else {
-                    missedSignature = true;
-                }
-            }
-
-            if (requiresSignature && props.useServerSigning) {
+            if (requiresSignature) {
                 const signRes = await fetch(
                     "https://rm-api-proxy.aiman-danish.workers.dev/auth/sign",
                     {
                         method: "POST",
                         credentials: "include",
-                        headers: { "Content-Type": "application/json" },
+                        headers: workerHeaders(),
                         body: JSON.stringify({
                             method: props.method,
                             url: resolvedUrl,
@@ -247,7 +268,9 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
                         }),
                     }
                 );
+
                 const signData = await signRes.json();
+
                 finalHeaders["X-Timestamp"] = signData.timestamp;
                 finalHeaders["X-Nonce-Str"] = signData.nonceStr;
                 finalHeaders["X-Signature"] = signData.signature;
@@ -259,7 +282,7 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
             {
                 method: "POST",
                 credentials: "include",
-                headers: { "Content-Type": "application/json" },
+                headers: workerHeaders(),
                 body: JSON.stringify({
                     url: resolvedUrl,
                     method: props.method,
@@ -290,18 +313,27 @@ export function useApiSharedState(props: PlaygroundProps): SharedState {
         return { response: parsed, status: res.status, missedSignature, missedToken };
     };
 
-    const notReady =
-        (requiresAccessToken && tokenStatus !== "active") ||
-        (requiresSignature && !props.useServerSigning && !keyLoaded) ||
-        (requiresSignature && props.useServerSigning && tokenStatus !== "active");
+  // ─── READY STATE ───────────────────────────────────────
 
-    return {
-        baseUrl, resolvedUrl,
-        params, setParams, paramKeys,
-        tokenStatus, keyLoaded,
-        handleClearToken, handleLoadKey, handleClearKey,
-        headers, setHeaders, jsonBody, setJsonBody,
-        isOAuth, requiresSignature, requiresAccessToken, notReady,
+    const notReady =
+        (requiresAccessToken && tokenStatus !== "active");
+
+        return {
+        baseUrl,
+        resolvedUrl,
+        params,
+        setParams,
+        paramKeys,
+        tokenStatus,
+        handleClearToken,
+        headers,
+        setHeaders,
+        jsonBody,
+        setJsonBody,
+        isOAuth,
+        requiresSignature,
+        requiresAccessToken,
+        notReady,
         method: props.method,
         send,
     };

@@ -8,7 +8,6 @@ interface PlaygroundRequest {
 interface Env {
   ENCRYPTION_KEY: string;
   RM_KV: KVNamespace;
-  RM_RATE_LIMIT: RateLimit;
 }
 
 const allowedHosts = [
@@ -20,7 +19,7 @@ const TOKEN_COOKIE = "rm_api_token"
 const SESSION_COOKIE = "rm_session_id"
 const SESSION_LENGTH = 64
 const OAUTH_PATHS = ["/v1/token"]
-const KV_TTL = 2592000 // 30 days in seconds
+const KV_TTL = 2592000
 
 function isOAuthEndpoint(url: string): boolean {
   try {
@@ -38,9 +37,21 @@ function buildCorsHeaders(origin: string) {
   return {
     "Access-Control-Allow-Origin": origin,
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Signature, X-Nonce-Str, X-Timestamp",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Signature, X-Nonce-Str, X-Timestamp, X-Session-Id",
     "Access-Control-Allow-Credentials": "true",
   }
+}
+
+function buildCookieParts(name: string, value: string, maxAge: number, isLocalhost: boolean): string {
+  const parts = [
+    `${name}=${value}`,
+    "HttpOnly",
+    `Max-Age=${maxAge}`,
+    "Path=/",
+    ...(isLocalhost ? [] : ["Secure"]),
+    isLocalhost ? "SameSite=Lax" : "SameSite=None",
+  ]
+  return parts.join("; ")
 }
 
 function generateSessionId(): string {
@@ -57,7 +68,11 @@ function getCookieValue(cookieHeader: string | null, name: string): string | nul
   return match ? match.slice(name.length + 1) : null
 }
 
-// ─── Encryption helpers (AES-256-GCM) ───────────────────────────────────
+function getSessionId(request: Request): string | null {
+  const fromCookie = getCookieValue(request.headers.get("Cookie"), SESSION_COOKIE);
+  if (fromCookie) return fromCookie;
+  return request.headers.get("X-Session-Id");
+}
 
 async function getEncryptionKey(env: Env): Promise<CryptoKey> {
   const secret = env.ENCRYPTION_KEY;
@@ -90,58 +105,43 @@ async function decrypt(ciphertext: string, env: Env): Promise<string> {
   return new TextDecoder().decode(decrypted);
 }
 
-// ─── Token refresh helper ─────────────────────────────────────────────────
-
 async function refreshToken(sessionId: string, env: Env): Promise<string | null> {
   try {
     const encryptedCred = await env.RM_KV.get(`cred:${sessionId}`);
     if (!encryptedCred) return null;
-
     const { clientId, clientSecret, env: clientEnv } = JSON.parse(await decrypt(encryptedCred, env));
-
     const base64 = btoa(`${clientId}:${clientSecret}`);
     const oauthUrl = clientEnv === "sandbox"
       ? "https://sb-oauth.revenuemonster.my/v1/token"
       : "https://oauth.revenuemonster.my/v1/token";
-
     const oauthRes = await fetch(oauthUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Basic ${base64}` },
       body: JSON.stringify({ grantType: "client_credentials" })
     });
-
     if (!oauthRes.ok) return null;
-
     const oauthData = await oauthRes.json() as { accessToken: string; expiresIn: number };
-    const tokenData = JSON.stringify({ accessToken: oauthData.accessToken, expiresIn: oauthData.expiresIn });
+    const tokenData = JSON.stringify({ accessToken: oauthData.accessToken, expiresIn: oauthData.expiresIn, storedAt: Date.now() });
     const encryptedToken = await encrypt(tokenData, env);
     await env.RM_KV.put(`token:${sessionId}`, encryptedToken, { expirationTtl: KV_TTL });
-
     return oauthData.accessToken;
   } catch {
     return null;
   }
 }
 
-// ─── Get valid access token (refresh if expired) ──────────────────────────
-
 async function getValidToken(sessionId: string, env: Env): Promise<string | null> {
   try {
     const encryptedToken = await env.RM_KV.get(`token:${sessionId}`);
     if (!encryptedToken) return await refreshToken(sessionId, env);
-
     const tokenData = JSON.parse(await decrypt(encryptedToken, env));
     const expiresAt = tokenData.storedAt + tokenData.expiresIn * 1000;
-    const isExpired = Date.now() > expiresAt;
-
-    if (isExpired) return await refreshToken(sessionId, env);
+    if (Date.now() > expiresAt) return await refreshToken(sessionId, env);
     return tokenData.accessToken;
   } catch {
     return await refreshToken(sessionId, env);
   }
 }
-
-// ─── RSA signing helpers ──────────────────────────────────────────────────
 
 function derLen(n: number): number[] {
   if (n < 0x80) return [n];
@@ -166,17 +166,14 @@ async function importPrivateKeyWorker(pem: string): Promise<CryptoKey> {
     .replace(/-----BEGIN[^-]*-----/, "")
     .replace(/-----END[^-]*-----/, "")
     .replace(/\s/g, "");
-  // Fix: use atob() to properly decode base64, not charCodeAt on raw string
   const pkcs1 = Uint8Array.from(atob(cleaned), (c) => c.charCodeAt(0));
   let der: Uint8Array;
   if (isPkcs1) {
-    const algoId = new Uint8Array([
-      0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00,
-    ]);
-    const octetString = new Uint8Array([0x04, ...derLen(pkcs1.length), ...pkcs1]);
-    const version = new Uint8Array([0x02, 0x01, 0x00]);
+    const algoId = new Uint8Array([48, 13, 6, 9, 42, 134, 72, 134, 247, 13, 1, 1, 1, 5, 0]);
+    const octetString = new Uint8Array([4, ...derLen(pkcs1.length), ...pkcs1]);
+    const version = new Uint8Array([2, 1, 0]);
     const inner = new Uint8Array([...version, ...algoId, ...octetString]);
-    der = new Uint8Array([0x30, ...derLen(inner.length), ...inner]);
+    der = new Uint8Array([48, ...derLen(inner.length), ...inner]);
   } else {
     der = pkcs1;
   }
@@ -193,44 +190,75 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin") || "*"
     const corsHeaders = buildCorsHeaders(origin)
+    const isLocalhost = origin.includes("localhost") || origin.includes("127.0.0.1")
+    const urlObj = new URL(request.url)
 
+    // ── CORS preflight ───────────────────────────────────────────────────
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204, headers: corsHeaders })
     }
 
-    if (request.method === "GET") {
+    // ── Health check ─────────────────────────────────────────────────────
+    if (request.method === "GET" && (urlObj.pathname === "/" || urlObj.pathname === "")) {
       return new Response(JSON.stringify({ ok: true }), {
         status: 200,
         headers: { ...corsHeaders, "Content-Type": "application/json" }
       })
     }
 
-    if (request.method !== "POST") {
-      return new Response("Method Not Allowed", {
-        status: 405,
-        headers: corsHeaders
-      })
-    }
-
-    const urlObj = new URL(request.url)
-
-    // ── Auth endpoints ──────────────────────────────────────────────────
-
-    if (urlObj.pathname === "/auth/login") {
-
-      // ── Rate limiting ──
-      if (env.RM_RATE_LIMIT) {
-        const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-        const rateLimitKey = `login:${ip}`;
-        const attempts = parseInt(await env.RM_KV.get(rateLimitKey) || "0");
-        if (attempts >= 10) {
-          return new Response(JSON.stringify({ error: "Too many attempts. Try again later." }), {
-            status: 429,
+    // ── /auth/status (GET) ───────────────────────────────────────────────
+    if (request.method === "GET" && urlObj.pathname === "/auth/status") {
+      const sessionId = getSessionId(request);
+      if (!sessionId) {
+        return new Response(JSON.stringify({ authenticated: false }), {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        });
+      }
+      try {
+        const encryptedCred = await env.RM_KV.get(`cred:${sessionId}`);
+        if (!encryptedCred) {
+          return new Response(JSON.stringify({ authenticated: false }), {
+            status: 200,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
-        await env.RM_KV.put(rateLimitKey, (attempts + 1).toString(), { expirationTtl: 300 }); // reset after 5 min
+        const accessToken = await getValidToken(sessionId, env);
+        if (!accessToken) {
+          return new Response(JSON.stringify({ authenticated: false }), {
+            status: 200,
+            headers: { ...corsHeaders, "Content-Type": "application/json" }
+          });
+        }
+        return new Response(JSON.stringify({ authenticated: true, expiresIn: 3600 }), {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        });
+      } catch {
+        return new Response(JSON.stringify({ authenticated: false }), {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        });
       }
+    }
+
+    // ── Block non-POST beyond this point ─────────────────────────────────
+    if (request.method !== "POST") {
+      return new Response("Method Not Allowed", { status: 405, headers: corsHeaders })
+    }
+
+    // ── /auth/login ──────────────────────────────────────────────────────
+    if (urlObj.pathname === "/auth/login") {
+      const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+      const rateLimitKey = `ratelimit:${ip}`;
+      const attempts = parseInt(await env.RM_KV.get(rateLimitKey) || "0");
+      if (attempts >= 10) {
+        return new Response(JSON.stringify({ error: "Too many attempts. Try again later." }), {
+          status: 429,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        });
+      }
+      await env.RM_KV.put(rateLimitKey, (attempts + 1).toString(), { expirationTtl: 300 });
 
       try {
         const body = await request.json() as any;
@@ -247,8 +275,6 @@ export default {
         const sessionId = generateSessionId();
         const credJson = JSON.stringify({ clientId, clientSecret, privateKey, env: clientEnv || "sandbox" });
         const encryptedCred = await encrypt(credJson, env);
-
-        // ── KV TTL applied ──
         await env.RM_KV.put(`cred:${sessionId}`, encryptedCred, { expirationTtl: KV_TTL });
 
         const base64 = btoa(`${clientId}:${clientSecret}`);
@@ -271,31 +297,16 @@ export default {
         }
 
         const oauthData = await oauthRes.json() as { accessToken: string; expiresIn: number; tokenType?: string };
-        const tokenData = JSON.stringify({
-          accessToken: oauthData.accessToken,
-          expiresIn: oauthData.expiresIn,
-          storedAt: Date.now(), // store time so we can check expiry later
-        });
+        const tokenData = JSON.stringify({ accessToken: oauthData.accessToken, expiresIn: oauthData.expiresIn, storedAt: Date.now() });
         const encryptedToken = await encrypt(tokenData, env);
-
-        // ── KV TTL applied ──
         await env.RM_KV.put(`token:${sessionId}`, encryptedToken, { expirationTtl: KV_TTL });
 
-        const cookieParts = [
-          `${SESSION_COOKIE}=${sessionId}`,
-          "HttpOnly",
-          "Max-Age=2591999",
-          "Path=/",
-          "Secure",
-          "SameSite=None",
-        ];
-
-        return new Response(JSON.stringify({ success: true, expiresIn: oauthData.expiresIn }), {
+        return new Response(JSON.stringify({ success: true, expiresIn: oauthData.expiresIn, sessionId }), {
           status: 200,
           headers: {
             ...corsHeaders,
             "Content-Type": "application/json",
-            "Set-Cookie": cookieParts.join("; "),
+            "Set-Cookie": buildCookieParts(SESSION_COOKIE, sessionId, 2591999, isLocalhost),
           }
         });
       } catch (err: any) {
@@ -306,87 +317,32 @@ export default {
       }
     }
 
+    // ── /auth/logout ─────────────────────────────────────────────────────
     if (urlObj.pathname === "/auth/logout") {
-      const cookieHeader = request.headers.get("Cookie");
-      const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
-
+      const sessionId = getSessionId(request);
       if (sessionId) {
         await env.RM_KV.delete(`cred:${sessionId}`);
         await env.RM_KV.delete(`token:${sessionId}`);
       }
-
-      const cookieParts = [
-        `${SESSION_COOKIE}=`,
-        "HttpOnly",
-        "Max-Age=0",
-        "Path=/",
-        "Secure",
-        "SameSite=None",
-      ];
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
         headers: {
           ...corsHeaders,
           "Content-Type": "application/json",
-          "Set-Cookie": cookieParts.join("; "),
+          "Set-Cookie": buildCookieParts(SESSION_COOKIE, "", 0, isLocalhost),
         }
       });
     }
 
-    if (urlObj.pathname === "/auth/status") {
-      const cookieHeader = request.headers.get("Cookie");
-      const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
-
-      if (!sessionId) {
-        return new Response(JSON.stringify({ authenticated: false }), {
-          status: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
-      }
-
-      try {
-        const encryptedToken = await env.RM_KV.get(`token:${sessionId}`);
-        if (!encryptedToken) {
-          return new Response(JSON.stringify({ authenticated: false }), {
-            status: 200,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-          });
-        }
-        const tokenData = JSON.parse(await decrypt(encryptedToken, env));
-
-        // Auto-refresh if expired
-        const expiresAt = tokenData.storedAt + tokenData.expiresIn * 1000;
-        const isExpired = Date.now() > expiresAt;
-        const effectiveExpiresIn = isExpired
-          ? await refreshToken(sessionId, env).then(() => tokenData.expiresIn)
-          : Math.floor((expiresAt - Date.now()) / 1000);
-
-        return new Response(JSON.stringify({
-          authenticated: true,
-          expiresIn: effectiveExpiresIn,
-        }), {
-          status: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
-      } catch {
-        return new Response(JSON.stringify({ authenticated: false }), {
-          status: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" }
-        });
-      }
-    }
-
+    // ── /auth/sign ───────────────────────────────────────────────────────
     if (urlObj.pathname === "/auth/sign") {
-      const cookieHeader = request.headers.get("Cookie");
-      const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
-
+      const sessionId = getSessionId(request);
       if (!sessionId) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
           status: 401,
           headers: { ...corsHeaders, "Content-Type": "application/json" }
         });
       }
-
       try {
         const encryptedCred = await env.RM_KV.get(`cred:${sessionId}`);
         if (!encryptedCred) {
@@ -395,48 +351,33 @@ export default {
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
-
-        const { privateKey } = JSON.parse(await decrypt(encryptedCred, env)) as { clientId: string; clientSecret: string; privateKey: string; env: string };
-
+        const { privateKey } = JSON.parse(await decrypt(encryptedCred, env));
         const { method, url, body } = await request.json() as { method: string; url: string; body?: any };
-
         if (!method || !url) {
           return new Response(JSON.stringify({ error: "Missing method or url" }), {
             status: 400,
             headers: { ...corsHeaders, "Content-Type": "application/json" }
           });
         }
-
         const nonce = (crypto.randomUUID as () => string)().replace(/-/g, "");
         const timestamp = Math.floor(Date.now() / 1000).toString();
-
         let base64Data = "";
         if (body && typeof body === "object" && Object.keys(body).length > 0) {
-          const sortedBody = sortObject(body);
-          base64Data = btoa(JSON.stringify(sortedBody));
+          base64Data = btoa(JSON.stringify(sortObject(body)));
         }
-
         const dataParam = base64Data ? `data=${base64Data}&` : "";
         const plaintext = `${dataParam}method=${method.toLowerCase()}&nonceStr=${nonce}&requestUrl=${url}&signType=sha256&timestamp=${timestamp}`;
-
         const cryptoKey = await importPrivateKeyWorker(privateKey);
         const signature = await crypto.subtle.sign(
           { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
           cryptoKey,
           new TextEncoder().encode(plaintext)
         );
-
         const signatureBase64 = btoa(String.fromCharCode(...new Uint8Array(signature)));
-
-        return new Response(JSON.stringify({
-          signature: `sha256 ${signatureBase64}`,
-          nonceStr: nonce,
-          timestamp
-        }), {
+        return new Response(JSON.stringify({ signature: `sha256 ${signatureBase64}`, nonceStr: nonce, timestamp }), {
           status: 200,
           headers: { ...corsHeaders, "Content-Type": "application/json" }
         });
-
       } catch (err: any) {
         return new Response(JSON.stringify({ error: err?.message || "Signing failed" }), {
           status: 500,
@@ -445,39 +386,39 @@ export default {
       }
     }
 
-    // ── Proxy endpoint ──────────────────────────────────────────────────
-
+    // ── Proxy ────────────────────────────────────────────────────────────
     try {
-      const { method, body, url, headers } =
-        await request.json() as PlaygroundRequest
-
+      const { method, body, url, headers } = await request.json() as PlaygroundRequest
       if (!url || !method) {
-        return new Response(
-          JSON.stringify({ error: "Missing url or method" }),
-          {
-            status: 400,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-          }
-        )
+        return new Response(JSON.stringify({ error: "Missing url or method" }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        })
       }
-
       const parsedUrl = new URL(url)
       if (!allowedHosts.includes(parsedUrl.hostname)) {
-        return new Response(
-          JSON.stringify({ error: "Host not allowed" }),
-          {
-            status: 403,
-            headers: { ...corsHeaders, "Content-Type": "application/json" }
-          }
-        )
+        return new Response(JSON.stringify({ error: "Host not allowed" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" }
+        })
       }
 
       const finalHeaders: Record<string, string> = { ...headers }
-      const cookieHeader = request.headers.get("Cookie")
-      const sessionId = getCookieValue(cookieHeader, SESSION_COOKIE);
+      const sessionId = getSessionId(request);
 
-      // Inject token — auto-refresh if expired
-      if (sessionId && !isOAuthEndpoint(url)) {
+      // For OAuth endpoints, inject Basic auth from stored credentials
+      if (isOAuthEndpoint(url) && sessionId) {
+        try {
+          const encryptedCred = await env.RM_KV.get(`cred:${sessionId}`);
+          if (encryptedCred) {
+            const { clientId, clientSecret } = JSON.parse(await decrypt(encryptedCred, env));
+            finalHeaders["Authorization"] = `Basic ${btoa(`${clientId}:${clientSecret}`)}`;
+          }
+        } catch { }
+      }
+
+      // For non-OAuth endpoints, inject Bearer token from KV
+      if (!isOAuthEndpoint(url) && sessionId) {
         const accessToken = await getValidToken(sessionId, env);
         if (accessToken && !finalHeaders["Authorization"]) {
           finalHeaders["Authorization"] = `Bearer ${accessToken}`;
@@ -485,89 +426,48 @@ export default {
       }
 
       // Legacy cookie fallback
-      const tokenFromCookie = getCookieValue(cookieHeader, TOKEN_COOKIE)
-      if (tokenFromCookie && !isOAuthEndpoint(url)) {
-        if (!finalHeaders["Authorization"]) {
-          finalHeaders["Authorization"] = `Bearer ${tokenFromCookie}`
-        }
+      const tokenFromCookie = getCookieValue(request.headers.get("Cookie"), TOKEN_COOKIE)
+      if (tokenFromCookie && !isOAuthEndpoint(url) && !finalHeaders["Authorization"]) {
+        finalHeaders["Authorization"] = `Bearer ${tokenFromCookie}`
       }
 
-      const requestBody =
-        body && typeof body !== "string"
-          ? JSON.stringify(body)
-          : body
-
-      const response = await fetch(url, {
-        method,
-        headers: finalHeaders,
-        body: requestBody
-      })
-
+      const requestBody = body && typeof body !== "string" ? JSON.stringify(body) : body
+      const response = await fetch(url, { method, headers: finalHeaders, body: requestBody })
       const responseText = await response.text()
 
+      // Intercept OAuth response to store new token in KV
       if (isOAuthEndpoint(url) && response.ok) {
         try {
           const parsed = JSON.parse(responseText)
           const token = parsed?.accessToken
           const expiresIn = parsed?.expiresIn ?? 2591999
-
-          if (token) {
-            const cookieParts = [
-              `${TOKEN_COOKIE}=${token}`,
-              "HttpOnly",
-              `Max-Age=${expiresIn}`,
-              "Path=/",
-              "Secure",
-              "SameSite=None",
-            ]
-
-            const sid = getCookieValue(cookieHeader, SESSION_COOKIE);
-            if (sid) {
-              const tokenData = JSON.stringify({ accessToken: token, expiresIn, storedAt: Date.now() });
-              const encryptedToken = await encrypt(tokenData, env);
-              await env.RM_KV.put(`token:${sid}`, encryptedToken, { expirationTtl: KV_TTL });
-            }
-
-            return new Response(
-              JSON.stringify({
-                success: true,
-                tokenType: parsed.tokenType,
-                expiresIn: parsed.expiresIn,
-              }),
-              {
-                status: 200,
-                headers: {
-                  ...corsHeaders,
-                  "Content-Type": "application/json",
-                  "Set-Cookie": cookieParts.join("; "),
-                }
-              }
-            )
+          if (token && sessionId) {
+            const tokenData = JSON.stringify({ accessToken: token, expiresIn, storedAt: Date.now() });
+            const encryptedToken = await encrypt(tokenData, env);
+            await env.RM_KV.put(`token:${sessionId}`, encryptedToken, { expirationTtl: KV_TTL });
           }
-        } catch {
-          // parsing failed, fall through
-        }
+          return new Response(
+            JSON.stringify({ success: true, tokenType: parsed.tokenType, expiresIn }),
+            {
+              status: 200,
+              headers: {
+                ...corsHeaders,
+                "Content-Type": "application/json",
+                "Set-Cookie": buildCookieParts(TOKEN_COOKIE, token, expiresIn, isLocalhost),
+              }
+            }
+          )
+        } catch { }
       }
 
       return new Response(responseText, {
         status: response.status,
-        headers: {
-          ...corsHeaders,
-          "Content-Type":
-            response.headers.get("Content-Type") || "application/json"
-        }
+        headers: { ...corsHeaders, "Content-Type": response.headers.get("Content-Type") || "application/json" }
       })
-
     } catch (err: any) {
       return new Response(
-        JSON.stringify({
-          error: "Worker crashed",
-          message: err?.message || "Unknown error"
-        }),
-        {
-          status: 500,
-          headers: { ...corsHeaders, "Content-Type": "application/json" }
-        }
+        JSON.stringify({ error: "Worker crashed", message: err?.message || "Unknown error" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
   }

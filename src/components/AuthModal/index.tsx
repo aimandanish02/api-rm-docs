@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { setTokenExpiry, clearTokenExpiry } from "../../utils/auth";
+import {
+  getSessionId,
+  syncAuthStatus,
+  setTokenExpiry,
+  clearTokenExpiry,
+  setSessionId,
+  clearSessionId,
+} from "../../utils/auth";
 import { setPrivateKey, clearPrivateKey } from "../../utils/privateKey";
 import styles from "./styles.module.css";
 
@@ -12,13 +19,65 @@ export default function AuthModal() {
   const [clientId, setClientId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [privateKey, setPrivateKeyInput] = useState("");
-  const [step, setStep] = useState<Step>("form");
+
+  const initialStep: Step = (() => {
+    if (typeof window === "undefined") return "form";
+    const sid = localStorage.getItem("rm_session_id");
+    console.log("[AuthModal] initialStep check — rm_session_id:", sid);
+    return sid ? "success" : "form";
+  })();
+
+  const [step, setStep] = useState<Step>(initialStep);
   const [errorMsg, setErrorMsg] = useState("");
+
+  console.log("[AuthModal] render — step:", step, "open:", open);
 
   useEffect(() => {
     const handler = () => setOpen(true);
     window.addEventListener("rm-open-auth", handler);
     return () => window.removeEventListener("rm-open-auth", handler);
+  }, []);
+
+  useEffect(() => {
+    const run = async () => {
+      const sessionId = getSessionId();
+      console.log("[AuthModal useEffect] sessionId:", sessionId);
+      console.log("[AuthModal useEffect] current step before run:", step);
+
+      if (sessionId) {
+        console.log("[AuthModal useEffect] session found → setting success");
+        setStep("success");
+      }
+
+      await syncAuthStatus(
+        (expiresIn) => {
+          console.log("[AuthModal useEffect] syncAuthStatus → authenticated, expiresIn:", expiresIn);
+          setStep("success");
+        },
+        () => {
+          console.log("[AuthModal useEffect] syncAuthStatus → NOT authenticated");
+          const latestSession = getSessionId();
+          console.log("[AuthModal useEffect] latestSession after sync:", latestSession);
+          if (latestSession) {
+            console.log("[AuthModal useEffect] fallback → keeping success");
+            setStep("success");
+          } else {
+            console.log("[AuthModal useEffect] no session → form");
+            setStep("form");
+          }
+        }
+      );
+    };
+
+    run();
+
+    window.addEventListener("rm-auth-changed", run);
+    window.addEventListener("focus", run);
+
+    return () => {
+      window.removeEventListener("rm-auth-changed", run);
+      window.removeEventListener("focus", run);
+    };
   }, []);
 
   const handleConnect = async () => {
@@ -44,6 +103,7 @@ export default function AuthModal() {
       });
 
       const data = await res.json();
+      console.log("[AuthModal handleConnect] response:", data);
 
       if (!res.ok || !data.success) {
         const rawError = data?.error || data?.message;
@@ -60,12 +120,16 @@ export default function AuthModal() {
 
       setTokenExpiry(data.expiresIn);
 
+      if (data.sessionId) {
+        console.log("[AuthModal handleConnect] storing sessionId:", data.sessionId);
+        setSessionId(data.sessionId);
+      }
+
       if (privateKey.trim()) {
         setPrivateKey(privateKey.trim());
       }
 
       setStep("success");
-
       window.dispatchEvent(new CustomEvent("rm-auth-changed"));
     } catch (err: any) {
       setErrorMsg(err?.message || "Network error. Try again.");
@@ -83,6 +147,7 @@ export default function AuthModal() {
       // best effort
     }
     clearTokenExpiry();
+    clearSessionId();
     clearPrivateKey();
     setStep("form");
     setClientId("");
@@ -93,7 +158,6 @@ export default function AuthModal() {
 
   const handleClose = () => {
     setOpen(false);
-    setStep("form");
     setErrorMsg("");
   };
 
@@ -103,7 +167,6 @@ export default function AuthModal() {
     <div className={styles.overlay} onClick={handleClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
 
-        {/* Header */}
         <div className={styles.header}>
           <div>
             <p className={styles.title}>Connect your account</p>
@@ -128,7 +191,6 @@ export default function AuthModal() {
           </div>
         ) : (
           <>
-            {/* Login with Dashboard */}
             <a
               href="https://sb-oauth.revenuemonster.my/login?redirectUri=https://sb-merchant.revenuemonster.my/developer/applications"
               target="_blank"
