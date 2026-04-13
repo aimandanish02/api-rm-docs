@@ -24,10 +24,12 @@ const highlightJson = (json: string) =>
     );
 
 type Props = {
-  shared: SharedState;
+  shared: SharedState;  
+  children?: React.ReactNode;
+
 };
 
-export default function ApiPlayground({ shared }: Props) {
+export default function ApiPlayground({ shared, children }: Props) {
   const {
     baseUrl,
     params, setParams,
@@ -210,6 +212,7 @@ export default function ApiPlayground({ shared }: Props) {
           })()}
         </div>
       )}
+      {children}
     </div>
   );
 }

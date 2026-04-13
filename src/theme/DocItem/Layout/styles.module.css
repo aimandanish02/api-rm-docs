@@ -2,25 +2,74 @@
   display: grid;
   width: 100%;
   max-width: 100%;
-  align-items: start;
   grid-template-columns: minmax(0, 1fr) clamp(380px, 32vw, 580px);
   gap: clamp(24px, 3vw, 48px);
+  height: calc(100vh - var(--ifm-navbar-height));
+  overflow: hidden;
 }
 
 .docContent {
   min-width: 0;
   width: 100%;
   padding: 0 var(--ifm-spacing-horizontal);
+  height: 100%;
+  overflow-y: auto;
 }
 
 .playground {
-  position: sticky;
-  top: var(--ifm-navbar-height);
-  align-self: start;
-  height: fit-content;
+  position: relative;
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
   border-left: 1px solid var(--ifm-toc-border-color);
   padding: 0 var(--ifm-spacing-horizontal) 0 0;
+  height: 100%;
+  overflow-y: scroll;
+
+  /* Fade overlay — no pseudo-element, no flow artifacts */
+  box-shadow: inset 0 -56px 28px -28px var(--ifm-background-color);
+}
+
+.scrollHint {
+  position: sticky;
+  bottom: 12px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--ifm-color-emphasis-500);
+  pointer-events: none;
+  animation: scrollBounce 1.6s ease-in-out infinite;
+  letter-spacing: 0.04em;
+}
+
+
+
+/* Webkit scrollbar */
+.playground::-webkit-scrollbar,
+.docContent::-webkit-scrollbar {
+  width: 4px;
+}
+
+.playground::-webkit-scrollbar-track,
+.docContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.playground::-webkit-scrollbar-thumb,
+.docContent::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.35);
+  border-radius: 999px;
+}
+
+.playground::-webkit-scrollbar-thumb:hover,
+.docContent::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.6);
+}
+
+/* Firefox */
+.playground,
+.docContent {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.35) transparent;
 }

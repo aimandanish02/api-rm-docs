@@ -19,8 +19,9 @@ function ApiPanel({ api }) {
 
   return (
     <aside className={styles.playground}>
-      <ApiPlayground shared={shared} />
-      <ApiExamples />
+      <ApiPlayground shared={shared} >
+        <ApiExamples />
+      </ApiPlayground>
     </aside>
   );
 }
