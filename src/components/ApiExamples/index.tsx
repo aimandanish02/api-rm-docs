@@ -4,6 +4,14 @@ import { useDoc } from "@docusaurus/theme-common/internal";
 import { SNIPPET_LANGS, SnippetLang, generateSnippet } from "../../utils/snippets";
 import styles from "./styles.module.css";
 
+
+function normalizeCurl(curl: string): string {
+  return curl
+    .replace(/\\n/g, "\n")          // literal \n → real newline
+    .replace(/ \\\n\s*/g, " \\\n    ") // normalize indentation after line continuations
+    .trim();
+}
+
 function toString(val: any): string | undefined {
   if (!val) return undefined;
   if (typeof val === "string") return val.trim();
@@ -35,8 +43,9 @@ export default function ApiExamples() {
   const { frontMatter } = useDoc();
   const examples = (frontMatter as any).examples;
 
-  const rawRequest = toString(examples?.request);
-  const rawBody = toString(examples?.body);
+const rawRequest = toString(examples?.request)
+  ? normalizeCurl(toString(examples.request)!)
+  : undefined;  const rawBody = toString(examples?.body);
   const exampleResponse = toString(examples?.response);
 
   // Produce a complete cURL that always includes the body
