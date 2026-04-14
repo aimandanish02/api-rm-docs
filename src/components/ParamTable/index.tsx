@@ -22,7 +22,6 @@ export default function ParamTable({
 
   return (
     <div className={styles.wrapper}>
-      {/* Rows */}
       <div className={`${styles.body} ${open ? styles.bodyOpen : styles.bodyClose}`}>
         <div className={styles.inner}>
           {rows.map((row, i) => (
@@ -31,7 +30,6 @@ export default function ParamTable({
         </div>
       </div>
 
-      {/* Toggle footer */}
       <button
         className={styles.toggle}
         onClick={() => setOpen((o) => !o)}
@@ -64,7 +62,6 @@ function ParamRowItem({ row, last }: { row: ParamRow; last: boolean }) {
 
   return (
     <div className={`${styles.row} ${last ? styles.rowLast : ""}`}>
-      {/* Name + type + required on one line */}
       <div className={styles.meta}>
         <code className={styles.paramName}>{row.name}</code>
         {row.type && (
@@ -77,12 +74,10 @@ function ParamRowItem({ row, last }: { row: ParamRow; last: boolean }) {
         )}
       </div>
 
-      {/* Description */}
       {row.description && (
         <p className={styles.description}>{row.description}</p>
       )}
 
-      {/* Example */}
       {row.example && (
         <p className={styles.example}>
           <span className={styles.exampleLabel}>Example: </span>

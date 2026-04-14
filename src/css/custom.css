@@ -126,6 +126,7 @@
    API METHOD BADGES (SIDEBAR)
 ================================ */
 
+
 .api-get>.menu__link,
 .api-post>.menu__link,
 .api-put>.menu__link,
@@ -136,54 +137,82 @@
   align-items: center;
 }
 
+/* ── shared badge base ── */
+.api-get>.menu__link::after,
+.api-post>.menu__link::after,
+.api-put>.menu__link::after,
+.api-delete>.menu__link::after,
+.api-patch>.menu__link::after {
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* ── GET — green ── */
 .api-get>.menu__link::after {
   content: "GET";
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 6px;
-  background: #16a34a;
-  color: white;
+  background: #e6f6ee;
+  color: #1a7f4b;
+  border: 1px solid #b0dfc5;
+}
+[data-theme="dark"] .api-get>.menu__link::after {
+  background: #0d3d22;
+  color: #4ade80;
+  border-color: #166534;
 }
 
+/* ── POST — orange ── */
 .api-post>.menu__link::after {
   content: "POST";
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 6px;
-  background: #FACC15;
-  color: rgb(255, 255, 255);
+  background: #fff4e6;
+  color: #b45309;
+  border: 1px solid #fcd09a;
+}
+[data-theme="dark"] .api-post>.menu__link::after {
+  background: #3d1f00;
+  color: #fb923c;
+  border-color: #7c3400;
 }
 
+/* ── PUT — blue ── */
 .api-put>.menu__link::after {
   content: "PUT";
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 6px;
-  background: #3B82F6;
-  color: rgb(255, 255, 255);
+  background: #e8f0fe;
+  color: #1d4ed8;
+  border: 1px solid #a8c0f8;
+}
+[data-theme="dark"] .api-put>.menu__link::after {
+  background: #0d1f4d;
+  color: #60a5fa;
+  border-color: #1e3a8a;
 }
 
+/* ── DELETE — red ── */
 .api-delete>.menu__link::after {
   content: "DEL";
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 6px;
-  background: #dc2626;
-  color: white;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+}
+[data-theme="dark"] .api-delete>.menu__link::after {
+  background: #3d0a0a;
+  color: #f87171;
+  border-color: #7f1d1d;
 }
 
+/* ── PATCH — purple ── */
 .api-patch>.menu__link::after {
   content: "PATCH";
-  padding: 2px 6px;
-  font-size: 10px;
-  font-weight: 700;
-  border-radius: 6px;
-  background: #808080;
-  color: rgb(255, 255, 255);
+  background: #f3f0ff;
+  color: #6d28d9;
+  border: 1px solid #c4b5fd;
+}
+[data-theme="dark"] .api-patch>.menu__link::after {
+  background: #1e0a3d;
+  color: #a78bfa;
+  border-color: #4c1d95;
 }
 
 /* ================================

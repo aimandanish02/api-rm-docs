@@ -1,3 +1,4 @@
+//example request/response component for API reference pages. Expects frontMatter.
 import React, { useState } from "react";
 import CodeBlock from "@theme/CodeBlock";
 import { useDoc } from "@docusaurus/theme-common/internal";
