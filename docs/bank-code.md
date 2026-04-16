@@ -4,11 +4,10 @@ title: Bank Code
 sidebar_label: Bank Code
 ---
 
-import { Box, Heading, Text, Card, Image, Button, Flex, Table } from "rebass";
+Bank codes supported by Revenue Monster for FPX payments. Codes not listed below are not supported.
 
 :::note
-**Following list is bank code supported by Revenue Monster.**<br/>
-(Bank code(s) not on the list are not supported)
+Use these codes when integrating with FPX-based payment methods.
 :::
 
 

@@ -4,11 +4,15 @@ title: Error Codes
 sidebar_label: Error Codes
 ---
 
-import { Box, Heading, Text, Card, Image, Button, Flex, Table } from "rebass";
+Complete list of error codes returned by the Revenue Monster API. Use this reference to diagnose failed requests and implement error handling.
 
-| Error Codes              | Description                                                                                                                                       | Solution                                                                                                                                                                                                           |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| InvalidRequest:          | The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. | Refer to request paramenter(s) as described in API documentation and retry again.                                                                                                                                  |
+---
+
+## OAuth / Authentication Errors
+
+| Error Code | Description | Solution |
+|---|---|---|
+| InvalidRequest: | The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed. | Refer to request parameter(s) as described in API documentation and retry again.                                                                                                                                  |
 | InvalidGrant:            | Invalid grant                                                                                                                                     | Check redirect URI (must be exactly the same as request URI query string)                                                                                                                                          |
 | InvalidClient:           | Invalid client                                                                                                                                    | Client is not registered in our system, please try again with correct clientId, clientSecret.                                                                                                                      |
 | InvalidCode:             | Invalid authorization code                                                                                                                        | This is not the correct authorization code generated from our system, please request a new authorization code again.                                                                                               |
@@ -21,11 +25,11 @@ import { Box, Heading, Text, Card, Image, Button, Flex, Table } from "rebass";
 | InternalError:           | The authorization server encountered an unexpected condition that prevented it from fulfilling the request                                        | If this condition persists, please contact our customer support.                                                                                                                                                   |
 | TemporaryUnAvailable:    | The authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server                    | If this condition persists, please contact our customer support.                                                                                                                                                   |
 
-<hr/>
+---
 
-### Other Error Codes
+## API Error Codes
 
-| Error Message                               | Description                                                                                                                          |
+| Error Code | Description                                                                                                                          |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | ALIPAY_CHINA_NOT_ACTIVE                     | Alipay China is not active. Please contact Revenue Monster to activate merchant for Alipay (016-6999168 / support@revenuemonster.my) |
 | ACCESS_TOKEN_READ_FAIL                      | Cannot read access token file                                                                                                        |

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Refactor all 126 documentation files in the `/docs` folder to improve UI/UX, readability, and developer experience for Revenue Monster API documentation.
+Refactor only sidebar-visible docs — 126 total in the `/docs` folder to improve UI/UX, readability, and developer experience for Revenue Monster API documentation.
 
 ## Goals
 
@@ -18,12 +18,6 @@ Refactor all 126 documentation files in the `/docs` folder to improve UI/UX, rea
 - Preserve all images, videos, and media exactly as-is
 - Ensure every API doc includes clear step-by-step instructions
 
-## Refactoring Priority
-
-1. **Intro docs first** (`introduction/`, `quickstart/`) — establish baseline patterns
-2. **Core API docs** (`payment-method.mdx`, `error-codes.md`, etc.)
-3. **Feature docs** (`campaign/`, `ekyc/`, `merchant-onboarding/`)
-4. **Plugin/integration docs** (`ecom-plugin/`, `v2/`, etc.)
 
 ## Per-File Checklist
 
@@ -109,12 +103,6 @@ Refactor all 126 documentation files in the `/docs` folder to improve UI/UX, rea
 ## [Category 2]
 [Related items grouped]
 ```
-
-## Files to Skip / Special Handling
-
-- **Very large files** (>10k tokens): Split into logical sections
-- **MDX files with JSX**: Preserve JSX components, refactor markdown around them
-- **Files using custom components**: Don't break existing working components
 
 ## Success Criteria
 
