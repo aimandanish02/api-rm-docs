@@ -5,8 +5,9 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
-
+/* ================================
+   CSS VARIABLES
+================================ */
 
 :root {
   --ifm-color-primary: #0000ff;
@@ -17,8 +18,26 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
-
 }
+
+/* ================================
+   PREVENT BODY-LEVEL OVERFLOW
+================================ */
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#__docusaurus {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ================================
+   FOOTER
+================================ */
 
 .footer.footer--dark {
   --ifm-footer-background-color: #0000ff;
@@ -30,12 +49,20 @@
   height: auto;
 }
 
+/* ================================
+   CODE HIGHLIGHT
+================================ */
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+/* ================================
+   BUTTONS
+================================ */
 
 .button {
   color: #0000ff !important;
@@ -49,25 +76,6 @@
   color: black !important;
 }
 
-.navbar .navbar__items {
-  align-items: center;
-  display: flex;
-  flex: 1 1 auto;
-  width: 20%;
-}
-
-.navbar .navbar__search .navbar__search-input {
-  width: 6.5rem;
-  /* -webkit-transition: width 0.4s ease-in-out; */
-  animation-timing-function: width 0.2s ease-in-out;
-  /* transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1); */
-}
-
-.navbar .navbar__search .navbar__search-input:focus {
-  background-color: aliceblue;
-  width: 100%;
-}
-
 .button.button--secondary.button--outline:not(.button--active):not(:hover) {
   color: var(--ifm-font-color-base);
   background-color: aqua;
@@ -79,6 +87,35 @@
   --ifm-button-border-color: var(--ifm-color-secondary);
   border-radius: 20px;
 }
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar .navbar__items {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  width: 20%;
+}
+
+.navbar .navbar__search .navbar__search-input {
+  width: 6.5rem;
+  animation-timing-function: width 0.2s ease-in-out;
+}
+
+.navbar .navbar__search .navbar__search-input:focus {
+  background-color: aliceblue;
+  width: 100%;
+}
+
+.navbar__item--explore {
+  display: block;
+}
+
+/* ================================
+   HERO
+================================ */
 
 .hero.hero--primary {
   --ifm-hero-background-image: url("/img/background.jpg");
@@ -94,10 +131,14 @@
   color: #00ffff;
 }
 
+/* ================================
+   RESPONSIVE
+================================ */
+
 @media screen and (max-width: 966px) {
   .navbar .navbar__search .navbar__search-input:focus {
     background-color: aliceblue;
-    width: 25%;
+    width: 100%;
     position: absolute;
     right: 1px;
     left: 1px;
@@ -112,104 +153,102 @@
   .hero .hero__subtitle {
     font-size: 1rem;
   }
-
-  .navbar .navbar__search .navbar__search-input:focus {
-    background-color: aliceblue;
-    width: 100%;
-  }
-
 }
 
-
+@media screen and (max-width: 768px) {
+  .navbar__item--explore {
+    display: none;
+  }
+}
 
 /* ================================
    API METHOD BADGES (SIDEBAR)
 ================================ */
 
-
-.api-get>.menu__link,
-.api-post>.menu__link,
-.api-put>.menu__link,
-.api-delete>.menu__link,
-.api-patch>.menu__link {
+.api-get > .menu__link,
+.api-post > .menu__link,
+.api-put > .menu__link,
+.api-delete > .menu__link,
+.api-patch > .menu__link {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* ── shared badge base ── */
-.api-get>.menu__link::after,
-.api-post>.menu__link::after,
-.api-put>.menu__link::after,
-.api-delete>.menu__link::after,
-.api-patch>.menu__link::after {
+/* shared badge base */
+.api-get > .menu__link::after,
+.api-post > .menu__link::after,
+.api-put > .menu__link::after,
+.api-delete > .menu__link::after,
+.api-patch > .menu__link::after {
   padding: 2px 6px;
   font-size: 10px;
   font-weight: 700;
   border-radius: 4px;
   letter-spacing: 0.03em;
+  flex-shrink: 0;
 }
 
-/* ── GET — green ── */
-.api-get>.menu__link::after {
+/* GET — green */
+.api-get > .menu__link::after {
   content: "GET";
   background: #e6f6ee;
   color: #1a7f4b;
   border: 1px solid #b0dfc5;
 }
-[data-theme="dark"] .api-get>.menu__link::after {
+[data-theme="dark"] .api-get > .menu__link::after {
   background: #0d3d22;
   color: #4ade80;
   border-color: #166534;
 }
 
-/* ── POST — orange ── */
-.api-post>.menu__link::after {
+/* POST — orange */
+.api-post > .menu__link::after {
   content: "POST";
   background: #fff4e6;
   color: #b45309;
   border: 1px solid #fcd09a;
 }
-[data-theme="dark"] .api-post>.menu__link::after {
+[data-theme="dark"] .api-post > .menu__link::after {
   background: #3d1f00;
   color: #fb923c;
   border-color: #7c3400;
 }
 
-/* ── PUT — blue ── */
-.api-put>.menu__link::after {
+/* PUT — blue */
+.api-put > .menu__link::after {
   content: "PUT";
   background: #e8f0fe;
   color: #1d4ed8;
   border: 1px solid #a8c0f8;
 }
-[data-theme="dark"] .api-put>.menu__link::after {
+[data-theme="dark"] .api-put > .menu__link::after {
   background: #0d1f4d;
   color: #60a5fa;
   border-color: #1e3a8a;
 }
 
-/* ── DELETE — red ── */
-.api-delete>.menu__link::after {
+/* DELETE — red */
+.api-delete > .menu__link::after {
   content: "DEL";
   background: #fef2f2;
   color: #b91c1c;
   border: 1px solid #fca5a5;
 }
-[data-theme="dark"] .api-delete>.menu__link::after {
+[data-theme="dark"] .api-delete > .menu__link::after {
   background: #3d0a0a;
   color: #f87171;
   border-color: #7f1d1d;
 }
 
-/* ── PATCH — purple ── */
-.api-patch>.menu__link::after {
+/* PATCH — purple */
+.api-patch > .menu__link::after {
   content: "PATCH";
   background: #f3f0ff;
   color: #6d28d9;
   border: 1px solid #c4b5fd;
 }
-[data-theme="dark"] .api-patch>.menu__link::after {
+[data-theme="dark"] .api-patch > .menu__link::after {
   background: #1e0a3d;
   color: #a78bfa;
   border-color: #4c1d95;
@@ -219,45 +258,38 @@
    SIDEBAR TREE CONNECTOR LINE
 ================================ */
 
-/* Add faded vertical line for nested categories */
 .menu__list .menu__list {
   border-left: 1px solid rgba(255, 255, 255, 0.08);
   margin-left: 10px;
   padding-left: 14px;
 }
 
-/* Light mode adjustment */
 html[data-theme="light"] .menu__list .menu__list {
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* src/css/custom.css */
-.navbar__item--explore {
-  display: block;
-  /* desktop */
+/* ================================
+   SIDEBAR WIDTH
+================================ */
+
+.navbar-sidebar,
+.menu,
+nav.menu {
+  width: 300px !important;
+  min-width: 300px !important;
 }
 
-@media screen and (max-width: 768px) {
-  .navbar__item--explore {
-    display: none;
-  }
-}
-
-/* src/css/custom.css */
-.navbar__item--explore {
-  display: block;
-  /* desktop */
-}
-
-@media screen and (max-width: 768px) {
-  .navbar__item--explore {
-    display: none;
-  }
+.docSidebarContainer,
+aside.theme-doc-sidebar-container,
+[class*="docSidebarContainer"] {
+  width: 300px !important;
+  min-width: 300px !important;
 }
 
 /* ================================
    API PAGE LAYOUT OVERRIDES
 ================================ */
+
 .api-page-layout .container {
   max-width: 100% !important;
   margin: 0 !important;
@@ -277,23 +309,50 @@ html[data-theme="light"] .menu__list .menu__list {
   padding-right: 0 !important;
 }
 
-/* Hide TOC on API pages */
-.api-page-layout .col--3 {
+/* Hide built-in TOC on API pages — playground panel replaces it */
+.api-page-layout .col--3,
+.api-page-layout .theme-doc-toc-desktop {
   display: none !important;
 }
 
-.navbar-sidebar,
-.menu,
-nav.menu {
-  width: 420px !important;
-  min-width: 420px !important;
+/* Let article stretch to fill full width on API pages */
+.api-page-layout .docItemCol {
+  max-width: 100% !important;
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
 }
 
-.docSidebarContainer,
-aside.theme-doc-sidebar-container,
-[class*="docSidebarContainer"] {
-  width: 420px !important;
-  min-width: 420px !important;
+/* ================================
+   TOC — REGULAR DOC PAGES
+================================ */
+
+/* Wrap long headings instead of overflowing */
+.theme-doc-toc-desktop .table-of-contents__link {
+  white-space: normal;
+  word-break: break-word;
+  display: block;
+}
+
+.theme-doc-toc-desktop {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* ================================
+   DOC CONTENT — PREVENT WIDE BLOWOUT
+================================ */
+
+/* Wide elements scroll within themselves, not push layout */
+.docItemCol pre,
+.docItemCol table,
+.docItemCol [class*="codeBlockContainer"] {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Prevent inline code from stretching */
+.docItemCol code {
+  word-break: break-word;
 }
 
 /* ================================
@@ -325,7 +384,7 @@ details summary::before {
   opacity: 0.6;
 }
 
-details[open]>summary::before {
+details[open] > summary::before {
   transform: rotate(90deg);
 }
 
@@ -333,9 +392,8 @@ details[open]>summary::before {
   overflow: hidden;
 }
 
-/* 
-.markdown {
-  font-family: ui-monospace, SFMono-Regular, Menlo, "Roboto Mono", monospace;
-} */
+/* ================================
+   IMPORTS
+================================ */
 
 @import "./api-playground.css";
