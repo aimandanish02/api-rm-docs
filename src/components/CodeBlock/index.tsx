@@ -1,0 +1,159 @@
+import React, { useState, useRef } from "react";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import type { Language } from "prism-react-renderer";
+import styles from "./styles.module.css";
+
+// Custom dark theme tuned for aesthetics
+const theme = {
+  plain: {
+    color: "#e2e8f0",
+    backgroundColor: "transparent",
+  },
+  styles: [
+    { types: ["comment", "prolog", "doctype", "cdata"], style: { color: "#4a5568", fontStyle: "italic" as const } },
+    { types: ["punctuation"], style: { color: "#718096" } },
+    { types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"], style: { color: "#fc8181" } },
+    { types: ["selector", "attr-name", "string", "char", "builtin", "inserted"], style: { color: "#68d391" } },
+    { types: ["operator", "entity", "url"], style: { color: "#76e4f7" } },
+    { types: ["atrule", "attr-value", "keyword"], style: { color: "#76e4f7" } },
+    { types: ["function", "class-name"], style: { color: "#f6ad55" } },
+    { types: ["regex", "important", "variable"], style: { color: "#faf089" } },
+  ],
+};
+
+const LANG_META: Record<string, { label: string; color: string; bg: string }> = {
+  json:       { label: "JSON",       color: "#f6ad55", bg: "rgba(246,173,85,0.12)" },
+  bash:       { label: "Bash",       color: "#68d391", bg: "rgba(104,211,145,0.12)" },
+  curl:       { label: "cURL",       color: "#68d391", bg: "rgba(104,211,145,0.12)" },
+  javascript: { label: "JavaScript", color: "#faf089", bg: "rgba(250,240,137,0.12)" },
+  typescript: { label: "TypeScript", color: "#76e4f7", bg: "rgba(118,228,247,0.12)" },
+  jsx:        { label: "JSX",        color: "#f687b3", bg: "rgba(246,135,179,0.12)" },
+  tsx:        { label: "TSX",        color: "#f687b3", bg: "rgba(246,135,179,0.12)" },
+  plaintext:  { label: "Text",       color: "#a0aec0", bg: "rgba(160,174,192,0.12)" },
+};
+
+interface Props {
+  children: string;
+  language?: Language | "curl" | "plaintext" | string;
+  filename?: string;
+  hideLineNumbers?: boolean;
+}
+
+export default function CodeBlock({
+  children,
+  language = "plaintext",
+  filename,
+  hideLineNumbers = false,
+}: Props) {
+  const [copied, setCopied] = useState(false);
+  const [hoveredLine, setHoveredLine] = useState<number | null>(null);
+  const codeRef = useRef<HTMLPreElement>(null);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(children.trim());
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const prismLang = (
+    language === "curl" || language === "plaintext" ? "bash" : language
+  ) as Language;
+
+  const meta = LANG_META[language] ?? LANG_META["plaintext"];
+
+  return (
+    <div className={styles.wrapper}>
+      {/* Header */}
+      <div className={styles.header}>
+        <div className={styles.headerLeft}>
+          {/* Terminal dots */}
+          <div className={styles.dots}>
+            <span className={`${styles.dot} ${styles.dotRed}`} />
+            <span className={`${styles.dot} ${styles.dotYellow}`} />
+            <span className={`${styles.dot} ${styles.dotGreen}`} />
+          </div>
+
+          {/* Filename */}
+          {filename && (
+            <span className={styles.filename}>{filename}</span>
+          )}
+        </div>
+
+        <div className={styles.headerRight}>
+          {/* Language badge */}
+          <span
+            className={styles.langBadge}
+            style={{ color: meta.color, background: meta.bg, borderColor: `${meta.color}33` }}
+          >
+            {meta.label}
+          </span>
+
+          {/* Copy button */}
+          <button
+            className={`${styles.copyBtn} ${copied ? styles.copyBtnSuccess : ""}`}
+            onClick={handleCopy}
+            aria-label="Copy code"
+          >
+            {copied ? (
+              <>
+                <svg className={styles.icon} viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Copied
+              </>
+            ) : (
+              <>
+                <svg className={styles.icon} viewBox="0 0 16 16" fill="none">
+                  <rect x="5" y="5" width="8" height="8" rx="1.5" stroke="currentColor" strokeWidth="1.2"/>
+                  <path d="M3 11V3h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Copy
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Code area */}
+      <div className={styles.codeWrapper}>
+        <Highlight
+          {...defaultProps}
+          code={children.trim()}
+          language={prismLang}
+          theme={theme}
+        >
+          {({ className, tokens, getLineProps, getTokenProps }) => (
+            <pre ref={codeRef} className={`${className} ${styles.pre}`}>
+              {tokens.map((line, i) => {
+                const lineProps = getLineProps({ line, key: i });
+                return (
+                  <div
+                    key={i}
+                    {...lineProps}
+                    className={`${styles.line} ${hoveredLine === i ? styles.lineHovered : ""}`}
+                    onMouseEnter={() => setHoveredLine(i)}
+                    onMouseLeave={() => setHoveredLine(null)}
+                  >
+                    {!hideLineNumbers && (
+                      <span className={`${styles.lineNumber} ${hoveredLine === i ? styles.lineNumberHovered : ""}`}>
+                        {i + 1}
+                      </span>
+                    )}
+                    <span className={styles.lineContent}>
+                      {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                      ))}
+                    </span>
+                  </div>
+                );
+              })}
+            </pre>
+          )}
+        </Highlight>
+      </div>
+
+      {/* Bottom glow line */}
+      <div className={styles.bottomAccent} style={{ background: meta.color }} />
+    </div>
+  );
+}
