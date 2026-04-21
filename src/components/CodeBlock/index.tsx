@@ -66,13 +66,6 @@ export default function CodeBlock({
       {/* Header */}
       <div className={styles.header}>
         <div className={styles.headerLeft}>
-          {/* Terminal dots */}
-          <div className={styles.dots}>
-            <span className={`${styles.dot} ${styles.dotRed}`} />
-            <span className={`${styles.dot} ${styles.dotYellow}`} />
-            <span className={`${styles.dot} ${styles.dotGreen}`} />
-          </div>
-
           {/* Filename */}
           {filename && (
             <span className={styles.filename}>{filename}</span>

@@ -67,32 +67,6 @@
 }
 
 /* ================================
-   TERMINAL DOTS
-================================ */
-
-.dots {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  flex-shrink: 0;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  transition: filter 0.2s ease;
-}
-
-.wrapper:hover .dot {
-  filter: brightness(1.2);
-}
-
-.dotRed    { background: #ff5f57; box-shadow: 0 0 4px rgba(255, 95, 87, 0.4); }
-.dotYellow { background: #febc2e; box-shadow: 0 0 4px rgba(254, 188, 46, 0.4); }
-.dotGreen  { background: #28c840; box-shadow: 0 0 4px rgba(40, 200, 64, 0.4); }
-
-/* ================================
    FILENAME
 ================================ */
 
