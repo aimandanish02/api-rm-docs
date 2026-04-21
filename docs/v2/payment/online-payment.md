@@ -70,49 +70,41 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 import { Flex, Button, Card, Image } from "rebass";
 
-# Online Payment
+## What is this?
 
-Online payment allows businesses to accept online payments through web applications. With Revenue Monster's Online Payment, customers can enter payment details or select e-wallet options to complete the payment process from their smartphones and website.
-
-- Demo Web Payment: [Click Here](https://sb-api.revenuemonster.my/demo/payment/online)
+Online Payment lets businesses accept online payments through web and mobile applications. Customers can enter card details or select an e-wallet to complete payment from their smartphone or website.
 
 :::info
 Online Payment is an **online payment method**. Subscription is based on the online subscription rate.
 :::
 
-<Flex justifyContent="center">
-  <Button
-    width="100%"
-    sx={{
-      ":hover": { backgroundColor: "blue" },
-      backgroundColor: "#528ef7",
-      borderRadius: 15,
-    }}
-    onClick={() => {
-      window.location.href = "https://drive.google.com/drive/folders/1MOJBWY6aw6KiUUMRMbHo-hXMuxjI3Z0Q?usp=sharing";
-    }}
-  >
-    Payment Sequence Diagram
-  </Button>
-</Flex>
+---
 
-<br />
+## How to Use
 
-**Example of Web Payment**
+### Step 1: Create a Checkout Session
 
-![image](/img/gif/web-payment.gif)
+Send the order details to this endpoint. You will receive a `checkoutId` and a checkout `url`.
 
-**Example of Mobile Payment**
+### Step 2: Redirect the Customer
 
-<img src="/img/gif/mobile-web-payment.gif" width="300" height="600" />
+Redirect the customer to the `url` returned in the response. They will complete payment on the hosted checkout page.
+
+### Step 3: Handle the Redirect
+
+After payment, the customer is redirected to your `redirectUrl`. The redirect includes `status` and `orderId` as query parameters.
+
+### Step 4: Receive the Server Notification
+
+Set a `notifyUrl` to receive a server-to-server callback when payment succeeds. Query the transaction using [Query Transaction](./query-transaction.md) for full details.
 
 ---
 
 ## Hosted Payment Checkout
 
 :::note
-- To create a unified payment checkout page for your website and mobile.
-- **Data object** needs to be sorted, and **nested objects** also need to be sorted.
+- This creates a unified payment checkout page for both web and mobile.
+- The **data object** must be sorted alphabetically, including nested objects.
 :::
 
 **Request Parameters**
@@ -128,8 +120,8 @@ Online Payment is an **online payment method**. Subscription is based on the onl
     { name: "method", type: "[]String", description: "Payment methods to enable." },
     { name: "order.id", type: "String", required: true, description: "Order ID" },
     { name: "order.title", type: "String", required: true, description: "Order title" },
-    { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type (currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
+    { name: "order.currencyType", type: "String", required: true, description: "Order currency type (currently supported MYR only)" },
+    { name: "order.amount", type: "Uint64", required: true, description: "Order amount" },
     { name: "order.detail", type: "String", description: "Order detail" },
     { name: "order.additionalData", type: "String", description: "Order additional data" },
     { name: "customer.userId", type: "String", description: "Required when tokenization is enabled." },
@@ -145,8 +137,8 @@ Online Payment is an **online payment method**. Subscription is based on the onl
   title="Details"
   rows={[
     { name: "item.checkoutId", type: "String", description: "Checkout session ID" },
-    { name: "item.url", type: "String", description: "Checkout session URL" },
-    { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded. Otherwise returns an error code." },
+    { name: "item.url", type: "String", description: "Checkout session URL to redirect the customer to" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded, otherwise an error code." },
     { name: "error.code", type: "String", description: "Error code if the request failed." },
     { name: "error.message", type: "String", description: "Error message." },
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
@@ -155,38 +147,32 @@ Online Payment is an **online payment method**. Subscription is based on the onl
 
 ---
 
-### Advance: Individual Payment Checkout
+## Individual Payment Checkout
 
-After you have the **checkout session URL** from the checkout API:
+After creating a checkout session, use the `checkoutId` to build a custom payment experience:
 
-```
-https://sb-pg.revenuemonster.my/v4/checkout?checkoutId=1548316308361173347
-```
+<CodeBlock language="plaintext" filename="Checkout URL" hideLineNumbers>
+{`https://sb-pg.revenuemonster.my/v4/checkout?checkoutId=1548316308361173347`}
+</CodeBlock>
 
 ### Redirect Response
 
 :::info
-Redirect URL redirects your customer back to your page after payment. It can be any URL type (deep link, browser URL, server URL) as long as the browser can navigate to it.
+The redirect URL brings the customer back to your page after payment. It can be any URL type (deep link, browser URL, server URL).
 :::
 
 **Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
 
 | Parameter | Type | Required | Description |
-|
----|
----|
----|
----|
+|---|---|---|---|
 | `status` | String | Yes | Payment status |
 | `orderId` | String | Yes | Payment order ID |
 | `reason` | String | No | Payment failure reason |
 
----
-
 ### Notify Response
 
 :::info
-Notify URL (callback URL) informs your server of the transaction status after payment. Notify is called only on success — fail and refund do not trigger a notify. We suggest querying the transaction to get full details. See [Query Transaction](./query-transaction.md).
+The notify URL informs your server of the transaction status after a successful payment. Notify is only called on success — failure or refund does not trigger a notify. Query the transaction using [Query Transaction](./query-transaction.md) for full details.
 :::
 
 **Method:** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span>
@@ -199,22 +185,20 @@ Notify URL (callback URL) informs your server of the transaction status after pa
     { name: "data.referenceId", type: "String", description: "Reference ID." },
     { name: "data.transactionId", type: "String", required: true, description: "Transaction ID." },
     { name: "data.terminalId", type: "String", description: "Terminal ID." },
-    { name: "data.currencyType", type: "String", required: true, description: "Currency Type (currently supported MYR only)." },
-    { name: "data.balanceAmount", type: "Uint64", required: true, description: "Remaining balance amount for initiating refund." },
-    { name: "data.finalAmount", type: "Uint64", required: true, description: "Amount after all deductions (voucher, membership)." },
+    { name: "data.currencyType", type: "String", required: true, description: "Currency type (currently supported MYR only)." },
+    { name: "data.balanceAmount", type: "Uint64", required: true, description: "Remaining balance for initiating refund." },
+    { name: "data.finalAmount", type: "Uint64", required: true, description: "Amount after deductions (voucher, membership)." },
     { name: "data.platform", type: "String", required: true, description: "Transaction platform." },
     { name: "data.type", type: "String", required: true, description: "Transaction type." },
     { name: "data.method", type: "String", required: true, description: "Transaction payment method." },
     { name: "data.region", type: "String", required: true, description: "Transaction payment region." },
     { name: "data.status", type: "String", required: true, description: "Transaction payment status." },
-    { name: "data.transactionAt", type: "String", description: "Transaction date time. Present only when status is SUCCESS." },
+    { name: "data.transactionAt", type: "String", description: "Transaction date time (present only when status is SUCCESS)." },
     { name: "data.createdAt", type: "String", required: true, description: "Transaction created date time." },
     { name: "data.updatedAt", type: "String", required: true, description: "Transaction last updated date time." },
-    { name: "data.payee.userId", type: "String", description: "Payment provider user ID." },
-    { name: "data.payee.subUserId", type: "String", description: "Payment provider sub-user ID." },
     { name: "data.order.id", type: "String", required: true, description: "Order ID." },
     { name: "data.order.title", type: "String", required: true, description: "Order title." },
-    { name: "data.order.currencyType", type: "String", required: true, description: "Order Currency Type (currently supported MYR only)." },
+    { name: "data.order.currencyType", type: "String", required: true, description: "Order currency type." },
     { name: "data.order.amount", type: "Uint64", required: true, description: "Order amount." },
     { name: "data.order.detail", type: "String", description: "Order detail." },
     { name: "data.order.additionalData", type: "String", description: "Order additional data." }
@@ -226,17 +210,13 @@ Notify URL (callback URL) informs your server of the transaction status after pa
 ## Query Payment Checkout
 
 :::caution
-Payment checkout is not the same as payment transaction info. Checkout only returns status, amount, and redirectUrl. For full transaction details after a successful payment, query the transaction using [Query By Transaction ID](./query-transaction.md#query-by-transaction-id) with the `transactionId` from the checkout response.
+Payment checkout is not the same as payment transaction info. Checkout only returns status, amount, and redirectUrl. For full transaction details, query the transaction using [Query By Transaction ID](./query-transaction.md#query-by-transaction-id) with the `transactionId` from the checkout response.
 :::
 
 **Request Parameters**
 
 | Parameter | Type | Required | Description |
-|
----|
----|
----|
----|
+|---|---|---|---|
 | `checkoutId` | QueryParam | Yes | Payment checkout ID |
 
 **Response Parameters**
@@ -253,13 +233,13 @@ Payment checkout is not the same as payment transaction info. Checkout only retu
     { name: "item.transactionId", type: "String", description: "Payment transaction ID. Use this to query the transaction via Query Transaction." },
     { name: "item.order.id", type: "String", description: "Order ID." },
     { name: "item.order.title", type: "String", description: "Order title." },
-    { name: "item.order.currencyType", type: "String", description: "Order Currency Type (currently supported MYR only)." },
+    { name: "item.order.currencyType", type: "String", description: "Order currency type." },
     { name: "item.order.amount", type: "Uint64", description: "Order amount." },
     { name: "item.order.detail", type: "String", description: "Order detail." },
     { name: "item.order.additionalData", type: "String", description: "Order additional data." },
     { name: "item.platform", type: "String", description: "Payment checkout platform." },
     { name: "item.method", type: "String", description: "Payment checkout available methods." },
-    { name: "item.redirectUrl", type: "String", description: "Payment redirect URL (includes cancel and fail)." },
+    { name: "item.redirectUrl", type: "String", description: "Payment redirect URL." },
     { name: "item.notifyUrl", type: "String", description: "Payment notify URL." },
     { name: "item.startAt", type: "String", description: "Payment checkout start date time." },
     { name: "item.status", type: "String", description: "Payment checkout status." },
@@ -273,13 +253,11 @@ Payment checkout is not the same as payment transaction info. Checkout only retu
 ## Direct Payment Checkout
 
 :::note
-- With Direct Payment Checkout, you can create a payment page with your own UI design.
-- There are two modes: QR code and URL. URL is preferred in most cases.
-- For asset information, see [GitHub](https://github.com/RevenueMonster/Payment-Icon).
+With Direct Payment Checkout, you create a payment page with your own UI design. There are two modes: QR code and URL. URL is preferred in most cases.
 :::
 
 :::caution
-Direct Payment Checkout requires you to poll the [Query Payment Checkout](#query-payment-checkout) API to keep the payment status updated. Without polling, the payment status will not update until our system performs a pre-timeout check. Suggested polling interval is 3 to 5 seconds or longer based on your use case.
+Direct Payment Checkout requires polling the [Query Payment Checkout](#query-payment-checkout) API to keep the payment status updated. Without polling, the payment status will not update until our system performs a pre-timeout check. Suggested polling interval is 3 to 5 seconds.
 :::
 
 ### Mode: URL
@@ -295,13 +273,13 @@ Direct Payment Checkout requires you to poll the [Query Payment Checkout](#query
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1582438693268947023",
   "type": "URL",
   "method": "ALIPAYPLUS_MY"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -321,20 +299,6 @@ Direct Payment Checkout requires you to poll the [Query Payment Checkout](#query
 
 ### Mode: QR Code
 
-Using **qrCodeImageBase64** URL to generate a QR code:
-
-<Card width="100%">
-  <Image src="/img/payment-image/individual-qr-code.png" />
-</Card>
-
-Once the user scans the QR code, it will display:
-
-<Card width="100%">
-  <Image src="/img/payment-image/check-out-payment.png" />
-</Card>
-
-<br/>
-
 **Request Parameters**
 
 <ParamTable
@@ -346,13 +310,13 @@ Once the user scans the QR code, it will display:
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1582438693268947023",
   "type": "QRCODE",
   "method": "MAYBANK_MY"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -380,17 +344,17 @@ Once the user scans the QR code, it will display:
   rows={[
     { name: "checkoutId", type: "String", required: true, description: "Checkout ID from the Hosted Payment Checkout response." },
     { name: "type", type: "String", required: true, description: "Checkout type. Set to \"DUITNOW_QRCODE\"." },
-    { name: "method", type: "String", required: true, description: "Payment method. Leave empty for DuitNow QR." }
+    { name: "method", type: "String", required: true, description: "Leave empty for DuitNow QR." }
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1687168234460362061",
   "method": "",
   "type": "DUITNOW_QRCODE"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -422,13 +386,13 @@ Once the user scans the QR code, it will display:
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1582438693268947023",
   "type": "MINI_PROGRAM",
   "method": "ALIPAY_CN"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -450,20 +414,20 @@ Once the user scans the QR code, it will display:
 Use base64 decode on the `data` parameter and pass the result to the mini program API.
 :::
 
-```js
-my.tradePay({
+<CodeBlock language="javascript" filename="Alipay Mini Program">
+{`my.tradePay({
   orderStr: base64Decode(dataParameter),
   success: (res) => { console.log("success", res); },
   fail: (res) => { console.log("error", res); }
-});
-```
+});`}
+</CodeBlock>
 
 ---
 
 ### Mode: WeChat Pay Mini Program
 
 :::note
-Before starting integration, contact [support@revenuemonster.my](mailto:support@revenuemonster.my) to bind your "Mini Program App ID / 小程序 App ID" to your account. You will be notified once the binding is complete.
+Before starting integration, contact [support@revenuemonster.my](mailto:support@revenuemonster.my) to bind your "Mini Program App ID / 小程序 App ID" to your account.
 :::
 
 **Request Parameters**
@@ -478,14 +442,14 @@ Before starting integration, contact [support@revenuemonster.my](mailto:support@
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1582438693268947023",
   "type": "MINI_PROGRAM",
   "method": "WECHATPAY_CN",
   "userId": "oFGqK6w1kZyjDTtNAcOXBDHAa8CY"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -507,16 +471,16 @@ Before starting integration, contact [support@revenuemonster.my](mailto:support@
 Use base64 decode on the `data` parameter and pass the result to the mini program API.
 :::
 
-```js
-var base64decoded = base64Decode(dataParameter);
+<CodeBlock language="javascript" filename="WeChat Mini Program">
+{`var base64decoded = base64Decode(dataParameter);
 var payload = JSON.parse(base64decoded);
 wx.requestPayment({
   ...payload,
   success: function (res) { console.log("success", res); },
   fail: function (res) { console.log("fail", res); },
   complete: function (res) { console.log("complete", res); }
-});
-```
+});`}
+</CodeBlock>
 
 ---
 
@@ -524,12 +488,13 @@ wx.requestPayment({
 
 **Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
 **URL:** `https://open.revenuemonster.my/v3/payment/fpx-bank`
+
 **Sandbox URL:** `https://sb-open.revenuemonster.my/v3/payment/fpx-bank`
 
+**FPX Bank Codes:**
+
 | Code | Name |
-|
----|
----|
+|---|---|
 | ABB0233:B2C | Affin Bank |
 | ABMB0212:B2C | Alliance Bank (Personal) |
 | AGRO01:B2C | AGRONet |
@@ -562,16 +527,16 @@ wx.requestPayment({
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1687166508263303064",
   "method": "FPX_MY",
   "type": "URL",
   "fpx": {
     "bankCode": "TEST0021"
   }
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -603,13 +568,13 @@ wx.requestPayment({
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "checkoutId": "1687168234460362061",
   "method": "MASTERCARD_MY",
   "type": "URL"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
@@ -624,3 +589,5 @@ wx.requestPayment({
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

@@ -71,19 +71,23 @@ Concatenate your `clientId` and `clientSecret` with a colon, then Base64-encode 
 
 **Format:** `clientId:clientSecret`
 
-```
-Before encoding:
-3675930941412424316:wmn7FUauXHdkoYa9182kCMkjGnNJVgin
+**Before encoding:**
 
-After Base64 encoding:
-MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
-```
+<CodeBlock language="plaintext" filename="Plain Credentials" hideLineNumbers>
+{`3675930941412424316:wmn7FUauXHdkoYa9182kCMkjGnNJVgin`}
+</CodeBlock>
+
+**After Base64 encoding:**
+
+<CodeBlock language="plaintext" filename="Base64 Encoded" hideLineNumbers>
+{`MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==`}
+</CodeBlock>
 
 You can use any Base64 encoding tool or the following one-liner:
 
-```bash
-echo -n "clientId:clientSecret" | base64
-```
+<CodeBlock language="bash" filename="Terminal" hideLineNumbers>
+{`echo -n "clientId:clientSecret" | base64`}
+</CodeBlock>
 
 ---
 
@@ -91,10 +95,10 @@ echo -n "clientId:clientSecret" | base64
 
 Include the Base64-encoded credentials in the `Authorization` header:
 
-```
-Content-Type: application/json
-Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
-```
+<CodeBlock language="plaintext" filename="Request Headers" hideLineNumbers>
+{`Content-Type: application/json
+Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==`}
+</CodeBlock>
 
 See [HTTP Basic Authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) for more details on this scheme.
 
@@ -123,3 +127,5 @@ See [HTTP Basic Authentication](https://developer.mozilla.org/en-US/docs/Web/HTT
     { name: "refreshTokenExpiresIn", type: "Number", description: "Refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

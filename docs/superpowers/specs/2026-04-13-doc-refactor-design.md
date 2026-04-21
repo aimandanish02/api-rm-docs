@@ -111,3 +111,37 @@ Refactor only sidebar-visible docs — 126 total in the `/docs` folder to improv
 - Code examples clean and properly formatted
 - Scanability improved (users can understand content quickly)
 - API docs follow What / When / How structure
+
+---
+
+## Strict Rules
+
+### Front Matter — DO NOT TOUCH
+The front matter at the top of each doc file (between `---` markers) must remain **completely untouched**. It affects the API Playground component. Only modify content below the front matter.
+
+### ParamTable Component — MANDATORY
+For any table with data type columns (bool, int, char, string, object, array, number, etc.), you **MUST** use the custom `<ParamTable />` component from `src/components/ParamTable/index.tsx` instead of markdown tables.
+
+Example:
+- **DO NOT use:** `| name | type | description |`
+- **USE:** `<ParamTable rows={[{name: "fieldName", type: "String", description: "..."}]} />`
+
+### Only Sidebar Docs
+Only refactor docs that appear in `sidebars.js`. Ignore any docs outside the sidebar list.
+
+### Tracking Progress
+Add a completion badge at the end of each refactored doc by adding this comment at the very bottom of the file:
+
+```html
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+```
+
+This serves as a tracking marker. Count these markers to know how many docs are completed.
+
+---
+
+## Completion Tracking
+
+Total sidebar docs: ~92 documents requiring refactoring.
+
+Progress will be tracked by counting files with the completion marker at the bottom.

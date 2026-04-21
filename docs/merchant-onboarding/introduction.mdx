@@ -6,16 +6,52 @@ sidebar_label: Introduction
 
 # Merchant Onboarding API
 
+## What is this?
+
+The Merchant Onboarding API lets third-party developers integrate RM's Open API for their own merchant base. Partners collect and submit merchant information on behalf of merchants.
+
+## When to Use
+
+Use this API when you:
+- Are a platform or aggregator with multiple merchants
+- Want to automate merchant onboarding into RM's system
+- Need to manage merchant accounts programmatically
+
 :::note
 This API is for **Partner Merchant accounts** only. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
-Onboarding API is for third-party developers who have their own merchant base and want to integrate RM's Open API. Merchants are onboarded directly through the partner, so the partner collects and submits the merchant information on their behalf.
+## How to Use
 
-![Merchant Onboarding flow](/img/onboarding/onboarding.png)
+### Step 1: Activate Partner Account
+
+Contact RM to activate your Partner account. You will receive credentials to use the onboarding API.
+
+### Step 2: Collect Merchant Information
+
+Gather the required merchant details:
+- Company name and registration information
+- Contact information (email, phone)
+- Store details
+
+### Step 3: Submit Merchant via API
+
+Use the Create Merchant endpoint to submit merchant information. The merchant will be reviewed by RM.
+
+### Step 4: Monitor Application Status
+
+Track the merchant's application status. See [Get Merchant](./get-merchant.md) for details.
+
+---
+
+
+<img src="/img/onboarding/onboarding.png" />
 
 :::note
 For all Open API endpoints other than the Onboarding API, you must use an **Onboarded Merchant Account** Developer Application. See the configuration guide below.
 :::
 
-![Developer Application configuration](/img/onboarding/configuration.png)
+<img src="/img/onboarding/configuration.png" />
+
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

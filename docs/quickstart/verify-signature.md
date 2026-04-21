@@ -38,15 +38,15 @@ When RM calls your `notifyUrl`, the request body will be a JSON object. The foll
   ]}
 />
 
-```json
-{
+<CodeBlock language="json" filename="Callback Body">
+{`{
   "code": "SUCCESS",
   "item": {
     "checkoutId": "1617985392758071583",
     "url": "https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583"
   }
-}
-```
+}`}
+</CodeBlock>
 
 ---
 
@@ -56,15 +56,15 @@ Sort the JSON keys alphabetically (including nested objects), make it compact, t
 
 **Sorted, compact JSON:**
 
-```json
-{"code":"SUCCESS","item":{"checkoutId":"1617985392758071583","url":"https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583"}}
-```
+<CodeBlock language="json" filename="Sorted Compact JSON" hideLineNumbers>
+{`{"code":"SUCCESS","item":{"checkoutId":"1617985392758071583","url":"https://sb-pg.revenuemonster.my/v2/checkout?checkoutId=1617985392758071583"}}`}
+</CodeBlock>
 
 **Base64 result:**
 
-```
-eyJjb2RlIjoiU1VDQ0VTUyIsIml0ZW0iOnsiY2hlY2tvdXRJZCI6IjE2MTc5ODUzOTI3NTgwNzE1ODMiLCJ1cmwiOiJodHRwczovL3NiLXBnLnJldmVudWVtb25zdGVyLm15L3YyL2NoZWNrb3V0P2NoZWNrb3V0SWQ9MTYxNzk4NTM5Mjc1ODA3MTU4MyJ9fQ==
-```
+<CodeBlock language="plaintext" filename="Base64 Encoded" hideLineNumbers>
+{`eyJjb2RlIjoiU1VDQ0VTUyIsIml0ZW0iOnsiY2hlY2tvdXRJZCI6IjE2MTc5ODUzOTI3NTgwNzE1ODMiLCJ1cmwiOiJodHRwczovL3NiLXBnLnJldmVudWVtb25zdGVyLm15L3YyL2NoZWNrb3V0P2NoZWNrb3V0SWQ9MTYxNzk4NTM5Mjc1ODA3MTU4MyJ9fQ==`}
+</CodeBlock>
 
 ---
 
@@ -84,14 +84,14 @@ Build the same signing string format used for requests. The values of `nonceStr`
 />
 
 :::note
+`requestUrl` is omitted when verifying callback signatures.
+:::
+
 **Example verification string:**
 
-```
-data=eyJjb2Rl...&method=post&nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&signType=sha256&timestamp=1527407052
-```
-
-Note: `requestUrl` is omitted when verifying callback signatures.
-:::
+<CodeBlock language="plaintext" filename="Verification String" hideLineNumbers>
+{`data=eyJjb2Rl...&method=post&nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&signType=sha256&timestamp=1527407052`}
+</CodeBlock>
 
 ---
 
@@ -103,19 +103,17 @@ Verify the `X-Signature` header from the RM callback against your constructed st
 Use the **RM Server Public Key** (not your own public key) to verify callbacks. Find it in **Merchant Portal > Developer > Applications > Server Public Key**.
 
 Wrap it in standard PEM format before use:
-
-```
--
-----BEGIN PUBLIC KEY
------
-<server_public_key_content>
--
-----END PUBLIC KEY
------
-```
 :::
+
+<CodeBlock language="plaintext" filename="PEM Format" hideLineNumbers>
+{`-----BEGIN PUBLIC KEY-----
+<server_public_key_content>
+-----END PUBLIC KEY-----`}
+</CodeBlock>
 
 The verification process:
 1. Extract the signature value from the `X-Signature` header (strip the `sha256 ` prefix).
 2. Verify the signature against your constructed string from Step 3 using the RM Server Public Key and `sha256`.
 3. If verification passes, the callback is authentic. If it fails, discard the request.
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

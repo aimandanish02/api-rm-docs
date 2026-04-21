@@ -64,63 +64,27 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/payment/quickpay"
 />
 
-import { Box, Flex, Button } from "rebass";
+## What is this?
 
-<Box
-  sx={{
-    width: "100%",
-    height: 0,
-    paddingBottom: 900 / 16 + "%",
-    position: "relative",
-    overflow: "hidden",
-    "& > iframe": {
-      position: "absolute",
-      width: "100%",
-      height: "100%",
-      top: 0,
-      bottom: 0,
-      left: 0,
-      border: 0,
-    },
-  }}
->
-  <iframe
-    width="560"
-    height="315"
-    src="https://www.youtube.com/embed/sGmQCTvXORQ"
-    frameBorder="0"
-    allowFullScreen
-  />
-</Box>
+Quick Pay lets merchants accept payments by scanning a QR code presented by the customer. The customer scans the merchant's QR code using their preferred payment app, and the payment is processed instantly.
 
-<br />
+## When to Use
 
-# Quick Pay
+Use Quick Pay when you want to:
+- Accept in-store payments via QR code
+- Process offline transactions at a physical store or terminal
+- Support multiple e-wallets and payment methods in a single integration
 
-Quick Pay allows businesses to accept payments from customers using a mobile app or QR code. With Revenue Monster's Quick Pay, customers can simply scan a QR code displayed by the merchant, and then make a payment using their preferred payment method such as credit card, debit card, or e-wallet.
-
-:::info
-Quick Pay is an offline payment method and its subscription is based on the offline subscription rate.
+:::tip
+Quick Pay is an **offline payment method**. Its subscription rate is based on the offline subscription plan. Contact [support@revenuemonster.my](mailto:support@revenuemonster.my) to activate this feature.
 :::
 
-<Flex justifyContent="center">
-  <Button
-    width="100%"
-    sx={{
-      ":hover": {
-        backgroundColor: "blue",
-      },
-      backgroundColor: "#528ef7",
-      borderRadius: 15,
-    }}
-    onClick={() => {
-      window.location.href =
-        "https://drive.google.com/drive/folders/1x5jjspiW46mPKXbFO-0d-BZoyjpM1kp4?usp=sharing";
-    }}
-  >
-    Sequence Diagram
-  </Button>
-</Flex>
+## How to Use
+
+1. Customer presents a QR code from their payment app
+2. Scan the QR code to get the `authCode`
+3. Send the `authCode` along with order details to this endpoint
+4. Check the `code` in the response — if `"SUCCESS"`, the payment is complete
 
 ---
 
@@ -143,31 +107,31 @@ Quick Pay is an offline payment method and its subscription is based on the offl
   ]}
 />
 
-```json title="Example Request"
-{
-    "authCode": "134850717797247290",
-    "storeId": "6170506694335521334",
-    "ipAddress": "8.8.8.8",
-    "order": {
-        "id": "ODR-20230513-1001",
-        "title": "Payment via OpenAPI",
-        "currencyType": "MYR",
-        "amount": 1000,
-        "detail": "",
-        "additionalData": ""
-    }
-}
-```
+<CodeBlock language="json" filename="Example Request">
+{`{
+  "authCode": "134850717797247290",
+  "storeId": "6170506694335521334",
+  "ipAddress": "8.8.8.8",
+  "order": {
+    "id": "ODR-20230513-1001",
+    "title": "Payment via OpenAPI",
+    "currencyType": "MYR",
+    "amount": 1000,
+    "detail": "",
+    "additionalData": ""
+  }
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the payment succeeded, otherwise an error code" },
+    { name: "error.code", type: "String", description: "Error code if the request failed" },
+    { name: "error.message", type: "String", description: "Error message if the request failed" },
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)" }
   ]}
 />
@@ -176,7 +140,7 @@ Quick Pay is an offline payment method and its subscription is based on the offl
 
 ## Quick Pay + Voucher
 
-:::tip About voucher redemption flow
+:::tip
 Vouchers can be generated as QR codes for scanning. Scan the voucher QR code first, then scan the wallet QR code.
 :::
 
@@ -198,34 +162,34 @@ Vouchers can be generated as QR codes for scanning. Scan the voucher QR code fir
   ]}
 />
 
-```json title="Example Request"
-{
-    "authCode": "134850717797247290",
-    "storeId": "6170506694335521334",
-    "ipAddress": "8.8.8.8",
-    "order": {
-        "id": "ODR-20230513-1001",
-        "title": "Payment via OpenAPI",
-        "currencyType": "MYR",
-        "amount": 1000,
-        "detail": "",
-        "additionalData": ""
-    },
-    "voucher": {
-      "code": "haYkAch3VN"
-    }
-}
-```
+<CodeBlock language="json" filename="Example Request">
+{`{
+  "authCode": "134850717797247290",
+  "storeId": "6170506694335521334",
+  "ipAddress": "8.8.8.8",
+  "order": {
+    "id": "ODR-20230513-1001",
+    "title": "Payment via OpenAPI",
+    "currencyType": "MYR",
+    "amount": 1000,
+    "detail": "",
+    "additionalData": ""
+  },
+  "voucher": {
+    "code": "haYkAch3VN"
+  }
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the payment succeeded, otherwise an error code" },
+    { name: "error.code", type: "String", description: "Error code if the request failed" },
+    { name: "error.message", type: "String", description: "Error message if the request failed" },
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)" }
   ]}
 />
@@ -234,10 +198,10 @@ Vouchers can be generated as QR codes for scanning. Scan the voucher QR code fir
 
 ## Quick Pay + Spending Loyalty
 
-:::info About QR Code Type
-You will receive extra parameters in the transaction response and you need to print the generated QR code on the receipt so customers can use their loyalty program to retrieve spending loyalty points.
+:::important
+You will receive extra parameters in the transaction response. You need to print the generated QR code on the receipt so customers can use their loyalty program to retrieve spending loyalty points.
 
-Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spending-loyalty)
+See [Transaction Object > Spending Loyalty](./query-transaction.md#spending-loyalty)
 :::
 
 **Request Parameters**
@@ -261,36 +225,36 @@ Reference: [Transaction Object > Spending Loyalty](./query-transaction.md#spendi
   ]}
 />
 
-```json title="Example Request"
-{
-    "authCode": "134850717797247290",
-    "storeId": "6170506694335521334",
-    "ipAddress": "8.8.8.8",
-    "order": {
-        "id": "ODR-20230513-1001",
-        "title": "Payment via OpenAPI",
-        "currencyType": "MYR",
-        "amount": 1000,
-        "detail": "",
-        "additionalData": ""
-    },
-    "loyalty": {
-      "type": "PHONENUMBER",
-      "countryCode": "60",
-      "phoneNumber": "103403660"
-    }
-}
-```
+<CodeBlock language="json" filename="Example Request">
+{`{
+  "authCode": "134850717797247290",
+  "storeId": "6170506694335521334",
+  "ipAddress": "8.8.8.8",
+  "order": {
+    "id": "ODR-20230513-1001",
+    "title": "Payment via OpenAPI",
+    "currencyType": "MYR",
+    "amount": 1000,
+    "detail": "",
+    "additionalData": ""
+  },
+  "loyalty": {
+    "type": "PHONENUMBER",
+    "countryCode": "60",
+    "phoneNumber": "103403660"
+  }
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the payment succeeded, otherwise an error code" },
+    { name: "error.code", type: "String", description: "Error code if the request failed" },
+    { name: "error.message", type: "String", description: "Error message if the request failed" },
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)" }
   ]}
 />
@@ -315,21 +279,21 @@ Currently available membership card: Alipay Gourmet Card (马来西亚美食优�
   ]}
 />
 
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "memberCardId": "28158443195878043074",
   "storeId": "4949529109748431621"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the verification succeeded, otherwise an error code" },
+    { name: "error.code", type: "String", description: "Error code if the request failed" },
+    { name: "error.message", type: "String", description: "Error message if the request failed" },
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)" }
   ]}
 />
@@ -357,35 +321,37 @@ Currently available membership card: Alipay Gourmet Card (马来西亚美食优�
   ]}
 />
 
-```json title="Example Request"
-{
-    "authCode": "134850717797247290",
-    "storeId": "6170506694335521334",
-    "ipAddress": "8.8.8.8",
-    "order": {
-        "id": "ODR-20230513-1001",
-        "title": "Payment via OpenAPI",
-        "currencyType": "MYR",
-        "amount": 1000,
-        "detail": "",
-        "additionalData": ""
-    },
-    "extraInfo": {
-      "type": "MEMBERSHIP",
-      "reference": "28158443195878043074"
-    }
-}
-```
+<CodeBlock language="json" filename="Example Request">
+{`{
+  "authCode": "134850717797247290",
+  "storeId": "6170506694335521334",
+  "ipAddress": "8.8.8.8",
+  "order": {
+    "id": "ODR-20230513-1001",
+    "title": "Payment via OpenAPI",
+    "currencyType": "MYR",
+    "amount": 1000,
+    "detail": "",
+    "additionalData": ""
+  },
+  "extraInfo": {
+    "type": "MEMBERSHIP",
+    "reference": "28158443195878043074"
+  }
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the payment succeeded, otherwise an error code" },
+    { name: "error.code", type: "String", description: "Error code if the request failed" },
+    { name: "error.message", type: "String", description: "Error message if the request failed" },
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

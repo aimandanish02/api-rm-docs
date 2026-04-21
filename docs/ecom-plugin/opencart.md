@@ -14,61 +14,24 @@ Enable RM payment for Opencart
 
 Go to this link [Install RM payment gateway](https://github.com/RevenueMonster/opencart-payment-gateway) > Code > Download ZIP<br/>
 
-![image](/img/gif/download-opencart.png)
+<img src="/img/gif/download-opencart.png" />
 
 ### Step 2 : Plugin RM in Opencart
 
 Go to Extensions > Installer > Upload File > Upload the Zip file<br/>
 
-![image](/img/gif/install-opencart.png)
+<img src="/img/gif/install-opencart.png" />
 
 ### Step 3 : Enable RM plug-in
 
-![image](/img/gif/enable-opencart.gif)<br/>
+<img src="/img/gif/enable-opencart.gif" /> <br/>
+
 Go to Extensions > Extensions > Choose payments > <b>Install</b> Revenue Monster Payment Gateway
 
 ### Step 4 : Setup Payment Gateway
 
 | Title                  | Required | Example                                                                                                                      |
-| 
-----
-----
-----
-----
------- | 
-----
----- | 
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
-----
----- |
+|------------------------|----------|------------------------------------------------------------------------------------------------------------------------------|
 | Sandbox Mode           | Optional | Yes                                                                                                                          |
 | Debug Model            | Optional | Disabled                                                                                                                     |
 | RM Client ID           | Yes      | <a href="https://doc.revenuemonster.my/docs/quickstart/signature-algorithm#step-1--create-new-application">Get Client ID</a> |
@@ -82,14 +45,15 @@ Go to Extensions > Extensions > Choose payments > <b>Install</b> Revenue Monster
 
 After done all the flow click **Save**<br/>
 
-![image](/img/gif/setup-opencart.gif)<br/>
+<img src="/img/gif/setup-opencart.gif" /> <br/>
+
 
 ### Example of Payment
 
 <b>Web view</b> <br />
 
-![image](/img/gif/webview-opencart.gif) <br />
+<img src="/img/gif/webview-opencart.gif" /> <br/>
 
 <b>Mobile view</b> <br />
 
-![image](/img/gif/mobileview-opencart.gif)
+<img src="/img/gif/mobileview-opencart.gif" /> 

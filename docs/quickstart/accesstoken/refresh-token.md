@@ -78,13 +78,17 @@ Go to [RM Merchant Portal](https://merchant.revenuemonster.my/) > **Developer** 
 
 Concatenate your `clientId` and `clientSecret` with a colon, then Base64-encode the result.
 
-```
-Before encoding:
-3675930941412424316:wmn7FUauXHdkoYa9182kCMkjGnNJVgin
+**Before encoding:**
 
-After Base64 encoding:
-MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
-```
+<CodeBlock language="plaintext" filename="Plain Credentials" hideLineNumbers>
+{`3675930941412424316:wmn7FUauXHdkoYa9182kCMkjGnNJVgin`}
+</CodeBlock>
+
+**After Base64 encoding:**
+
+<CodeBlock language="plaintext" filename="Base64 Encoded" hideLineNumbers>
+{`MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==`}
+</CodeBlock>
 
 ---
 
@@ -94,10 +98,10 @@ Include the Base64-encoded credentials in the `Authorization` header, and pass t
 
 **Headers:**
 
-```
-Content-Type: application/json
-Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==
-```
+<CodeBlock language="plaintext" filename="Request Headers" hideLineNumbers>
+{`Content-Type: application/json
+Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2pHbk5KVmdpbg==`}
+</CodeBlock>
 
 **Body:**
 
@@ -123,3 +127,5 @@ Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2p
     { name: "refreshTokenExpiresIn", type: "Number", description: "New refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

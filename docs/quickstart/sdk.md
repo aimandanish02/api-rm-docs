@@ -52,3 +52,5 @@ Not all SDKs fully implement every API function. Pull requests are welcome.
   text-decoration: none;
 }
 `}</style>
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

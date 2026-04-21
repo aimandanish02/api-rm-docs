@@ -79,7 +79,7 @@ Refer to which API endpoint you are calling. Below request parameter is just an 
 />
 
 ### Example Request
-
+<!-- 
 ```json
 {
   "order": {
@@ -101,7 +101,29 @@ Refer to which API endpoint you are calling. Below request parameter is just an 
   "notifyUrl": "https://dev-rm-api.ap.ngrok.io",
   "layoutVersion": "v3"
 }
-```
+``` -->
+<CodeBlock language="json" filename="Example Request">
+{`{
+  "order": {
+    "title": "hello",
+    "detail": "",
+    "additionalData": "world",
+    "amount": 10,
+    "currencyType": "MYR",
+    "id": "7211"
+  },
+  "customer": {
+    "userId": "13245876",
+    "email": ""
+  },
+  "method": [],
+  "type": "WEB_PAYMENT",
+  "storeId": "1608123035564538121",
+  "redirectUrl": "https://revenuemonster.my",
+  "notifyUrl": "https://dev-rm-api.ap.ngrok.io",
+  "layoutVersion": "v3"
+}`}
+</CodeBlock>
 
 :::important
 Before signing, you must:
@@ -111,13 +133,7 @@ Before signing, you must:
 3. **Replace special characters:**
 
 | Character | Replace With |
-|
-----
-----
----|
-----
-----
------|
+|-----------|-------------|
 | `<` | `\u003c` |
 | `>` | `\u003e` |
 | `&` | `\u0026` |
@@ -129,11 +145,22 @@ Before signing, you must:
 
 Take the compact, sorted JSON string and Base64-encode it.
 
-:::note Example output:
+<!-- :::note Example output:
 `ewogICAgIm9yZGVyIjogewogICAgCSJ0aXRsZSI6ICJoZWxsbyIsCiAgICAJImRldGFpbCI6ICIiLAogICAgCSJhZGRpdGlvbmFsRGF0YSI6ICJ3b3JsZCIsCgkgICAgImFtb3VudCI6IDEwLAoJICAgICJjdXJyZW5jeVR5cGUiOiAiTVlSIiwKCSAgICAiaWQiOiAgIjcyMTEiCiAgICB9LAogICAgImN1c3RvbWVyIjogewogICAgInVzZXJJZCI6ICIiLAogICAgImVtYWlsIjogIiIKfSwKICAgICJtZXRob2QiOltdLAogICAgInR5cGUiOiAiV0VCX1BBWU1FTlQiLAogICAgInN0b3JlSWQiOiAiMTYwODEyMzAzNTU2NDUzODEyMSIsCiAgICAicmVkaXJlY3RVcmwiOiAiaHR0cHM6Ly9yZXZlbnVlbW9uc3Rlci5teSIsCiAgICAibm90aWZ5VXJsIjogImh0dHBzOi8vZGV2LXJtLWFwaS5hcC5uZ3Jvay5pbyIsCiAgICAibGF5b3V0VmVyc2lvbiI6InYzIgp9`
-:::
+::: -->
 
----
+
+<CodeBlock language="plaintext" filename="Base64 Encoded" hideLineNumbers>
+{`ewogICAgIm9yZGVyIjogewogICAgCSJ0aXRsZSI6ICJoZWxsbyIsCiAgICAJImRldGFpbCI6IC
+IiLAogICAgCSJhZGRpdGlvbmFsRGF0YSI6ICJ3b3JsZCIsCgkgICAgImFtb3VudCI6IDEwLAoJIC
+AgICJjdXJyZW5jeVR5cGUiOiAiTVlSIiwKCSAgICAiaWQiOiAgIjcyMTEiCiAgICB9LAogICAgIm
+N1c3RvbWVyIjogewogICAgInVzZXJJZCI6ICIiLAogICAgImVtYWlsIjogIiIKfSwKICAgICJtZX
+Rob2QiOltdLAogICAgInR5cGUiOiAiV0VCX1BBWU1FTlQiLAogICAgInN0b3JlSWQiOiAiMTYwOD
+EyMzAzNTU2NDUzODEyMSIsCiAgICAicmVkaXJlY3RVcmwiOiAiaHR0cHM6Ly9yZXZlbnVlbW9uc3
+Rlci5teSIsCiAgICAibm90aWZ5VXJsIjogImh0dHBzOi8vZGV2LXJtLWFwaS5hcC5uZ3Jvay5pby
+IsCiAgICAibGF5b3V0VmVyc2lvbiI6InYzIgp9`}
+</CodeBlock>
+
 
 ## Step 3 — Construct the Signing String
 
@@ -154,11 +181,16 @@ Take the compact, sorted JSON string and Base64-encode it.
   ]}
 />
 
-:::note Example signing string:
+<!-- :::note Example signing string:
 ```
 data=ewogICAgIm9yZGVyIjog...&method=post&nonceStr=VYNknZohxwicZMaWbNdBKUrnrxDtaRhN&requestUrl=https://sb-open.revenuemonster.my/v3/payment/online&signType=sha256&timestamp=1527407052
 ```
-:::
+::: -->
+
+<CodeBlock language="plaintext" filename="Signing String" hideLineNumbers>
+{`data=ewogICAgIm9yZGVyIjog...&method=post&nonceStr=VYNknZohxwicZMaWbNdB
+KUrnrxDtaRhN&requestUrl=https://sb-open.revenuemonster.my/v3/payment/online&signType=sha256&timestamp=1527407052`}
+</CodeBlock>
 
 ---
 
@@ -170,9 +202,13 @@ Sign the plain text string from Step 3 using `sha256` with your RSA private key.
 Sign this content using `sha256` with your **private key** and make sure the **public key** has been uploaded to the **RM Merchant Portal**.
 :::
 
-:::note Example signature:
+<!-- :::note Example signature:
 `sha256 IrBg6t73VsH7ieEnQDB4CXHFjMWUkp8Dtddpxqw+4Gvz6Tag7Dx6nrfAt2ofYK8xZN9aBCvAKAfmAOGWIXnsTXfhFBnMA2kadiga7ufUJ81ozyhllbiliRM2ugw1OcqSTLRHWBPhrVwhHBxgDiG9wbuI3FKURrz+CufYYakFoCw=`
-:::
+::: -->
+
+<CodeBlock language="plaintext" filename="Signature" hideLineNumbers>
+{`sha256 IrBg6t73VsH7ieEnQDB4CXHFjMWUkp8Dtddpxqw+4Gvz6Tag7Dx6nrfAt2ofYK8xZN9aBCvAKAfmAOGWIXnsTXfhFBnMA2kadiga7ufUJ81ozyhllbiliRM2ugw1OcqSTLRHWBPhrVwhHBxgDiG9wbuI3FKURrz+CufYYakFoCw=`}
+</CodeBlock>
 
 ---
 
@@ -181,9 +217,7 @@ Sign this content using `sha256` with your **private key** and make sure the **p
 Place the signature in the `X-Signature` header, prefixed with the sign type:
 
 | Header | Value |
-|
----|
----|
+|---|---|
 | `X-Signature` | `sha256 <your_signature>` |
 | `X-Nonce-Str` | The nonce string you generated |
 | `X-Timestamp` | The Unix timestamp you generated |
@@ -192,7 +226,7 @@ Place the signature in the `X-Signature` header, prefixed with the sign type:
 
 ### Example cURL Request
 
-```bash
+<!-- ```bash
 curl --request POST \
   --url 'https://sb-open.revenuemonster.my/v3/payment/online' \
   --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ...' \
@@ -220,7 +254,37 @@ curl --request POST \
     "notifyUrl": "https://dev-rm-api.ap.ngrok.io",
     "layoutVersion": "v3"
   }'
-```
+``` -->
+
+<CodeBlock language="bash" filename="cURL" hideLineNumbers>
+{`curl --request POST \\
+  --url 'https://sb-open.revenuemonster.my/v3/payment/online' \\
+  --header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ...' \\
+  --header 'Content-Type: application/json' \\
+  --header 'X-Nonce-Str: VYNknZohxwicZMaWbNdBKUrnrxDtaRhN' \\
+  --header 'X-Signature: sha256 IrBg6t73VsH7ieEnQDB4CXHFjMWUkp8Dtddpxqw+4Gvz6Tag7Dx6nrfAt2ofYK8xZN9aBCvAKAfmAOGWIXnsTXfhFBnMA2kadiga7ufUJ81ozyhllbiliRM2ugw1OcqSTLRHWBPhrVwhHBxgDiG9wbuI3FKURrz+CufYYakFoCw=' \\
+  --header 'X-Timestamp: 1527407052' \\
+  --data '{
+    "order": {
+      "title": "hello",
+      "detail": "",
+      "additionalData": "world",
+      "amount": 10,
+      "currencyType": "MYR",
+      "id": "7211"
+    },
+    "customer": {
+      "userId": "13245876",
+      "email": ""
+    },
+    "method": [],
+    "type": "WEB_PAYMENT",
+    "storeId": "1608123035564538121",
+    "redirectUrl": "https://revenuemonster.my",
+    "notifyUrl": "https://dev-rm-api.ap.ngrok.io",
+    "layoutVersion": "v3"
+  }'`}
+</CodeBlock>
 
 ---
 
@@ -246,7 +310,7 @@ curl --request POST \
 
 ### Example Response
 
-```json
+<!-- ```json
 {
   "item": {
     "checkoutId": "1548316308361173347",
@@ -254,7 +318,17 @@ curl --request POST \
   },
   "code": "SUCCESS"
 }
-```
+``` -->
+
+<CodeBlock language="json" filename="Response">
+{`{
+  "item": {
+    "checkoutId": "1548316308361173347",
+    "url": "https://sb-pg.revenuemonster.my/checkout?checkoutId=1548316308361173347"
+  },
+  "code": "SUCCESS"
+}`}
+</CodeBlock>
 
 ---
 
@@ -264,7 +338,7 @@ curl --request POST \
 
 Go to **Merchant Portal → Developer → Applications** and create a new application:
 
-![image](/img/developer-application/1.png)
+<img src="/img/developer-application/1.png" />
 
 ### Step 2 — Obtain Credentials
 
@@ -272,11 +346,11 @@ Click on the application you created. You can edit and update relevant informati
 
 To disable the application, toggle the **ON/OFF** switch at the top right:
 
-![image](/img/developer-application/4.png)
+<img src="/img/developer-application/4.png" />
 
 Click **Show** to reveal your `clientSecret`:
 
-![image](/img/developer-application/5.png)
+<img src="/img/developer-application/5.png" />
 
 ### Step 3 — Generate RSA Keys
 
@@ -285,19 +359,21 @@ Go to **Merchant Portal → Developer → Application → Generate RSA Key**. Re
 - **Private Key** — store securely, never expose publicly. Used to sign your API requests.
 - **Public Key** — upload to the Merchant Portal so RM can verify your signatures.
 
-![image](/img/developer-application/rks-key.png)
+<img src="/img/developer-application/rks-key.png" />
+
 
 ### Step 4 — Wrap Your Public Key (For Signature Debugger)
 
 Your public key needs to be wrapped in standard PEM format before using with the Signature Debugger:
 
-![image](/img/developer-application/9.png)
+<img src="/img/developer-application/9.png" />
+
 
 ### Step 5 — Use the Signature Debugger (Optional)
 
 For security purposes, RM has enhanced its authentication flow by adding layers of encryption to endpoints. You may develop your own encryption tool, or use the **Signature Debugger** to sign and verify content using your private/public keys:
 
-![image](/img/developer-application/signature-debug.png)
+<img src="/img/developer-application/signature-debug.png" />
 
 ---
 
@@ -309,7 +385,7 @@ If you receive an `INVALID_REQUEST_SIGNATURE` error, the response includes a `de
 Compare the `preVerifyContent` steps below with your own output to find where they diverge.
 :::
 
-```json
+<!-- ```json
 {
   "debug": {
     "preVerifyContent": {
@@ -356,14 +432,61 @@ Compare the `preVerifyContent` steps below with your own output to find where th
     "message": "The request signature is invalid"
   }
 }
-```
+``` -->
+
+<CodeBlock language="json" filename="Debug Response">
+{`{
+  "debug": {
+    "preVerifyContent": {
+      "step1": {
+        "content": "{\\"layoutVersion\\":\\"v2\\",\\"method\\":[\\"GOBIZ_MY\\"],\\"notifyUrl\\":\\"https://dev-rm-api.ap.ngrok.io\\",\\"order\\":{\\"additionalData\\":\\"world\\",\\"amount\\":10,\\"currencyType\\":\\"MYR\\",\\"detail\\":\\"hello\\",\\"id\\":\\"721115\\",\\"title\\":\\"hello\\"},\\"redirectUrl\\":\\"https://revenuemonster.my\\",\\"storeId\\":\\"10946114768247530\\",\\"type\\":\\"WEB_PAYMENT\\"}",
+        "remark": "Sort the json key alphabetically"
+      },
+      "step2": {
+        "content": "eyJsYXlvdXRWZXJzaW9uIjoidjIiLCJtZXRob2QiOlsiR09CSVpfTVkiXSwibm90aWZ5VXJsIjoiaHR0cHM6Ly9kZXYtcm0tYXBpLmFwLm5ncm9rLmlvIiwib3JkZXIiOnsiYWRkaXRpb25hbERhdGEiOiJ3b3JsZCIsImFtb3VudCI6MTAsImN1cnJlbmN5VHlwZSI6Ik1ZUiIsImRldGFpbCI6ImhlbGxvIiwiaWQiOiI3MjExMTUiLCJ0aXRsZSI6ImhlbGxvIn0sInJlZGlyZWN0VXJsIjoiaHR0cHM6Ly9yZXZlbnVlbW9uc3Rlci5teSIsInN0b3JlSWQiOiIxMDk0NjExNDc2ODI0NzUzMCIsInR5cGUiOiJXRUJfUEFZTUVOVCJ9",
+        "remark": "Encode the data using Base64 format"
+      },
+      "step3": {
+        "content": "data=eyJsYXlvd...&method=post&nonceStr=XAYZRZNLGCKSTURRFKBIGYALUKLCLJOG&requestUrl=https://sb-open.revenuemonster.my/v3/payment/online&signType=sha256&timestamp=1599467903",
+        "remark": "Construct plain text parameters on this format. If the body is empty, the data parameter can be omitted."
+      },
+      "step4": {
+        "content": "data=eyJsYXlvd...&method=post&nonceStr=XAYZRZNLGCKSTURRFKBIGYALUKLCLJOG&requestUrl=https://sb-open.revenuemonster.my/v3/payment/online&signType=sha256&timestamp=1599467903",
+        "remark": "Sign this content using sha256 with rsa private key and make sure the public key has been uploaded to the portal."
+      },
+      "step5": {
+        "remark": "Pass the generated signature in the X-Signature header, prefixed with the sign type. Example: sha256 {{ signatureContent }}"
+      }
+    },
+    "requestHeader": {
+      "X-Nonce-Str": {
+        "currentValue": "XAYZRZNLGCKSTURRFKBIGYALUKLCLJOG",
+        "isValid": true,
+        "remark": "The nonce string must not contain spaces and must be unique for at least 120 seconds."
+      },
+      "X-Signature": {
+        "currentValue": "sha256 XvedDW8H2gqGL5gMzTHqDy1PXX3OqRF09WuQDkeCDwuinOAsPstcPOSefUwkyHPM9WPNKKHyR5qXbKNLC7UgQyGi8Ynio03kDo0p+g3BqXaUT1tpo5D8kv42Kh2S8CW4RkX2Dkf+Yxi2XMQ8l3kzPZaRyhudaGerUZony4Npzf63p4+oTBbXE01uX/4x/WL57+zkaaVRc1KlJsLdGsBmLlPOHLana7udJffJyxXhOmyokBuJ4GoOC8JpDG9oaKCNMZ88ow9CWWB0yRPrK2KeaEDwzCm2Jh8IFKw1gS6avQAwsjychZWv5XmAXkZ8ZQrnLXJquA09QpLxPTtOeQC9SA==",
+        "isValid": false,
+        "remark": "The signature is invalid."
+      },
+      "X-Timestamp": {
+        "currentValue": "1599467903",
+        "isValid": false,
+        "remark": "The timestamp must be in UTC and within 120 seconds of the server time."
+      }
+    }
+  },
+  "error": {
+    "code": "INVALID_REQUEST_SIGNATURE",
+    "message": "The request signature is invalid"
+  }
+}`}
+</CodeBlock>
 
 ### Common Causes
 
 | Cause | Fix |
-|
----|
----|
+|---|---|
 | Private key doesn't match the public key uploaded to the Merchant Portal | Re-upload the correct public key |
 | JSON keys not sorted alphabetically | Check nested objects too |
 | JSON body still contains spaces or newlines before Base64 encoding | Make the JSON compact |
@@ -371,3 +494,5 @@ Compare the `preVerifyContent` steps below with your own output to find where th
 | `X-Timestamp` is more than 120 seconds away from server UTC time | Sync your system clock |
 | `X-Nonce-Str` was reused within a 120-second window | Generate a new nonce for each request |
 | Amount is in cents — `"amount": 100` = RM 1.00 | Multiply the amount by 100 |
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

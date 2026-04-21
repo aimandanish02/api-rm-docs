@@ -25,7 +25,7 @@ examples:
     There is no example body request.
   response: |
     There is no example response provided.
-    
+
 ---
 
 
@@ -37,108 +37,122 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/payment/reverse"
 />
 
+## What is this?
 
+Cancel or reverse a transaction. Use this to void a payment before settlement, or to request a refund for a completed transaction.
 
+:::info
+**Reverse** cancels a transaction — used mainly to prevent double charges when a timeout occurs.
 
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
-# Cancel Transaction
-
-:::info Refund & Reverse
-**Refund** is returns funds to the customer either before / after settlement date is based on the payment provider.
-
-**Reverse** will cancel the transactions only between specific such as 15 minutes after transaction happened, mainly for integrator to handle some situation like bad connection to prevent double charges. 
+**Refund** returns funds to the customer — based on the payment provider's policy and time limits.
 :::
+
+---
+
+## How to Use
+
+### Step 1: Decide Between Reverse or Refund
+
+- **Reverse** — use within ~15 minutes of a transaction to cancel it. Prevents double charges caused by timeouts.
+- **Refund** — use to return funds for a completed transaction. Subject to the payment provider's refund period.
+
+### Step 2: For Reverse — Get the Order ID
+
+Locate the `orderId` from the original transaction response.
+
+### Step 3: For Refund — Get the Transaction ID
+
+Locate the `transactionId` and prepare the refund amount and reason.
+
+### Step 4: Make the Request
+
+Send the appropriate request. Check the `code` field in the response — if `"SUCCESS"`, the operation completed.
+
+---
 
 ## Reverse
 
 :::note
-If a transaction is timed out, the merchant should perform a reverse order before creating a new transaction. This is to prevent a double charge.
+If a transaction times out, perform a reverse before creating a new transaction. This prevents a double charge.
 :::
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "orderId", type: "String", required: true, description: "Order ID" }
+    { name: "orderId", type: "String", required: true, description: "Order ID of the transaction to reverse", example: "\"180730103903010431152179\"" }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "orderId": "180730103903010431152179"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" }
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the reverse succeeded, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
 
+---
 
 ## Refund
 
 :::note
-Transaction refundable is based on payment provider, so every payment have their own refund period if still need a refund after the period, please email to [support@revenuemonster.my](mailto:support@revenuemonster.my?subject=%5BRefund%20Request%5D). Format as per below is recommended :-
-
-Email Subject: [Refund Request] Test Merchant - 4118165203679668885
-
-Email Body:
-
-Transaction ID: 230514103255300424706686<br />
-Reference ID ( if applicable ): 20230512111212800110171906802679242<br />
-Total Tranasaction Amount: RM 10.00<br />
-Total Refund Amount ( if applicable ): RM 10.00<br />
-Reason for refund request/s: Exceed refund period and would like to request manual refund
+Refund eligibility depends on the payment provider. Each payment method has its own refund period. If the refund period has passed, contact [support@revenuemonster.my](mailto:support@revenuemonster.my?subject=%5BRefund%20Request%5D) with:
+- Transaction ID
+- Reference ID (if applicable)
+- Total Transaction Amount
+- Total Refund Amount
+- Reason for refund
 :::
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "transactionId", type: "String", required: true, description: "Transaction ID" },
-    { name: "refund.type", type: "String", required: true, description: "Refund type" },
-    { name: "refund.currencyType", type: "String", required: true, description: "Refund currency type" },
-    { name: "refund.amount", type: "Uint64", required: true, description: "Refund amount" },
-    { name: "reason", type: "String", required: true }
+    { name: "transactionId", type: "String", required: true, description: "Transaction ID to refund", example: "\"180730103903010431152179\"" },
+    { name: "refund.type", type: "String", required: true, description: "Refund type (e.g., \"FULL\")", example: "\"FULL\"" },
+    { name: "refund.currencyType", type: "String", required: true, description: "Refund currency type", example: "\"MYR\"" },
+    { name: "refund.amount", type: "Uint64", required: true, description: "Refund amount in smallest currency unit", example: "100" },
+    { name: "reason", type: "String", required: true, description: "Reason for the refund" }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "transactionId": "180730103903010431152179",
   "refund": {
     "type": "FULL",
     "currencyType": "MYR",
     "amount": 100
   },
-  "reason": "test"
-}
-```
+  "reason": "Customer requested refund"
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" }
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the refund succeeded, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

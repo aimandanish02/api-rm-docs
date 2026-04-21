@@ -83,6 +83,37 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
+## What is this?
+
+Update an existing application client for a merchant under your Partner account. Use this to modify application details such as the name, URLs, redirect URIs, public key, or active status.
+
+## When to Use
+
+Use this endpoint when:
+- An application's details need to be updated
+- You need to change the redirect URIs or public key
+- Activating or deactivating an application
+
+---
+
+## How to Use
+
+### Step 1: Get the Merchant ID and Client ID
+
+Locate the `merchantId` and `clientId` for the application you want to update. You can get the `clientId` from the [Get Application Clients](./get-application-clients) endpoint.
+
+### Step 2: Prepare the Updated Data
+
+Gather the fields you want to update. Only include the fields that need to be changed.
+
+### Step 3: Make the PUT Request
+
+Send the updated application data with `merchantId` and `clientId` as path parameters.
+
+### Step 4: Review the Response
+
+Check the `code` field. If `"SUCCESS"`, the application was updated.
+
 ---
 
 ### Request Parameters
@@ -140,3 +171,5 @@ Pass `merchantId` and `clientId` as path parameters in the URL.
     { name: "updatedAt", type: "DateTime", description: "Last update date time of the application.", example: "\"2022-03-17T07:36:10Z\"" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

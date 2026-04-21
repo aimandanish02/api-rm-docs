@@ -88,20 +88,20 @@ Build the authorization URL using the parameters below and redirect the merchant
 
 **Example authorization URL:**
 
-```
-https://sb-oauth.revenuemonster.my/authorize
+<CodeBlock language="plaintext" filename="Authorization URL" hideLineNumbers>
+{`https://sb-oauth.revenuemonster.my/authorize
   ?responseType=code
   &clientId=3675930941412424316
   &redirectUri=https://example.com/oauth/callback
   &scope=manage_payment
-  &state=abc123
-```
+  &state=abc123`}
+</CodeBlock>
 
 After the merchant approves, RM redirects them to your `redirectUri` with a `code` query parameter:
 
-```
-https://example.com/oauth/callback?code=<AUTHORIZATION_CODE>&state=abc123
-```
+<CodeBlock language="plaintext" filename="Redirect Response" hideLineNumbers>
+{`https://example.com/oauth/callback?code=<AUTHORIZATION_CODE>&state=abc123`}
+</CodeBlock>
 
 ---
 
@@ -134,3 +134,5 @@ Use the `code` from the redirect to request an access token. Include your Base64
     { name: "refreshTokenExpiresIn", type: "Number", description: "Refresh token lifetime in seconds.", example: "1576799999" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

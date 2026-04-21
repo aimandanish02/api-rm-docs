@@ -45,57 +45,71 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/payment/terminal/quickpay"
 />
 
+## What is this?
 
+Terminal Integration lets businesses process orders using an RM Terminal to accept credit cards, debit cards, and e-wallets. Common use cases are for **POS** and **Self-Service Kiosk** systems.
 
-
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
-
-# Terminal Integration
-
-Terminal Integration allow businesses to process their orders using systems and process transactions more efficiency
-using RM Terminal to improve customer experience by allowing them to pay using their preferred methods such as credit
-cards, debit cards and e-wallets. The most common use cases integration are for **POS** & **Self Service Kiosk**
-systems.
-
-There's two type of API **Server** and **Event**, Event will send the action to the terminal from our server while *
-*Server** will only process at our server and response to you directly. So **Event** may take some time to process and
-also can fail when the terminal not connected to the server.
+There are two types of integration:
+- **Event** — sends an action to the terminal from the RM server. May take time and can fail if the terminal is not connected.
+- **Server** — processes directly on the RM server and returns a response immediately.
 
 :::note
-This integration can be applicable on any system as long as you're using our terminal for payment acceptance then you
-can integrate this to trigger the payment with your own machine / system.
+This integration works with any system as long as you are using an RM Terminal for payment acceptance.
 :::
+
+---
+
+## How to Use
+
+### Step 1: Identify the Terminal
+
+Get the `terminalId` of the RM Terminal you want to use.
+
+### Step 2: Choose the Event Type
+
+Select the appropriate event based on what you want to do:
+- Quick Pay — accept e-wallet QR payments
+- Card Payment — accept card payments
+- Card Refund — refund a card transaction
+- Card Settlement — settle terminal transactions
+- Cancel Event — cancel an ongoing event
+
+### Step 3: Make the POST Request
+
+Send the event request with the `terminalId`, `type`, and order details.
+
+### Step 4: Handle the Response
+
+Check the `code` field. For Event-type requests, a `"SUCCESS"` response confirms the event was sent — not that it completed on the terminal.
+
+---
 
 ## Event: Quick Pay
 
-:::tip Information
-If your hardware device have it's own scanner to scan the payment qrcode, you will not needed to use our terminal to
-accept payment while you can proceed the [OpenAPI QuickPay](./quick-pay.md) instead to have better experience and
-performance.
+:::tip
+If your hardware device has its own scanner to scan payment QR codes, use the [OpenAPI QuickPay](./quick-pay.md) instead for better experience and performance.
 :::
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "terminalId", type: "String", required: true, description: "Terminal ID" },
-    { name: "type", type: "String", required: true, description: "Payment type" },
-    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Merchant Copy and Customer copy2 : Print Customer copy3 : Do not print Merchant Copy & Customer Copy" },
-    { name: "cameraType", type: "String", required: true, description: "For \"E-WALLET\" only, use back or front camera to scan QR" },
+    { name: "terminalId", type: "String", required: true, description: "RM Terminal ID" },
+    { name: "type", type: "String", required: true, description: "Payment type. Set to \"E-WALLET\"." },
+    { name: "receiptType", type: "Uint", required: true, description: "Receipt setting: 1 = Print both merchant and customer copy, 2 = Print customer copy only, 3 = Do not print" },
+    { name: "cameraType", type: "String", required: true, description: "Use \"FRONT\" or \"BACK\" camera to scan QR code (for E-WALLET only)" },
     { name: "order.id", type: "String", required: true, description: "Order ID" },
-    { name: "order.title", type: "String", required: true, description: "Order Title" },
-    { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type ( currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
-    { name: "order.detail", type: "String", description: "Order Detail" },
-    { name: "order.additionalData", type: "String", description: "Order Additional Data" }
+    { name: "order.title", type: "String", required: true, description: "Order title" },
+    { name: "order.currencyType", type: "String", required: true, description: "Currency type (currently supported MYR only)" },
+    { name: "order.amount", type: "Uint64", required: true, description: "Order amount" },
+    { name: "order.detail", type: "String", description: "Order detail" },
+    { name: "order.additionalData", type: "String", description: "Order additional data" }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "terminalId": "1554193032595276913",
   "type": "E-WALLET",
   "receiptType": 3,
@@ -106,140 +120,95 @@ performance.
     "id": "387153091916665362292147",
     "title": "title",
     "detail": "desc",
-    "additionalData": "010100 Pay parking ticket\n30/07/20 07:13 - 30/07/20 18:40\nLength of stay: 0 Days. 11:35\n02993777014011020212260030??"
+    "additionalData": "010100 Pay parking ticket"
   }
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" }
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the event was sent, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
 
-
----
-api:
-  method: POST
-  url:
-    sandbox: https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay
-    prod: https://open.revenuemonster.my/v3/payment/terminal/quickpay
-  headers:
-    Authorization: Bearer {{access_token}}
-    X-Timestamp: {{timestamp}}
-  bodyType: json
-  body:
-    terminalId:
-      type: string
-      required: true
-    type:
-      type: string
-      required: true
-      enum: ["CARD"]
-    receiptType:
-      type: number
-      required: true
-      enum: [1,2,3]
-    order:
-      type: object
-      required: true
-      properties:
-        id:
-          type: string
-          required: true
-        title:
-          type: string
-          required: true
-        currencyType:
-          type: string
-          required: true
-          enum: ["MYR"]
-        amount:
-          type: number
-          required: true
 ---
 
 ## Event: Card Payment
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "terminalId", type: "String", required: true, description: "Terminal ID" },
-    { name: "type", type: "String", required: true, description: "Payment type" },
-    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Merchant Copy and Customer copy2 : Print Customer copy3 : Do not print Merchant Copy & Customer Copy" },
-    { name: "cameraType", type: "String", required: true, description: "For \"E-WALLET\" only, use back or front camera to scan QR" },
+    { name: "terminalId", type: "String", required: true, description: "RM Terminal ID" },
+    { name: "type", type: "String", required: true, description: "Payment type. Set to \"CARD\"." },
+    { name: "receiptType", type: "Uint", required: true, description: "Receipt setting: 1 = Print both copies, 2 = Print customer copy only, 3 = Do not print" },
     { name: "order.id", type: "String", required: true, description: "Order ID" },
-    { name: "order.title", type: "String", required: true, description: "Order Title" },
-    { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type ( currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
-    { name: "order.detail", type: "String", description: "Order Detail" },
-    { name: "order.additionalData", type: "String", description: "Order Additional Data" }
+    { name: "order.title", type: "String", required: true, description: "Order title" },
+    { name: "order.currencyType", type: "String", required: true, description: "Currency type (currently supported MYR only)" },
+    { name: "order.amount", type: "Uint64", required: true, description: "Order amount" },
+    { name: "order.detail", type: "String", description: "Order detail" },
+    { name: "order.additionalData", type: "String", description: "Order additional data" }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "terminalId": "1554193032595276913",
   "type": "CARD",
   "receiptType": 3,
-  "cameraType": "BACK",
   "order": {
     "amount": 10,
     "currencyType": "MYR",
     "id": "387153091916665362292147",
     "title": "title",
     "detail": "desc",
-    "additionalData": "010100 Pay parking ticket\n30/07/20 07:13 - 30/07/20 18:40\nLength of stay: 0 Days. 11:35\n02993777014011020212260030??"
+    "additionalData": "010100 Pay parking ticket"
   }
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" }
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the event was sent, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
 
+---
 
 ## Event: Card Refund
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "terminalId", type: "String", required: true, description: "Terminal ID" },
-    { name: "type", type: "String", required: true, description: "Event Type" },
-    { name: "data.transactionId", type: "String", required: true, description: "Transaction ID" },
-    { name: "data.receiptType", type: "Uint", description: "1 : Print Merchant Copy and Customer copy2 : Print Customer copy3 : Do not print Merchant Copy & Customer Copy" },
-    { name: "data.reason", type: "String" },
-    { name: "data.email", type: "String", required: true, description: "Email match with the refund pin" },
-    { name: "data.pin", type: "String", required: true, description: "Refund Pin" }
+    { name: "terminalId", type: "String", required: true, description: "RM Terminal ID" },
+    { name: "type", type: "String", required: true, description: "Event type. Set to \"REFUND\"." },
+    { name: "data.transactionId", type: "String", required: true, description: "Transaction ID to refund" },
+    { name: "data.receiptType", type: "Uint", description: "Receipt setting: 1 = Print both copies, 2 = Print customer copy only, 3 = Do not print" },
+    { name: "data.reason", type: "String", description: "Reason for the refund" },
+    { name: "data.email", type: "String", required: true, description: "Email address matching the refund PIN" },
+    { name: "data.pin", type: "String", required: true, description: "Refund PIN" }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "terminalId": "1582107209454501456",
   "type": "REFUND",
   "data": {
@@ -249,117 +218,120 @@ api:
     "email": "oska.ng@revenuemonster.my",
     "pin": "321123"
   }
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "item", type: "JSON", description: "Transaction response" },
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" }
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the event was sent, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
 
+---
 
 ## Event: Card Settlement
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "terminalId", type: "String", required: true, description: "Terminal ID" },
-    { name: "type", type: "String", required: true, description: "Event Type" },
-    { name: "data.receiptType", type: "Uint", description: "1 : Print Merchant Copy and Customer copy2 : Print Customer copy3 : Do not print Merchant Copy & Customer Copy" }
+    { name: "terminalId", type: "String", required: true, description: "RM Terminal ID" },
+    { name: "type", type: "String", required: true, description: "Event type. Set to \"SETTLEMENT\"." },
+    { name: "data.receiptType", type: "Uint", description: "Receipt setting: 1 = Print both copies, 2 = Print customer copy only, 3 = Do not print" }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "terminalId": "1554193032595276913",
   "type": "SETTLEMENT",
   "data": {
     "receiptType": 3
   }
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" },
-    { name: "summary.batchNo", type: "String", description: "Sequence no. of the terminal settlement" },
-    { name: "summary.currencyType", type: "String", description: "Settlement Currency Type ( currently supported MYR only)" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the event was sent, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." },
+    { name: "summary.batchNo", type: "String", description: "Terminal settlement sequence number" },
+    { name: "summary.currencyType", type: "String", description: "Settlement currency type (currently supported MYR only)" },
     { name: "summary.noOfTransactions", type: "Uint64", description: "Count of settled transactions" },
-    { name: "summary.settlementAt", type: "String", description: "Date and time of the settlement" },
+    { name: "summary.settlementAt", type: "String", description: "Date and time of settlement" },
     { name: "summary.totalSalesAmount", type: "Uint64", description: "Total sales amount in cents" },
-    { name: "transactions[*].amount", type: "Uint64", description: "Transactions amount in cents" },
-    { name: "transactions[*].currencyType", type: "Uint64", description: "Transaction Currency Type ( currently supported MYR only)" },
-    { name: "transactions[*].transactionAt", type: "String", description: "Date and time of the transaction" },
+    { name: "transactions[*].amount", type: "Uint64", description: "Transaction amount in cents" },
+    { name: "transactions[*].currencyType", type: "Uint64", description: "Transaction currency type" },
+    { name: "transactions[*].transactionAt", type: "String", description: "Transaction date and time" },
     { name: "transactions[*].transactionId", type: "String", description: "Transaction ID" },
     { name: "transactions[*].type", type: "String", description: "Transaction type" }
   ]}
 />
 
+---
 
 ## Event: Cancel Event
-
 
 **Request Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "terminalId", type: "String", required: true, description: "Terminal ID" },
-    { name: "type", type: "String", required: true, description: "Event Type" }
+    { name: "terminalId", type: "String", required: true, description: "RM Terminal ID" },
+    { name: "type", type: "String", required: true, description: "Event type. Set to \"CANCEL\"." }
   ]}
 />
 
-
-```json title="Example Request"
-{
+<CodeBlock language="json" filename="Example Request">
+{`{
   "terminalId": "1582107209454501456",
   "type": "CANCEL"
-}
-```
+}`}
+</CodeBlock>
 
 **Response Parameters**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "code", type: "String", description: "Determine request have success" },
-    { name: "error.code", type: "String", description: "Error code" },
-    { name: "error.message", type: "String", description: "Error message" },
-    { name: "error.debug", type: "String", description: "Debug message ( sandbox only )" }
+    { name: "code", type: "String", description: "\"SUCCESS\" if the event was sent, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
   ]}
 />
 
+---
 
 ## Server: Payment Refund
 
 :::caution
-This applicable to e-wallet transactions only, for card payment will have to perform refund on terminal via Event API.
+This applies to e-wallet transactions only. For card payments, perform the refund on the terminal via the Event API.
 
-Reference: [Cancel Transaction > Reverse](./cancel-transaction.md#refund)
+See [Cancel Transaction > Refund](./cancel-transaction.md#refund)
 :::
+
+---
 
 ## Server: Payment Reverse
 
 :::caution
-This applicable to e-wallet transactions only, for card payment will have to perform refund on terminal via Event API.
+This applies to e-wallet transactions only. For card payments, perform the reverse on the terminal via the Event API.
 
-Reference: [Cancel Transaction > Reverse](./cancel-transaction.md#refund)
+See [Cancel Transaction > Reverse](./cancel-transaction.md#reverse)
 :::
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
