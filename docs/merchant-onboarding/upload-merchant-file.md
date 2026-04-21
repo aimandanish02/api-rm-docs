@@ -52,7 +52,6 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/partner/file/upload"
 />
 
-
 <!-- user cannot send/upload multipart form data for security purposes (aiman) -->
 :::note
 This endpoint accepts `multipart/form-data` and requires a file upload.
@@ -61,49 +60,66 @@ File upload is **not supported in the API Playground**.
 Please use the cURL example or a server-side integration to test this endpoint.
 :::
 
+## What is this?
 
-import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
+Upload a supporting document (such as a business registration document, IC copy, or bank statement) for a merchant under your Partner account.
 
+## When to Use
 
-:::note
+Use this endpoint when:
+- A merchant needs to submit required documents during onboarding
+- Updating documents for an existing merchant
 
-Upload Merchant File
+---
 
-:::
+## How to Use
+
+### Step 1: Prepare the File
+
+Choose the file you need to upload. Common formats include PDF, JPG, or PNG.
+
+### Step 2: Set the File Name
+
+Give the file a descriptive name that indicates its contents.
+
+### Step 3: Make the POST Request
+
+Send the file as `multipart/form-data` with the `file` and `fileName` parameters.
+
+### Step 4: Review the Response
+
+Check the `code` field. If `"SUCCESS"`, the file was uploaded and the `fileUrl` is returned.
+
+---
 
 ### Request Parameters
 
 <ParamTable
   title="Request Parameters"
   rows={[
-    { name: "file", type: "File" },
-    { name: "fileName", type: "String", example: "\"Testing\"" }
+    { name: "file", type: "File", required: true, description: "The file to upload." },
+    { name: "fileName", type: "String", required: true, description: "Name of the file.", example: "\"Testing\"" }
   ]}
 />
-
 
 ### Response Parameters
 
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "item", type: "Object", example: "(Refer to explanation below)" },
-    { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
+    { name: "item", type: "Object", description: "Contains fileName and fileUrl.", example: "(Refer to explanation below)" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the file was uploaded. Otherwise returns an error code.", example: "\"SUCCESS\"" }
   ]}
 />
 
-
-<br/>
-
-<strong>Item Object :</strong>
+**Item object:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "fileName", type: "String", example: "\"testing\"" },
-    { name: "fileUrl", type: "String", example: "\"https://rm-sandbox-document.oss-ap-southeast-3.aliyuncs.com/1629257189967895215/dGVzdGluZw==-1629297786.pdf\"" }
+    { name: "fileName", type: "String", description: "Name of the uploaded file.", example: "\"testing\"" },
+    { name: "fileUrl", type: "String", description: "URL where the file is stored.", example: "\"https://rm-sandbox-document.oss-ap-southeast-3.aliyuncs.com/...pdf\"" }
   ]}
 />
 
-
-<br/>
+<!-- SPDX-License-Identifier: Apache-2.0 -->

@@ -28,45 +28,9 @@ examples:
         {
           "id": "1629258448138509563",
           "companyName": "Ed Testing",
-          "brandName": "",
-          "companyType": "",
-          "companyLogoUrl": "https://storage.googleapis.com/rm-sandbox-asset/img/merchant.png",
-          "registrationNumber": "",
-          "businessCategory": "",
-          "businessScope": "",
-          "sourceOfFunds": "",
-          "customerOrigin": "",
-          "websiteUrl": "",
-          "establishedAt": "0001-01-01T00:00:00Z",
-          "countryCode": "60",
-          "phoneNumber": "164699197",
-          "addressLine1": "",
-          "addressLine2": "",
-          "postcode": "",
-          "city": "",
-          "state": "",
-          "country": "",
-          "invoiceAddress": null,
-          "isActive": true,
           "status": "REVIEWING",
-          "isMasterMerchant": false,
-          "masterMerchantId": "",
-          "isPartner": true,
-          "partnerId": "1629257189967895215",
-          "gstNo": "",
-          "extraInfo": {
-            "contactInfo": [],
-            "businessHour": []
-          },
-          "paymentSubscription": "",
-          "subscription": {
-            "terminalOfflineEWallet": false,
-            "terminalOfflineCreditCard": false,
-            "onlineCreditCard": false
-          },
-          "registrationSource": "OPEN_API",
-          "createdAt": "2021-08-18T03:47:28Z",
-          "updatedAt": "2021-08-18T03:47:28Z"
+          "isActive": true,
+          "isPartner": true
         }
       ],
       "code": "SUCCESS",
@@ -83,26 +47,51 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
   prod="/v3/partner/merchants"
 />
 
+## What is this?
+
+Retrieve a list of all merchants under your Partner account. This endpoint returns merchant details including registration status, company information, and subscription settings.
+
+## When to Use
+
+Use this endpoint when you:
+- Need to view all merchants in your partner account
+- Want to check merchant status or details
+- Need to display merchant list in your dashboard
+
 :::note
 This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
+## How to Use
+
+### Step 1: Authenticate Your Request
+
+Include your `Authorization` header with the Bearer token obtained from the Client Credentials flow.
+
+### Step 2: Make the GET Request
+
+Send a GET request to the endpoint. No request body is required.
+
+### Step 3: Review the Response
+
+The response contains an `items` array with all your merchants. Check the `status` field to see each merchant's current state.
+
 ---
 
-### Request Parameters
+## Request Parameters
 
-This is a GET request with no request body.
+This is a GET request with no parameters.
 
 ---
 
-### Response Parameters
+## Response Parameters
 
 <ParamTable
-  title="Response Parameters"
+  title="Response"
   rows={[
-    { name: "items", type: "Object[]", description: "List of merchants under this partner account.", example: "(Refer to explanation below)" },
-    { name: "code", type: "String", description: "\"SUCCESS\" if the call succeeded. Otherwise returns an error code object. See Appendix 1: Error Codes.", example: "\"SUCCESS\"" },
-    { name: "meta", type: "Object", example: "{}" }
+    { name: "items", type: "Object[]", description: "Array of merchant objects", example: "(See merchant object below)" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded. Otherwise returns an error code.", example: "\"SUCCESS\"" },
+    { name: "meta", type: "Object", description: "Pagination metadata (empty if no pagination)", example: "{}" }
   ]}
 />
 
@@ -113,51 +102,43 @@ This is a GET request with no request body.
 <ParamTable
   title="Details"
   rows={[
-    { name: "id", type: "String", description: "Merchant ID", example: "\"6170506694335521334\"" },
-    { name: "companyName", type: "String", description: "Company name of merchant", example: "\"REVENUE MONSTER\"" },
-    { name: "brandName", type: "String", description: "Brand name of merchant", example: "\"REVENUE MONSTER\"" },
+    { name: "id", type: "String", description: "Unique merchant ID", example: "\"6170506694335521334\"" },
+    { name: "companyName", type: "String", description: "Registered company name", example: "\"REVENUE MONSTER\"" },
+    { name: "brandName", type: "String", description: "Brand name if different from company", example: "\"\"" },
     { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"SOLE PROPRIETOR\"" },
-    { name: "companyLogoUrl", type: "String", description: "Public URL to show merchant's logo", example: "\"https://storage.googleapis.com/rm-dev-asset/img/merchant.png\"" },
-    { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "\"12344\"" },
-    { name: "businessCategory", type: "String", description: "Business category of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "businessScope", type: "String", description: "Business scope of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "sourceOfFunds", type: "String", description: "Source of funds of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "customerOrigin", type: "String", description: "Customer origin of merchant", example: "\"SOFTWARE AND IT\"" },
-    { name: "websiteUrl", type: "String", description: "Website URL of merchant", example: "\"https://revenuemonster.my\"" },
-    { name: "establishedAt", type: "DateTime", description: "Established date time of merchant", example: "\"2018-03-26T04:50:57Z\"" },
-    { name: "countryCode", type: "String", description: "Country code of merchant contact number", example: "\"60\"" },
-    { name: "phoneNumber", type: "String", description: "Phone number of merchant", example: "\"377334080\"" },
-    { name: "addressLine1", type: "String", description: "Address 1 of merchant", example: "\"20, JALAN JASA 38, TAMAN MUTIARA RINI\"" },
-    { name: "addressLine2", type: "String", description: "Address 2 of merchant", example: "\"\"" },
-    { name: "postcode", type: "String", description: "Postcode of merchant", example: "\"81300\"" },
-    { name: "city", type: "String", description: "City of merchant", example: "\"Petaling Jaya\"" },
-    { name: "state", type: "String", description: "State of merchant", example: "\"Selangor\"" },
-    { name: "country", type: "String", description: "Country of merchant", example: "\"Malaysia\"" },
-    { name: "invoiceAddress", type: "Object", description: "Invoice address of merchant", example: "(Refer below)" },
+    { name: "companyLogoUrl", type: "String", description: "Public URL for company logo", example: "\"https://storage.googleapis.com/rm-sandbox-asset/img/merchant.png\"" },
+    { name: "registrationNumber", type: "String", description: "Company registration number", example: "\"\"" },
+    { name: "businessCategory", type: "String", description: "Business category", example: "\"\"" },
+    { name: "countryCode", type: "String", description: "Country code for contact", example: "\"60\"" },
+    { name: "phoneNumber", type: "String", description: "Contact phone number", example: "\"377334080\"" },
+    { name: "addressLine1", type: "String", description: "Street address line 1", example: "\"\"" },
+    { name: "city", type: "String", description: "City", example: "\"\"" },
+    { name: "state", type: "String", description: "State/Province", example: "\"\"" },
+    { name: "postcode", type: "String", description: "Postal/ZIP code", example: "\"\"" },
+    { name: "country", type: "String", description: "Country", example: "\"\"" },
     { name: "isActive", type: "Boolean", description: "Whether the merchant account is active", example: "true" },
-    { name: "status", type: "String", description: "Current status of merchant", example: "\"REVIEWING\"" },
-    { name: "isMasterMerchant", type: "Bool", description: "Master merchant flag", example: "true" },
-    { name: "masterMerchantId", type: "String", description: "Master merchant ID, if any", example: "\"2301663653361832803\"" },
-    { name: "isPartner", type: "Bool", description: "Partner merchant flag", example: "true" },
-    { name: "partnerId", type: "String", description: "Partner merchant ID, if any", example: "\"2301663653361832803\"" },
-    { name: "gstNo", type: "String", description: "GST number, if any", example: "\"\"" },
-    { name: "paymentSubscription", type: "String", example: "\"\"" },
-    { name: "subscription", type: "Object", description: "Subscription flags. See subscription object below.", example: "(Refer below)" },
+    { name: "status", type: "String", description: "Current status (\"REVIEWING\", \"UNVERIFIED\", \"ACTIVE\")", example: "\"REVIEWING\"" },
+    { name: "isPartner", type: "Boolean", description: "Whether this is a partner merchant", example: "true" },
+    { name: "partnerId", type: "String", description: "Partner ID if applicable", example: "\"\"" },
+    { name: "gstNo", type: "String", description: "GST registration number", example: "\"\"" },
+    { name: "subscription", type: "Object", description: "Subscription flags. See subscription object below.", example: "(See below)" },
     { name: "registrationSource", type: "String", description: "How the merchant was registered", example: "\"OPEN_API\"" },
-    { name: "createdAt", type: "DateTime", description: "Creation date time of merchant", example: "\"2018-02-12T08:53:13Z\"" },
-    { name: "updatedAt", type: "DateTime", description: "Last update date time of merchant", example: "\"2018-02-12T08:53:13Z\"" }
+    { name: "createdAt", type: "DateTime", description: "Account creation timestamp", example: "\"2021-08-18T03:47:28Z\"" },
+    { name: "updatedAt", type: "DateTime", description: "Last update timestamp", example: "\"2021-08-18T03:47:28Z\"" }
   ]}
 />
 
 ---
 
-**Subscription object:**
+**Subscription object (items.subscription):**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "terminalOfflineEWallet", type: "Bool", example: "false" },
-    { name: "terminalOfflineCreditCard", type: "Bool", example: "false" },
-    { name: "onlineCreditCard", type: "Bool", example: "false" }
+    { name: "terminalOfflineEWallet", type: "Boolean", description: "Offline e-wallet terminal enabled", example: "false" },
+    { name: "terminalOfflineCreditCard", type: "Boolean", description: "Offline credit card terminal enabled", example: "false" },
+    { name: "onlineCreditCard", type: "Boolean", description: "Online credit card enabled", example: "false" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

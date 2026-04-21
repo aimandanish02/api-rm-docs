@@ -198,6 +198,37 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
+## What is this?
+
+Update an existing merchant's information under your Partner account. Use this to modify company details, address, bank account information, and business details.
+
+## When to Use
+
+Use this endpoint when:
+- A merchant needs to update their company information
+- Business details such as address or contact information change
+- Bank account or settlement information needs to be updated
+
+---
+
+## How to Use
+
+### Step 1: Get the Merchant ID
+
+Locate the `merchantID` for the merchant you want to update. You can get this from the [Get Merchants](./get-merchants) endpoint.
+
+### Step 2: Prepare the Updated Data
+
+Gather the fields you want to update. Only include the fields that need to be changed — all fields are optional.
+
+### Step 3: Make the PATCH Request
+
+Send the updated merchant information with the `merchantID` as a path parameter.
+
+### Step 4: Review the Response
+
+Check the `code` field. If `"SUCCESS"`, the merchant was updated. The full merchant object is returned.
+
 ---
 
 ### Request Parameters
@@ -439,3 +470,5 @@ Pass the merchant ID as a path parameter in the URL.
     { name: "BusinessSitePhotoFileURL", type: "String (nullable)", example: "null" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

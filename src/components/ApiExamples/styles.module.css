@@ -26,10 +26,9 @@
 }
 
 .card pre {
-  white-space: pre-wrap !important;
-  /* wrap long lines */
-  word-break: break-all !important;
-  /* break URLs / long tokens */
+  white-space: pre-wrap !important;     /* wrap long lines */
+  overflow-wrap: anywhere !important;   /* break long tokens/URLs only when needed */
+  word-break: normal !important;        /* keeps line numbers (10, 11…) intact */
   overflow-x: hidden !important;
 }
 

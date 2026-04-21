@@ -7,10 +7,49 @@ import styles from "./styles.module.css";
 
 
 function normalizeCurl(curl: string): string {
-  return curl
-    .replace(/\\n/g, "\n")          // literal \n → real newline
-    .replace(/ \\\n\s*/g, " \\\n    ") // normalize indentation after line continuations
-    .trim();
+  // 1. Convert literal \n sequences → real newlines
+  const raw = curl.replace(/\\n/g, "\n").trim();
+
+  // 2. Strip line-continuation backslashes and flatten to one line
+  const flat = raw
+    .split("\n")
+    .map((l) => l.replace(/\\\s*$/, "").trim())
+    .filter(Boolean)
+    .join(" ");
+
+  // 3. Re-split before each flag (-X / --flag), respecting quoted strings
+  const segments: string[] = [];
+  let current = "";
+  let i = 0;
+
+  while (i < flat.length) {
+    const ch = flat[i];
+
+    // Inside a quoted section — never split here
+    if (ch === '"' || ch === "'") {
+      const q = ch;
+      let j = i + 1;
+      while (j < flat.length && flat[j] !== q) j++;
+      current += flat.slice(i, j + 1);
+      i = j + 1;
+      continue;
+    }
+
+    // Boundary: space immediately before a dash → new flag starts
+    if (ch === " " && i + 1 < flat.length && flat[i + 1] === "-") {
+      segments.push(current);
+      current = "";
+      i++; // skip the space; '-' is picked up next iteration
+      continue;
+    }
+
+    current += ch;
+    i++;
+  }
+  if (current) segments.push(current);
+
+  if (segments.length <= 1) return flat;
+  return [segments[0], ...segments.slice(1).map((s) => `  ${s.trim()}`)].join(" \\\n");
 }
 
 function toString(val: any): string | undefined {
@@ -102,7 +141,7 @@ const rawRequest = toString(examples?.request)
           </div>
 
           {openReq && (
-            <CodeBlock language={langToHighlight(lang)}>
+            <CodeBlock language={langToHighlight(lang)} showLineNumbers>
               {snippet}
             </CodeBlock>
           )}
@@ -117,7 +156,7 @@ const rawRequest = toString(examples?.request)
             <span className={styles.chevron}>{openRes ? "▾" : "▸"}</span>
           </div>
           {openRes && (
-            <CodeBlock language="json">{exampleResponse!}</CodeBlock>
+            <CodeBlock language="json" showLineNumbers>{exampleResponse!}</CodeBlock>
           )}
         </div>
       )}

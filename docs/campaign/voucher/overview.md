@@ -14,11 +14,11 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 ### Issue Voucher Using RM Merchant App/Terminal
 
-![image](/img/voucher/issue-voucher.png)
+<img src="/img/voucher/issue-voucher.png" />
 
 <hr/>
 
-![image](/img/voucher/issue-voucher-api.png)
+<img src="/img/voucher/issue-voucher-api.png" />
 
 <ParamTable
   rows={[
@@ -39,7 +39,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 :::
 
-![image](/img/voucher/marketplace-voucher.png)
+<img src="/img/voucher/marketplace-voucher.png" />
 
 <ParamTable
   rows={[

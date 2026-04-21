@@ -87,6 +87,40 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
+## What is this?
+
+Create a new application client for a merchant under your Partner account. An application client contains the `clientId` and `clientSecret` used for OAuth authentication with the RM API.
+
+## When to Use
+
+Use this endpoint when:
+- A new application needs to be registered for a merchant
+- Setting up OAuth credentials for a merchant's integration
+
+---
+
+## How to Use
+
+### Step 1: Get the Merchant ID
+
+Locate the `merchantId` for the merchant you want to create an application for. You can get this from the [Get Merchants](../get-merchants) endpoint.
+
+### Step 2: Prepare Application Details
+
+Gather the required information:
+- Application name
+- Homepage URL, logo URL, and privacy policy URL
+- Redirect URIs for OAuth
+- RSA public key in PEM format
+
+### Step 3: Make the POST Request
+
+Send the application details with the `merchantId` as a path parameter.
+
+### Step 4: Store the Credentials
+
+In the response, note the `clientId` and `clientSecret`. These are needed for OAuth authentication and cannot be retrieved again later.
+
 ---
 
 ### Request Parameters
@@ -144,3 +178,5 @@ Pass the `merchantId` as a path parameter in the URL.
     { name: "updatedAt", type: "DateTime", description: "Last update date time of the application.", example: "\"2022-03-17T07:36:10Z\"" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->

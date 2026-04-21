@@ -113,19 +113,50 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 This endpoint is for merchants with a Partner account. To activate a Partner account, [contact us](https://revenuemonster.my/about-us).
 :::
 
+## What is this?
+
+Submit a merchant's completed application for review by Revenue Monster. Once submitted, the merchant's status changes to `REVIEWING` and RM will assess the application.
+
+## When to Use
+
+Use this endpoint when:
+- A merchant has completed all required fields and documents
+- You are ready to submit the merchant for RM's review process
+
+:::tip
+Before submitting, ensure all required information is complete. Incomplete applications may be rejected.
+:::
+
+---
+
+## How to Use
+
+### Step 1: Verify Merchant Completeness
+
+Confirm that all required merchant details and documents have been uploaded. Check the merchant's information using [Get Merchant](./get-merchant.md).
+
+### Step 2: Get the Merchant ID
+
+Locate the `merchantID` for the merchant you want to submit for review.
+
+### Step 3: Make the POST Request
+
+Send the request with the `merchantID` as a path parameter. No request body is required.
+
+### Step 4: Review the Response
+
+Check the `code` field. If `"SUCCESS"`, the merchant has been submitted. The `status` will change to `"REVIEWING"`.
+
 ---
 
 ### Request Parameters
 
-Pass the `merchantID` as a path parameter in the URL. No request body is required.
-
-| Parameter | Type | Required | Description |
-|
----|
----|
----|
----|
-| `merchantID` | String | Yes | The ID of the merchant to submit for review. Pass it in the URL path. |
+<ParamTable
+  title="Path Parameters"
+  rows={[
+    { name: "merchantID", type: "String", required: true, description: "The ID of the merchant to submit for review. Pass it in the URL path.", example: "\"1629292083526787883\"" }
+  ]}
+/>
 
 ---
 
@@ -229,3 +260,5 @@ Pass the `merchantID` as a path parameter in the URL. No request body is require
     { name: "BusinessSitePhotoFileURL", type: "String (nullable)", example: "null" }
   ]}
 />
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
