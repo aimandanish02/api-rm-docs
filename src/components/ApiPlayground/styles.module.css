@@ -159,32 +159,33 @@
 
 /* ================= SEND BUTTON ================= */
 
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --reveal-angle {
+  syntax: "<angle>";
+  initial-value: 360deg;
+  inherits: false;
+}
+
+@keyframes angle-rotation {
+  0% {
+    --gradient-angle: 0deg;
+    --reveal-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+    --reveal-angle: 360deg;
+  }
+}
+
 .send {
   margin-top: 20px;
-  position: relative;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  color: #ffffff;
-  z-index: 1;
-  transition: all 0.3s ease;
-}
-
-:root[data-theme="light"] .send {
-  background: #111111;
-}
-
-:root[data-theme="dark"] .send {
-  background: #000000;
-}
-
-/* ================= SEND BUTTON ================= */
-
-.send {
-  margin-top: 20px;
+  margin-left: auto;
+  display: block;
   position: relative;
   padding: 12px 20px;
   border-radius: 12px;
@@ -192,18 +193,19 @@
   font-size: 14px;
   cursor: pointer;
   border: none;
-  color: #ffffff;
   z-index: 1;
   transition: opacity 0.2s ease, transform 0.2s ease;
   isolation: isolate;
 }
 
 :root[data-theme="light"] .send {
-  background: #111111;
+  background: #ffffff;
+  color: #111111;
 }
 
 :root[data-theme="dark"] .send {
   background: #000000;
+  color: #ffffff;
 }
 
 .send::before {
@@ -211,8 +213,13 @@
   position: absolute;
   inset: -1.5px;
   border-radius: 13px;
-  background: linear-gradient(135deg, #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
+  background-image: linear-gradient(var(--gradient-angle), #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
+  mask-image: conic-gradient(#000 10deg, #000 var(--reveal-angle), transparent var(--reveal-angle));
   z-index: -1;
+}
+
+.send:hover::before {
+  animation: angle-rotation 1.5s ease forwards;
 }
 
 .send::after {
@@ -238,12 +245,17 @@
   cursor: not-allowed;
 }
 
+.send:disabled::before {
+  animation: none;
+}
+
 .sendBlocked {
   opacity: 0.55;
 }
 
 .sendBlocked::before {
-  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  background-image: linear-gradient(var(--gradient-angle), #6b7280, #9ca3af);
+  animation: none;
 }
 
 /* ================= OUTPUT ================= */
