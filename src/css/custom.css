@@ -202,17 +202,17 @@ body {
   border-color: #166534;
 }
 
-/* POST — orange */
+/* POST — yellow */
 .api-post > .menu__link::after {
   content: "POST";
-  background: #fff4e6;
+  background: #fffbeb;
   color: #b45309;
-  border: 1px solid #fcd09a;
+  border: 1px solid #fef3c7;
 }
 [data-theme="dark"] .api-post > .menu__link::after {
-  background: #3d1f00;
-  color: #fb923c;
-  border-color: #7c3400;
+  background: #3d2d00;
+  color: #fbbf24;
+  border-color: #7c5c00;
 }
 
 /* PUT — blue */
