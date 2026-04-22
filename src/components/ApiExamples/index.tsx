@@ -49,7 +49,12 @@ function normalizeCurl(curl: string): string {
   if (current) segments.push(current);
 
   if (segments.length <= 1) return flat;
-  return [segments[0], ...segments.slice(1).map((s) => `  ${s.trim()}`)].join(" \\\n");
+  return segments
+    .map((s, i) => {
+      const line = i === 0 ? s.trim() : `  ${s.trim()}`;
+      return i < segments.length - 1 ? `${line} \\` : line;
+    })
+    .join("\n");
 }
 
 function toString(val: any): string | undefined {
@@ -76,7 +81,7 @@ function mergeBodyIntoCurl(curl: string, body?: string): string {
 
   // Collapse the body to a single line for --data
   const oneLine = body.trim().replace(/\n\s*/g, " ");
-  return `${curl.trimEnd()} \\\n    --data '${oneLine}'`;
+  return `${curl.trimEnd()}\n    --data \\\n-raw '${oneLine}'`;
 }
 
 export default function ApiExamples() {
@@ -141,7 +146,7 @@ const rawRequest = toString(examples?.request)
           </div>
 
           {openReq && (
-            <CodeBlock language={langToHighlight(lang)} showLineNumbers>
+            <CodeBlock language={langToHighlight(lang)} showLineNumbers startLine={1}>
               {snippet}
             </CodeBlock>
           )}
