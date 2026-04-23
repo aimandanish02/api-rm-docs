@@ -10,7 +10,7 @@
 ================================ */
 
 :root {
-  --ifm-color-primary: #0000ff;
+  --ifm-color-primary: #6666eb;
   --ifm-color-primary-dark: rgb(33, 175, 144);
   --ifm-color-primary-darker: rgb(31, 165, 136);
   --ifm-color-primary-darkest: rgb(26, 136, 112);
@@ -326,16 +326,9 @@ aside.theme-doc-sidebar-container,
    TOC — REGULAR DOC PAGES
 ================================ */
 
-/* Wrap long headings instead of overflowing */
-.theme-doc-toc-desktop .table-of-contents__link {
-  white-space: normal;
-  word-break: break-word;
-  display: block;
-}
-
+/* Hide native Docusaurus TOC */
 .theme-doc-toc-desktop {
-  overflow-x: hidden;
-  max-width: 100%;
+  display: none !important;
 }
 
 /* ================================
@@ -390,6 +383,12 @@ details[open] > summary::before {
 
 .details-inner {
   overflow: hidden;
+}
+
+html[data-theme='dark'] .docs-wrapper,
+html[data-theme='light'] .docs-wrapper,
+.docs-wrapper.docs-doc-page {
+  overflow-y: visible !important;
 }
 
 /* ================================
