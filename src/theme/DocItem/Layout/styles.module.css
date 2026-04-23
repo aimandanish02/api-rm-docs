@@ -30,6 +30,17 @@
   box-shadow: inset 0 -56px 28px -28px var(--ifm-background-color);
 }
 
+.tocSidebar {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border-left: 1px solid var(--ifm-toc-border-color);
+  padding: 0 var(--ifm-spacing-horizontal) 0 0;
+  height: 100%;
+  overflow-y: auto;
+}
+
 .scrollHint {
   position: sticky;
   bottom: 12px;

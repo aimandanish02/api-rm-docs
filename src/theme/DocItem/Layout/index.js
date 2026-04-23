@@ -3,8 +3,19 @@ import Layout from "@theme-original/DocItem/Layout";
 import { useDoc } from "@docusaurus/theme-common/internal";
 import ApiPlayground from "@site/src/components/ApiPlayground";
 import ApiExamples from "@site/src/components/ApiExamples";
+import DocTOC from "@site/src/components/DocTOC";
 import { useApiSharedState } from "@site/src/components/ApiPlayground/UseApiSharedState";
 import styles from "./styles.module.css";
+
+// Wrap Layout to inject DocTOC
+function LayoutWithTOC(props) {
+  return (
+    <>
+      <DocTOC />
+      <Layout {...props} />
+    </>
+  );
+}
 
 // Separate component so hooks are always called unconditionally
 function ApiPanel({ api }) {
@@ -19,7 +30,7 @@ function ApiPanel({ api }) {
 
   return (
     <aside className={styles.playground}>
-      <ApiPlayground shared={shared} >
+      <ApiPlayground shared={shared}>
         <ApiExamples />
       </ApiPlayground>
     </aside>
@@ -31,9 +42,11 @@ export default function LayoutWrapper(props) {
   const api = frontMatter?.api;
 
   if (!api) {
-    return <Layout {...props} />;
+    // Regular doc page
+    return <LayoutWithTOC {...props} />;
   }
 
+  // API page with playground
   return (
     <div className={`${styles.apiLayout} api-page-layout`}>
       <div className={styles.docContent}>

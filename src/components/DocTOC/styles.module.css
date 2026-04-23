@@ -1,0 +1,139 @@
+.tocWrapper {
+  position: -webkit-sticky;
+  position: sticky;
+  top: calc(var(--ifm-navbar-height) + 1rem);
+  background: var(--ifm-background-color);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 2rem;
+  box-shadow: none;
+  z-index: 100;
+  align-self: flex-start;
+}
+
+html[data-theme='dark'] .tocWrapper {
+  background: var(--ifm-background-color);
+}
+
+html[data-theme='dark'] .tocWrapper {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tocDropdown {
+  border: none;
+  margin: 0;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--ifm-toc-border-color);
+}
+
+.tocSummary {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-800);
+  padding: 0;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.tocSummary:hover {
+  color: var(--ifm-color-primary);
+}
+
+.tocIcon {
+  font-size: 1.1rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.tocOpen .tocIcon {
+  transform: rotate(0deg);
+}
+
+.tocDropdown:not(.tocOpen) .tocIcon {
+  transform: rotate(-90deg);
+}
+
+.tocContent {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.tocOpen .tocContent {
+  grid-template-rows: 1fr;
+}
+
+.tocInner {
+  min-height: 0;
+  padding-top: 1rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tocOpen .tocInner {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+/* Style the TOC links */
+.tocContent :global(.table-of-contents) {
+  margin: 0;
+  padding-left: 0;
+  font-size: 0.875rem;
+}
+
+.tocContent :global(.table-of-contents__link) {
+  padding: 0.35rem 0 0.35rem 0.75rem;
+  display: block;
+  color: var(--ifm-color-emphasis-700);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  margin-left: 0;
+  line-height: 1.4;
+}
+
+.tocContent :global(.table-of-contents__link:hover) {
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-lightest);
+  border-left-color: var(--ifm-color-primary);
+}
+
+.tocContent :global(.table-of-contents__link--active) {
+  color: var(--ifm-color-primary);
+  border-left-color: var(--ifm-color-primary);
+  font-weight: 600;
+  background: var(--ifm-color-primary-lightest);
+}
+
+/* Nested TOC items */
+.tocContent :global(.table-of-contents__list) {
+  margin: 0;
+  padding-left: 0;
+}
+
+.tocContent :global(.table-of-contents__list .table-of-contents__list) {
+  padding-left: 1rem;
+}
+
+/* Responsive - hide on mobile since native TOC drawer exists */
+@media screen and (max-width: 996px) {
+  .tocWrapper {
+    display: none;
+  }
+}
