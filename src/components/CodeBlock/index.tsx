@@ -1,10 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import type { Language } from "prism-react-renderer";
 import styles from "./styles.module.css";
 
-// Custom dark theme tuned for aesthetics
-const theme = {
+// Light theme for syntax highlighting
+const lightTheme = {
+  plain: {
+    color: "#24292e",
+    backgroundColor: "transparent",
+  },
+  styles: [
+    { types: ["comment", "prolog", "doctype", "cdata"], style: { color: "#6a737d", fontStyle: "italic" as const } },
+    { types: ["punctuation"], style: { color: "#5e6687" } },
+    { types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"], style: { color: "#d73a49" } },
+    { types: ["selector", "attr-name", "string", "char", "builtin", "inserted"], style: { color: "#22863a" } },
+    { types: ["operator", "entity", "url"], style: { color: "#005cc5" } },
+    { types: ["atrule", "attr-value", "keyword"], style: { color: "#d73a49" } },
+    { types: ["function", "class-name"], style: { color: "#6f42c1" } },
+    { types: ["regex", "important", "variable"], style: { color: "#e36209" } },
+  ],
+};
+
+// Dark theme for syntax highlighting
+const darkTheme = {
   plain: {
     color: "#e2e8f0",
     backgroundColor: "transparent",
@@ -47,7 +65,27 @@ export default function CodeBlock({
 }: Props) {
   const [copied, setCopied] = useState(false);
   const [hoveredLine, setHoveredLine] = useState<number | null>(null);
+  const [isDark, setIsDark] = useState(false);
   const codeRef = useRef<HTMLPreElement>(null);
+
+  // Detect theme changes
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      setIsDark(theme === 'dark');
+    };
+    
+    checkTheme();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    
+    return () => observer.disconnect();
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(children.trim());
@@ -60,6 +98,7 @@ export default function CodeBlock({
   ) as Language;
 
   const meta = LANG_META[language] ?? LANG_META["plaintext"];
+  const theme = isDark ? darkTheme : lightTheme;
 
   return (
     <div className={styles.wrapper}>

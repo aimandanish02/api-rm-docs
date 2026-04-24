@@ -9,17 +9,34 @@
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  background: #0d1117;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--ifm-code-background);
+  border: 1px solid var(--ifm-color-emphasis-300);
   box-shadow:
-    0 0 0 1px rgba(0, 0, 0, 0.4),
-    0 4px 6px -1px rgba(0, 0, 0, 0.4),
-    0 16px 32px -8px rgba(0, 0, 0, 0.5);
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 16px 32px -8px rgba(0, 0, 0, 0.15);
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
   animation: fadeSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .wrapper:hover {
+  border-color: var(--ifm-color-emphasis-400);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 8px 16px -2px rgba(0, 0, 0, 0.15),
+    0 24px 48px -8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .wrapper {
+  background: #0d1117;
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 16px 32px -8px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .wrapper:hover {
   border-color: rgba(255, 255, 255, 0.1);
   box-shadow:
     0 0 0 1px rgba(0, 0, 0, 0.4),
@@ -47,9 +64,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 14px;
-  background: #161b22;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
   gap: 12px;
+}
+
+[data-theme='dark'] .header {
+  background: #161b22;
+  border-bottom-color: rgba(255, 255, 255, 0.05);
 }
 
 .headerLeft {
@@ -73,11 +95,15 @@
 .filename {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--ifm-color-emphasis-600);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.01em;
+}
+
+[data-theme='dark'] .filename {
+  color: rgba(255, 255, 255, 0.45);
 }
 
 /* ================================
@@ -110,9 +136,9 @@
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-color-emphasis-700);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
@@ -120,10 +146,22 @@
 }
 
 .copyBtn:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-400);
+  color: var(--ifm-font-color-base);
+  transform: translateY(-1px);
+}
+
+[data-theme='dark'] .copyBtn {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+[data-theme='dark'] .copyBtn:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.18);
   color: rgba(255, 255, 255, 0.8);
-  transform: translateY(-1px);
 }
 
 .copyBtn:active {
@@ -156,6 +194,10 @@
 .codeWrapper {
   overflow-x: auto;
   scrollbar-width: thin;
+  scrollbar-color: var(--ifm-color-emphasis-300) transparent;
+}
+
+[data-theme='dark'] .codeWrapper {
   scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
 }
 
@@ -166,8 +208,12 @@
   background: transparent;
 }
 .codeWrapper::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--ifm-color-emphasis-300);
   border-radius: 999px;
+}
+
+[data-theme='dark'] .codeWrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .pre {
@@ -196,6 +242,10 @@
 }
 
 .lineHovered {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .lineHovered {
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -206,15 +256,19 @@
   top: 0;
   bottom: 0;
   width: 2px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--ifm-color-emphasis-400);
   border-radius: 0 1px 1px 0;
+}
+
+[data-theme='dark'] .lineHovered::before {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .lineNumber {
   user-select: none;
   min-width: 44px;
   padding: 0 16px 0 20px;
-  color: rgba(255, 255, 255, 0.15);
+  color: var(--ifm-color-emphasis-500);
   font-size: 12px;
   text-align: right;
   flex-shrink: 0;
@@ -222,7 +276,15 @@
   font-variant-numeric: tabular-nums;
 }
 
+[data-theme='dark'] .lineNumber {
+  color: rgba(255, 255, 255, 0.15);
+}
+
 .lineNumberHovered {
+  color: var(--ifm-color-emphasis-700);
+}
+
+[data-theme='dark'] .lineNumberHovered {
   color: rgba(255, 255, 255, 0.35);
 }
 
