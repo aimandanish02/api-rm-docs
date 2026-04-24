@@ -1,10 +1,46 @@
 //example request/response component for API reference pages. Expects frontMatter.
-import React, { useState } from "react";
-import CodeBlock from "@theme/CodeBlock";
+import React, { useState, useEffect } from "react";
+import Highlight, { defaultProps } from "prism-react-renderer";
+import type { Language } from "prism-react-renderer";
 import { useDoc } from "@docusaurus/theme-common/internal";
 import { SNIPPET_LANGS, SnippetLang, generateSnippet } from "../../utils/snippets";
 import styles from "./styles.module.css";
 
+// Light theme
+const lightTheme = {
+  plain: {
+    color: "#24292e",
+    backgroundColor: "transparent",
+  },
+  styles: [
+    { types: ["comment", "prolog", "doctype", "cdata"], style: { color: "#6a737d", fontStyle: "italic" as const } },
+    { types: ["punctuation"], style: { color: "#5e6687" } },
+    { types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"], style: { color: "#d73a49" } },
+    { types: ["selector", "attr-name", "string", "char", "builtin", "inserted"], style: { color: "#22863a" } },
+    { types: ["operator", "entity", "url"], style: { color: "#005cc5" } },
+    { types: ["atrule", "attr-value", "keyword"], style: { color: "#d73a49" } },
+    { types: ["function", "class-name"], style: { color: "#6f42c1" } },
+    { types: ["regex", "important", "variable"], style: { color: "#e36209" } },
+  ],
+};
+
+// Dark theme
+const darkTheme = {
+  plain: {
+    color: "#e2e8f0",
+    backgroundColor: "transparent",
+  },
+  styles: [
+    { types: ["comment", "prolog", "doctype", "cdata"], style: { color: "#4a5568", fontStyle: "italic" as const } },
+    { types: ["punctuation"], style: { color: "#718096" } },
+    { types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"], style: { color: "#fc8181" } },
+    { types: ["selector", "attr-name", "string", "char", "builtin", "inserted"], style: { color: "#68d391" } },
+    { types: ["operator", "entity", "url"], style: { color: "#76e4f7" } },
+    { types: ["atrule", "attr-value", "keyword"], style: { color: "#76e4f7" } },
+    { types: ["function", "class-name"], style: { color: "#f6ad55" } },
+    { types: ["regex", "important", "variable"], style: { color: "#faf089" } },
+  ],
+};
 
 function normalizeCurl(curl: string): string {
   // 1. Convert literal \n sequences → real newlines
@@ -84,13 +120,64 @@ function mergeBodyIntoCurl(curl: string, body?: string): string {
   return `${curl.trimEnd()}\n    --data \\\n-raw '${oneLine}'`;
 }
 
+function CodeHighlight({ code, language }: { code: string; language: Language }) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      setIsDark(theme === 'dark');
+    };
+    
+    checkTheme();
+    
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+    
+    return () => observer.disconnect();
+  }, []);
+
+  const theme = isDark ? darkTheme : lightTheme;
+
+  return (
+    <Highlight
+      {...defaultProps}
+      code={code.trim()}
+      language={language}
+      theme={theme}
+    >
+      {({ className, tokens, getLineProps, getTokenProps }) => (
+        <pre className={`${className} ${styles.codeBlock}`}>
+          {tokens.map((line, i) => {
+            const lineProps = getLineProps({ line, key: i });
+            return (
+              <div key={i} {...lineProps} className={styles.codeLine}>
+                <span className={styles.lineNumber}>{i + 1}</span>
+                <span className={styles.lineContent}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </span>
+              </div>
+            );
+          })}
+        </pre>
+      )}
+    </Highlight>
+  );
+}
+
 export default function ApiExamples() {
   const { frontMatter } = useDoc();
   const examples = (frontMatter as any).examples;
 
-const rawRequest = toString(examples?.request)
-  ? normalizeCurl(toString(examples.request)!)
-  : undefined;  const rawBody = toString(examples?.body);
+  const rawRequest = toString(examples?.request)
+    ? normalizeCurl(toString(examples.request)!)
+    : undefined;
+  const rawBody = toString(examples?.body);
   const exampleResponse = toString(examples?.response);
 
   // Produce a complete cURL that always includes the body
@@ -146,9 +233,9 @@ const rawRequest = toString(examples?.request)
           </div>
 
           {openReq && (
-            <CodeBlock language={langToHighlight(lang)} showLineNumbers startLine={1}>
-              {snippet}
-            </CodeBlock>
+            <div className={styles.codeWrapper}>
+              <CodeHighlight code={snippet} language={langToHighlight(lang)} />
+            </div>
           )}
         </div>
       )}
@@ -161,7 +248,9 @@ const rawRequest = toString(examples?.request)
             <span className={styles.chevron}>{openRes ? "▾" : "▸"}</span>
           </div>
           {openRes && (
-            <CodeBlock language="json" showLineNumbers>{exampleResponse!}</CodeBlock>
+            <div className={styles.codeWrapper}>
+              <CodeHighlight code={exampleResponse!} language="json" />
+            </div>
           )}
         </div>
       )}
@@ -170,7 +259,7 @@ const rawRequest = toString(examples?.request)
   );
 }
 
-function langToHighlight(lang: SnippetLang): string {
+function langToHighlight(lang: SnippetLang): Language {
   switch (lang) {
     case "cURL": return "bash";
     case "JS Fetch": return "javascript";

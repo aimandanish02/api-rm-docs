@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
 .wrapper {
   width: 100%;
   margin: 16px 0;
@@ -13,23 +15,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 400px;
-  /* fixed height — adjust to taste */
-}
-
-/* scrollable body, no horizontal overflow */
-.card> :not(.header) {
-  overflow-y: auto;
-  overflow-x: hidden;
-  /* kill horizontal scroll */
-  flex: 1;
-}
-
-.card pre {
-  white-space: pre-wrap !important;     /* wrap long lines */
-  overflow-wrap: anywhere !important;   /* break long tokens/URLs only when needed */
-  word-break: normal !important;        /* keeps line numbers (10, 11…) intact */
-  overflow-x: hidden !important;
+  background: var(--ifm-background-color);
 }
 
 .header {
@@ -42,6 +28,8 @@
   font-weight: 600;
   font-size: 13px;
   user-select: none;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  transition: background 0.15s ease;
 }
 
 .header:hover {
@@ -91,7 +79,7 @@
   padding: 3px 10px;
   border-radius: 6px;
   border: 1px solid var(--ifm-color-emphasis-300);
-  background: transparent;
+  background: var(--ifm-color-emphasis-100);
   color: var(--ifm-font-color-base);
   font-size: 11.5px;
   cursor: pointer;
@@ -102,9 +90,116 @@
 .copyBtn:hover {
   border-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-200);
 }
 
 .copyBtnCopied {
   border-color: #22c55e !important;
   color: #22c55e !important;
+  background: rgba(34, 197, 94, 0.1) !important;
+}
+
+/* ── Code wrapper ── */
+
+.codeWrapper {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--ifm-code-background);
+}
+
+/* Light mode background */
+[data-theme='light'] .codeWrapper {
+  background: #f6f8fa;
+}
+
+/* Dark mode background */
+[data-theme='dark'] .codeWrapper {
+  background: #0d1117;
+}
+
+/* ── Code block ── */
+
+.codeBlock {
+  margin: 0 !important;
+  padding: 16px 0 !important;
+  background: transparent !important;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  overflow-x: auto !important;
+  white-space: pre !important;
+}
+
+.codeLine {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 20px 0 0;
+  min-height: 22px;
+  transition: background 0.1s ease;
+}
+
+.codeLine:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .codeLine:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.lineNumber {
+  user-select: none;
+  min-width: 44px;
+  padding: 0 16px 0 20px;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 12px;
+  text-align: right;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-theme='dark'] .lineNumber {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.codeLine:hover .lineNumber {
+  color: var(--ifm-color-emphasis-800);
+}
+
+[data-theme='dark'] .codeLine:hover .lineNumber {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.lineContent {
+  flex: 1;
+  min-width: 0;
+  padding-right: 24px;
+}
+
+/* Scrollbar styling */
+.codeWrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.codeWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.codeWrapper::-webkit-scrollbar-thumb {
+  background: var(--ifm-color-emphasis-300);
+  border-radius: 4px;
+}
+
+.codeWrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .codeWrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='dark'] .codeWrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
