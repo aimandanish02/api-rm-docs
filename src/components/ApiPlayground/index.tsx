@@ -26,7 +26,6 @@ const highlightJson = (json: string) =>
 type Props = {
   shared: SharedState;  
   children?: React.ReactNode;
-
 };
 
 export default function ApiPlayground({ shared, children }: Props) {
@@ -44,6 +43,7 @@ export default function ApiPlayground({ shared, children }: Props) {
   const [status, setStatus] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [missedSignature, setMissedSignature] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleSend = async () => {
     try {
@@ -55,6 +55,9 @@ export default function ApiPlayground({ shared, children }: Props) {
       setResponse(result.response);
       setStatus(result.status);
       setMissedSignature(result.missedSignature);
+      
+      // Auto-expand if the playground was collapsed when the request was sent
+      if (isCollapsed) setIsCollapsed(false); 
     } catch (err: any) {
       alert("Request failed: " + (err?.message || String(err)));
     } finally {
@@ -90,129 +93,141 @@ export default function ApiPlayground({ shared, children }: Props) {
             );
           })}
         </span>
+        
+        <button 
+          className={styles.collapseBtn} 
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          title={isCollapsed ? "Expand Playground" : "Collapse Playground"}
+        >
+          {isCollapsed ? "▼ Show Details" : "▲ Collapse"}
+        </button>
       </div>
 
-      {requiresAccessToken && (
-        <TokenBanner status={tokenStatus} onClear={handleClearToken} />
-      )}
-      {/* {requiresSignature && (
-        <PrivateKeyBanner
-          loaded={keyLoaded}
-          onLoad={handleLoadKey}
-          onClear={handleClearKey}
-        />
-      )} */}
+      {!isCollapsed && (
+        <div className={styles.playgroundBody}>
+          {requiresAccessToken && (
+            <TokenBanner status={tokenStatus} onClear={handleClearToken} />
+          )}
+          {/* {requiresSignature && (
+            <PrivateKeyBanner
+              loaded={keyLoaded}
+              onLoad={handleLoadKey}
+              onClear={handleClearKey}
+            />
+          )} */}
 
-      <div className={styles.blockHeader}>
-        <label className={styles.label}>Headers</label>
-      </div>
-      <pre
-        className={styles.editor}
-        contentEditable
-        suppressContentEditableWarning
-        onBlur={(e) => {
-          try { setHeaders(JSON.parse(e.currentTarget.innerText)); } catch { }
-        }}
-        dangerouslySetInnerHTML={{
-          __html: highlightJson(JSON.stringify(headers, null, 2)),
-        }}
-      />
-
-      {method !== "GET" && (
-        <>
           <div className={styles.blockHeader}>
-            <label className={styles.label}>Body</label>
+            <label className={styles.label}>Headers</label>
           </div>
           <pre
             className={styles.editor}
             contentEditable
             suppressContentEditableWarning
-            onBlur={(e) => setJsonBody(e.currentTarget.innerText)}
-            dangerouslySetInnerHTML={{ __html: highlightJson(jsonBody) }}
+            onBlur={(e) => {
+              try { setHeaders(JSON.parse(e.currentTarget.innerText)); } catch { }
+            }}
+            dangerouslySetInnerHTML={{
+              __html: highlightJson(JSON.stringify(headers, null, 2)),
+            }}
           />
-        </>
-      )}
 
-      <button
-        className={`${styles.send} ${notReady ? styles.sendBlocked : ""}`}
-        onClick={handleSend}
-        disabled={loading}
-        title={notReady ? "Resolve the warnings above before sending" : undefined}
-      >
-        {loading ? "Sending…" : "▶ Send Request"}
-      </button>
-
-      {missedSignature && (
-        <div className={`${styles.banner} ${styles.bannerWarning}`} style={{ marginTop: 12 }}>
-          <span className={styles.bannerDot} />
-          <span>
-            Request sent <strong>without a signature</strong> — the server will likely reject it.
-            Paste your private key above and send again.
-          </span>
-        </div>
-      )}
-
-      {status !== null && (
-        <div>
-          <div className={styles.statusLine}>
-            <span className={status >= 200 && status < 300 ? styles.statusOk : styles.statusErr}>
-              {status}
-            </span>
-            {response?._error && (
-              <span className={styles.statusHint}>{response._error}</span>
-            )}
-          </div>
-          {!response?._error && (
-            <pre className={styles.response}>
-              {JSON.stringify(response, null, 2)}
-            </pre>
+          {method !== "GET" && (
+            <>
+              <div className={styles.blockHeader}>
+                <label className={styles.label}>Body</label>
+              </div>
+              <pre
+                className={styles.editor}
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) => setJsonBody(e.currentTarget.innerText)}
+                dangerouslySetInnerHTML={{ __html: highlightJson(jsonBody) }}
+              />
+            </>
           )}
-          {status >= 300 && !response?._error && (() => {
-            const codes = extractErrorCodes(response);
-            if (codes.length === 0) return null;
-            return (
-              <div className={styles.errorLookup}>
-                <div className={styles.errorLookupHeader}>
-                  <span className={styles.errorLookupIcon}>⚑</span>
-                  <span>Error Code Reference</span>
-                </div>
-                {codes.map((code) => {
-                  const entry = lookupError(code);
-                  return (
-                    <div key={code} className={styles.errorLookupEntry}>
-                      <div className={styles.errorLookupCode}>{code}</div>
-                      {entry ? (
-                        <>
-                          <div className={styles.errorLookupDesc}>{entry.description}</div>
-                          {entry.solution && (
-                            <div className={styles.errorLookupSolution}>
-                              <span className={styles.errorLookupSolutionLabel}>💡 Fix</span>
-                              {entry.solution}
+
+          <button
+            className={`${styles.send} ${notReady ? styles.sendBlocked : ""}`}
+            onClick={handleSend}
+            disabled={loading}
+            title={notReady ? "Resolve the warnings above before sending" : undefined}
+          >
+            {loading ? "Sending…" : "▶ Send Request"}
+          </button>
+
+          {missedSignature && (
+            <div className={`${styles.banner} ${styles.bannerWarning}`} style={{ marginTop: 12 }}>
+              <span className={styles.bannerDot} />
+              <span>
+                Request sent <strong>without a signature</strong> — the server will likely reject it.
+                Paste your private key above and send again.
+              </span>
+            </div>
+          )}
+
+          {status !== null && (
+            <div>
+              <div className={styles.statusLine}>
+                <span className={status >= 200 && status < 300 ? styles.statusOk : styles.statusErr}>
+                  {status}
+                </span>
+                {response?._error && (
+                  <span className={styles.statusHint}>{response._error}</span>
+                )}
+              </div>
+              {!response?._error && (
+                <pre className={styles.response}>
+                  {JSON.stringify(response, null, 2)}
+                </pre>
+              )}
+              {status >= 300 && !response?._error && (() => {
+                const codes = extractErrorCodes(response);
+                if (codes.length === 0) return null;
+                return (
+                  <div className={styles.errorLookup}>
+                    <div className={styles.errorLookupHeader}>
+                      <span className={styles.errorLookupIcon}>⚑</span>
+                      <span>Error Code Reference</span>
+                    </div>
+                    {codes.map((code) => {
+                      const entry = lookupError(code);
+                      return (
+                        <div key={code} className={styles.errorLookupEntry}>
+                          <div className={styles.errorLookupCode}>{code}</div>
+                          {entry ? (
+                            <>
+                              <div className={styles.errorLookupDesc}>{entry.description}</div>
+                              {entry.solution && (
+                                <div className={styles.errorLookupSolution}>
+                                  <span className={styles.errorLookupSolutionLabel}>💡 Fix</span>
+                                  {entry.solution}
+                                </div>
+                              )}
+                            </>
+                          ) : (
+                            <div className={styles.errorLookupDesc}>
+                              No description found.{" "}
+                              <a href="/docs/error-codes" className={styles.errorLookupLink}>
+                                View all error codes →
+                              </a>
                             </div>
                           )}
-                        </>
-                      ) : (
-                        <div className={styles.errorLookupDesc}>
-                          No description found.{" "}
-                          <a href="/docs/error-codes" className={styles.errorLookupLink}>
-                            View all error codes →
-                          </a>
                         </div>
-                      )}
+                      );
+                    })}
+                    <div className={styles.errorLookupFooter}>
+                      <a href="/docs/error-codes" className={styles.errorLookupLink}>
+                        View full error code reference →
+                      </a>
                     </div>
-                  );
-                })}
-                <div className={styles.errorLookupFooter}>
-                  <a href="/docs/error-codes" className={styles.errorLookupLink}>
-                    View full error code reference →
-                  </a>
-                </div>
-              </div>
-            );
-          })()}
+                  </div>
+                );
+              })()}
+            </div>
+          )}
+          {children}
         </div>
       )}
-      {children}
     </div>
   );
 }
