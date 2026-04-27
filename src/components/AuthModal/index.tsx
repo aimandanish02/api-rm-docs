@@ -197,7 +197,7 @@ export default function AuthModal() {
               rel="noopener noreferrer"
               className={styles.dashboardBtn}
             >
-              Login with Dashboard
+              Create App on Dashboard
             </a>
 
             <p className={styles.dividerLabel}>or paste your credentials below</p>

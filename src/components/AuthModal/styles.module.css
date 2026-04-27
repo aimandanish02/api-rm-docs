@@ -51,21 +51,60 @@
 .dashboardBtn {
   display: block;
   width: 100%;
-  padding: 10px;
-  font-size: 14px;
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 12px;
   font-weight: 600;
-  border-radius: 8px;
-  border: 1.5px solid var(--ifm-color-primary);
-  background: transparent;
-  color: var(--ifm-color-primary);
+  font-size: 14px;
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  z-index: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  isolation: isolate;
   margin-bottom: 6px;
 }
 
+:root[data-theme="light"] .dashboardBtn {
+  background: #ffffff;
+  color: #111111;
+}
+
+:root[data-theme="dark"] .dashboardBtn {
+  background: #000000;
+  color: #ffffff;
+}
+
+.dashboardBtn::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 13px;
+  background-image: linear-gradient(var(--gradient-angle), #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
+  mask-image: conic-gradient(#000 10deg, #000 var(--reveal-angle), transparent var(--reveal-angle));
+  z-index: -1;
+}
+
+.dashboardBtn:hover::before {
+  animation: angle-rotation 1.5s ease forwards;
+}
+
+.dashboardBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: inherit;
+  z-index: -1;
+}
+
 .dashboardBtn:hover {
-  background: var(--ifm-color-primary-lightest, #e8f4fd);
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.dashboardBtn:active {
+  transform: scale(0.97);
 }
 
 .dividerLabel {
@@ -175,22 +214,95 @@
   border-color: var(--ifm-color-primary);
 }
 
+/* ================= CONNECT BUTTON ================= */
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --reveal-angle {
+  syntax: "<angle>";
+  initial-value: 360deg;
+  inherits: false;
+}
+
+@keyframes angle-rotation {
+  0% {
+    --gradient-angle: 0deg;
+    --reveal-angle: 0deg;
+  }
+  100% {
+    --gradient-angle: 360deg;
+    --reveal-angle: 360deg;
+  }
+}
+
 .connectBtn {
   width: 100%;
-  padding: 10px;
-  font-size: 14px;
+  position: relative;
+  padding: 12px 20px;
+  border-radius: 12px;
   font-weight: 600;
-  border-radius: 8px;
-  border: none;
-  background: var(--ifm-color-primary);
-  color: #fff;
+  font-size: 14px;
   cursor: pointer;
+  border: none;
+  z-index: 1;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  isolation: isolate;
   margin-bottom: 10px;
 }
 
+:root[data-theme="light"] .connectBtn {
+  background: #ffffff;
+  color: #111111;
+}
+
+:root[data-theme="dark"] .connectBtn {
+  background: #000000;
+  color: #ffffff;
+}
+
+.connectBtn::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: 13px;
+  background-image: linear-gradient(var(--gradient-angle), #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
+  mask-image: conic-gradient(#000 10deg, #000 var(--reveal-angle), transparent var(--reveal-angle));
+  z-index: -1;
+}
+
+.connectBtn:hover::before {
+  animation: angle-rotation 1.5s ease forwards;
+}
+
+.connectBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: inherit;
+  z-index: -1;
+}
+
+.connectBtn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.connectBtn:active {
+  transform: scale(0.97);
+}
+
 .connectBtn:disabled {
-  opacity: 0.6;
+  opacity: 0.5;
   cursor: not-allowed;
+}
+
+.connectBtn:disabled::before {
+  animation: none;
 }
 
 .sessionNote {
