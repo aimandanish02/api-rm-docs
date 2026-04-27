@@ -2,7 +2,6 @@ import React from "react";
 import classnames from "classnames";
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
-import Footer from "./Footer/index.js";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
@@ -133,8 +132,6 @@ function Home() {
   </section>
 </main>
 
-      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-      <Footer />
     </Layout>
   );
 }
