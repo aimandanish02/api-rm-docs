@@ -108,9 +108,22 @@ Payment: [
     className: "api-get",
   },
   {
-    type: "doc",
-    id: "v2/payment/cancel-transaction",
-    className: "api-post",
+    type: "category",
+    label: "Cancel Transaction",
+    collapsible: true,
+    collapsed: false,
+    items: [
+      {
+        type: "doc",
+        id: "v2/payment/cancel-transaction/reverse-transaction",
+        className: "api-post",
+      },
+      {
+        type: "doc",
+        id: "v2/payment/cancel-transaction/refund-transaction",
+        className: "api-post",
+      },
+    ],
   },
   {
     type: "doc",

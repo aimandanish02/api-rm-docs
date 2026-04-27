@@ -1,0 +1,114 @@
+---
+id: refund-transaction
+title: "Refund Transaction"
+sidebar_label: "Refund Transaction"
+
+api:
+  method: POST
+  url:
+    sandbox: https://sb-open.revenuemonster.my/v3/payment/refund
+
+  headers:
+    Authorization: Bearer {{access_token}}
+    X-Timestamp: {{timestamp}}
+  body:
+    type: json
+    example: |
+      {
+        "transactionId": "180730103903010431152179",
+        "refund": {
+          "type": "FULL",
+          "currencyType": "MYR",
+          "amount": 100
+        },
+        "reason": "Customer requested refund"
+      }
+
+examples:
+  request: |
+    There is no example request provided.
+  body: |
+    There is no example body request.
+  response: |
+    There is no example response provided.
+
+---
+
+import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
+
+<ApiEndpoint
+  method="POST"
+  sandbox="/v3/payment/refund"
+  prod="/v3/payment/refund"
+/>
+
+## What is this?
+
+Refund returns funds to the customer — based on the payment provider's policy and time limits.
+
+:::info
+Refund eligibility depends on the payment provider. Each payment method has its own refund period. If the refund period has passed, contact [support@revenuemonster.my](mailto:support@revenuemonster.my?subject=%5BRefund%20Request%5D) with:
+- Transaction ID
+- Reference ID (if applicable)
+- Total Transaction Amount
+- Total Refund Amount
+- Reason for refund
+:::
+
+---
+
+## How to Use
+
+### Step 1: Get the Transaction ID
+
+Locate the `transactionId` from the original transaction.
+
+### Step 2: Prepare the Refund
+
+Prepare the refund amount and reason.
+
+### Step 3: Make the Request
+
+Send the refund request. Check the `code` field in the response — if `"SUCCESS"`, the operation completed.
+
+---
+
+## Request Parameters
+
+<ParamTable
+  title="Details"
+  rows={[
+    { name: "transactionId", type: "String", required: true, description: "Transaction ID to refund", example: "\"180730103903010431152179\"" },
+    { name: "refund.type", type: "String", required: true, description: "Refund type (e.g., \"FULL\")", example: "\"FULL\"" },
+    { name: "refund.currencyType", type: "String", required: true, description: "Refund currency type", example: "\"MYR\"" },
+    { name: "refund.amount", type: "Uint64", required: true, description: "Refund amount in smallest currency unit", example: "100" },
+    { name: "reason", type: "String", required: true, description: "Reason for the refund" }
+  ]}
+/>
+
+<CodeBlock language="json" filename="Example Request">
+{`{
+  "transactionId": "180730103903010431152179",
+  "refund": {
+    "type": "FULL",
+    "currencyType": "MYR",
+    "amount": 100
+  },
+  "reason": "Customer requested refund"
+}`}
+</CodeBlock>
+
+## Response Parameters
+
+<ParamTable
+  title="Details"
+  rows={[
+    { name: "item", type: "Object", description: "Transaction response object" },
+    { name: "code", type: "String", description: "\"SUCCESS\" if the refund succeeded, otherwise an error code." },
+    { name: "error.code", type: "String", description: "Error code if the request failed." },
+    { name: "error.message", type: "String", description: "Error message if the request failed." },
+    { name: "error.debug", type: "String", description: "Debug message (sandbox only)." }
+  ]}
+/>
+
+<!-- SPDX-License-Identifier: Apache-2.0 -->
