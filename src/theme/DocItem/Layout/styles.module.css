@@ -1,3 +1,51 @@
+/* Grid layout for non-API doc pages (TOC above article) */
+.docItemWrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: calc(100vh - var(--ifm-navbar-height));
+  overflow: hidden;
+}
+
+.tocWrapper {
+  overflow-y: auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+.articleWrapper {
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* Webkit scrollbar */
+.articleWrapper::-webkit-scrollbar,
+.tocWrapper::-webkit-scrollbar {
+  width: 4px;
+}
+
+.articleWrapper::-webkit-scrollbar-track,
+.tocWrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.articleWrapper::-webkit-scrollbar-thumb,
+.tocWrapper::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.35);
+  border-radius: 999px;
+}
+
+.articleWrapper::-webkit-scrollbar-thumb:hover,
+.tocWrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.6);
+}
+
+/* Firefox */
+.articleWrapper,
+.tocWrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.35) transparent;
+}
+
 .apiLayout {
   display: grid;
   width: 100%;

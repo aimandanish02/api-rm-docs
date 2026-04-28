@@ -2,13 +2,13 @@
   .sidebar {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding-top: var(--ifm-navbar-height);
+    min-height: 100vh;
+    padding-top: 0 !important;
     width: var(--doc-sidebar-width);
   }
 
   .sidebarWithHideableNavbar {
-    padding-top: 0;
+    /* Keep empty */
   }
 
   .sidebarHidden {
@@ -24,6 +24,7 @@
     max-height: var(--ifm-navbar-height);
     color: inherit !important;
     text-decoration: none !important;
+    flex-shrink: 0;
   }
 
   .sidebarLogo img {
