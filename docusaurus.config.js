@@ -87,8 +87,9 @@ module.exports = {
 
     navbar: {
       logo: {
-        alt: "My Site Logo",
+        alt: "Revenue Monster",
         src: "/img/rm-logo.svg",
+        srcDark: "https://rm-landing-web-assets.oss-ap-southeast-3.aliyuncs.com/icons/RM.svg",
         href: "https://revenuemonster.my",
       },
       items: [
