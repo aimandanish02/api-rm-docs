@@ -18,6 +18,7 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
+  --doc-sidebar-width: 300px; /* Sidebar width - adjust if needed */
 }
 
 /* ================================
@@ -269,21 +270,70 @@ html[data-theme="light"] .menu__list .menu__list {
 }
 
 /* ================================
-   SIDEBAR WIDTH
+   SIDEBAR LAYOUT (NON-API PAGES)
 ================================ */
 
-.navbar-sidebar,
-.menu,
-nav.menu {
-  width: 300px !important;
-  min-width: 300px !important;
+@media (min-width: 997px) {
+  /* Main container */
+  [class*="docMainContainer"] {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+  }
+
+  /* Sidebar — sticky, full height */
+  [class*="docSidebarContainer"] {
+    position: sticky !important;
+    top: 0 !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    z-index: 10 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Custom scrollbar for sidebar */
+  [class*="docSidebarContainer"]::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  [class*="docSidebarContainer"]::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  [class*="docSidebarContainer"]::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.35);
+    border-radius: 999px;
+  }
+
+  [class*="docSidebarContainer"]::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.6);
+  }
+
+  [class*="docSidebarContainer"] {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 128, 128, 0.35) transparent;
+  }
 }
 
-.docSidebarContainer,
-aside.theme-doc-sidebar-container,
-[class*="docSidebarContainer"] {
-  width: 300px !important;
-  min-width: 300px !important;
+/* Mobile sidebar */
+@media (max-width: 996px) {
+  [class*="docSidebarContainer"] {
+    position: static !important;
+  }
+}
+
+/* ================================
+   REMOVE TOC COLUMN ON REGULAR DOCS
+================================ */
+
+@media (min-width: 997px) {
+  /* Hide TOC column on non-API docs */
+  .col--3,
+  .theme-doc-toc-desktop {
+    display: none !important;
+  }
 }
 
 /* ================================
@@ -320,15 +370,6 @@ aside.theme-doc-sidebar-container,
   max-width: 100% !important;
   flex: 1 1 0 !important;
   min-width: 0 !important;
-}
-
-/* ================================
-   TOC — REGULAR DOC PAGES
-================================ */
-
-/* Hide native Docusaurus TOC */
-.theme-doc-toc-desktop {
-  display: none !important;
 }
 
 /* ================================
