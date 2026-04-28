@@ -7,16 +7,6 @@ import DocTOC from "@site/src/components/DocTOC";
 import { useApiSharedState } from "@site/src/components/ApiPlayground/UseApiSharedState";
 import styles from "./styles.module.css";
 
-// Wrap Layout to inject DocTOC
-function LayoutWithTOC(props) {
-  return (
-    <>
-      <DocTOC />
-      <Layout {...props} />
-    </>
-  );
-}
-
 // Separate component so hooks are always called unconditionally
 function ApiPanel({ api }) {
   const shared = useApiSharedState({
@@ -42,8 +32,17 @@ export default function LayoutWrapper(props) {
   const api = frontMatter?.api;
 
   if (!api) {
-    // Regular doc page
-    return <LayoutWithTOC {...props} />;
+    // Regular doc page — TOC above content, scrolls with article
+    return (
+      <div className={styles.docItemWrapper}>
+        <div className={styles.tocWrapper}>
+          <DocTOC />
+        </div>
+        <div className={styles.articleWrapper}>
+          <Layout {...props} />
+        </div>
+      </div>
+    );
   }
 
   // API page with playground
