@@ -111,4 +111,119 @@ Send the refund request. Check the `code` field in the response — if `"SUCCESS
   ]}
 />
 
+---
+
+## Appendix: Merchant Refund Process Online/Offline (Terminal/App/Portal)
+
+<div style={{overflowX: 'auto'}}>
+  <table style={{width: '100%', borderCollapse: 'collapse', marginBottom: '16px'}}>
+    <thead>
+      <tr style={{borderBottom: '2px solid #ddd'}}>
+        <th style={{padding: '12px', textAlign: 'left', fontWeight: '600'}}>Payment Method</th>
+        <th style={{padding: '12px', textAlign: 'center', fontWeight: '600'}}>Online / Offline</th>
+        <th style={{padding: '12px', textAlign: 'center', fontWeight: '600'}}>Same Day</th>
+        <th style={{padding: '12px', textAlign: 'center', fontWeight: '600'}}>Next Day</th>
+        <th style={{padding: '12px', textAlign: 'left', fontWeight: '600'}}>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', gap: '8px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', minHeight: '80px'}}><img src="/img/merchantlogorefund/grab.png" style={{height: '60px', maxWidth: '45%', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/ShopBack.png" style={{height: '60px', maxWidth: '45%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px'}}>Transaction over 30 days contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/touchngo.png" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px'}}>Transaction over 30 days Contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', justifyContent: 'center', alignItems: 'center', minHeight: '100px'}}><img src="/img/merchantlogorefund/alipay.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/alipay-plus.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/WeChat_Pay.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/shopeepay.png" style={{height: '50px', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px'}}>Transaction over 365 days contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', justifyContent: 'center', alignItems: 'center', minHeight: '100px'}}><img src="/img/merchantlogorefund/spayglobal.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/setel.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/truemoney.png" style={{height: '50px', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px'}}>If insufficient amount, contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/boost.png" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px'}}>Transaction over 14 days contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td rowSpan={2} style={{padding: '12px', textAlign: 'center', verticalAlign: 'middle'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/mae.png" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>If insufficient amount, contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}>Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px'}}>Transaction over 30 days contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td rowSpan={2} style={{padding: '12px', textAlign: 'center', verticalAlign: 'middle'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/card.png" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>Contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}>Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>Merchant may void to customer before settlement</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/fpx.png" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>Manually refund to customer / Customer may file dispute to their bank issuer</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', justifyContent: 'center', alignItems: 'center', minHeight: '100px'}}><img src="/img/merchantlogorefund/tapay.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/mcash.png" style={{height: '50px', objectFit: 'contain'}} /><img src="/img/merchantlogorefund/unionpay.jpeg" style={{height: '50px', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>Contact Revenue Monster</td>
+      </tr>
+      <tr style={{borderBottom: '1px solid #eee'}}>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/atome.png" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>Contact Atome at support@atome.my</td>
+      </tr>
+      <tr>
+        <td style={{padding: '12px', textAlign: 'center'}}><div style={{backgroundColor: '#f5f5f5', borderRadius: '8px', padding: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80px'}}><img src="/img/merchantlogorefund/duitnow.jpeg" style={{height: '60px', maxWidth: '80%', objectFit: 'contain'}} /></div></td>
+        <td style={{padding: '12px', textAlign: 'center'}}>Online & Offline</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>✅</td>
+        <td style={{padding: '12px', textAlign: 'center', fontSize: '18px'}}>❌</td>
+        <td style={{padding: '12px'}}>Merchant may void to customer before settlement</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+> **Note:** Same wallet with sufficient amount
+
+:::info
+For refund requests, contact [support@revenuemonster.my](mailto:support@revenuemonster.my?subject=%5BRefund%20Request%5D).
+:::
+
 <!-- SPDX-License-Identifier: Apache-2.0 -->
