@@ -1,0 +1,215 @@
+/* ================================
+   MARKDOWN TABLE STYLES
+   Modern, beautiful tables with card-like appearance
+================================ */
+
+.wrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 16px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Table base */
+.table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  table-layout: fixed;
+  word-break: break-word;
+  display: table; /* Override any display: block */
+  margin-bottom: 0; /* Override any inherited margin */
+}
+
+/* Header */
+.table thead {
+  background: linear-gradient(
+    135deg,
+    #00bfa5 0%,
+    #5e35b1 100%
+  );
+}
+
+.table thead th {
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  border: none;
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* First header cell gets left padding */
+.table thead th:first-child {
+  border-radius: 16px 0 0 0;
+}
+
+/* Last header cell gets right padding */
+.table thead th:last-child {
+  border-radius: 0 16px 0 0;
+}
+
+/* Body cells */
+.table tbody td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  border-right: 1px solid var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+  vertical-align: middle;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Remove right border on last column */
+.table tbody td:last-child {
+  border-right: none;
+}
+
+/* Last row - no border */
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* First row cells get top spacing */
+.table tbody tr:first-child td {
+  padding-top: 16px;
+}
+
+/* Last row cells get bottom spacing and rounded corners */
+.table tbody tr:last-child td:first-child {
+  border-radius: 0 0 0 16px;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-radius: 0 0 16px 0;
+}
+
+/* Hover effect on rows */
+.table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.table tbody tr:hover td {
+  background: rgba(0, 191, 165, 0.08);
+}
+
+/* First column (often labels/names) */
+.table tbody td:first-child {
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  background: var(--ifm-color-emphasis-50);
+}
+
+/* Code in tables */
+.table code {
+  font-size: 0.85em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-200);
+  word-break: break-word;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+/* Links in tables */
+.table a {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.table a:hover {
+  color: var(--ifm-color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Strong/bold text */
+.table tbody td strong {
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+}
+
+/* ================================
+   DARK MODE
+================================ */
+
+[data-theme="dark"] .wrapper {
+  border-color: var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .table thead {
+  background: linear-gradient(
+    135deg,
+    #00bfa5 0%,
+    #5e35b1 100%
+  );
+}
+
+[data-theme="dark"] .table tbody td:first-child {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme="dark"] .table tbody tr:hover td {
+  background: rgba(0, 191, 165, 0.12);
+}
+
+[data-theme="dark"] .table tbody td {
+  border-bottom-color: var(--ifm-color-emphasis-300);
+  border-right-color: var(--ifm-color-emphasis-300);
+}
+
+[data-theme="dark"] .table code {
+  background: var(--ifm-color-emphasis-300);
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin: 1rem 0;
+    border-radius: 12px;
+  }
+
+  .table {
+    font-size: 0.85rem;
+  }
+
+  .table thead th {
+    padding: 12px 14px;
+  }
+
+  .table tbody td {
+    padding: 12px 14px;
+  }
+
+  .table thead th:first-child {
+    border-radius: 12px 0 0 0;
+  }
+
+  .table thead th:last-child {
+    border-radius: 0 12px 0 0;
+  }
+
+  .table tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 12px;
+  }
+
+  .table tbody tr:last-child td:last-child {
+    border-radius: 0 0 12px 0;
+  }
+}
