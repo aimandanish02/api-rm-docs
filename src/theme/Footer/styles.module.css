@@ -1,5 +1,5 @@
 .footer {
-  padding: 48px 0 32px;
+  padding: 24px 0;
   border-top: 1px solid var(--ifm-color-emphasis-200);
   background: var(--ifm-background-surface-color);
   color: var(--ifm-color-content);
@@ -11,55 +11,8 @@
   padding: 0 24px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 48px;
-}
-
-.brandSection {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.logo {
-  height: 28px;
-  width: auto;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-}
-
-.logo:hover {
-  opacity: 1;
-}
-
-.socialLinks {
-  display: flex;
-  gap: 12px;
-}
-
-.socialLink {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: var(--ifm-color-emphasis-200);
-  color: var(--ifm-color-content-secondary);
-  transition: all 0.2s ease;
-}
-
-.socialLink:hover {
-  background: var(--ifm-color-primary);
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.infoSection {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 24px;
 }
 
 .copyright {
@@ -69,29 +22,28 @@
   line-height: 1.5;
 }
 
-.legalLinks {
+.socialLinks {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.socialLink {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  color: var(--ifm-color-content-secondary);
+  transition: all 0.2s ease;
 }
 
-.legalLink {
-  font-size: 13px;
-  font-weight: 500;
+.socialLink:hover {
+  background: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
   color: var(--ifm-color-primary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.legalLink:hover {
-  color: var(--ifm-color-primary-dark);
-  text-decoration: underline;
-}
-
-.separator {
-  color: var(--ifm-color-emphasis-300);
-  font-size: 13px;
 }
 
 /* Responsive */
@@ -100,18 +52,14 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 32px;
+    gap: 16px;
   }
 
-  .brandSection {
-    align-items: center;
+  .copyright {
+    order: 2;
   }
 
-  .infoSection {
-    align-items: center;
-  }
-
-  .legalLinks {
-    justify-content: center;
+  .socialLinks {
+    order: 1;
   }
 }

@@ -48,51 +48,22 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.brandSection}>
-          <img
-            className={styles.logo}
-            src="/img/rm-white-logo.svg"
-            alt="Revenue Monster"
-          />
-          <div className={styles.socialLinks}>
-            {socialLinks.map(({ href, Icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.socialLink}
-                aria-label={label}
-              >
-                <Icon />
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.infoSection}>
-          <p className={styles.copyright}>
-            Copyright &copy; {currentYear} Revenue Monster SDN BHD (Company NO.1236838-T). All rights reserved.
-          </p>
-          <div className={styles.legalLinks}>
+        <p className={styles.copyright}>
+          &copy; {currentYear} Revenue Monster Sdn Bhd (Company No. 1236838-T). All rights reserved.
+        </p>
+        <div className={styles.socialLinks}>
+          {socialLinks.map(({ href, Icon, label }) => (
             <a
-              href="https://merchant.revenuemonster.my/docs/privacy-notice"
+              key={label}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.legalLink}
+              className={styles.socialLink}
+              aria-label={label}
             >
-              Privacy Notice
+              <Icon />
             </a>
-            <span className={styles.separator} aria-hidden="true">|</span>
-            <a
-              href="https://merchant.revenuemonster.my/docs/terms-of-use"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.legalLink}
-            >
-              Terms of Use
-            </a>
-          </div>
+          ))}
         </div>
       </div>
     </footer>

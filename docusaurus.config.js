@@ -88,7 +88,7 @@ module.exports = {
     navbar: {
       logo: {
         alt: "Revenue Monster",
-        src: "/img/rm-logo.svg",
+        src: "/img/revenuemoster-logo-dark.svg",
         srcDark: "https://rm-landing-web-assets.oss-ap-southeast-3.aliyuncs.com/icons/RM.svg",
         href: "https://revenuemonster.my",
       },
@@ -116,10 +116,10 @@ module.exports = {
       ],
     },
 
-    footer: {
-      style: "dark",
-      copyright: `Copyright © ${new Date().getFullYear()} Revenue Monster SDN BHD (Company NO.1236838-T). All rights reserved`,
-    },
+    // footer: {
+    //   style: "dark",
+    //   copyright: `Copyright © ${new Date().getFullYear()} Revenue Monster SDN BHD (Company NO.1236838-T). All rights reserved`,
+    // },
   },
 
   presets: [
