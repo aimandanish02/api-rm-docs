@@ -213,7 +213,7 @@
   position: absolute;
   inset: -1.5px;
   border-radius: 13px;
-  background-image: linear-gradient(var(--gradient-angle), #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
+  background-image: linear-gradient(135deg, #1e2891 1.85%, #734696 69.78%, #eb008c 100.66%);
   mask-image: conic-gradient(#000 10deg, #000 var(--reveal-angle), transparent var(--reveal-angle));
   z-index: -1;
 }
