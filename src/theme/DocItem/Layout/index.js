@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "@theme-original/DocItem/Layout";
 import { useDoc } from "@docusaurus/theme-common/internal";
 import ApiPlayground from "@site/src/components/ApiPlayground";
@@ -8,7 +8,7 @@ import { useApiSharedState } from "@site/src/components/ApiPlayground/UseApiShar
 import styles from "./styles.module.css";
 
 // Separate component so hooks are always called unconditionally
-function ApiPanel({ api }) {
+function ApiPanel({ api, isVisible, onToggle }) {
   const shared = useApiSharedState({
     method: api.method,
     url: api.url?.sandbox ?? api.url ?? "",
@@ -18,18 +18,49 @@ function ApiPanel({ api }) {
     useServerSigning: true,
   });
 
+  // Lock body scroll when playground is open on mobile
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    if (isVisible && window.innerWidth <= 996) {
+      // Lock body scroll
+      document.body.classList.add('mobile-playground-open');
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      // Unlock body scroll
+      document.body.classList.remove('mobile-playground-open');
+      document.documentElement.style.overflow = '';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('mobile-playground-open');
+      document.documentElement.style.overflow = '';
+    };
+  }, [isVisible]);
+
   return (
-    <aside className={styles.playground}>
-      <ApiPlayground shared={shared}>
-        <ApiExamples />
-      </ApiPlayground>
-    </aside>
+    <>
+      <aside className={`${styles.playground} ${isVisible ? styles.playgroundVisible : ''}`}>
+        <ApiPlayground shared={shared}>
+          <ApiExamples />
+        </ApiPlayground>
+      </aside>
+      <button
+        className={`${styles.mobileToggle} ${isVisible ? styles.mobileToggleActive : ''}`}
+        onClick={onToggle}
+        aria-label={isVisible ? "Close API Playground" : "Open API Playground"}
+      >
+        {isVisible ? "✕ Close Playground" : "🔧 Try API"}
+      </button>
+    </>
   );
 }
 
 export default function LayoutWrapper(props) {
   const { frontMatter } = useDoc();
   const api = frontMatter?.api;
+  const [playgroundVisible, setPlaygroundVisible] = useState(false);
 
   if (!api) {
     // Regular doc page — TOC above content, scrolls with article
@@ -51,7 +82,11 @@ export default function LayoutWrapper(props) {
       <div className={styles.docContent}>
         <Layout {...props} />
       </div>
-      <ApiPanel api={api} />
+      <ApiPanel 
+        api={api} 
+        isVisible={playgroundVisible}
+        onToggle={() => setPlaygroundVisible(!playgroundVisible)}
+      />
     </div>
   );
 }
