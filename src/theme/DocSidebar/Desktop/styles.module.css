@@ -4,11 +4,12 @@
     flex-direction: column;
     min-height: 100vh;
     padding-top: 0 !important;
+    margin-top: 0 !important;
     width: var(--doc-sidebar-width);
   }
 
   .sidebarWithHideableNavbar {
-    /* Keep empty */
+    padding-top: 0 !important;
   }
 
   .sidebarHidden {

@@ -18,7 +18,7 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
-  --doc-sidebar-width: 300px; /* Sidebar width - adjust if needed */
+  --doc-sidebar-width: 300px;
 }
 
 /* ================================
@@ -176,7 +176,6 @@ body {
   align-items: center;
 }
 
-/* shared badge base */
 .api-get > .menu__link::after,
 .api-post > .menu__link::after,
 .api-put > .menu__link::after,
@@ -190,7 +189,6 @@ body {
   flex-shrink: 0;
 }
 
-/* GET — green */
 .api-get > .menu__link::after {
   content: "GET";
   background: #e6f6ee;
@@ -203,7 +201,6 @@ body {
   border-color: #166534;
 }
 
-/* POST — yellow */
 .api-post > .menu__link::after {
   content: "POST";
   background: #fffbeb;
@@ -216,7 +213,6 @@ body {
   border-color: #7c5c00;
 }
 
-/* PUT — blue */
 .api-put > .menu__link::after {
   content: "PUT";
   background: #e8f0fe;
@@ -229,7 +225,6 @@ body {
   border-color: #1e3a8a;
 }
 
-/* DELETE — red */
 .api-delete > .menu__link::after {
   content: "DEL";
   background: #fef2f2;
@@ -242,7 +237,6 @@ body {
   border-color: #7f1d1d;
 }
 
-/* PATCH — purple */
 .api-patch > .menu__link::after {
   content: "PATCH";
   background: #f3f0ff;
@@ -270,7 +264,7 @@ html[data-theme="light"] .menu__list .menu__list {
 }
 
 /* ================================
-   SIDEBAR LAYOUT (NON-API PAGES)
+   SIDEBAR LAYOUT - REMOVE TOP PADDING
 ================================ */
 
 @media (min-width: 997px) {
@@ -281,7 +275,7 @@ html[data-theme="light"] .menu__list .menu__list {
     align-items: stretch !important;
   }
 
-  /* Sidebar — sticky, full height */
+  /* Sidebar - sticky, full height, NO TOP PADDING */
   [class*="docSidebarContainer"] {
     position: sticky !important;
     top: 0 !important;
@@ -290,6 +284,12 @@ html[data-theme="light"] .menu__list .menu__list {
     z-index: 10 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    margin-top: 0 !important;
+  }
+
+  /* Remove any inherited padding from sidebar menu */
+  [class*="docSidebarContainer"] .menu {
+    padding-top: 0 !important;
     margin-top: 0 !important;
   }
 
@@ -317,7 +317,6 @@ html[data-theme="light"] .menu__list .menu__list {
   }
 }
 
-/* Mobile sidebar */
 @media (max-width: 996px) {
   [class*="docSidebarContainer"] {
     position: static !important;
@@ -329,7 +328,6 @@ html[data-theme="light"] .menu__list .menu__list {
 ================================ */
 
 @media (min-width: 997px) {
-  /* Hide TOC column on non-API docs */
   .col--3,
   .theme-doc-toc-desktop {
     display: none !important;
@@ -359,13 +357,11 @@ html[data-theme="light"] .menu__list .menu__list {
   padding-right: 0 !important;
 }
 
-/* Hide built-in TOC on API pages — playground panel replaces it */
 .api-page-layout .col--3,
 .api-page-layout .theme-doc-toc-desktop {
   display: none !important;
 }
 
-/* Let article stretch to fill full width on API pages */
 .api-page-layout .docItemCol {
   max-width: 100% !important;
   flex: 1 1 0 !important;
@@ -373,10 +369,9 @@ html[data-theme="light"] .menu__list .menu__list {
 }
 
 /* ================================
-   DOC CONTENT — PREVENT WIDE BLOWOUT
+   DOC CONTENT - PREVENT WIDE BLOWOUT
 ================================ */
 
-/* Wide elements scroll within themselves, not push layout */
 .docItemCol pre,
 .docItemCol table,
 .docItemCol [class*="codeBlockContainer"] {
@@ -384,7 +379,6 @@ html[data-theme="light"] .menu__list .menu__list {
   overflow-x: auto;
 }
 
-/* Prevent inline code from stretching */
 .docItemCol code {
   word-break: break-word;
 }
@@ -433,7 +427,33 @@ html[data-theme='light'] .docs-wrapper,
 }
 
 /* ================================
-   IMPORTS
+   RESPONSIVE NAVBAR
 ================================ */
 
-@import "./api-playground.css";
+@media (max-width: 996px) {
+  .auth-badge-desktop,
+  .explore-button-desktop {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar__items {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  
+  .navbar__item {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar__toggle {
+    margin-right: 0;
+  }
+  
+  .navbar__brand {
+    margin-right: auto;
+  }
+}
