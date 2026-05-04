@@ -88,7 +88,11 @@ function AuthBadge() {
   const label = connected ? "Connected" : expired ? "Token expired" : "Connect";
 
   return (
-    <button style={badgeStyle} onClick={openModal}>
+    <button 
+      style={badgeStyle} 
+      onClick={openModal}
+      className="auth-badge-desktop"
+    >
       <span style={dotStyle} />
       {label}
     </button>
@@ -104,6 +108,7 @@ export default function NavbarContent(props) {
         <OriginalNavbarContent {...props} />
         <AuthBadge />
         <button
+          className="explore-button-desktop"
           style={{
             background: "none",
             border: "none",
