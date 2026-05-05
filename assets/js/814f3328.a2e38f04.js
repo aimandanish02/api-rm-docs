@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkrevenuemonster=self.webpackChunkrevenuemonster||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome","permalink":"/api-rm-docs/blog/welcome"}]}')}}]);
