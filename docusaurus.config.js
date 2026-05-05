@@ -4,12 +4,13 @@ module.exports = {
   title: "Revenue Monster",
   tagline:
     "Empowering businesses by seamlessly integrating Mobile Payments, Loyalty Programs and Social Media",
-  url: "https://revenuemonster.my",
-  baseUrl: "/",
+  url: "https://aimandanish02.github.io", //previously was "https://doc.revenuemonster.my"
+  baseUrl: "/api-rm-docs/", //previously was "/"
   favicon: "img/favicon.ico",
 
-  organizationName: "revenuemonster",
-  projectName: "doc-v2",
+  organizationName: "aimandanish02", //previously was "RevenueMonster"
+  projectName: "api-rm-docs", //previously was "doc-v2"
+  trailingSlash: false, //before this doesnt have this
 
   plugins: [
     path.resolve(__dirname, "./node_modules/docusaurus-lunr-search/"),
