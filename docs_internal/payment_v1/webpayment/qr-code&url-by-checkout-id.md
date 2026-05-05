@@ -3,6 +3,7 @@ id: qr-code&url-by-checkout-id
 title: Get QR Code & URL By Checkout ID
 sidebar_label: Get QR Code & URL By Checkout ID
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -130,3 +131,5 @@ curl --location --request POST '{{open_base_path}}/v3/payment/online/checkout' \
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

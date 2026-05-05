@@ -3,6 +3,7 @@ id: delete-customer-token
 title: Delete Customer Tokens
 sidebar_label: Delete Customer Tokens
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -38,3 +39,5 @@ curl --location --request DELETE "https://sb-open.revenuemonster.my/v3/payment/t
 
 ```
 
+
+{% endraw %}

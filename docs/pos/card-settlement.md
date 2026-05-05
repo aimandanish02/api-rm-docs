@@ -3,6 +3,7 @@ id: card-settlement
 title: Card Payment Settlement
 sidebar_label: Card Payment Settlement
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -106,3 +107,5 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
   ]
 }
 ```
+
+{% endraw %}

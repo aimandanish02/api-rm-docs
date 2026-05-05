@@ -3,6 +3,7 @@ id: card-refund
 title: Card Payment Refund
 sidebar_label: Card Payment Refund
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -143,3 +144,5 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
   }
 }
 ```
+
+{% endraw %}

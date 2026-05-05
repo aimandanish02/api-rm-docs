@@ -3,6 +3,7 @@ id: create-customer-order
 title: Create Customer Order
 sidebar_label: Create Customer Order
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -147,3 +148,5 @@ Create Customer Order
     "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

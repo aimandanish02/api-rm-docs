@@ -3,6 +3,7 @@ id: query-status-by-order-id
 title: Query Status By Order ID
 sidebar_label: Query Status By Order ID
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -149,3 +150,5 @@ No request parameter is required for this endpoint.
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

@@ -3,6 +3,7 @@ id: payment
 title: POS Terminal Integration
 sidebar_label: POS Terminal Integration
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -201,3 +202,5 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   "updatedAt": "2021-02-17T18:39:37Z"
 }
 ```
+
+{% endraw %}

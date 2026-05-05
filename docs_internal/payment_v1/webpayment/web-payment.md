@@ -3,6 +3,7 @@ id: web-payment
 title: Web/Mobile Payment Transaction
 sidebar_label: Web/Mobile Payment Transaction
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -199,3 +200,5 @@ curl --location --request POST "{{open_base_path}}/v3/payment/online" \
     https://sb-pg.revenuemonster.my/v4/checkout?checkoutId=1548316308361173347&method=TNG_MY
   </b>
 </details>
+
+{% endraw %}

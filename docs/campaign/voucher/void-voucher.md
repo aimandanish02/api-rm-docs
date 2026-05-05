@@ -64,6 +64,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+{% raw %}
 
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -167,3 +168,5 @@ To void voucher(s) of customer.
   ]}
 />
 
+
+{% endraw %}

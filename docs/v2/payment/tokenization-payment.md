@@ -42,6 +42,7 @@ examples:
   response: |
     There is no example response provided.
 ---
+{% raw %}
 
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -491,3 +492,5 @@ This API uses the customer's bound card to make a payment — it is not a manual
 />
 
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+
+{% endraw %}

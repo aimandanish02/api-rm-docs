@@ -3,6 +3,7 @@ id: signature-algorithm
 title: Signature Algorithm
 sidebar_label: Signature Algorithm
 ---
+{% raw %}
 
 # Signature Algorithm
 
@@ -496,3 +497,5 @@ Compare the `preVerifyContent` steps below with your own output to find where th
 | Amount is in cents — `"amount": 100` = RM 1.00 | Multiply the amount by 100 |
 
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+
+{% endraw %}

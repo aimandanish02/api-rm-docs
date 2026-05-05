@@ -3,6 +3,7 @@ id: create-recurring-customer
 title: Create Recurring Customer
 sidebar_label: Create Recurring Customer
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -119,3 +120,5 @@ Create Recurring Customer
     "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

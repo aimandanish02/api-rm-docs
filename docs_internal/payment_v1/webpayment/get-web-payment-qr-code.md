@@ -3,6 +3,7 @@ id: get-web-payment-qr-code
 title: Get Individual QR Code
 sidebar_label: Get Individual QR Code
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -66,3 +67,5 @@ Generate a QR code to display on your web or mobile for user to scan
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

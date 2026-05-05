@@ -49,6 +49,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
+{% raw %}
 
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -79,3 +80,5 @@ Get loyalty member by `Member ID`
 :::
 
 ### Response Parameters
+
+{% endraw %}

@@ -3,6 +3,7 @@ id: toggle-customer-status
 title: Toggle Customer Status
 sidebar_label: Toggle Customer Status
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -87,3 +88,5 @@ No request parameter is required for this endpoint.
     "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

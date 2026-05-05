@@ -3,6 +3,7 @@ id: topup-history
 title: Topup History
 sidebar_label: Topup History
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -285,3 +286,5 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/transaction" \
     ]
 }
 ```
+
+{% endraw %}

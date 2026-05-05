@@ -3,6 +3,7 @@ id: create-tokenized-customer
 title: Create Tokenized Customer
 sidebar_label: Create Tokenized Customer
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -92,3 +93,5 @@ Create Tokenized Customer
     "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

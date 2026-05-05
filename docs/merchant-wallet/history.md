@@ -3,6 +3,7 @@ id: history
 title: Check Wallet History
 sidebar_label: Check Wallet History
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -311,3 +312,5 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/history" \
     ]
 }
 ```
+
+{% endraw %}

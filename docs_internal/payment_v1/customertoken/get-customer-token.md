@@ -3,6 +3,7 @@ id: get-customer-token
 title: Get Customer Tokens
 sidebar_label: Get Customer Tokens
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -89,3 +90,5 @@ curl --location --request GET "https://sb-open.revenuemonster.my/v3/payment/toke
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

@@ -3,6 +3,7 @@ id: testing-wallets
 title: Testing Wallets
 sidebar_label: Testing Wallets
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -260,3 +261,5 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   </td> 
   </tr>
 </table>
+
+{% endraw %}

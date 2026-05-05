@@ -3,6 +3,7 @@ id: get-customer-orders
 title: Get Customer Orders
 sidebar_label: Get Customer Orders
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -186,3 +187,5 @@ No request parameter is required for this endpoint.
     "meta": {}
 }
 ```
+
+{% endraw %}

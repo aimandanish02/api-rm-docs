@@ -3,6 +3,7 @@ id: get-online-transaction
 title: Get Online Transaction By Checkout ID
 sidebar_label: Get Online Transaction By Checkout ID
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -61,3 +62,5 @@ No request parameter is required for this endpoint.
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

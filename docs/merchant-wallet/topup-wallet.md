@@ -3,6 +3,7 @@ id: topup-wallet
 title: Topup Wallet
 sidebar_label: Topup Wallet
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -51,3 +52,5 @@ curl --location --request POST "{{open_base_path}}/v3/wallet/topup" \
     "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

@@ -3,6 +3,7 @@ id: daily-settlement-report
 title: Daily Settlement Report
 sidebar_label: Daily Settlement Report
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -124,3 +125,5 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/rec
   "meta": {}
 }
 ```
+
+{% endraw %}

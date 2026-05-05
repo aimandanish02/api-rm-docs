@@ -3,6 +3,7 @@ id: query-status-by-transaction-id
 title: Query Status by Transaction ID
 sidebar_label: Query Status by TransactionID
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -150,3 +151,5 @@ No request parameter is required for this endpoint.
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}

@@ -33,6 +33,7 @@ examples:
     There is no example response provided.
 
 ---
+{% raw %}
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
@@ -227,3 +228,4 @@ For refund requests, contact [support@revenuemonster.my](mailto:support@revenuem
 :::
 
 <!-- SPDX-License-Identifier: Apache-2.0 -->
+{% endraw %}

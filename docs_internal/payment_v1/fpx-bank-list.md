@@ -3,6 +3,7 @@ id: get-fpx-bank-list
 title: Get Fpx Bank List
 sidebar_label: Get Fpx Banks
 ---
+{% raw %}
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -124,3 +125,5 @@ No request parameter is required for this endpoint.
   "code": "SUCCESS"
 }
 ```
+
+{% endraw %}
