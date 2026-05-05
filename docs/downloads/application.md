@@ -22,11 +22,10 @@ Application Install
       cursor:"pointer",
     }}
     onClick={() => {
-      window.open( "https://install.appcenter.ms/orgs/revenue-monster/apps/revenue-monster-merchant-android/distribution_groups/public", "_blank");
-       
+      window.open("https://install.appcenter.ms/orgs/revenue-monster/apps/revenue-monster-merchant-android/distribution_groups/public", "_blank");
     }}
   >
-  <b>Production Application</b>
+    <b>Production Application</b>
   </Button>
 </Flex>
 <br/>
@@ -42,11 +41,9 @@ Application Install
       cursor:"pointer",
     }}
     onClick={() => {
-       window.open(  "https://install.appcenter.ms/orgs/revenue-monster/apps/revenue-monster-merchant-android/distribution_groups/staging","_blank");
-     
+      window.open("https://install.appcenter.ms/orgs/revenue-monster/apps/revenue-monster-merchant-android/distribution_groups/staging", "_blank");
     }}
   >
-    <b>Sandbox Application </b>
+    <b>Sandbox Application</b>
   </Button>
- 
 </Flex>
