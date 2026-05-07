@@ -92,24 +92,36 @@ body {
 /* ================================
    NAVBAR
 ================================ */
-
+ 
 .navbar .navbar__items {
   align-items: center;
   display: flex;
   flex: 1 1 auto;
   width: 20%;
 }
-
+ 
 .navbar .navbar__search .navbar__search-input {
   width: 6.5rem;
   animation-timing-function: width 0.2s ease-in-out;
 }
-
+ 
 .navbar .navbar__search .navbar__search-input:focus {
   background-color: aliceblue;
   width: 100%;
 }
-
+ 
+/* Dark mode styles for search bar */
+[data-theme='dark'] .navbar .navbar__search .navbar__search-input {
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+ 
+[data-theme='dark'] .navbar .navbar__search .navbar__search-input:focus {
+  background-color: var(--ifm-color-emphasis-100);
+  border-color: var(--ifm-color-primary);
+}
+ 
 .navbar__item--explore {
   display: block;
 }
@@ -135,7 +147,7 @@ body {
 /* ================================
    RESPONSIVE
 ================================ */
-
+ 
 @media screen and (max-width: 966px) {
   .navbar .navbar__search .navbar__search-input:focus {
     background-color: aliceblue;
@@ -146,16 +158,21 @@ body {
     top: 15px;
     z-index: 1;
   }
-
+ 
+  /* Dark mode for mobile search */
+  [data-theme='dark'] .navbar .navbar__search .navbar__search-input:focus {
+    background-color: var(--ifm-color-emphasis-100);
+  }
+ 
   .hero .hero__title {
     font-size: 2rem;
   }
-
+ 
   .hero .hero__subtitle {
     font-size: 1rem;
   }
 }
-
+ 
 @media screen and (max-width: 768px) {
   .navbar__item--explore {
     display: none;
