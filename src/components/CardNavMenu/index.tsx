@@ -35,21 +35,15 @@ const navItems = [
 ];
 
 export default function CardNavMenu({ open, setOpen, mobile }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
-
-
-
-  // 🔹 DESKTOP VERSION (your existing overlay)
   return (
     <div
       className={`${styles.overlay} ${open ? styles.open : ""}`}
       onClick={() => setOpen(false)}
     >
-<div
-  className={styles.menu}
-  onClick={(e) => e.stopPropagation()}
->
+      <div
+        className={styles.menu}
+        onClick={(e) => e.stopPropagation()}
+      >
         {navItems.map((section, i) => (
           <div
             key={section.label}
