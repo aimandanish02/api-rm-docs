@@ -117,6 +117,12 @@ module.exports = {
       ],
     },
 
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
+
     // footer: {
     //   style: "dark",
     //   copyright: `Copyright © ${new Date().getFullYear()} Revenue Monster SDN BHD (Company NO.1236838-T). All rights reserved`,

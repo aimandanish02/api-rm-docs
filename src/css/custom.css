@@ -77,7 +77,8 @@ body {
   color: black !important;
 }
 
-.button.button--secondary.button--outline:not(.button--active):not(:hover) {
+/* Sidebar collapse button uses its own styles.module.css — exclude it here */
+.button.button--secondary.button--outline:not(.button--active):not(:hover):not([class*='collapseSidebar']) {
   color: var(--ifm-font-color-base);
   background-color: aqua;
   border-radius: 20px;
@@ -281,7 +282,7 @@ html[data-theme="light"] .menu__list .menu__list {
 }
 
 /* ================================
-   SIDEBAR LAYOUT - REMOVE TOP PADDING
+   SIDEBAR LAYOUT - REMOVE TOP PADDING & COLLAPSIBLE SUPPORT
 ================================ */
 
 @media (min-width: 997px) {
@@ -297,11 +298,52 @@ html[data-theme="light"] .menu__list .menu__list {
     position: sticky !important;
     top: 0 !important;
     height: 100vh !important;
-    overflow-y: auto !important;
+    max-height: 100vh !important;
+    overflow: visible !important;
+    clip-path: none !important; /* Override Docusaurus inset clipping so the collapse button is visible */
     z-index: 10 !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     margin-top: 0 !important;
+    width: var(--doc-sidebar-width) !important;
+    min-width: var(--doc-sidebar-width) !important;
+    flex-shrink: 0 !important;
+    transition: width 0.3s ease, min-width 0.3s ease, opacity 0.3s ease !important;
+    border-right: 1px solid var(--ifm-toc-border-color) !important;
+  }
+
+  /* Neutralize Docusaurus's built-in hidden-state hover/peek behavior
+     (we drive collapse via data-sidebar-collapsed, not the Hidden class) */
+  [class*="docSidebarContainerHidden"] {
+    cursor: default !important;
+  }
+  [class*="docSidebarContainerHidden"]:hover {
+    width: var(--doc-sidebar-width) !important;
+  }
+
+  /* COLLAPSED STATE - Hide the entire sidebar container */
+  body[data-sidebar-collapsed="true"] [class*="docSidebarContainer"],
+  html[data-sidebar-collapsed="true"] [class*="docSidebarContainer"] {
+    width: 0 !important;
+    min-width: 0 !important;
+    opacity: 1 !important; /* Keep it opaque so child button is visible */
+    pointer-events: auto !important; /* Keep pointer events for the button */
+  }
+
+  /* EXPANDED STATE - Show content at full width when sidebar is collapsed */
+  body[data-sidebar-collapsed="true"] [class*="docMainContainer"],
+  html[data-sidebar-collapsed="true"] [class*="docMainContainer"] {
+    max-width: 100% !important;
+  }
+
+  body[data-sidebar-collapsed="true"] .container,
+  html[data-sidebar-collapsed="true"] .container {
+    max-width: 100% !important;
+  }
+
+  body[data-sidebar-collapsed="true"] .row,
+  html[data-sidebar-collapsed="true"] .row {
+    margin-left: 0 !important;
   }
 
   /* Remove any inherited padding from sidebar menu */

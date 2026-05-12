@@ -1,40 +1,79 @@
-:root {
-  --docusaurus-collapse-button-bg: transparent;
-  --docusaurus-collapse-button-bg-hover: rgb(0 0 0 / 10%);
-}
-
-[data-theme='dark']:root {
-  --docusaurus-collapse-button-bg: rgb(255 255 255 / 5%);
-  --docusaurus-collapse-button-bg-hover: rgb(255 255 255 / 10%);
+.collapseSidebarButton {
+  display: none;
 }
 
 @media (min-width: 997px) {
   .collapseSidebarButton {
-    display: block !important;
-    background-color: var(--docusaurus-collapse-button-bg);
-    height: 40px;
-    position: sticky;
-    bottom: 0;
-    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    right: -13px;
+    transform: translateY(-50%);
+
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+
+    /* Matches sidebar/page background so it looks mounted on the edge */
+    background: var(--ifm-sidebar-background-color, var(--ifm-background-color));
     border: 1px solid var(--ifm-toc-border-color);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    z-index: 200;
+    padding: 0;
+    margin: 0;
+
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+
+    /* Reset any inherited button styles */
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    font: inherit;
+  }
+
+  .collapseSidebarButton:hover {
+    background: var(--ifm-color-emphasis-200);
+    border-color: var(--ifm-color-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .collapseSidebarButton:active {
+    background: var(--ifm-color-emphasis-300);
   }
 
   .collapseSidebarButtonIcon {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    /* chevron points left = collapse */
+    transform: rotate(0deg);
+    transition: transform 0.25s ease;
+  }
+
+  /* Collapsed: float the button at the left edge of content, fully in view */
+  body[data-sidebar-collapsed='true'] .collapseSidebarButton,
+  html[data-sidebar-collapsed='true'] .collapseSidebarButton {
+    right: auto;
+    left: 4px;
+  }
+
+  /* Collapsed: chevron flips to point right = expand */
+  body[data-sidebar-collapsed='true'] .collapseSidebarButtonIcon,
+  html[data-sidebar-collapsed='true'] .collapseSidebarButtonIcon {
     transform: rotate(180deg);
-    margin-top: 4px;
   }
 
   [dir='rtl'] .collapseSidebarButtonIcon {
-    transform: rotate(0);
+    transform: rotate(180deg);
   }
 
-  .collapseSidebarButton:hover,
-  .collapseSidebarButton:focus {
-    background-color: var(--docusaurus-collapse-button-bg-hover);
+  [dir='rtl'] body[data-sidebar-collapsed='true'] .collapseSidebarButtonIcon,
+  [dir='rtl'] html[data-sidebar-collapsed='true'] .collapseSidebarButtonIcon {
+    transform: rotate(0deg);
   }
-}
-
-.collapseSidebarButton {
-  display: none;
-  margin: 0;
 }

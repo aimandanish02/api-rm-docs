@@ -2,10 +2,39 @@
   .sidebar {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
+    max-height: 100vh;
     padding-top: 0 !important;
     margin-top: 0 !important;
     width: var(--doc-sidebar-width);
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: visible;
+  }
+
+  .sidebarMenu {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebarCollapsed {
+    width: 0 !important;
+    min-width: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Hide only the menu content, not .sidebar itself — opacity on the parent
+     would propagate and hide the collapse button too. */
+  .sidebarCollapsed .sidebarMenu,
+  .sidebarCollapsed .sidebarLogo {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
   }
 
   .sidebarWithHideableNavbar {
