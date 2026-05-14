@@ -19,6 +19,15 @@
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
   --doc-sidebar-width: 300px;
+  --ifm-h1-font-size: 1.3rem;
+}
+
+/* ================================
+   PAGE TITLE (H1)
+================================ */
+
+article h1 {
+  font-size: 1.8rem !important;
 }
 
 /* ================================
