@@ -137,6 +137,7 @@ module.exports = {
           sidebarPath: require.resolve("./sidebars.js"),
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
+          rehypePlugins: [require("./src/rehype/collapsibleSections")],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

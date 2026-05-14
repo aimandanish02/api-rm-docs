@@ -493,6 +493,83 @@ html[data-theme='light'] .docs-wrapper,
 }
 
 /* ================================
+   DARK MODE HEADING HIERARCHY
+================================ */
+
+[data-theme="dark"] {
+  --ifm-heading-color: #ffffff;
+}
+
+[data-theme="dark"] h2 {
+  color: #ffffff;
+  border-bottom: 1px solid rgba(102, 102, 235, 0.35);
+  padding-bottom: 0.4rem;
+}
+
+[data-theme="dark"] h3 {
+  color: #e8e8ff;
+}
+
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #d0d0f0;
+}
+
+/* ================================
+   COLLAPSIBLE SECTION HEADINGS
+================================ */
+
+details.section-details {
+  overflow: visible;
+  border: none;
+  background: transparent;
+  margin-bottom: 1.5rem;
+}
+
+details.section-details > summary.section-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  list-style: none;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+[data-theme="dark"] details.section-details > summary.section-summary {
+  border-bottom-color: rgba(102, 102, 235, 0.35);
+}
+
+details.section-details > summary.section-summary::before {
+  display: none;
+}
+
+details.section-details > summary.section-summary h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  flex: 1;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.section-toggle {
+  font-size: 18px;
+  line-height: 1;
+  opacity: 0.6;
+  flex-shrink: 0;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+  user-select: none;
+}
+
+details.section-details:not([open]) .section-toggle {
+  transform: rotate(-90deg);
+}
+
+/* ================================
    RESPONSIVE NAVBAR
 ================================ */
 

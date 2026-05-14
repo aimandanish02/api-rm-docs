@@ -62,6 +62,7 @@ function setupDetails() {
         const triggerY = window.innerHeight * TRIGGER_LINE;
         document.querySelectorAll("details").forEach((details) => {
             if (details.open) return;
+            if (details.classList.contains("section-details")) return;
             const summary = details.querySelector("summary");
             if (!summary) return;
             const summaryTop = summary.getBoundingClientRect().top;
@@ -78,6 +79,7 @@ function setupDetails() {
     function openRemaining() {
         if (!isAtBottom()) return;
         document.querySelectorAll("details").forEach((details) => {
+            if (details.classList.contains("section-details")) return;
             if (!details.open) {
                 animateOpen(details);
             }
