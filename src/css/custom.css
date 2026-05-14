@@ -190,6 +190,34 @@ body {
 }
 
 /* ================================
+   HTTP METHOD BADGES (reusable)
+================================ */
+
+.http-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+  vertical-align: middle;
+  line-height: 1.4;
+}
+
+.http-badge--get    { background: #e6f6ee; color: #1a7f4b; border: 1px solid #b0dfc5; }
+.http-badge--post   { background: #fffbeb; color: #b45309; border: 1px solid #fef3c7; }
+.http-badge--put    { background: #e8f0fe; color: #1d4ed8; border: 1px solid #a8c0f8; }
+.http-badge--delete { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+.http-badge--patch  { background: #f3f0ff; color: #6d28d9; border: 1px solid #c4b5fd; }
+
+[data-theme="dark"] .http-badge--get    { background: #0d3d22; color: #4ade80; border-color: #166534; }
+[data-theme="dark"] .http-badge--post   { background: #3d2d00; color: #fbbf24; border-color: #7c5c00; }
+[data-theme="dark"] .http-badge--put    { background: #0d1f4d; color: #60a5fa; border-color: #1e3a8a; }
+[data-theme="dark"] .http-badge--delete { background: #3d0a0a; color: #f87171; border-color: #7f1d1d; }
+[data-theme="dark"] .http-badge--patch  { background: #1e0a3d; color: #a78bfa; border-color: #4c1d95; }
+
+/* ================================
    API METHOD BADGES (SIDEBAR)
 ================================ */
 

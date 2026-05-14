@@ -9,7 +9,7 @@ We suggest you to calling the get customer token api after the transaction is su
 
 ### Get Customer Tokens
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span><br/>
+**Method :** <HttpMethodBadge method="GET" /><br/>
 URL : `https://open.revenuemonster.my/v3/payment/tokens/{customer_id}`<br/>
 Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/tokens/{customer_id}`
 
@@ -88,7 +88,7 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/tokens/{customer_id}
 
 ### Delete Customer Token
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>DELETE</span><br/>
+**Method :** <HttpMethodBadge method="DELETE" /><br/>
 URL : `https://open.revenuemonster.my/v3/payment/tokens/{customer_id}`<br/>
 Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/tokens/{customer_id}`
 

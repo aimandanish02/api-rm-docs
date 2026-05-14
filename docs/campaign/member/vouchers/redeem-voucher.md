@@ -7,7 +7,7 @@ sidebar_label: Redeem Voucher
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
+**Method :** <HttpMethodBadge method="POST" /><br/>
 URL : `https://open.revenuemonster.my/v3/loyalty/me/voucher/{voucher-code}/redeem?countryCode=60&phoneNumber=187824152`<br/>
 Sandbox URL : `https://sb-open.revenuemonster.my/v3/loyalty/me/voucher/{voucher-code}/redeem?countryCode=60&phoneNumber=187824152`
 

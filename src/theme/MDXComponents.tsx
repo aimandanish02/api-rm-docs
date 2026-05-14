@@ -3,6 +3,7 @@ import ApiExamples from "../components/ApiExamples";
 import ParamTable from "../components/ParamTable";
 import CodeBlock from "../components/CodeBlock";
 import MarkdownTable from "../components/MarkdownTable";
+import HttpMethodBadge from "../components/HttpMethodBadge";
 
 export default {
   ApiPlayground,
@@ -10,4 +11,5 @@ export default {
   ParamTable,
   CodeBlock,
   table: MarkdownTable,
+  HttpMethodBadge,
 };

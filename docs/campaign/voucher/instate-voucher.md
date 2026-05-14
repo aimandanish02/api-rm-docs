@@ -84,7 +84,7 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>PATCH</span><br/>
+**Method :** <HttpMethodBadge method="PATCH" /><br/>
 Url :`https://open.revenuemonster.my/v3/voucher/8JwpM3BC/reinstate`<br/>
 Sandbox Url : `https://sb-open.revenuemonster.my/v3/voucher/8JwpM3BC/reinstate`
 

@@ -7,7 +7,7 @@ sidebar_label: Check Balance
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
+**Method :** <HttpMethodBadge method="GET" /><br/>
 URL : `https://open.revenuemonster.my/v3/wallet/credit`<br/>
 Sandbox URL : `https://sb-open.revenuemonster.my/v3/wallet/credit`
 

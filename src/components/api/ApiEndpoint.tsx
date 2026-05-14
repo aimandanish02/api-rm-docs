@@ -1,6 +1,5 @@
-//api badge
 import React from "react";
-import clsx from "clsx";
+import HttpMethodBadge from "../HttpMethodBadge";
 import styles from "./api.module.css";
 
 type Props = {
@@ -14,9 +13,7 @@ export default function ApiEndpoint({ method, path, sandbox }: Props) {
   const displayPath = path ?? sandbox ?? "";
   return (
     <div className={styles.wrapper}>
-      <span className={clsx(styles.badge, styles[method.toLowerCase()])}>
-        {method}
-      </span>
+      <HttpMethodBadge method={method} />
       <code className={styles.path}>{displayPath}</code>
     </div>
   );

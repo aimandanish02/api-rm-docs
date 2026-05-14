@@ -120,7 +120,7 @@ import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "green", fontWeight: "bold" }}>GET</span><br/>
+**Method :** <HttpMethodBadge method="GET" /><br/>
 Url : `https://open.revenuemonster.my/v3/voucher-batches`<br/>
 Sandbox Url : `https://sb-open.revenuemonster.my/v3/voucher-batches`
 

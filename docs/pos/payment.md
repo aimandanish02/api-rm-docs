@@ -7,7 +7,7 @@ sidebar_label: POS Terminal Integration
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
-**Method :** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span><br/>
+**Method :** <HttpMethodBadge method="POST" /><br/>
 URL : `https://open.revenuemonster.my/v3/payment/terminal/quickpay`<br/>
 Sandbox URL : `https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay`
 

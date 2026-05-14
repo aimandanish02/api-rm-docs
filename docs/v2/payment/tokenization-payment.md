@@ -190,7 +190,7 @@ Recurring payment lets you automatically charge a customer's card based on a def
 The redirect URL brings the customer back to your page after card binding. It can be any URL type (deep link, browser URL, server URL).
 :::
 
-**Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
+**Method:** <HttpMethodBadge method="GET" />
 
 <ParamTable
   title="Details"
@@ -207,7 +207,7 @@ The redirect URL brings the customer back to your page after card binding. It ca
 Notify URL informs your server when a recurring payment is made. Notify is only called on success — fail and refund do not trigger a notify. Use [Query Transaction](./query-transaction.md) for full transaction details.
 :::
 
-**Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
+**Method:** <HttpMethodBadge method="GET" />
 
 <ParamTable
   title="Details"
@@ -300,7 +300,7 @@ Tokenized payment lets customers bind their card once, then you charge on your o
 The redirect URL brings the customer back to your page after card binding.
 :::
 
-**Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
+**Method:** <HttpMethodBadge method="GET" />
 
 <ParamTable
   title="Details"

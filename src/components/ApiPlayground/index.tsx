@@ -3,6 +3,7 @@ import { lookupError, extractErrorCodes } from "../../utils/errorCodes";
 import TokenBanner from "./TokenBanner";
 // import PrivateKeyBanner from "./PrivateKeyBanner";
 import { SharedState } from "./UseApiSharedState";
+import HttpMethodBadge from "../HttpMethodBadge";
 import styles from "./styles.module.css";
 
 const highlightJson = (json: string) =>
@@ -70,9 +71,7 @@ export default function ApiPlayground({ shared, children }: Props) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <span className={`${styles.method} ${styles[method.toLowerCase()]}`}>
-          {method}
-        </span>
+        <HttpMethodBadge method={method} />
         <span className={styles.url}>
           {baseUrl.split(/({[^}]+})/g).map((part, i) => {
             const match = part.match(/{([^}]+)}/);

@@ -162,7 +162,7 @@ After creating a checkout session, use the `checkoutId` to build a custom paymen
 The redirect URL brings the customer back to your page after payment. It can be any URL type (deep link, browser URL, server URL).
 :::
 
-**Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
+**Method:** <HttpMethodBadge method="GET" />
 
 | Parameter | Type | Required | Description |
 |---|---|---|---|
@@ -176,7 +176,7 @@ The redirect URL brings the customer back to your page after payment. It can be 
 The notify URL informs your server of the transaction status after a successful payment. Notify is only called on success — failure or refund does not trigger a notify. Query the transaction using [Query Transaction](./query-transaction.md) for full details.
 :::
 
-**Method:** <span style={{ color: "orange", fontWeight: "bold" }}>POST</span>
+**Method:** <HttpMethodBadge method="POST" />
 
 <ParamTable
   title="Details"
@@ -487,7 +487,7 @@ wx.requestPayment({
 
 ### Mode: FPX
 
-**Method:** <span style={{ color: "orange", fontWeight: "bold" }}>GET</span>
+**Method:** <HttpMethodBadge method="GET" />
 **URL:** `https://open.revenuemonster.my/v3/payment/fpx-bank`
 
 **Sandbox URL:** `https://sb-open.revenuemonster.my/v3/payment/fpx-bank`
