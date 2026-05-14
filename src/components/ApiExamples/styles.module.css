@@ -46,6 +46,12 @@
   font-size: 14px;
   opacity: 0.6;
   margin-left: 4px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.chevronCollapsed {
+  transform: rotate(-90deg);
 }
 
 /* ── Language dropdown ── */
@@ -106,16 +112,15 @@
   overflow-y: auto;
   overflow-x: hidden;
   background: var(--ifm-code-background);
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.2s ease;
+  opacity: 1;
 }
 
-/* Light mode background */
-[data-theme='light'] .codeWrapper {
-  background: #f6f8fa;
-}
-
-/* Dark mode background */
-[data-theme='dark'] .codeWrapper {
-  background: #0d1117;
+.codeWrapperCollapsed {
+  max-height: 0 !important;
+  overflow: hidden;
+  opacity: 0;
 }
 
 /* ── Code block ── */

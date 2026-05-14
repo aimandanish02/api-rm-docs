@@ -17,11 +17,11 @@ const highlightJson = (json: string) =>
     )
     .replace(
       /:\s*("(\\u[a-zA-Z0-9]{4}|\\[^\\"])*")/g,
-      `: <span class="${styles.jsonValue}">$1</span>`
+      `: <span class="${styles.jsonStringValue}">$1</span>`
     )
     .replace(
       /:\s*(\d+|true|false|null)/g,
-      `: <span class="${styles.jsonValue}">$1</span>`
+      `: <span class="${styles.jsonNumValue}">$1</span>`
     );
 
 type Props = {
@@ -45,6 +45,24 @@ export default function ApiPlayground({ shared, children, onCollapsePanel }: Pro
   const [status, setStatus] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [missedSignature, setMissedSignature] = useState(false);
+  const [copiedHeaders, setCopiedHeaders] = useState(false);
+  const [copiedBody, setCopiedBody] = useState(false);
+  const [openHeaders, setOpenHeaders] = useState(true);
+  const [openBody, setOpenBody] = useState(true);
+
+  const handleCopyHeaders = () => {
+    navigator.clipboard.writeText(JSON.stringify(headers, null, 2)).then(() => {
+      setCopiedHeaders(true);
+      setTimeout(() => setCopiedHeaders(false), 2000);
+    });
+  };
+
+  const handleCopyBody = () => {
+    navigator.clipboard.writeText(jsonBody).then(() => {
+      setCopiedBody(true);
+      setTimeout(() => setCopiedBody(false), 2000);
+    });
+  };
 
   const handleSend = async () => {
     try {
@@ -89,16 +107,6 @@ export default function ApiPlayground({ shared, children, onCollapsePanel }: Pro
             );
           })}
         </span>
-        
-        {onCollapsePanel && (
-          <button
-            className={styles.collapseBtn}
-            onClick={onCollapsePanel}
-            title="Collapse Playground"
-          >
-            ▶ Collapse
-          </button>
-        )}
       </div>
 
       <div className={styles.playgroundBody}>
@@ -106,34 +114,58 @@ export default function ApiPlayground({ shared, children, onCollapsePanel }: Pro
           <TokenBanner status={tokenStatus} onClear={handleClearToken} />
         )}
 
-        <div className={styles.blockHeader}>
-          <label className={styles.label}>Headers</label>
+        {/* Headers card */}
+        <div className={styles.editorCard}>
+          <div className={styles.editorCardHeader} onClick={() => setOpenHeaders(!openHeaders)}>
+            <span className={styles.editorCardTitle}>Headers</span>
+            <div className={styles.editorCardActions} onClick={(e) => e.stopPropagation()}>
+              <button
+                className={`${styles.editorCopyBtn} ${copiedHeaders ? styles.editorCopied : ""}`}
+                onClick={handleCopyHeaders}
+                title="Copy headers"
+              >
+                {copiedHeaders ? "✓" : "Copy"}
+              </button>
+              <span className={`${styles.editorChevron} ${!openHeaders ? styles.editorChevronCollapsed : ""}`}>▾</span>
+            </div>
+          </div>
+          <pre
+            className={`${styles.editor} ${!openHeaders ? styles.editorCollapsed : ""}`}
+            contentEditable
+            suppressContentEditableWarning
+            onBlur={(e) => {
+              try { setHeaders(JSON.parse(e.currentTarget.innerText)); } catch { }
+            }}
+            dangerouslySetInnerHTML={{
+              __html: highlightJson(JSON.stringify(headers, null, 2)),
+            }}
+          />
         </div>
-        <pre
-          className={styles.editor}
-          contentEditable
-          suppressContentEditableWarning
-          onBlur={(e) => {
-            try { setHeaders(JSON.parse(e.currentTarget.innerText)); } catch { }
-          }}
-          dangerouslySetInnerHTML={{
-            __html: highlightJson(JSON.stringify(headers, null, 2)),
-          }}
-        />
 
+        {/* Body card */}
         {method !== "GET" && (
-          <>
-            <div className={styles.blockHeader}>
-              <label className={styles.label}>Body</label>
+          <div className={styles.editorCard}>
+            <div className={styles.editorCardHeader} onClick={() => setOpenBody(!openBody)}>
+              <span className={styles.editorCardTitle}>Body</span>
+              <div className={styles.editorCardActions} onClick={(e) => e.stopPropagation()}>
+                <button
+                  className={`${styles.editorCopyBtn} ${copiedBody ? styles.editorCopied : ""}`}
+                  onClick={handleCopyBody}
+                  title="Copy body"
+                >
+                  {copiedBody ? "✓" : "Copy"}
+                </button>
+                <span className={`${styles.editorChevron} ${!openBody ? styles.editorChevronCollapsed : ""}`}>▾</span>
+              </div>
             </div>
             <pre
-              className={styles.editor}
+              className={`${styles.editor} ${!openBody ? styles.editorCollapsed : ""}`}
               contentEditable
               suppressContentEditableWarning
               onBlur={(e) => setJsonBody(e.currentTarget.innerText)}
               dangerouslySetInnerHTML={{ __html: highlightJson(jsonBody) }}
             />
-          </>
+          </div>
         )}
 
         <button

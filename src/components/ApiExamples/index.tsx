@@ -228,15 +228,12 @@ export default function ApiExamples() {
               >
                 {copied ? "✓" : "Copy"}
               </button>
-              <span className={styles.chevron}>{openReq ? "▾" : "▸"}</span>
+              <span className={`${styles.chevron} ${!openReq ? styles.chevronCollapsed : ""}`}>▾</span>
             </div>
           </div>
-
-          {openReq && (
-            <div className={styles.codeWrapper}>
-              <CodeHighlight code={snippet} language={langToHighlight(lang)} />
-            </div>
-          )}
+          <div className={`${styles.codeWrapper} ${!openReq ? styles.codeWrapperCollapsed : ""}`}>
+            <CodeHighlight code={snippet} language={langToHighlight(lang)} />
+          </div>
         </div>
       )}
 
@@ -245,13 +242,11 @@ export default function ApiExamples() {
         <div className={styles.card}>
           <div className={styles.header} onClick={() => setOpenRes(!openRes)}>
             <span>Example Response</span>
-            <span className={styles.chevron}>{openRes ? "▾" : "▸"}</span>
+            <span className={`${styles.chevron} ${!openRes ? styles.chevronCollapsed : ""}`}>▾</span>
           </div>
-          {openRes && (
-            <div className={styles.codeWrapper}>
-              <CodeHighlight code={exampleResponse!} language="json" />
-            </div>
-          )}
+          <div className={`${styles.codeWrapper} ${!openRes ? styles.codeWrapperCollapsed : ""}`}>
+            <CodeHighlight code={exampleResponse!} language="json" />
+          </div>
         </div>
       )}
 
