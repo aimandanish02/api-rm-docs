@@ -195,10 +195,10 @@ body {
 
 .http-badge {
   display: inline-block;
-  padding: 2px 6px;
-  font-size: 11px;
+  padding: 1px 4px;
+  font-size: 9px;
   font-weight: 700;
-  border-radius: 4px;
+  border-radius: 3px;
   letter-spacing: 0.03em;
   flex-shrink: 0;
   vertical-align: middle;
@@ -236,10 +236,10 @@ body {
 .api-put > .menu__link::after,
 .api-delete > .menu__link::after,
 .api-patch > .menu__link::after {
-  padding: 2px 6px;
-  font-size: 10px;
+  padding: 1px 4px;
+  font-size: 9px;
   font-weight: 700;
-  border-radius: 4px;
+  border-radius: 3px;
   letter-spacing: 0.03em;
   flex-shrink: 0;
 }
