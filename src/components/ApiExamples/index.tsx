@@ -257,6 +257,7 @@ export default function ApiExamples() {
 function langToHighlight(lang: SnippetLang): Language {
   switch (lang) {
     case "cURL": return "bash";
+    case "Go": return "go" as Language;
     case "JS Fetch": return "javascript";
     case "Node / Axios": return "javascript";
     case "Python": return "python";

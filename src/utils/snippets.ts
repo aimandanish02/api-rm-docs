@@ -92,6 +92,38 @@ response = requests.${method.toLowerCase()}(
 print(response.json())`;
 }
 
+export function generateGo({ method, url, headers = {}, body }: SnippetInput): string {
+  const b = bodyStr(body);
+  const hasBody = !!b;
+  const imports = ['"fmt"', '"io"', '"net/http"', ...(hasBody ? ['"strings"'] : ['"bytes"'])].join("\n\t");
+  const payloadBlock = hasBody
+    ? `payload := strings.NewReader(\`${b}\`)`
+    : `payload := bytes.NewReader([]byte{})`;
+  const headerLines = Object.entries(headers)
+    .map(([k, v]) => `\treq.Header.Add("${k}", "${v}")`)
+    .join("\n");
+
+  return `package main
+
+import (
+\t${imports}
+)
+
+func main() {
+\turl := "${url}"
+\t${payloadBlock}
+
+\treq, _ := http.NewRequest("${method}", url, payload)
+${headerLines}
+
+\tres, _ := http.DefaultClient.Do(req)
+\tdefer res.Body.Close()
+
+\tbody, _ := io.ReadAll(res.Body)
+\tfmt.Println(string(body))
+}`;
+}
+
 export function generatePhp({ method, url, headers = {}, body }: SnippetInput): string {
   const headerLines = Object.entries(headers)
     .map(([k, v]) => `  "${k}: ${v}",`)
@@ -118,19 +150,18 @@ echo $response;`;
 
 /* ─── registry ────────────────────────────────────────────────────── */
 
-export type SnippetLang = "cURL" | "JS Fetch" | "Node / Axios" | "Python" | "PHP";
+export type SnippetLang = "cURL" | "Go" | "JS Fetch" | "Node / Axios" | "Python" | "PHP";
 
 export const SNIPPET_LANGS: SnippetLang[] = [
-  "cURL", "JS Fetch", "Node / Axios", "Python", "PHP",
+  "cURL", "Go", "JS Fetch", "Node / Axios", "Python", "PHP",
 ];
 
 export function generateSnippet(lang: SnippetLang, rawCurl: string): string {
-  // cURL always uses the raw original
   if (lang === "cURL") return generateCurl(rawCurl);
 
-  // All other languages parse the cURL first
   const parsed = parseCurl(rawCurl);
   switch (lang) {
+    case "Go":           return generateGo(parsed);
     case "JS Fetch":     return generateFetch(parsed);
     case "Node / Axios": return generateAxios(parsed);
     case "Python":       return generatePython(parsed);
