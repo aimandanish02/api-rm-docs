@@ -159,6 +159,8 @@ Prerequisite : Acquire requestID from mykad recognition response
 />
 
 
+<a id="request" />
+
 <ParamTable
   title="Details"
   rows={[
@@ -197,11 +199,11 @@ Prerequisite : Acquire requestID from mykad recognition response
     { name: "status", type: "String", description: "EKYC result status", example: "SUCCESS" },
     { name: "faceAction", type: "String", description: "Action Required for Face Compare", example: "NONE_REQUIRED" },
     { name: "faceCompareRequestId", type: "String", description: "Face Compare Request ID", example: "62201d51239b18052126e288" },
-    { name: "faceResult", type: "Object", description: "Refer to the Face Result", example: "(Refer to explanation below)" },
+    { name: "faceResult", type: "Object", description: "Refer to the Face Result", example: "(Refer to explanation below)", anchor: "inside-face-result-parameter" },
     { name: "mykadAction", type: "String", description: "Action Required for Mykad Recognition", example: "NONE_REQUIRED" },
     { name: "mykadRequestId", type: "String", description: "Detected Landmark", example: "62201d48a694817dede84b35" },
     { name: "reasons", type: "Array", description: "Meesage from EKYC engine", example: "[]" },
-    { name: "results", type: "Array", description: "Refer to the EKYC Result", example: "(Refer to explanation below)" },
+    { name: "results", type: "Array", description: "Refer to the EKYC Result", example: "(Refer to explanation below)", anchor: "inside-results-parameter" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time", example: "\"2022-03-03T01:43:46.155Z\"" },
     { name: "createdAt", type: "DateTime", description: "Create date time", example: "\"2022-03-03T01:43:36.963Z\"" }
   ]}
@@ -230,10 +232,10 @@ Prerequisite : Acquire requestID from mykad recognition response
 <ParamTable
   rows={[
     { name: "duration", type: "Float", description: "Mykad Recognition Duration", example: "3.2886" },
-    { name: "data", type: "Object", description: "Refer to the Results Data", example: "(Refer to explanation below)" },
-    { name: "faces", type: "Array", description: "Refer to the Results Faces", example: "(Refer to explanation below)" },
-    { name: "object", type: "Object", description: "Refer to the Results Object", example: "(Refer to explanation below)" },
-    { name: "scores", type: "Object", description: "Refer to the Results Scores", example: "(Refer to explanation below)" }
+    { name: "data", type: "Object", description: "Refer to the Results Data", example: "(Refer to explanation below)", anchor: "inside-results-data-parameter" },
+    { name: "faces", type: "Array", description: "Refer to the Results Faces", example: "(Refer to explanation below)", anchor: "inside-results-faces-parameter" },
+    { name: "object", type: "Object", description: "Refer to the Results Object", example: "(Refer to explanation below)", anchor: "inside-results-object-parameter" },
+    { name: "scores", type: "Object", description: "Refer to the Results Scores", example: "(Refer to explanation below)", anchor: "inside-results-scores-parameter" }
   ]}
 />
 
@@ -246,7 +248,7 @@ Prerequisite : Acquire requestID from mykad recognition response
 
 <ParamTable
   rows={[
-    { name: "address", type: "Object", description: "Refer to the Address", example: "(Refer to explanation below)" },
+    { name: "address", type: "Object", description: "Refer to the Address", example: "(Refer to explanation below)", anchor: "inside-address-parameter" },
     { name: "gender", type: "String", description: "Gender information of mykad", example: "\"MALE\"" },
     { name: "ic", type: "String", description: "Mykad ID", example: "\"550106-12-5821\"" },
     { name: "isMuslim", type: "Boolean", description: "Is muslim", example: "false" },

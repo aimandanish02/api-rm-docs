@@ -86,6 +86,8 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
   ]}
 />
 <br/>
+<a id="card" />
+
 <strong>Card object (card):</strong>
 
 <ParamTable

@@ -141,6 +141,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <br />
 
+<a id="items" />
+
 <strong>Vouchers object (item):</strong>
 
 <ParamTable
@@ -177,6 +179,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <br />
 
+<a id="payload" />
+
 <strong>Payload object:</strong>
 
 <ParamTable
@@ -188,7 +192,23 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 />
 
 
+<br />
+<a id="contactinfo" />
+
+<strong>Contact Info object:</strong>
+
+<ParamTable
+  title="Details"
+  rows={[
+    { name: "email", type: "String", description: "Email", example: "\"\"" },
+    { name: "phoneNumber", type: "String", description: "Phone Number", example: "\"\"" }
+  ]}
+/>
+
+
 <br/>
+<a id="expiry" />
+
 <strong>Expiry object:</strong>
 
 <ParamTable
@@ -202,6 +222,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 <br />
+<a id="address" />
+
 <strong>Address object:</strong>
 
 <ParamTable

@@ -148,6 +148,8 @@ Get loyalty balances
 
 <br />
 
+<a id="items" />
+
 <ParamTable
   title="Details"
   rows={[

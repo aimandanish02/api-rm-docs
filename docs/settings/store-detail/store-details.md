@@ -131,6 +131,8 @@ No request parameter is required for this endpoint.
 
 
 <br/>
+<a id="items" />
+
 <strong>Array of store object (items):</strong>
 
 <ParamTable
@@ -156,6 +158,8 @@ No request parameter is required for this endpoint.
 
 
 <br/>
+<a id="meta" />
+
 <strong>Database object (meta):</strong>
 
 <ParamTable

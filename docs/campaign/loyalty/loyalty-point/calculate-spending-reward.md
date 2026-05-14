@@ -85,6 +85,8 @@ Use amount sales to Calculate Spending Reward points
 
 <br/>
 
+<a id="item" />
+
 <strong>Point Object (item)</strong> <br/>
 
 <ParamTable

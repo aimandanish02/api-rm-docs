@@ -147,6 +147,8 @@ No request parameter is required for this endpoint.
 
 <br/>
 
+<a id="items" />
+
 <strong>Voucher object (items):</strong>
 
 <ParamTable

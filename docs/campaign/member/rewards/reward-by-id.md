@@ -97,6 +97,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <br />
 
+<a id="item" />
+
 <strong>Reward object (item):</strong>
 
 <ParamTable
@@ -125,6 +127,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 
 <br />
+
+<a id="payload" />
+
 <strong>Payload object:</strong>
 
 <ParamTable
@@ -135,8 +140,10 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   ]}
 />
 
-
 <br />
+
+<a id="contactinfo" />
+
 <strong>Contact Info object:</strong>
 
 <ParamTable

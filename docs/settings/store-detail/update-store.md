@@ -134,6 +134,8 @@ To update a specific store under the merchant. Specify `store_id` in your query.
 
 
 <br/>
+<a id="item" />
+
 <strong>Array of store object (item):</strong>
 
 <ParamTable

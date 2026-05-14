@@ -101,6 +101,8 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 
 <br />
 
+<a id="item" />
+
 <strong>Profile object (item):</strong>
 
 <ParamTable
@@ -128,6 +130,9 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 
 
 <br />
+
+<a id="address" />
+
 <strong>Address object:</strong>
 
 <ParamTable

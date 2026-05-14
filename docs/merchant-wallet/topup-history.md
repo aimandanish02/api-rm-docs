@@ -41,6 +41,8 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/transaction" \
 
 <br />
 
+<a id="items" />
+
 <strong>Transaction History object (item):</strong>
 
 

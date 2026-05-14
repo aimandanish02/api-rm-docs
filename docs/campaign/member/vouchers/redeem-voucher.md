@@ -44,6 +44,8 @@ curl --location --request POST "{{open_base_path}}/v3/loyalty/me/voucher/rms@xR4
 />
 <br />
 
+<a id="item" />
+
 <strong>Voucher object (item):</strong>
 
 <ParamTable
@@ -77,6 +79,8 @@ curl --location --request POST "{{open_base_path}}/v3/loyalty/me/voucher/rms@xR4
 />
 <br />
 
+<a id="payload" />
+
 <strong>Payload object:</strong>
 
 <ParamTable
@@ -86,6 +90,20 @@ curl --location --request POST "{{open_base_path}}/v3/loyalty/me/voucher/rms@xR4
   ]}
 />
 <br />
+<a id="contactinfo" />
+
+<strong>Contact Info object:</strong>
+
+<ParamTable
+  rows={[
+    { name: "email", type: "String", description: "Email", example: "\"\"" },
+    { name: "phoneNumber", type: "String", description: "Phone Number", example: "\"\"" }
+  ]}
+/>
+<br />
+
+<a id="expiry" />
+
 <strong>Expiry object:</strong>
 
 <ParamTable
@@ -96,6 +114,9 @@ curl --location --request POST "{{open_base_path}}/v3/loyalty/me/voucher/rms@xR4
   ]}
 />
 <br />
+
+<a id="address" />
+
 <strong>Address object:</strong>
 
 <ParamTable

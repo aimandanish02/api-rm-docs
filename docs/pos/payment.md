@@ -96,6 +96,8 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   ]}
 />
 <br/>
+<a id="card" />
+
 <strong>Card object (card):</strong>
 
 <ParamTable

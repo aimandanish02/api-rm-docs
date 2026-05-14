@@ -346,6 +346,8 @@ Pass the merchant ID as a path parameter in the URL.
 
 ---
 
+<a id="item" />
+
 **Settlement object (item):**
 
 <ParamTable

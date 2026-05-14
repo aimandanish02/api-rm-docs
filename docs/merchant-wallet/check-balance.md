@@ -40,6 +40,8 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/credit" \
 />
 <br />
 
+<a id="item" />
+
 <strong>Wallet object (item):</strong>
 
 <ParamTable

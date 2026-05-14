@@ -74,6 +74,8 @@ Specify loyalty member id to get topup url for member.
 
 <br />
 
+<a id="item" />
+
 <strong>Payment object (item):</strong>
 
 <ParamTable

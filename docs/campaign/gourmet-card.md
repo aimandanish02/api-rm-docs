@@ -109,6 +109,8 @@ Collect information using member card ID
 
 <br/>
 
+<a id="item" />
+
 <strong>Item object (item):</strong>
 
 <ParamTable
@@ -128,6 +130,8 @@ Collect information using member card ID
 
 
 <br/>
+
+<a id="card" />
 
 <strong> Card object (card):</strong>
 

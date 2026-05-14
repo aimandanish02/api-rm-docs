@@ -7,6 +7,7 @@ export interface ParamRow {
   required?: boolean;
   description?: string;
   example?: string;
+  anchor?: string;
 }
 
 interface ParamTableProps {
@@ -81,7 +82,16 @@ function ParamRowItem({ row, last }: { row: ParamRow; last: boolean }) {
       {row.example && (
         <p className={styles.example}>
           <span className={styles.exampleLabel}>Example: </span>
-          <code className={styles.exampleValue}>{row.example}</code>
+          {row.example === "(Refer to explanation below)" ? (
+            <a
+              href={`#${row.anchor ?? row.name.toLowerCase().replace(/\s+/g, "-")}`}
+              className={styles.exampleRef}
+            >
+              {row.example}
+            </a>
+          ) : (
+            <code className={styles.exampleValue}>{row.example}</code>
+          )}
         </p>
       )}
     </div>
