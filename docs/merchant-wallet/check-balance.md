@@ -3,7 +3,7 @@ id: check-balance
 title: Check Balance
 sidebar_label: Check Balance
 ---
-{% raw %}
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -62,4 +62,4 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/credit" \
 }
 ```
 
-{% endraw %}
+

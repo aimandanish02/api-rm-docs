@@ -3,7 +3,7 @@ id: cancellation
 title: POS Payment Cancellation
 sidebar_label: POS Payment Cancellation
 ---
-{% raw %}
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -52,4 +52,4 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 }
 ```
 
-{% endraw %}
+

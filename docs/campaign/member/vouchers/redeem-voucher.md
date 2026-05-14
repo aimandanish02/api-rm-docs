@@ -3,7 +3,7 @@ id: redeem-voucher
 title: Redeem Voucher
 sidebar_label: Redeem Voucher
 ---
-{% raw %}
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -149,4 +149,4 @@ curl --location --request POST "{{open_base_path}}/v3/loyalty/me/voucher/rms@xR4
 }
 ```
 
-{% endraw %}
+

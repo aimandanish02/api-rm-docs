@@ -74,7 +74,7 @@ examples:
        }
     }
 ---
-{% raw %}
+
 
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -106,4 +106,4 @@ Get Loyalty Member Point History By `Member ID`
 
 ### Response Parameters
 
-{% endraw %}
+

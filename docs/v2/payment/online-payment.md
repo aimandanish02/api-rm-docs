@@ -58,7 +58,7 @@ examples:
       "code": "SUCCESS"
     }
 ---
-{% raw %}
+
 
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -593,4 +593,4 @@ wx.requestPayment({
 
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 
-{% endraw %}
+

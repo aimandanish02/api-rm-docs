@@ -3,7 +3,7 @@ id: logo
 title: Wallet Logo
 sidebar_label: Wallet logo
 ---
-{% raw %}
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -31,4 +31,4 @@ Get all eWallet logo
   </Button>
 </Flex>
 
-{% endraw %}
+

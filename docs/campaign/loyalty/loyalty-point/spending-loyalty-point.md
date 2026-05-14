@@ -30,7 +30,7 @@ examples:
   response: |
     There is no example response provided.
 ---
-{% raw %}
+
 
 
 import ApiEndpoint from "@site/src/components/api/ApiEndpoint";
@@ -155,4 +155,4 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/loyalty/rew
 }
 ```
 
-{% endraw %}
+

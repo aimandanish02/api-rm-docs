@@ -4,7 +4,7 @@ title: Revenue Monster Application
 sidebar_label: Application
 ---
 
-{% raw %}
+
 
 import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
@@ -50,4 +50,3 @@ Application Install
   </Button>
 </Flex>
 
-{% endraw %}
