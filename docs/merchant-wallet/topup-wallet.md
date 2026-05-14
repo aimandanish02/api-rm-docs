@@ -20,7 +20,7 @@ Topup merchant wallet
 <ParamTable
   rows={[
     { name: "redirect", type: "String", description: "Redirect after topup", example: "\"https://revenuemonster.my\"" },
-    { name: "amount", type: "uint64", description: "Topup Amount", example: "10" }
+    { name: "amount", type: "Integer", description: "Topup Amount", example: "10" }
   ]}
 />
 > Example Request

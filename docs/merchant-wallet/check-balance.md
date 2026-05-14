@@ -48,7 +48,7 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/credit" \
   rows={[
     { name: "id", type: "String", description: "Wallet ID", example: "1585119930335618836" },
     { name: "referenceId", type: "String", description: "Wallet reference ID usually is your Merchant ID", example: "4118165203679668885" },
-    { name: "credit", type: "uint64", description: "Merchant wallet credit amount", example: "1952" }
+    { name: "credit", type: "Integer", description: "Merchant wallet credit amount", example: "1952" }
   ]}
 />
 > Example Response

@@ -68,7 +68,7 @@ No request parameter is required for this endpoint.
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "item", type: "Object[]", description: "Array of user object", example: "(Refer to explanation below)" },
+    { name: "item", type: "Array", description: "Array of user object", example: "(Refer to explanation below)" },
     { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
   ]}
 />

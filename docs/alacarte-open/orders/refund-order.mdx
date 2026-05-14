@@ -252,8 +252,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
     { name: "items", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "orderId", type: "String", description: "Order ID", example: "\"5f7596e066ef1c1a4f9807f4\"" },
     { name: "payment", type: "Object", description: "Refer to explanation below", example: "(Refer to explanation below)" },
-    { name: "quantity", type: "Uint", description: "Quantity of the item", example: "1" },
-    { name: "queueNo", type: "Uint", description: "Queue number of the item", example: "0" },
+    { name: "quantity", type: "Integer", description: "Quantity of the item", example: "1" },
+    { name: "queueNo", type: "Integer", description: "Queue number of the item", example: "0" },
     { name: "state", type: "String", description: "State of the item", example: "\"REFUNDED\"" },
     { name: "status", type: "String", description: "Status of the item", example: "\"CANCELLED\"" },
     { name: "storeId", type: "String", description: "ID of the Store that Create from RM", example: "\"10946114768247530\"" },
@@ -292,7 +292,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   rows={[
     { name: "address", type: "String", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "courier", type: "String", description: "Refer to explanation below", example: "(Refer to explanation below)" },
-    { name: "distanceInMeter", type: "Int", description: "Delivery Distance (In Meter)", example: "17446" },
+    { name: "distanceInMeter", type: "Integer", description: "Delivery Distance (In Meter)", example: "17446" },
     { name: "id", type: "String", description: "Customer contact number", example: "\"5f815e2c3c6920f1233a540f\"" },
     { name: "method", type: "String", description: "Customer ID", example: "\"OWN\"" },
     { name: "vendorId", type: "String", description: "Customer ID", example: "\"5f815e2c3c6920f1233a540f\"" }
@@ -379,7 +379,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
     { name: "name", type: "String", description: "Item Name", example: "\"Nasi lemak & Lemak\"" },
     { name: "preferences", type: "Array", description: "Refer to the Preferences parameter", example: "(Refer to the Preferences parameter)" },
     { name: "price", type: "Object", description: "Refer to the Price parameter", example: "( Refer to the Price parameter)" },
-    { name: "quantity", type: "Uint", description: "Item Quantity", example: "1" },
+    { name: "quantity", type: "Integer", description: "Item Quantity", example: "1" },
     { name: "remark", type: "String", description: "Customer Remark", example: "\"\"" },
     { name: "sides", type: "Array", description: "Refer to the Sides parameter", example: "( Refer to the Sides parameter)" }
   ]}
@@ -399,8 +399,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   title="Details"
   rows={[
     { name: "name", type: "String", description: "Preferences name", example: "\"Sweetness\"" },
-    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
-    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "minChoice", type: "Integer", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Integer", description: "Set maximum choice", example: "3" },
     { name: "labels", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
   ]}
 />
@@ -485,9 +485,9 @@ Only `serviceFee` and `serviceTax` have <b>percentage</b>
 <ParamTable
   title="Details"
   rows={[
-    { name: "amount", type: "Uint", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
+    { name: "amount", type: "Integer", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
     { name: "currencyType", type: "String", description: "Current only support Ringgit Malaysia", example: "\"MYR\"" },
-    { name: "percentage", type: "Uint", description: "precentage will be divide 100 eg: 1300/100", example: "1300" }
+    { name: "percentage", type: "Integer", description: "precentage will be divide 100 eg: 1300/100", example: "1300" }
   ]}
 />
 
@@ -501,8 +501,8 @@ Only `serviceFee` and `serviceTax` have <b>percentage</b>
 <ParamTable
   rows={[
     { name: "id", type: "String", description: "Table ID", example: "\"5e86af7ef9e6794801df3302\"" },
-    { name: "isAvailable", type: "Bool", description: "Vehicle Number", example: "true" },
-    { name: "isDefault", type: "Bool", description: "Vehicle Number", example: "true" },
+    { name: "isAvailable", type: "Boolean", description: "Vehicle Number", example: "true" },
+    { name: "isDefault", type: "Boolean", description: "Vehicle Number", example: "true" },
     { name: "name", type: "String", description: "Table Name", example: "\"Default Table\"" }
   ]}
 />

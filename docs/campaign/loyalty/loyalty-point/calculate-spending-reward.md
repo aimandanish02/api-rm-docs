@@ -67,7 +67,7 @@ Use amount sales to Calculate Spending Reward points
   title="Request Parameters"
   rows={[
     { name: "currencyType", type: "String", description: "Currently MYR only", example: "MYR" },
-    { name: "amount", type: "int", description: "Amount Sales", example: "300" }
+    { name: "amount", type: "Integer", description: "Amount Sales", example: "300" }
   ]}
 />
 
@@ -92,7 +92,7 @@ Use amount sales to Calculate Spending Reward points
 <ParamTable
   title="Details"
   rows={[
-    { name: "point", type: "Int", description: "Loyalty point given to customers.", example: "3" }
+    { name: "point", type: "Integer", description: "Loyalty point given to customers.", example: "3" }
   ]}
 />
 

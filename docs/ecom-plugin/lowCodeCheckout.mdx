@@ -104,15 +104,15 @@ Alternatively, if you are developing for sandbox environment, please amend the l
 
 <ParamTable
   rows={[
-    { name: "clientId", type: "Uint", required: true, description: "Client ID of your application", example: "1698131134927762904" },
-    { name: "orderId", type: "Uint", description: "Order ID, unique for each order", example: "1234567890" },
-    { name: "storeId", type: "Uint", required: true, description: "Store ID for the order", example: "10946114768247530" },
+    { name: "clientId", type: "Integer", required: true, description: "Client ID of your application", example: "1698131134927762904" },
+    { name: "orderId", type: "Integer", description: "Order ID, unique for each order", example: "1234567890" },
+    { name: "storeId", type: "Integer", required: true, description: "Store ID for the order", example: "10946114768247530" },
     { name: "currency", type: "String", required: true, description: "Currency", example: "\"MYR\"" },
-    { name: "amount", type: "Uint", required: true, description: "Amount in cents", example: "1390 => RM13.90" },
+    { name: "amount", type: "Integer", required: true, description: "Amount in cents", example: "1390 => RM13.90" },
     { name: "title", type: "String", required: true, description: "Order title", example: "\"Product X\"" },
     { name: "detail", type: "String", description: "Order detail", example: "\"Detail of the order\"" },
     { name: "additionalData", type: "String", description: "Order additional data", example: "Any data relevant to the order" },
-    { name: "customerId", type: "Uint", description: "Customer ID, required for tokenization", example: "1234567890" },
+    { name: "customerId", type: "Integer", description: "Customer ID, required for tokenization", example: "1234567890" },
     { name: "customerName", type: "String", description: "Customer name", example: "\"John\"" },
     { name: "customerEmail", type: "String", description: "Customer email", example: "\"john@example.com\"" }
   ]}

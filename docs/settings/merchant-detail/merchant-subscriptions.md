@@ -77,8 +77,8 @@ No request parameter is required for this endpoint.
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "id", type: "Uint", description: "ID is to differentiate which subscription:  1000 : Loyalty & Voucher  1001 : Payment  1002 : Market Place  1003 : Social Media", example: "1001" },
-    { name: "gracePeriod", type: "Uint", description: "merchant will terminate after 3 months", example: "90" },
+    { name: "id", type: "Integer", description: "ID is to differentiate which subscription:  1000 : Loyalty & Voucher  1001 : Payment  1002 : Market Place  1003 : Social Media", example: "1001" },
+    { name: "gracePeriod", type: "Integer", description: "merchant will terminate after 3 months", example: "90" },
     { name: "expiryAt", type: "DateTime", description: "Expiry date time of merchant", example: "\"2018-04-28T06:36:08Z\"" },
     { name: "terminateAt", type: "DateTime", description: "Terminate date time of merchant", example: "\"2018-07-27T23:59:59Z\"" },
     { name: "status", type: "String", description: "\"ACTIVE\" , \"REVIEWING\" , \"SUSPEND\" , \"PENDING\" , \"SUSPEND\"", example: "\"ACTIVE\"" }

@@ -55,6 +55,7 @@ interface Props {
   language?: Language | "curl" | "plaintext" | string;
   filename?: string;
   hideLineNumbers?: boolean;
+  defaultCollapsed?: boolean;
 }
 
 export default function CodeBlock({
@@ -62,8 +63,10 @@ export default function CodeBlock({
   language = "plaintext",
   filename,
   hideLineNumbers = false,
+  defaultCollapsed = false,
 }: Props) {
   const [copied, setCopied] = useState(false);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
   const [hoveredLine, setHoveredLine] = useState<number | null>(null);
   const [isDark, setIsDark] = useState(false);
   const codeRef = useRef<HTMLPreElement>(null);
@@ -120,6 +123,21 @@ export default function CodeBlock({
             {meta.label}
           </span>
 
+          {/* Collapse toggle */}
+          <button
+            className={styles.collapseBtn}
+            onClick={() => setCollapsed(c => !c)}
+            aria-label={collapsed ? "Expand code" : "Collapse code"}
+            type="button"
+          >
+            <svg
+              className={`${styles.collapseIcon} ${collapsed ? "" : styles.collapseIconOpen}`}
+              width="12" height="12" viewBox="0 0 12 12" fill="none"
+            >
+              <path d="M2 4L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+
           {/* Copy button */}
           <button
             className={`${styles.copyBtn} ${copied ? styles.copyBtnSuccess : ""}`}
@@ -147,6 +165,7 @@ export default function CodeBlock({
       </div>
 
       {/* Code area */}
+      <div className={`${styles.collapseBody} ${collapsed ? styles.collapseBodyClosed : styles.collapseBodyOpen}`}>
       <div className={styles.codeWrapper}>
         <Highlight
           {...defaultProps}
@@ -182,6 +201,7 @@ export default function CodeBlock({
             </pre>
           )}
         </Highlight>
+      </div>
       </div>
 
       {/* Bottom glow line */}

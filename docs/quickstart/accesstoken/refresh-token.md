@@ -122,9 +122,9 @@ Authorization: Basic MzY3NTkzMDk0MTQxMjQyNDMxNjp3bW43RlVhdVhIZGtvWWE5MTgya0NNa2p
   rows={[
     { name: "accessToken", type: "String", description: "New Bearer token to use in subsequent API requests.", example: "eyJhbGci..." },
     { name: "tokenType", type: "String", description: "Token scheme. Always \"Bearer\".", example: "\"Bearer\"" },
-    { name: "expiresIn", type: "Number", description: "New access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
+    { name: "expiresIn", type: "Integer", description: "New access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
     { name: "refreshToken", type: "String", description: "A new refresh token. Replace your stored refresh token with this value.", example: "XtBwKrib..." },
-    { name: "refreshTokenExpiresIn", type: "Number", description: "New refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
+    { name: "refreshTokenExpiresIn", type: "Integer", description: "New refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
   ]}
 />
 

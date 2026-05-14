@@ -129,9 +129,9 @@ Use the `code` from the redirect to request an access token. Include your Base64
   rows={[
     { name: "accessToken", type: "String", description: "Bearer token to include in all subsequent API requests.", example: "eyJhbGci..." },
     { name: "tokenType", type: "String", description: "Token scheme. Always \"Bearer\".", example: "\"Bearer\"" },
-    { name: "expiresIn", type: "Number", description: "Access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
+    { name: "expiresIn", type: "Integer", description: "Access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
     { name: "refreshToken", type: "String", description: "Use this to get a new access token once the current one expires. See Refresh Token.", example: "OgoHjoZy..." },
-    { name: "refreshTokenExpiresIn", type: "Number", description: "Refresh token lifetime in seconds.", example: "1576799999" }
+    { name: "refreshTokenExpiresIn", type: "Integer", description: "Refresh token lifetime in seconds.", example: "1576799999" }
   ]}
 />
 

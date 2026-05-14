@@ -142,13 +142,13 @@ To get Multiple voucher batches by Key .
     { name: "label", type: "String", description: "label of voucher for merchant remarks", example: "\"Free Breakfast”" },
     { name: "voucherBatchKey", type: "String", description: "Parent key of current voucher", example: "\"EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQkvnGweaB2uQg\"" },
     { name: "type", type: "String", description: "Define type of vouchers: DISCOUNT, GIFT, CASH", example: "“GIFT\"" },
-    { name: "amount", type: "Uint", description: "Required if type = CASH, notation in cents, eg. RM 1.00 = 100", example: "10000" },
-    { name: "discountRate", type: "Uint", description: "Required if type = DISCOUNT, notation without decimals, eg. 1% = 100", example: "0" },
+    { name: "amount", type: "Integer", description: "Required if type = CASH, notation in cents, eg. RM 1.00 = 100", example: "10000" },
+    { name: "discountRate", type: "Integer", description: "Required if type = DISCOUNT, notation without decimals, eg. 1% = 100", example: "0" },
     { name: "imageUrl", type: "String", description: "Image URL of current voucher, optional", example: "Image Url link (Refer to the below code)" },
-    { name: "quantity", type: "Uint", description: "Total quantity of voucher(s) in this batch", example: "1" },
-    { name: "balanceQuantity", type: "Uint", description: "Total quantity of voucher(s) remaining in this batch", example: "0" },
-    { name: "usedQuantity", type: "Uint", description: "Total quantity of voucher(s) used/assigned/redeemed in this batch", example: "1" },
-    { name: "expiry", type: "Object of Expiry", description: "Expiry date time of current voucher", example: "(Refer below)" },
+    { name: "quantity", type: "Integer", description: "Total quantity of voucher(s) in this batch", example: "1" },
+    { name: "balanceQuantity", type: "Integer", description: "Total quantity of voucher(s) remaining in this batch", example: "0" },
+    { name: "usedQuantity", type: "Integer", description: "Total quantity of voucher(s) used/assigned/redeemed in this batch", example: "1" },
+    { name: "expiry", type: "Object", description: "Expiry date time of current voucher", example: "(Refer below)" },
     { name: "origin", type: "String", description: "SYSTEM (voucher code generated from RM server), SELF (voucher code uploaded from merchant csv file)", example: "“SYSTEM”" },
     { name: "isShipping", type: "Boolean", description: "True if items/goods to be delivered physically to customers", example: "false" },
     { name: "reason", type: "String", description: "Will show if voucher batch is fail during creation. Optional.", example: "”\"" },
@@ -166,7 +166,7 @@ To get Multiple voucher batches by Key .
   title="Details"
   rows={[
     { name: "type", type: "String", description: "DYNAMIC (days from now), FIXED (specific fixed date)", example: "\"DYNAMIC\"" },
-    { name: "day", type: "Uint", description: "Only required by DYNAMIC expiry type. To indicate number of days from now until expiry.", example: "30" },
+    { name: "day", type: "Integer", description: "Only required by DYNAMIC expiry type. To indicate number of days from now until expiry.", example: "30" },
     { name: "expiryAt", type: "DateTime", description: "Only required by FIXED. To indicate specific expiry date.", example: "\"2020-10-07T17:44:26.679908+08:00\"" }
   ]}
 />

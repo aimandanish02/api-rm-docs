@@ -20,7 +20,7 @@ Check merchant wallet topup history
 <ParamTable
   rows={[
     { name: "cursor", type: "String", description: "Cursor", example: "\"60\"" },
-    { name: "transactionAt", type: "String[]", description: "Transaction At", example: "[\"2021-01-11T09:54:46Z\", \"2021-01-11T09:54:46Z\"]" },
+    { name: "transactionAt", type: "Array", description: "Transaction At", example: "[\"2021-01-11T09:54:46Z\", \"2021-01-11T09:54:46Z\"]" },
     { name: "referenceType", type: "String", description: "Reference Type", example: "\"DELIVERY\", \"BILLING\", \"TOPUP_MANUAL\", \"TOPUP_ONLINE\", \"TOPUP_BANKIN\"\"" }
   ]}
 />
@@ -59,9 +59,9 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/history" \
     { name: "type", type: "String", description: "History type", example: "\"TOPUP\", \"DEDUCT\"" },
     { name: "referenceType", type: "String", description: "History reference type", example: "\"DELIVERY\", \"BILLING\", \"TOPUP_MANUAL\", \"TOPUP_ONLINE\", \"TOPUP_BANKIN\"" },
     { name: "reference", type: "String", description: "Reference about the reference type usually it's usage information", example: "Online Transaction Topup -1598969316445167528" },
-    { name: "credit", type: "uint64", description: "How much credit added or deducted", example: "10" },
-    { name: "currentCredit", type: "uint64", description: "Credit balance after added or deducted", example: "1952" },
-    { name: "sequenceId", type: "uint64", description: "A sequential number", example: "26" },
+    { name: "credit", type: "Integer", description: "How much credit added or deducted", example: "10" },
+    { name: "currentCredit", type: "Integer", description: "Credit balance after added or deducted", example: "1952" },
+    { name: "sequenceId", type: "Integer", description: "A sequential number", example: "26" },
     { name: "transactionAt", type: "DateTime", description: "When history transaction", example: "2020-09-01T14:09:41Z" }
   ]}
 />

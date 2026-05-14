@@ -108,12 +108,12 @@ Recurring payment lets you automatically charge a customer's card based on a def
     { name: "productName", type: "String", required: true, description: "Recurring product name" },
     { name: "productDescription", type: "String", required: true, description: "Recurring product description" },
     { name: "currency", type: "String", required: true, description: "Recurring payment currency", example: "\"MYR\"" },
-    { name: "amount", type: "Uint64", required: true, description: "Recurring payment amount in smallest currency unit" },
+    { name: "amount", type: "Integer", required: true, description: "Recurring payment amount in smallest currency unit" },
     { name: "redirectUrl", type: "String", required: true, description: "URL to redirect the customer to after card binding" },
     { name: "notifyUrl", type: "String", required: true, description: "Server URL to receive payment notifications" },
     { name: "recurringInterval", type: "String", required: true, description: "Recurring interval (WEEKLY, MONTHLY)" },
     { name: "recurringTarget", type: "String", required: true, description: "Day of the week or month to charge. See recurring target rules below." },
-    { name: "recurringRepetition", type: "Uint64", required: true, description: "Number of times to charge the customer" }
+    { name: "recurringRepetition", type: "Integer", required: true, description: "Number of times to charge the customer" }
   ]}
 />
 
@@ -172,11 +172,11 @@ Recurring payment lets you automatically charge a customer's card based on a def
     { name: "item.redirectUrl", type: "String", description: "URL for customer to redirect after card binding" },
     { name: "item.notifyUrl", type: "String", description: "URL for payment notifications" },
     { name: "item.paymentUrl", type: "String", description: "URL for customer to bind their card" },
-    { name: "item.recurringPayment.amount", type: "Uint64", description: "Recurring payment amount" },
+    { name: "item.recurringPayment.amount", type: "Integer", description: "Recurring payment amount" },
     { name: "item.recurringPayment.currency", type: "String", description: "Recurring payment currency" },
     { name: "item.recurringPayment.recurringInterval", type: "String", description: "Recurring interval" },
     { name: "item.recurringPayment.recurringTarget", type: "String", description: "Recurring target rules" },
-    { name: "item.recurringPayment.recurringRepetition", type: "Uint64", description: "Number of repetitions" },
+    { name: "item.recurringPayment.recurringRepetition", type: "Integer", description: "Number of repetitions" },
     { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded, otherwise an error code." },
     { name: "error.code", type: "String", description: "Error code if the request failed." },
     { name: "error.message", type: "String", description: "Error message if the request failed." },
@@ -213,7 +213,7 @@ Notify URL informs your server when a recurring payment is made. Notify is only 
   title="Details"
   rows={[
     { name: "eventType", type: "String", required: true, description: "Notify event type" },
-    { name: "data.amount", type: "Uint64", required: true, description: "Recurring payment amount" },
+    { name: "data.amount", type: "Integer", required: true, description: "Recurring payment amount" },
     { name: "data.currency", type: "String", required: true, description: "Recurring order currency" },
     { name: "data.countryCode", type: "String", required: true, description: "Recurring customer country code" },
     { name: "data.phoneNumber", type: "String", required: true, description: "Recurring customer phone number" },
@@ -353,11 +353,11 @@ These APIs are only available after a customer has bound their card at least onc
     { name: "item.redirectUrl", type: "String", description: "Redirect URL" },
     { name: "item.notifyUrl", type: "String", description: "Notify URL" },
     { name: "item.paymentUrl", type: "String", description: "Card binding URL" },
-    { name: "item.recurringPayment.amount", type: "Uint64", description: "Recurring payment amount" },
+    { name: "item.recurringPayment.amount", type: "Integer", description: "Recurring payment amount" },
     { name: "item.recurringPayment.currency", type: "String", description: "Recurring payment currency" },
     { name: "item.recurringPayment.recurringInterval", type: "String", description: "Recurring interval" },
     { name: "item.recurringPayment.recurringTarget", type: "String", description: "Recurring target rules" },
-    { name: "item.recurringPayment.recurringRepetition", type: "Uint64", description: "Number of repetitions" },
+    { name: "item.recurringPayment.recurringRepetition", type: "Integer", description: "Number of repetitions" },
     { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded, otherwise an error code." },
     { name: "error.code", type: "String", description: "Error code if the request failed." },
     { name: "error.message", type: "String", description: "Error message if the request failed." },
@@ -401,7 +401,7 @@ These APIs are only available after a customer has bound their card at least onc
     { name: "transactionId", type: "String", description: "Transaction ID" },
     { name: "createdAt", type: "String", description: "Order created date time" },
     { name: "updatedAt", type: "String", description: "Order last updated date time" },
-    { name: "amount", type: "Uint64", description: "Order payment amount" },
+    { name: "amount", type: "Integer", description: "Order payment amount" },
     { name: "currency", type: "String", description: "Order currency" }
   ]}
 />
@@ -438,11 +438,11 @@ These APIs are only available after a customer has bound their card at least onc
     { name: "item.redirectUrl", type: "String", description: "Redirect URL" },
     { name: "item.notifyUrl", type: "String", description: "Notify URL" },
     { name: "item.paymentUrl", type: "String", description: "Card binding URL" },
-    { name: "item.recurringPayment.amount", type: "Uint64", description: "Recurring payment amount" },
+    { name: "item.recurringPayment.amount", type: "Integer", description: "Recurring payment amount" },
     { name: "item.recurringPayment.currency", type: "String", description: "Recurring payment currency" },
     { name: "item.recurringPayment.recurringInterval", type: "String", description: "Recurring interval" },
     { name: "item.recurringPayment.recurringTarget", type: "String", description: "Recurring target rules" },
-    { name: "item.recurringPayment.recurringRepetition", type: "Uint64", description: "Number of repetitions" },
+    { name: "item.recurringPayment.recurringRepetition", type: "Integer", description: "Number of repetitions" },
     { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded, otherwise an error code." },
     { name: "error.code", type: "String", description: "Error code if the request failed." },
     { name: "error.message", type: "String", description: "Error message if the request failed." },
@@ -463,7 +463,7 @@ This API uses the customer's bound card to make a payment — it is not a manual
   rows={[
     { name: "customer_id", type: "Param", required: true, description: "Customer ID returned from Create Recurring Customer or Create Tokenized Customer" },
     { name: "currency", type: "String", required: true, description: "Payment currency" },
-    { name: "amount", type: "Uint64", required: true, description: "Payment amount in smallest currency unit" },
+    { name: "amount", type: "Integer", required: true, description: "Payment amount in smallest currency unit" },
     { name: "title", type: "String", description: "Payment information title" },
     { name: "description", type: "String", description: "Payment information description" }
   ]}

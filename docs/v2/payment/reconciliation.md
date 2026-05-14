@@ -83,8 +83,8 @@ Each item in `items` represents a settled transaction. Use `meta.cursor` for pag
   rows={[
     { name: "transactionType", type: "String", description: "Type of transactions to retrieve (e.g., \"PAYMENT\")" },
     { name: "date", type: "String", required: true, description: "Transaction date in YYYY-MM-DD format", example: "\"2021-07-28\"" },
-    { name: "method", type: "Array[String]", description: "Filter by payment methods (e.g., [\"BOOST\"])", example: "[\"BOOST\"]" },
-    { name: "region", type: "Array[String]", description: "Filter by regions (e.g., [\"MALAYSIA\"])", example: "[\"MALAYSIA\"]" },
+    { name: "method", type: "Array", description: "Filter by payment methods (e.g., [\"BOOST\"])", example: "[\"BOOST\"]" },
+    { name: "region", type: "Array", description: "Filter by regions (e.g., [\"MALAYSIA\"])", example: "[\"MALAYSIA\"]" },
     { name: "cursor", type: "String", description: "Pagination cursor from previous response" }
   ]}
 />

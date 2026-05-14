@@ -178,8 +178,8 @@ The response contains `merchant` and `settlement` objects with complete details.
     { name: "bankAccountHolderName", type: "String", description: "Bank account holder name", example: "\"\"" },
     { name: "bankName", type: "String", description: "Bank name", example: "\"\"" },
     { name: "bankCode", type: "String", description: "Bank code", example: "\"\"" },
-    { name: "averageTicketSize", type: "Number", description: "Average transaction ticket size", example: "0" },
-    { name: "averageTurnoverPerMonth", type: "Number", description: "Average monthly turnover", example: "0" },
+    { name: "averageTicketSize", type: "Integer", description: "Average transaction ticket size", example: "0" },
+    { name: "averageTurnoverPerMonth", type: "Integer", description: "Average monthly turnover", example: "0" },
     { name: "createdAt", type: "DateTime", description: "Creation timestamp", example: "\"2021-08-18T04:03:15Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update timestamp", example: "\"2021-08-18T04:03:15Z\"" }
   ]}

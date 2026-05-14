@@ -179,7 +179,7 @@ Check the `code` field. If `"SUCCESS"`, the merchant has been submitted. The `st
   rows={[
     { name: "id", type: "String", description: "Settlement ID", example: "\"1629258558902992793\"" },
     { name: "merchantId", type: "String", description: "Merchant ID", example: "\"1629258448138509563\"" },
-    { name: "isDefault", type: "Bool", description: "Whether this is the default settlement account", example: "true" },
+    { name: "isDefault", type: "Boolean", description: "Whether this is the default settlement account", example: "true" },
     { name: "companyName", type: "String", description: "Company name of merchant", example: "\"REVENUE MONSTER\"" },
     { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"SOLE PROPRIETOR\"" },
     { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "\"12344\"" },
@@ -207,8 +207,8 @@ Check the `code` field. If `"SUCCESS"`, the merchant has been submitted. The `st
     { name: "bankAccountHolderName", type: "String", example: "\"\"" },
     { name: "bankName", type: "String", example: "\"\"" },
     { name: "bankCode", type: "String", example: "\"\"" },
-    { name: "averageTicketSize", type: "Uint", example: "0" },
-    { name: "averageTurnoverPerMonth", type: "Uint", example: "0" },
+    { name: "averageTicketSize", type: "Integer", example: "0" },
+    { name: "averageTurnoverPerMonth", type: "Integer", example: "0" },
     { name: "paymentSubscription", type: "String", example: "\"\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of settlement", example: "\"2021-08-18T14:33:49Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of settlement", example: "\"2021-08-18T14:33:49Z\"" }

@@ -134,8 +134,8 @@ This is a GET request with no request body. Pass the `merchantId` as a path para
     { name: "merchantId", type: "String", description: "Merchant ID this application belongs to.", example: "\"1647501978894816174\"" },
     { name: "userId", type: "String", description: "User ID who created this application.", example: "\"1647501978916382207\"" },
     { name: "oAuthClientProducts", type: "Array", description: "OAuth client products.", example: "[]" },
-    { name: "isActive", type: "Bool", description: "Whether the application is active.", example: "false" },
-    { name: "redirectUri", type: "Array[String]", description: "Allowed redirect URIs.", example: "[\"https://google.com\"]" },
+    { name: "isActive", type: "Boolean", description: "Whether the application is active.", example: "false" },
+    { name: "redirectUri", type: "Array", description: "Allowed redirect URIs.", example: "[\"https://google.com\"]" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of the application.", example: "\"2022-03-17T07:33:34Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of the application.", example: "\"2022-03-17T07:36:10Z\"" }
   ]}

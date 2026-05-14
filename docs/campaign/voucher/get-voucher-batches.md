@@ -139,7 +139,7 @@ No request parameter is required for this endpoint.
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "items", type: "[]Object", description: "Voucher object array", example: "(Refer to explanation below)" },
+    { name: "items", type: "Array", description: "Voucher object array", example: "(Refer to explanation below)" },
     { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
   ]}
 />
@@ -158,15 +158,15 @@ No request parameter is required for this endpoint.
     { name: "key", type: "String", description: "Vocher Key", example: "\"EhQKCE1lcmNoYW50EJXVzd3wraqTORIVCgdWb3VjaGVyGgpOQWtsRWZiVmRW\"" },
     { name: "label", type: "String", description: "label of voucher for merchant remarks", example: "\"Free Breakfast”" },
     { name: "type", type: "String", description: "Define type of vouchers: DISCOUNT, GIFT, “CASH\"", example: "“GIFT\"" },
-    { name: "amount", type: "Uint", description: "Required if type = CASH, notation in cents, eg. RM 1.00 = 100", example: "10000" },
-    { name: "discountRate", type: "Uint", description: "Required if type = DISCOUNT, notation without decimals, eg. 1% = 100", example: "0" },
-    { name: "minimumSpendAmount", type: "Uint", description: "Minimum spend amount", example: "0" },
+    { name: "amount", type: "Integer", description: "Required if type = CASH, notation in cents, eg. RM 1.00 = 100", example: "10000" },
+    { name: "discountRate", type: "Integer", description: "Required if type = DISCOUNT, notation without decimals, eg. 1% = 100", example: "0" },
+    { name: "minimumSpendAmount", type: "Integer", description: "Minimum spend amount", example: "0" },
     { name: "imageUrl", type: "String", description: "Image URL of current voucher, optional", example: "Image Url link (refer to below code)" },
-    { name: "quantity", type: "Uint", description: "Total quantity of voucher(s) in this batch", example: "1" },
-    { name: "balanceQuantity", type: "Uint", description: "Total quantity of voucher(s) remaining in this batch", example: "0" },
-    { name: "usedQuantity", type: "Uint", description: "Total quantity of voucher(s) used/assigned/redeemed in this batch", example: "1" },
+    { name: "quantity", type: "Integer", description: "Total quantity of voucher(s) in this batch", example: "1" },
+    { name: "balanceQuantity", type: "Integer", description: "Total quantity of voucher(s) remaining in this batch", example: "0" },
+    { name: "usedQuantity", type: "Integer", description: "Total quantity of voucher(s) used/assigned/redeemed in this batch", example: "1" },
     { name: "status", type: "String", description: "Voucher's status", example: "\"COMPLETED\"" },
-    { name: "expiry", type: "Object of Expiry", description: "Expiry date time of current voucher", example: "(Refer below)" },
+    { name: "expiry", type: "Object", description: "Expiry date time of current voucher", example: "(Refer below)" },
     { name: "origin", type: "String", description: "SYSTEM (voucher code generated from RM server), SELF (voucher code uploaded from merchant csv file)", example: "“SYSTEM”" },
     { name: "isShipping", type: "Boolean", description: "True if items/goods to be delivered physically to customers", example: "false" },
     { name: "reason", type: "String", description: "Will show if voucher batch is fail during creation. Optional.", example: "”\"" },

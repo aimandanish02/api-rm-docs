@@ -109,7 +109,7 @@ To create a store under one merchant.
     { name: "country", type: "String", required: true, description: "Country of store", example: "\"Malaysia\"" },
     { name: "countryCode", type: "String", required: true, description: "Country code of store contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", required: true, description: "Phone number of store", example: "\"377334080\"" },
-    { name: "geoLocation", type: "Object of [Float]", description: "Geo Location (latitude and longitude) of store", example: "{\"latitude\": 3.1349857, \"longitude\": 101.6136659 }" }
+    { name: "geoLocation", type: "Object", description: "Geo Location (latitude and longitude) of store", example: "{\"latitude\": 3.1349857, \"longitude\": 101.6136659 }" }
   ]}
 />
 
@@ -119,7 +119,7 @@ To create a store under one merchant.
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "item", type: "Object[]", description: "Array of store object", example: "(Refer to explanation below)" },
+    { name: "item", type: "Array", description: "Array of store object", example: "(Refer to explanation below)" },
     { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
   ]}
 />
@@ -145,7 +145,7 @@ To create a store under one merchant.
     { name: "country", type: "String", description: "Country of store", example: "\"Malaysia\"" },
     { name: "countryCode", type: "String", description: "Country code of store contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of store", example: "\"377334080\"" },
-    { name: "geoLocation", type: "Object of [Float]", description: "Geo Location (latitude and longitude) of store", example: "{\"latitude\": 3.1349857, \"longitude\": 101.6136659 }" },
+    { name: "geoLocation", type: "Object", description: "Geo Location (latitude and longitude) of store", example: "{\"latitude\": 3.1349857, \"longitude\": 101.6136659 }" },
     { name: "status", type: "String", description: "Current status of store", example: "\"ACTIVE\"" },
     { name: "isDefault", type: "String", description: "Default store of merchant (first store created upon signup)", example: "true" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2018-02-12T08:53:13Z\"" },

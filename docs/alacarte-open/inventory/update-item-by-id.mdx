@@ -197,9 +197,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
     { name: "name", type: "String", description: "Item name", example: "\"Hainan Chicken Rice\"" },
     { name: "description", type: "String", description: "Item description", example: "\"yummz\"" },
     { name: "imageUrl", type: "Array", description: "Input your image", example: "[]" },
-    { name: "isAvailable", type: "Bool", description: "Item available", example: "true" },
+    { name: "isAvailable", type: "Boolean", description: "Item available", example: "true" },
     { name: "price", type: "Object", description: "Refer to explanation below", example: "(Refer to explanation below)" },
-    { name: "quantity", type: "Uint", description: "Item quantity", example: "380" },
+    { name: "quantity", type: "Integer", description: "Item quantity", example: "380" },
     { name: "sides", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "preferences", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "schedules", type: "Array", description: "Schedules startAt and endAt", example: "[\"2020-09-22T02:00:00.000Z\", \"2020-09-22T14:00:00.000Z\"]" },
@@ -217,9 +217,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 <ParamTable
   rows={[
     { name: "name", type: "String", description: "Side Category name", example: "\"Side Category 1\"" },
-    { name: "isAvailable", type: "Bool", description: "Side Category available", example: "true" },
-    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
-    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "isAvailable", type: "Boolean", description: "Side Category available", example: "true" },
+    { name: "minChoice", type: "Integer", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Integer", description: "Set maximum choice", example: "3" },
     { name: "sideItems", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
   ]}
 />
@@ -237,7 +237,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
     { name: "id", type: "String", description: "Side Item ID", example: "\"5f698149585d7cc1ae35a392\"" },
     { name: "name", type: "String", description: "Side Item name", example: "\"Coke\"" },
     { name: "price", type: "Object", description: "Refer to the Price parameter", example: "( Refer to the Price parameter)" },
-    { name: "isAvailable", type: "Bool", description: "Side Item is available", example: "true" }
+    { name: "isAvailable", type: "Boolean", description: "Side Item is available", example: "true" }
   ]}
 />
 
@@ -250,7 +250,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <ParamTable
   rows={[
-    { name: "amount", type: "Uint", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
+    { name: "amount", type: "Integer", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
     { name: "currencyType", type: "String", description: "Current only support Ringgit Malaysia", example: "\"MYR\"" }
   ]}
 />
@@ -266,8 +266,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   rows={[
     { name: "id", type: "String", description: "Preferences ID", example: "\"5f698149585d7cc1ae35a38d\"" },
     { name: "name", type: "String", description: "Preferences name", example: "\"Sweetness\"" },
-    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
-    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "minChoice", type: "Integer", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Integer", description: "Set maximum choice", example: "3" },
     { name: "labels", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
   ]}
 />
@@ -298,13 +298,13 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
     { name: "createdAt", type: "DateTime", description: "Creation date time", example: "\"2020-09-22T04:44:57.950398414Z\"" },
     { name: "description", type: "String", description: "Description of the item", example: "\"Describe\"" },
     { name: "imageUrl", type: "Array", description: "Item image", example: "[]" },
-    { name: "isAvailable", type: "Bool", description: "Item available", example: "true" },
+    { name: "isAvailable", type: "Boolean", description: "Item available", example: "true" },
     { name: "itemId", type: "String", description: "Item ID", example: "\"5f698149585d7cc1ae35a391\"" },
     { name: "name", type: "String", description: "Item name", example: "\"Test123\"" },
-    { name: "position", type: "Uint", description: "Current position among item", example: "2" },
+    { name: "position", type: "Integer", description: "Current position among item", example: "2" },
     { name: "preferences", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "price", type: "Object", description: "Refer to the Price parameter", example: "( Refer to the Price parameter)" },
-    { name: "quantity", type: "Uint", description: "Item quantity", example: "350" },
+    { name: "quantity", type: "Integer", description: "Item quantity", example: "350" },
     { name: "schedules", type: "Array", description: "Schedules startAt and endAt", example: "[\"2020-09-22T02:00:00.000Z\", \"2020-09-22T14:00:00.000Z\"]" },
     { name: "sides", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "sku", type: "String", description: "Item SKU", example: "\"fkj31i\"" },
@@ -322,9 +322,9 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   rows={[
     { name: "id", type: "String", description: "Side Category ID", example: "\"5f698149585d7cc1ae35a395\"" },
     { name: "name", type: "String", description: "Side Category name", example: "\"Side Category 1\"" },
-    { name: "isAvailable", type: "Bool", description: "Side Category available", example: "true" },
-    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
-    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "isAvailable", type: "Boolean", description: "Side Category available", example: "true" },
+    { name: "minChoice", type: "Integer", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Integer", description: "Set maximum choice", example: "3" },
     { name: "sideItems", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
   ]}
 />
@@ -342,7 +342,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
     { name: "id", type: "String", description: "Side Item ID", example: "\"5f698149585d7cc1ae35a392\"" },
     { name: "name", type: "String", description: "Side Item name", example: "\"Coke\"" },
     { name: "price", type: "Object", description: "Refer to the Price parameter", example: "( Refer to the Price parameter)" },
-    { name: "isAvailable", type: "Bool", description: "Side Item is available", example: "true" }
+    { name: "isAvailable", type: "Boolean", description: "Side Item is available", example: "true" }
   ]}
 />
 
@@ -355,7 +355,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <ParamTable
   rows={[
-    { name: "amount", type: "Uint", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
+    { name: "amount", type: "Integer", description: "Amount in cent (min RM 0.10 10 = RM 0.10)", example: "100" },
     { name: "currencyType", type: "String", description: "Current only support Ringgit Malaysia", example: "\"MYR\"" }
   ]}
 />
@@ -371,8 +371,8 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
   rows={[
     { name: "id", type: "String", description: "Preferences ID", example: "\"5f698149585d7cc1ae35a38d\"" },
     { name: "name", type: "String", description: "Preferences name", example: "\"Sweetness\"" },
-    { name: "minChoice", type: "Uint", description: "Set minimum choice", example: "1" },
-    { name: "maxChoice", type: "Uint", description: "Set maximum choice", example: "3" },
+    { name: "minChoice", type: "Integer", description: "Set minimum choice", example: "1" },
+    { name: "maxChoice", type: "Integer", description: "Set maximum choice", example: "3" },
     { name: "labels", type: "Array", description: "Refer to explanation below", example: "(Refer to explanation below)" }
   ]}
 />

@@ -127,7 +127,7 @@ Using Query String to **Get User Profile** by input the **country code** and **p
     { name: "nric", type: "String", required: true, description: "IC Number", example: "\"950711011234\"" },
     { name: "birthDate", type: "String", required: true, description: "Member Birth Date", example: "\"1995-07-11T00:00:00Z\"" },
     { name: "gender", type: "String", required: true, description: "Gender", example: "\"MALE\"" },
-    { name: "point", type: "Uint", required: true, description: "Loyalty Point", example: "0" },
+    { name: "point", type: "Integer", required: true, description: "Loyalty Point", example: "0" },
     { name: "address", type: "Object", required: true, description: "Refer to explanation below", example: "(Refer to explanation below)" }
   ]}
 />
@@ -166,11 +166,11 @@ Using Query String to **Get User Profile** by input the **country code** and **p
     { name: "gender", type: "String", description: "Gender", example: "\"MALE\"" },
     { name: "address", type: "Object", description: "Refer to explanation below", example: "(Refer to explanation below)" },
     { name: "memberTier", type: "String", description: "Member Tier Point", example: "null" },
-    { name: "totalLoyaltyPoint", type: "Uint", description: "Total Loyalty Point", example: "0" },
-    { name: "hasPinCode", type: "Bool", description: "User Pin", example: "false" },
-    { name: "loyaltyPointBalance", type: "Uint", description: "Total Point Balance left", example: "0" },
-    { name: "spendingPoint", type: "Uint", description: "Point Spend", example: "0" },
-    { name: "creditBalance", type: "Uint", description: "Credit Balance", example: "0" },
+    { name: "totalLoyaltyPoint", type: "Integer", description: "Total Loyalty Point", example: "0" },
+    { name: "hasPinCode", type: "Boolean", description: "User Pin", example: "false" },
+    { name: "loyaltyPointBalance", type: "Integer", description: "Total Point Balance left", example: "0" },
+    { name: "spendingPoint", type: "Integer", description: "Point Spend", example: "0" },
+    { name: "creditBalance", type: "Integer", description: "Credit Balance", example: "0" },
     { name: "status", type: "String", description: "Profile Status", example: "\"ACTIVE\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time", example: "\"2018-10-19T03:39:47Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time", example: "\"2020-06-29T10:14:33Z\"" }

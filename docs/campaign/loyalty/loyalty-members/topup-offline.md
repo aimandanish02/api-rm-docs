@@ -139,7 +139,7 @@ Specify loyalty member id to topup using quickpay
   rows={[
     { name: "id", type: "String", required: true, description: "Order ID (from Merchant), max: 24", example: "\"134850717797247290\"" },
     { name: "currencyType", type: "String", required: true, description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
-    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" }
+    { name: "amount", type: "Integer", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" }
   ]}
 />
 
@@ -203,7 +203,7 @@ Specify loyalty member id to topup using quickpay
     { name: "country", type: "String", description: "Country of store", example: "\"Malaysia\"" },
     { name: "countryCode", type: "String", description: "Country code of store contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of store", example: "\"377334080\"" },
-    { name: "geoLocation", type: "Object of [Float]", description: "Geo Location (latitude and longtitude) of store", example: "{\"latitude\": 3.1349857, \"longtitude\": 101.6136659 }" },
+    { name: "geoLocation", type: "Object", description: "Geo Location (latitude and longtitude) of store", example: "{\"latitude\": 3.1349857, \"longtitude\": 101.6136659 }" },
     { name: "status", type: "String", description: "Current status of store", example: "\"ACTIVE\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2018-02-12T08:53:13Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of store", example: "\"2018-02-12T08:53:13Z\"" }
@@ -220,7 +220,7 @@ Specify loyalty member id to topup using quickpay
     { name: "id", type: "String", description: "Order ID (from Merchant), max: 24", example: "\"134850717797247290\"" },
     { name: "title", type: "String", description: "Order title, max: 32", example: "\"Sales\"" },
     { name: "details", type: "String", description: "Order details, max: 600", example: "\"1 x iPhone X; 2 x SAMSUNG S8\"" },
-    { name: "amount", type: "Uint", description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" }
+    { name: "amount", type: "Integer", description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" }
   ]}
 />
 

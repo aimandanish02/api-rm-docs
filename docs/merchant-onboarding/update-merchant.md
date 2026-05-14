@@ -253,8 +253,8 @@ Pass the merchant ID as a path parameter in the URL.
     { name: "companyName", type: "String", example: "\"Revenue Monster\"" },
     { name: "companyType", type: "String", example: "\"PRIVATE LIMITED COMPANY (SDN BHD)\"" },
     { name: "businessCategory", type: "String", example: "\"COMPUTER AND ELECTRONICS\"" },
-    { name: "averageTicketSize", type: "Uint", example: "1000000" },
-    { name: "averageTurnoverPerMonth", type: "Uint", example: "1000000" },
+    { name: "averageTicketSize", type: "Integer", example: "1000000" },
+    { name: "averageTurnoverPerMonth", type: "Integer", example: "1000000" },
     { name: "businessScope", type: "String", example: "\"some business scope\"" },
     { name: "invoiceAddress", type: "Object (nullable)", description: "See invoiceAddress object below.", example: "(Refer below)" },
     { name: "document", type: "Object", description: "See document object below.", example: "(Refer below)" },
@@ -266,9 +266,9 @@ Pass the merchant ID as a path parameter in the URL.
     { name: "latitude", type: "Float", example: "0.0" },
     { name: "longitude", type: "Float", example: "0.0" },
     { name: "paymentSubscription", type: "String", example: "\"BOTH\"" },
-    { name: "terminalOfflineEWallet", type: "Bool", example: "false" },
-    { name: "terminalOfflineCreditCard", type: "Bool", example: "false" },
-    { name: "onlineCreditCard", type: "Bool", example: "false" }
+    { name: "terminalOfflineEWallet", type: "Boolean", example: "false" },
+    { name: "terminalOfflineCreditCard", type: "Boolean", example: "false" },
+    { name: "onlineCreditCard", type: "Boolean", example: "false" }
   ]}
 />
 
@@ -355,7 +355,7 @@ Pass the merchant ID as a path parameter in the URL.
   rows={[
     { name: "id", type: "String", description: "Settlement ID", example: "\"1629258558902992793\"" },
     { name: "merchantId", type: "String", description: "Merchant ID", example: "\"1629258448138509563\"" },
-    { name: "isDefault", type: "Bool", description: "Whether this is the default settlement account", example: "true" },
+    { name: "isDefault", type: "Boolean", description: "Whether this is the default settlement account", example: "true" },
     { name: "companyName", type: "String", description: "Company name of merchant", example: "\"REVENUE MONSTER\"" },
     { name: "companyType", type: "String", description: "Type of company incorporation", example: "\"PRIVATE LIMITED COMPANY (SDN BHD)\"" },
     { name: "registrationNumber", type: "String", description: "Registration number of merchant", example: "\"12344\"" },
@@ -383,8 +383,8 @@ Pass the merchant ID as a path parameter in the URL.
     { name: "bankAccountHolderName", type: "String", example: "\"Revenue Monster\"" },
     { name: "bankName", type: "String", example: "\"HONG LEONG BANK\"" },
     { name: "bankCode", type: "String", example: "\"HLBB\"" },
-    { name: "averageTicketSize", type: "Uint", example: "0" },
-    { name: "averageTurnoverPerMonth", type: "Uint", example: "0" },
+    { name: "averageTicketSize", type: "Integer", example: "0" },
+    { name: "averageTurnoverPerMonth", type: "Integer", example: "0" },
     { name: "paymentSubscription", type: "String", example: "\"\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of settlement", example: "\"2021-06-02T14:37:25+08:00\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of settlement", example: "\"2021-06-02T14:37:25+08:00\"" }

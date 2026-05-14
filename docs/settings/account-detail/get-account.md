@@ -141,7 +141,7 @@ Get Account Info
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "item", type: "Object[]", example: "(Refer to explanation below)" },
+    { name: "item", type: "Array", example: "(Refer to explanation below)" },
     { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
   ]}
 />
@@ -186,8 +186,8 @@ Get Account Info
     { name: "bankAccountHolderName", type: "String", example: "\"\"" },
     { name: "bankName", type: "String", example: "\"\"" },
     { name: "bankCode", type: "String", example: "\"\"" },
-    { name: "averageTicketSize", type: "Uint", example: "0" },
-    { name: "averageTurnoverPerMonth", type: "Uint", example: "0" },
+    { name: "averageTicketSize", type: "Integer", example: "0" },
+    { name: "averageTurnoverPerMonth", type: "Integer", example: "0" },
     { name: "paymentSubscription", type: "String", example: "\"\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of merchant", example: "\"2021-01-13T04:35:32Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of merchant", example: "\"2021-01-13T04:35:32Z\"" }

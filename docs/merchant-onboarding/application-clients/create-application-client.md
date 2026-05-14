@@ -135,7 +135,7 @@ Pass the `merchantId` as a path parameter in the URL.
     { name: "homePageUrl", type: "String", required: true, description: "URL of the application's homepage.", example: "\"https://google.com\"" },
     { name: "logoUrl", type: "String", required: true, description: "URL of the application's logo.", example: "\"https://google.com\"" },
     { name: "privacyPolicyUrl", type: "String", required: true, description: "URL of the privacy policy page.", example: "\"https://google.com\"" },
-    { name: "redirectUri", type: "Array[String]", required: true, description: "Allowed redirect URIs for OAuth. Must exactly match URIs registered in the Merchant Portal.", example: "[\"https://google.com\"]" },
+    { name: "redirectUri", type: "Array", required: true, description: "Allowed redirect URIs for OAuth. Must exactly match URIs registered in the Merchant Portal.", example: "[\"https://google.com\"]" },
     { name: "publicKey", type: "String", required: true, description: "Your application's RSA public key for JWT authentication. Wrap in PEM format.", example: "\"-----BEGIN PUBLIC KEY-----\\n...\\n-----END PUBLIC KEY-----\"" },
     { name: "isActive", type: "Boolean", description: "Whether the application is active. Defaults to true if not provided.", example: "true" }
   ]}
@@ -172,8 +172,8 @@ Pass the `merchantId` as a path parameter in the URL.
     { name: "merchantId", type: "String", description: "Merchant ID this application belongs to.", example: "\"1647501978894816174\"" },
     { name: "userId", type: "String", description: "User ID who created this application.", example: "\"1647501978916382207\"" },
     { name: "oAuthClientProducts", type: "Array", description: "OAuth client products.", example: "[]" },
-    { name: "isActive", type: "Bool", description: "Whether the application is active.", example: "false" },
-    { name: "redirectUri", type: "Array[String]", description: "Allowed redirect URIs.", example: "[\"https://google.com\"]" },
+    { name: "isActive", type: "Boolean", description: "Whether the application is active.", example: "false" },
+    { name: "redirectUri", type: "Array", description: "Allowed redirect URIs.", example: "[\"https://google.com\"]" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of the application.", example: "\"2022-03-17T07:33:34Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of the application.", example: "\"2022-03-17T07:36:10Z\"" }
   ]}

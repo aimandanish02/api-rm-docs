@@ -25,7 +25,7 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 <ParamTable
   rows={[
     { name: "transactionId", type: "String", required: true, description: "Transaction ID generated from Revenue Monster.", example: "\"1582107209454501456\"" },
-    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Merchant Copy and Customer copy  2 : Print Customer copy 3 : Do not print Merchant Copy & Customer Copy", example: "1" },
+    { name: "receiptType", type: "Integer", required: true, description: "1 : Print Merchant Copy and Customer copy  2 : Print Customer copy 3 : Do not print Merchant Copy & Customer Copy", example: "1" },
     { name: "reason", type: "String", required: true, description: "Refund reason", example: "\"Wrong Item\"" },
     { name: "email", type: "String", required: true, description: "Refund email", example: "\"oska.ng@revenuemonster.my\"" },
     { name: "pin", type: "String", required: true, description: "Refund pin", example: "\"321123\"" }
@@ -59,7 +59,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 
 <ParamTable
   rows={[
-    { name: "balanceAmount", type: "Uint", description: "Amount of order in cent", example: "10" },
+    { name: "balanceAmount", type: "Integer", description: "Amount of order in cent", example: "10" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2020-02-13T07:08:56Z\"" },
     { name: "currencyType", type: "String", description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
     { name: "extraInfo", type: "Object", description: "(Refer to extraInfo)", example: "{}" },
@@ -103,7 +103,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 
 <ParamTable
   rows={[
-    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "10" },
+    { name: "amount", type: "Integer", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "10" },
     { name: "id", type: "String", required: true, description: "Order ID (from Merchant), max: 24", example: "\"201919250001\"" },
     { name: "title", type: "String", required: true, description: "Order title, max: 32", example: "\"SALE\"" },
     { name: "details", type: "String", required: true, description: "Order details, max: 600", example: "\"XXXX-XXXX-XXXX-3121\"" },

@@ -200,17 +200,17 @@ startActivity(i)`}
 
 <ParamTable
   rows={[
-    { name: "totalSalesAmount", type: "Uint64", description: "Total sales amount" },
-    { name: "totalSalesCount", type: "Uint64", description: "Total sales count" },
-    { name: "totalRefundedAmount", type: "Uint64", description: "Total refunded amount" },
-    { name: "totalRefundedCount", type: "Uint64", description: "Total refunded count" },
+    { name: "totalSalesAmount", type: "Integer", description: "Total sales amount" },
+    { name: "totalSalesCount", type: "Integer", description: "Total sales count" },
+    { name: "totalRefundedAmount", type: "Integer", description: "Total refunded amount" },
+    { name: "totalRefundedCount", type: "Integer", description: "Total refunded count" },
     { name: "wallet[*].name", type: "String", description: "Wallet name" },
     { name: "wallet[*].method", type: "String", description: "Wallet method" },
     { name: "wallet[*].region", type: "String", description: "Wallet region" },
-    { name: "wallet[*].sales.count", type: "Uint64", description: "Wallet sales count" },
-    { name: "wallet[*].sales.amount", type: "Uint64", description: "Wallet sales amount" },
-    { name: "wallet[*].refunded.count", type: "Uint64", description: "Wallet refunded count" },
-    { name: "wallet[*].refunded.amount", type: "Uint64", description: "Wallet refunded amount" },
+    { name: "wallet[*].sales.count", type: "Integer", description: "Wallet sales count" },
+    { name: "wallet[*].sales.amount", type: "Integer", description: "Wallet sales amount" },
+    { name: "wallet[*].refunded.count", type: "Integer", description: "Wallet refunded count" },
+    { name: "wallet[*].refunded.amount", type: "Integer", description: "Wallet refunded amount" },
     { name: "range[*]", type: "String", description: "Range of settlement dates" }
   ]}
 />
@@ -242,11 +242,11 @@ startActivity(i)`}
     { name: "error.debug", type: "String", description: "Debug message (sandbox only)." },
     { name: "summary.batchNo", type: "String", description: "Terminal settlement sequence number" },
     { name: "summary.currencyType", type: "String", description: "Settlement currency type (currently supported MYR only)" },
-    { name: "summary.noOfTransactions", type: "Uint64", description: "Count of settled transactions" },
+    { name: "summary.noOfTransactions", type: "Integer", description: "Count of settled transactions" },
     { name: "summary.settlementAt", type: "String", description: "Date and time of settlement" },
-    { name: "summary.totalSalesAmount", type: "Uint64", description: "Total sales amount in cents" },
-    { name: "transactions[*].amount", type: "Uint64", description: "Transaction amount in cents" },
-    { name: "transactions[*].currencyType", type: "Uint64", description: "Transaction currency type" },
+    { name: "summary.totalSalesAmount", type: "Integer", description: "Total sales amount in cents" },
+    { name: "transactions[*].amount", type: "Integer", description: "Transaction amount in cents" },
+    { name: "transactions[*].currencyType", type: "Integer", description: "Transaction currency type" },
     { name: "transactions[*].transactionAt", type: "String", description: "Transaction date and time" },
     { name: "transactions[*].transactionId", type: "String", description: "Transaction ID" },
     { name: "transactions[*].type", type: "String", description: "Transaction type" }

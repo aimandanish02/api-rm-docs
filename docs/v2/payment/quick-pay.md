@@ -101,7 +101,7 @@ Quick Pay is an **offline payment method**. Its subscription rate is based on th
     { name: "order.id", type: "String", required: true, description: "Order ID" },
     { name: "order.title", type: "String", required: true, description: "Order Title" },
     { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type (currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
+    { name: "order.amount", type: "Integer", required: true, description: "Order Amount" },
     { name: "order.detail", type: "String", description: "Order Detail" },
     { name: "order.additionalData", type: "String", description: "Order Additional Data" }
   ]}
@@ -155,7 +155,7 @@ Vouchers can be generated as QR codes for scanning. Scan the voucher QR code fir
     { name: "order.id", type: "String", required: true, description: "Order ID" },
     { name: "order.title", type: "String", required: true, description: "Order Title" },
     { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type (currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
+    { name: "order.amount", type: "Integer", required: true, description: "Order Amount" },
     { name: "order.detail", type: "String", description: "Order Detail" },
     { name: "order.additionalData", type: "String", description: "Order Additional Data" },
     { name: "voucher.code", type: "String", description: "Revenue Monster Voucher Code" }
@@ -215,7 +215,7 @@ See [Transaction Object > Spending Loyalty](./query-transaction.md#spending-loya
     { name: "order.id", type: "String", required: true, description: "Order ID" },
     { name: "order.title", type: "String", required: true, description: "Order Title" },
     { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type (currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
+    { name: "order.amount", type: "Integer", required: true, description: "Order Amount" },
     { name: "order.detail", type: "String", description: "Order Detail" },
     { name: "order.additionalData", type: "String", description: "Order Additional Data" },
     { name: "loyalty.type", type: "String", description: "Loyalty type" },
@@ -313,7 +313,7 @@ Currently available membership card: Alipay Gourmet Card (马来西亚美食优�
     { name: "order.id", type: "String", required: true, description: "Order ID" },
     { name: "order.title", type: "String", required: true, description: "Order Title" },
     { name: "order.currencyType", type: "String", required: true, description: "Order Currency Type (currently supported MYR only)" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order Amount" },
+    { name: "order.amount", type: "Integer", required: true, description: "Order Amount" },
     { name: "order.detail", type: "String", description: "Order Detail" },
     { name: "order.additionalData", type: "String", description: "Order Additional Data" },
     { name: "extraInfo.type", type: "String", description: "Extra Type \"MEMBERSHIP\"" },

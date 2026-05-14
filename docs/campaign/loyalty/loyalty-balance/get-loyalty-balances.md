@@ -206,7 +206,7 @@ Get loyalty balances
     { name: "id", type: "String", required: true, description: "Order ID (from Merchant), max: 24", example: "\"134850717797247290\"" },
     { name: "title", type: "String", required: true, example: "\"\"" },
     { name: "detail", type: "String", required: true, example: "\"\"" },
-    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" }
+    { name: "amount", type: "Integer", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" }
   ]}
 />
 

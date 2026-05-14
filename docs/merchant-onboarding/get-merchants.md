@@ -89,7 +89,7 @@ This is a GET request with no parameters.
 <ParamTable
   title="Response"
   rows={[
-    { name: "items", type: "Object[]", description: "Array of merchant objects", example: "(See merchant object below)" },
+    { name: "items", type: "Array", description: "Array of merchant objects", example: "(See merchant object below)" },
     { name: "code", type: "String", description: "\"SUCCESS\" if the request succeeded. Otherwise returns an error code.", example: "\"SUCCESS\"" },
     { name: "meta", type: "Object", description: "Pagination metadata (empty if no pagination)", example: "{}" }
   ]}

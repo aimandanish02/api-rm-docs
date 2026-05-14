@@ -24,7 +24,7 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
 
 <ParamTable
   rows={[
-    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Settlement summary and Settlement detail 3 : Perform settlement in the background without receipt", example: "3" }
+    { name: "receiptType", type: "Integer", required: true, description: "1 : Print Settlement summary and Settlement detail 3 : Perform settlement in the background without receipt", example: "3" }
   ]}
 />
 > Example Request
@@ -60,9 +60,9 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
   rows={[
     { name: "batchNo", type: "String", required: true, description: "Sequence no. of the terminal settlement", example: "\"000311\"" },
     { name: "currencyType", type: "String", required: true, description: "Current only support Ringgit Malaysia", example: "\"MYR\"" },
-    { name: "noOfTransactions", type: "Uint", required: true, description: "Count of settled transactions", example: "2" },
+    { name: "noOfTransactions", type: "Integer", required: true, description: "Count of settled transactions", example: "2" },
     { name: "settlementAt", type: "DateTime", required: true, description: "Date and time of the settlement", example: "\"2021-02-17T18:06:47Z\"" },
-    { name: "totalSalesAmount", type: "Uint", required: true, description: "Balance in cents", example: "0" }
+    { name: "totalSalesAmount", type: "Integer", required: true, description: "Balance in cents", example: "0" }
   ]}
 />
 <br/>
@@ -70,7 +70,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
 
 <ParamTable
   rows={[
-    { name: "amount", type: "Uint", required: true, description: "Amount in cent", example: "10" },
+    { name: "amount", type: "Integer", required: true, description: "Amount in cent", example: "10" },
     { name: "currencyType", type: "String", required: true, description: "Current only support Ringgit Malaysia", example: "\"MYR\"" },
     { name: "transactionAt", type: "DateTime", required: true, description: "Date time of transaction on terminal", example: "\"2021-02-16T17:44:02Z\"" },
     { name: "transactionId", type: "String", required: true, description: "Transaction ID (from RM server)", example: "\"210217174359100325085446\"" },

@@ -21,7 +21,7 @@ Integrate RM Terminal with POS System or Kiosk machine (using local callback). T
   rows={[
     { name: "terminalId", type: "String", required: true, description: "Terminal ID", example: "\"1582107209454501456\"" },
     { name: "type", type: "String", required: true, description: "e-wallet \"E-WALLET\" or Bank card \"CARD\" payment", example: "\"E-WALLET\"" },
-    { name: "receiptType", type: "Uint", required: true, description: "1 : Print Merchant Copy and Customer copy  2 : Print Customer copy 3 : Do not print Merchant Copy & Customer Copy", example: "1" },
+    { name: "receiptType", type: "Integer", required: true, description: "1 : Print Merchant Copy and Customer copy  2 : Print Customer copy 3 : Do not print Merchant Copy & Customer Copy", example: "1" },
     { name: "cameraType", type: "String", required: true, description: "For \"E-WALLET\" only, use back or front camera to scan QR", example: "\"FRONT\"" },
     { name: "order", type: "String", required: true, description: "(Refer order )", example: "{}" }
   ]}
@@ -31,7 +31,7 @@ Integrate RM Terminal with POS System or Kiosk machine (using local callback). T
 
 <ParamTable
   rows={[
-    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" },
+    { name: "amount", type: "Integer", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "100" },
     { name: "currencyType", type: "String", required: true, description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
     { name: "id", type: "String", required: true, description: "Order ID (from Merchant), max: 24", example: "\"123443333304\"" },
     { name: "title", type: "String", required: true, description: "Order title, max: 32", example: "\"title\"" },
@@ -69,7 +69,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
 
 <ParamTable
   rows={[
-    { name: "balanceAmount", type: "Uint", description: "Amount of order in cent", example: "10" },
+    { name: "balanceAmount", type: "Integer", description: "Amount of order in cent", example: "10" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2020-02-13T07:08:56Z\"" },
     { name: "currencyType", type: "String", description: "Currency notation (currently only support MYR)", example: "\"MYR\"" },
     { name: "extraInfo", type: "Object", description: "for CARD payment (Refer to extraInfo)", example: "{}" },
@@ -113,7 +113,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
 
 <ParamTable
   rows={[
-    { name: "amount", type: "Uint", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "10" },
+    { name: "amount", type: "Integer", required: true, description: "Amount of order in cent (min RM 0.10 or amount: 10)", example: "10" },
     { name: "id", type: "String", required: true, description: "Order ID (from Merchant), max: 24", example: "\"201919250001\"" },
     { name: "title", type: "String", required: true, description: "Order title, max: 32", example: "\"SALE\"" },
     { name: "details", type: "String", required: true, description: "Order details, max: 600", example: "\"XXXX-XXXX-XXXX-3121\"" },
@@ -143,7 +143,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
     { name: "country", type: "String", description: "Country of store", example: "\"Malaysia\"" },
     { name: "countryCode", type: "String", description: "Country code of store contact number", example: "\"60\"" },
     { name: "phoneNumber", type: "String", description: "Phone number of store", example: "\"377334080\"" },
-    { name: "geoLocation", type: "Object of [Float]", description: "Geo Location (latitude and longtitude) of store", example: "{\"latitude\": 3.1349857, \"longtitude\": 101.6136659 }" },
+    { name: "geoLocation", type: "Object", description: "Geo Location (latitude and longtitude) of store", example: "{\"latitude\": 3.1349857, \"longtitude\": 101.6136659 }" },
     { name: "status", type: "String", description: "Current status of store", example: "\"ACTIVE\"" },
     { name: "createdAt", type: "DateTime", description: "Creation date time of store", example: "\"2018-02-12T08:53:13Z\"" },
     { name: "updatedAt", type: "DateTime", description: "Last update date time of store", example: "\"2018-02-12T08:53:13Z\"" }

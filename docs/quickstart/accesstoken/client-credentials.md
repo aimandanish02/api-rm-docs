@@ -122,9 +122,9 @@ See [HTTP Basic Authentication](https://developer.mozilla.org/en-US/docs/Web/HTT
   rows={[
     { name: "accessToken", type: "String", description: "Bearer token to include in all subsequent API requests.", example: "eyJhbGci..." },
     { name: "tokenType", type: "String", description: "Token scheme. Always \"Bearer\".", example: "\"Bearer\"" },
-    { name: "expiresIn", type: "Number", description: "Access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
+    { name: "expiresIn", type: "Integer", description: "Access token lifetime in seconds. 2,591,999 seconds ≈ 30 days.", example: "2591999" },
     { name: "refreshToken", type: "String", description: "Use this to get a new access token once the current one expires, without re-sending your credentials. See Refresh Token.", example: "hDzmdhTrn..." },
-    { name: "refreshTokenExpiresIn", type: "Number", description: "Refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
+    { name: "refreshTokenExpiresIn", type: "Integer", description: "Refresh token lifetime in seconds. Store this value to know when you need to re-authenticate from scratch.", example: "1576799999" }
   ]}
 />
 

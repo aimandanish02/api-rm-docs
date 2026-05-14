@@ -188,10 +188,78 @@
 }
 
 /* ================================
+   COLLAPSE TOGGLE BUTTON
+================================ */
+
+.collapseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: transparent;
+  color: var(--ifm-color-emphasis-600);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.collapseBtn:hover {
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .collapseBtn {
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme='dark'] .collapseBtn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.collapseIcon {
+  transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.collapseIconOpen {
+  transform: rotate(180deg);
+}
+
+/* ================================
+   COLLAPSE ANIMATION
+================================ */
+
+.collapseBody {
+  display: grid;
+  overflow: hidden;
+  transition:
+    grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.22s ease;
+}
+
+.collapseBodyOpen {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.collapseBodyClosed {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ================================
    CODE AREA
 ================================ */
 
 .codeWrapper {
+  min-height: 0;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--ifm-color-emphasis-300) transparent;

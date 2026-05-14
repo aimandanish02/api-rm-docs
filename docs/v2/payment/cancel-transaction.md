@@ -125,7 +125,7 @@ Refund eligibility depends on the payment provider. Each payment method has its 
     { name: "transactionId", type: "String", required: true, description: "Transaction ID to refund", example: "\"180730103903010431152179\"" },
     { name: "refund.type", type: "String", required: true, description: "Refund type (e.g., \"FULL\")", example: "\"FULL\"" },
     { name: "refund.currencyType", type: "String", required: true, description: "Refund currency type", example: "\"MYR\"" },
-    { name: "refund.amount", type: "Uint64", required: true, description: "Refund amount in smallest currency unit", example: "100" },
+    { name: "refund.amount", type: "Integer", required: true, description: "Refund amount in smallest currency unit", example: "100" },
     { name: "reason", type: "String", required: true, description: "Reason for the refund" }
   ]}
 />

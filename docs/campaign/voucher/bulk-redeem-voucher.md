@@ -169,7 +169,7 @@ Redeem voucher(s) by Bulk
 <ParamTable
   title="Request Parameters"
   rows={[
-    { name: "codes", type: "[]String", description: "Voucher Code", example: "[\"8JwpM3BC\",\"7AbaVWXS\"]" }
+    { name: "codes", type: "Array", description: "Voucher Code", example: "[\"8JwpM3BC\",\"7AbaVWXS\"]" }
   ]}
 />
 
@@ -179,7 +179,7 @@ Redeem voucher(s) by Bulk
 <ParamTable
   title="Response Parameters"
   rows={[
-    { name: "item", type: "Object[]", description: "Voucher object", example: "(Refer to explanation below)" },
+    { name: "item", type: "Array", description: "Voucher object", example: "(Refer to explanation below)" },
     { name: "code", type: "String", description: "Successfully call this endpoint. If fail, will return error code object (Refer Appendix 1: Error Codes)", example: "\"SUCCESS\"" }
   ]}
 />
@@ -198,9 +198,9 @@ Redeem voucher(s) by Bulk
     { name: "label", type: "String", description: "label of voucher for merchant remarks", example: "\"Free Breakfast\"" },
     { name: "voucherBatchKey", type: "String", description: "Parent key of current voucher", example: "\"EhQKCE1lcmNoYW50EJXVzd3wraqTORIYCgxWb3VjaGVyQmF0Y2gQkvnGweaB2uQg\"" },
     { name: "type", type: "String", description: "Define type of vouchers: DISCOUNT, GIFT, CASH", example: "\"GIFT\"" },
-    { name: "amount", type: "Uint", description: "Required if type = CASH, notation in cents, eg. RM 1.00 = 100", example: "0" },
-    { name: "discountRate", type: "Uint", description: "Required if type = DISCOUNT, notation without decimals, eg. 1% = 100", example: "100" },
-    { name: "minimumSpendAmount", type: "Uint", description: "min amount to activate this voucher, required if type = CASH, DISCOUNT, notation in cents, eg. RM 1.00 = 100", example: "100" },
+    { name: "amount", type: "Integer", description: "Required if type = CASH, notation in cents, eg. RM 1.00 = 100", example: "0" },
+    { name: "discountRate", type: "Integer", description: "Required if type = DISCOUNT, notation without decimals, eg. 1% = 100", example: "100" },
+    { name: "minimumSpendAmount", type: "Integer", description: "min amount to activate this voucher, required if type = CASH, DISCOUNT, notation in cents, eg. RM 1.00 = 100", example: "100" },
     { name: "origin", type: "String", description: "SYSTEM (voucher code generated from RM server), SELF (voucher code uploaded from merchant csv file)", example: "\"SYSTEM\"" },
     { name: "imageUrl", type: "String", description: "Image URL of current voucher, optional", example: "\"\"" },
     { name: "memberProfile", type: "String", description: "Member profile of user's social media", example: "\"\"" },
@@ -209,7 +209,7 @@ Redeem voucher(s) by Bulk
     { name: "code", type: "String", description: "Voucher Code, members can keep this code for future redemption. Same as the qrURL below except this code is not a URL.", example: "\"NAklEfbVdV\"" },
     { name: "isShipping", type: "Boolean", description: "True if items/goods to be delivered physically to customers", example: "false" },
     { name: "address", type: "String", description: "Required if isShipping = true", example: "null" },
-    { name: "expiry", type: "Object of Expiry", description: "Expiry date time of current voucher", example: "(Refer below)" },
+    { name: "expiry", type: "Object", description: "Expiry date time of current voucher", example: "(Refer below)" },
     { name: "usedAt", type: "DateTime", description: "Date time of voucher being reinstateed (UTC)", example: "\"GIFT\"" },
     { name: "redeemedAt", type: "DateTime", description: "Date time of voucher being redeemed (UTC)", example: "\"GIFT\"" },
     { name: "isDeviceRedeem", type: "Boolean", description: "TRUE means only can be redeemed through merchant app. FALSE means customer can do redemption from own loyalty app.", example: "false" },
@@ -228,7 +228,7 @@ Redeem voucher(s) by Bulk
   title="Details"
   rows={[
     { name: "type", type: "String", description: "\"DYNAMIC\" (days from now), \"FIXED\" (specific fixed date)", example: "\"DYNAMIC\"" },
-    { name: "day", type: "Uint", description: "Only required by \"DYNAMIC\" expiry type. To indicate number of days from now until expiry.", example: "30" },
+    { name: "day", type: "Integer", description: "Only required by \"DYNAMIC\" expiry type. To indicate number of days from now until expiry.", example: "30" },
     { name: "expiryAt", type: "DateTime", description: "Only required by \"FIXED\". To indicate specific expiry date.", example: "\"2020-10-07T17:44:26.679908+08:00\"" }
   ]}
 />

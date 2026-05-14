@@ -166,8 +166,8 @@ The transaction object is returned in the `item` field of successful responses.
     { name: "transactionId", type: "String", required: true, description: "Revenue Monster's unique transaction ID" },
     { name: "terminalId", type: "String", description: "Terminal ID if applicable" },
     { name: "currencyType", type: "String", required: true, description: "Currency type (currently supported MYR only)" },
-    { name: "balanceAmount", type: "Uint64", required: true, description: "Remaining balance amount for initiating refund" },
-    { name: "finalAmount", type: "Uint64", required: true, description: "Amount after all deductions (voucher, membership)" },
+    { name: "balanceAmount", type: "Integer", required: true, description: "Remaining balance amount for initiating refund" },
+    { name: "finalAmount", type: "Integer", required: true, description: "Amount after all deductions (voucher, membership)" },
     { name: "platform", type: "String", required: true, description: "Transaction platform" },
     { name: "type", type: "String", required: true, description: "Transaction type" },
     { name: "method", type: "String", required: true, description: "Transaction payment method" },
@@ -180,7 +180,7 @@ The transaction object is returned in the `item` field of successful responses.
     { name: "order.id", type: "String", required: true, description: "Order ID" },
     { name: "order.title", type: "String", required: true, description: "Order title" },
     { name: "order.currencyType", type: "String", required: true, description: "Order currency type" },
-    { name: "order.amount", type: "Uint64", required: true, description: "Order amount" },
+    { name: "order.amount", type: "Integer", required: true, description: "Order amount" },
     { name: "order.detail", type: "String", description: "Order detail" },
     { name: "order.additionalData", type: "String", description: "Order additional data" }
   ]}
@@ -233,8 +233,8 @@ The transaction object is returned in the `item` field of successful responses.
     { name: "country", type: "String", description: "Store country" },
     { name: "countryCode", type: "String", description: "Store country code for phone number" },
     { name: "phoneNumber", type: "String", description: "Store phone number" },
-    { name: "geoLocation.latitude", type: "Float64", description: "Store latitude" },
-    { name: "geoLocation.longitude", type: "Float64", description: "Store longitude" },
+    { name: "geoLocation.latitude", type: "Float", description: "Store latitude" },
+    { name: "geoLocation.longitude", type: "Float", description: "Store longitude" },
     { name: "status", type: "String", description: "Store status" },
     { name: "createdAt", type: "String", description: "Store created time" },
     { name: "updatedAt", type: "String", description: "Store last updated time" }
@@ -269,7 +269,7 @@ The transaction object is returned in the `item` field of successful responses.
 <ParamTable
   rows={[
     { name: "isBuyNowPayLater", type: "Boolean", description: "Whether this is a BNPL transaction" },
-    { name: "installmentMonth", type: "Uint64", description: "Number of months selected for BNPL" }
+    { name: "installmentMonth", type: "Integer", description: "Number of months selected for BNPL" }
   ]}
 />
 
@@ -371,9 +371,9 @@ If you are using QR code mode for payment, you will receive the spending loyalty
 
 <ParamTable
   rows={[
-    { name: "salesAmount", type: "Uint64", description: "Original sales amount before discount" },
-    { name: "discountAmount", type: "Uint64", description: "Payment provider discount amount" },
-    { name: "grossAmount", type: "Uint64", description: "Sales amount after discount" }
+    { name: "salesAmount", type: "Integer", description: "Original sales amount before discount" },
+    { name: "discountAmount", type: "Integer", description: "Payment provider discount amount" },
+    { name: "grossAmount", type: "Integer", description: "Sales amount after discount" }
   ]}
 />
 
@@ -391,7 +391,7 @@ If you are using QR code mode for payment, you will receive the spending loyalty
   rows={[
     { name: "memberId", type: "String", description: "Membership member ID" },
     { name: "voucherId", type: "String", description: "Membership voucher ID" },
-    { name: "discountAmount", type: "Uint64", description: "Membership discount amount" }
+    { name: "discountAmount", type: "Integer", description: "Membership discount amount" }
   ]}
 />
 
