@@ -46,60 +46,97 @@
   scrollbar-color: rgba(128, 128, 128, 0.35) transparent;
 }
 
+/* ================= API PAGE LAYOUT ================= */
+
 .apiLayout {
-  display: grid;
+  display: flex;
   width: 100%;
   max-width: 100%;
-  grid-template-columns: minmax(0, 1fr) clamp(380px, 32vw, 580px);
-  gap: clamp(24px, 3vw, 48px);
   height: calc(100vh - var(--ifm-navbar-height));
   overflow: hidden;
 }
 
 .docContent {
+  flex: 1;
   min-width: 0;
-  width: 100%;
   padding: 0 var(--ifm-spacing-horizontal);
   height: 100%;
   overflow-y: auto;
 }
 
-.playground {
+/* ================= EDGE STRIP + COLLAPSE HANDLE ================= */
+
+.playgroundEdge {
+  flex-shrink: 0;
+  width: 1px;
+  background: var(--ifm-toc-border-color);
   position: relative;
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  border-left: 1px solid var(--ifm-toc-border-color);
-  padding: 0 var(--ifm-spacing-horizontal) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.collapseHandle {
+  position: absolute;
+  left: -13px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-toc-border-color);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.collapseHandle:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.collapseHandle:active {
+  background: var(--ifm-color-emphasis-300);
+}
+
+.collapseHandleIcon {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+  /* Default: chevron points left (‹) — playground visible, clicking collapses to the right */
+  transform: rotate(180deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Collapsed: flip chevron to point right (›) — clicking expands */
+.collapseHandleCollapsed .collapseHandleIcon {
+  transform: rotate(0deg);
+}
+
+/* ================= PLAYGROUND PANEL ================= */
+
+.playground {
+  flex-shrink: 0;
+  width: clamp(380px, 32vw, 580px);
   height: 100%;
   overflow-y: scroll;
-
-  /* Fade overlay — no pseudo-element, no flow artifacts */
+  overflow-x: hidden;
   box-shadow: inset 0 -56px 28px -28px var(--ifm-background-color);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.tocSidebar {
-  position: relative;
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-  border-left: 1px solid var(--ifm-toc-border-color);
-  padding: 0 var(--ifm-spacing-horizontal) 0 0;
-  height: 100%;
-  overflow-y: auto;
-}
-
-.scrollHint {
-  position: sticky;
-  bottom: 12px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 11px;
-  color: var(--ifm-color-emphasis-500);
-  pointer-events: none;
-  animation: scrollBounce 1.6s ease-in-out infinite;
-  letter-spacing: 0.04em;
+.playgroundPanelCollapsed {
+  width: 0 !important;
+  overflow: hidden;
 }
 
 /* Webkit scrollbar */
@@ -131,7 +168,8 @@
   scrollbar-color: rgba(128, 128, 128, 0.35) transparent;
 }
 
-/* Mobile toggle button */
+/* ================= MOBILE ================= */
+
 .mobileToggle {
   display: none;
   position: fixed;
@@ -161,71 +199,70 @@
 
 /* ================= RESPONSIVE BREAKPOINTS ================= */
 
-/* Tablet and below */
 @media (max-width: 996px) {
   .apiLayout {
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
     height: auto;
     min-height: calc(100vh - var(--ifm-navbar-height));
+    overflow: visible;
   }
-  
+
+  /* Hide edge strip on mobile */
+  .playgroundEdge {
+    display: none;
+  }
+
   .playground {
-    display: none; /* Hidden by default on mobile */
+    /* Reset desktop flex sizing */
+    width: auto !important;
+    flex-shrink: 1;
+
+    /* Full-screen fixed overlay on mobile */
+    display: none;
     position: fixed;
     top: var(--ifm-navbar-height);
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 99;
-    border-left: none;
-    border-top: none;
-    padding: 0;
-    background: var(--ifm-background-color);
     height: calc(100vh - var(--ifm-navbar-height));
-    overflow-y: auto; /* Playground scrolls independently */
+    overflow-y: auto;
     overflow-x: hidden;
+    background: var(--ifm-background-color);
     box-shadow: none;
-    /* Prevent scroll chaining to parent */
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    transition: none;
   }
-  
-  /* Show playground when toggled */
+
   .playgroundVisible {
     display: block !important;
     animation: slideInRight 0.3s ease-out;
   }
-  
+
   @keyframes slideInRight {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(0);
-    }
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
   }
-  
+
   .docContent {
     height: auto;
     overflow-y: visible;
-    padding-bottom: 80px; /* Space for mobile toggle button */
+    padding-bottom: 80px;
   }
-  
+
   .mobileToggle {
     display: block;
   }
-  
+
   .mobileToggleActive {
     background: var(--ifm-color-danger);
   }
-  
-  /* Adjust non-API doc pages on mobile */
+
   .docItemWrapper {
     height: auto;
     min-height: calc(100vh - var(--ifm-navbar-height));
   }
-  
+
   .articleWrapper {
     height: auto;
     overflow-y: visible;
@@ -240,7 +277,6 @@ body.mobile-playground-open {
   height: 100%;
 }
 
-/* Small mobile */
 @media (max-width: 576px) {
   .mobileToggle {
     bottom: 16px;
