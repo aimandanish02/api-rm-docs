@@ -157,7 +157,7 @@
   text-decoration: none;
 }
 
-/* ─── Toggle footer button ────────────────────────────── */
+/* ─── Toggle header button ────────────────────────────── */
 .toggle {
   display: flex;
   align-items: center;
@@ -166,7 +166,7 @@
   padding: 0.6rem 1.1rem;
   background: var(--ifm-color-emphasis-100);
   border: none;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
   cursor: pointer;
   font-size: 0.78rem;
   font-weight: 500;

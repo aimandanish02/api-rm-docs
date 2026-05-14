@@ -23,14 +23,6 @@ export default function ParamTable({
 
   return (
     <div className={styles.wrapper}>
-      <div className={`${styles.body} ${open ? styles.bodyOpen : styles.bodyClose}`}>
-        <div className={styles.inner}>
-          {rows.map((row, i) => (
-            <ParamRowItem key={i} row={row} last={i === rows.length - 1} />
-          ))}
-        </div>
-      </div>
-
       <button
         className={styles.toggle}
         onClick={() => setOpen((o) => !o)}
@@ -54,6 +46,14 @@ export default function ParamTable({
         </svg>
         <span>{open ? `Hide ${title}` : `Show ${title}`}</span>
       </button>
+
+      <div className={`${styles.body} ${open ? styles.bodyOpen : styles.bodyClose}`}>
+        <div className={styles.inner}>
+          {rows.map((row, i) => (
+            <ParamRowItem key={i} row={row} last={i === rows.length - 1} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
