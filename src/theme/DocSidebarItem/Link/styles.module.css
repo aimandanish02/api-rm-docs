@@ -1,0 +1,52 @@
+.menuExternalLink {
+  align-items: center;
+}
+
+/* ── Sidebar inline TOC ─────────────────────────────────── */
+
+.tocList {
+  list-style: none;
+  margin: 2px 0 6px;
+  padding: 0;
+}
+
+.tocItem {
+  margin: 0;
+}
+
+/* H3: indent further under its parent H2 */
+.tocItemH3 {
+  padding-left: 12px;
+}
+
+.tocLink {
+  display: block;
+  padding: 4px 8px 4px 12px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--ifm-color-emphasis-600);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tocLink:hover {
+  color: var(--ifm-color-primary);
+  border-left-color: var(--ifm-color-emphasis-300);
+  background: var(--ifm-color-emphasis-100);
+  text-decoration: none;
+}
+
+.tocLinkActive {
+  color: var(--ifm-color-primary) !important;
+  border-left-color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+}
+
+.tocLinkActive:hover {
+  background: var(--ifm-color-emphasis-100);
+}

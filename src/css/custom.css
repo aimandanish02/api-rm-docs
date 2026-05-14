@@ -293,12 +293,8 @@ html[data-theme="light"] .menu__list .menu__list {
     align-items: stretch !important;
   }
 
-  /* Sidebar - sticky, full height, NO TOP PADDING */
+  /* Sidebar container — tall flex item; sidebarViewport (> div) handles sticky */
   [class*="docSidebarContainer"] {
-    position: sticky !important;
-    top: 0 !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
     overflow: visible !important;
     clip-path: none !important; /* Override Docusaurus inset clipping so the collapse button is visible */
     z-index: 10 !important;
@@ -310,6 +306,17 @@ html[data-theme="light"] .menu__list .menu__list {
     flex-shrink: 0 !important;
     transition: width 0.3s ease, min-width 0.3s ease, opacity 0.3s ease !important;
     border-right: 1px solid var(--ifm-toc-border-color) !important;
+  }
+
+  /* sidebarViewport — the direct child div that Docusaurus renders as the sticky viewport.
+     top = navbar height so it sticks below the navbar (we removed docSidebarContainer's
+     negative margin-top, so the sidebar starts in the normal content flow). */
+  [class*="docSidebarContainer"] > div {
+    position: sticky !important;
+    top: var(--ifm-navbar-height) !important;
+    height: calc(100vh - var(--ifm-navbar-height)) !important;
+    max-height: calc(100vh - var(--ifm-navbar-height)) !important;
+    overflow: visible !important;
   }
 
   /* Neutralize Docusaurus's built-in hidden-state hover/peek behavior
