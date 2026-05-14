@@ -188,7 +188,7 @@
 }
 
 :root[data-theme="dark"] .send {
-  background: #000000;
+  background: var(--ifm-background-surface-color);
   color: #ffffff;
 }
 
