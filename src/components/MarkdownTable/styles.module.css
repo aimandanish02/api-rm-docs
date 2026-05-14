@@ -32,8 +32,8 @@
 .table thead {
   background: linear-gradient(
     135deg,
-    #00bfa5 0%,
-    #5e35b1 100%
+    #4444cc 0%,
+    #6666eb 100%
   );
 }
 
@@ -101,7 +101,7 @@
 }
 
 .table tbody tr:hover td {
-  background: rgba(0, 191, 165, 0.08);
+  background: rgba(102, 102, 235, 0.08);
 }
 
 /* First column (often labels/names) */
@@ -153,8 +153,8 @@
 [data-theme="dark"] .table thead {
   background: linear-gradient(
     135deg,
-    #00bfa5 0%,
-    #5e35b1 100%
+    #3333aa 0%,
+    #6666eb 100%
   );
 }
 
@@ -163,7 +163,7 @@
 }
 
 [data-theme="dark"] .table tbody tr:hover td {
-  background: rgba(0, 191, 165, 0.12);
+  background: rgba(102, 102, 235, 0.12);
 }
 
 [data-theme="dark"] .table tbody td {
