@@ -292,7 +292,9 @@
   font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace !important;
   font-size: 13px !important;
   line-height: 1.7 !important;
-  min-width: max-content;
+  white-space: pre-wrap !important;
+  overflow-wrap: break-word !important;
+  word-break: break-all !important;
   width: 100%;
 }
 
@@ -303,10 +305,11 @@
 .line {
   display: flex;
   align-items: flex-start;
-  padding: 0 20px 0 0;
+  padding: 0 20px 0 20px;
   min-height: 22px;
   transition: background 0.1s ease;
   position: relative;
+  flex-wrap: wrap;
 }
 
 .lineHovered {
@@ -335,7 +338,7 @@
 .lineNumber {
   user-select: none;
   min-width: 44px;
-  padding: 0 16px 0 20px;
+  padding: 0 16px 0 0;
   color: var(--ifm-color-emphasis-500);
   font-size: 12px;
   text-align: right;

@@ -6,15 +6,21 @@ import styles from "./styles.module.css";
 // Light theme for syntax highlighting
 const lightTheme = {
   plain: {
-    color: "#24292e",
+    color: "#475569",
     backgroundColor: "transparent",
   },
   styles: [
     { types: ["comment", "prolog", "doctype", "cdata"], style: { color: "#6a737d", fontStyle: "italic" as const } },
     { types: ["punctuation"], style: { color: "#5e6687" } },
-    { types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"], style: { color: "#d73a49" } },
-    { types: ["selector", "attr-name", "string", "char", "builtin", "inserted"], style: { color: "#22863a" } },
-    { types: ["operator", "entity", "url"], style: { color: "#005cc5" } },
+    // JSON keys / object properties → blue
+    { types: ["property"], style: { color: "#005cc5", fontWeight: "500" as const } },
+    // Strings → green
+    { types: ["string", "attr-name", "char", "builtin", "inserted", "selector"], style: { color: "#22863a" } },
+    // Numbers → orange
+    { types: ["number", "unit"], style: { color: "#e36209" } },
+    // Booleans / null / constants → red
+    { types: ["boolean", "constant", "symbol", "deleted", "tag"], style: { color: "#d73a49" } },
+    { types: ["operator", "entity", "url"], style: { color: "#5e6687" } },
     { types: ["atrule", "attr-value", "keyword"], style: { color: "#d73a49" } },
     { types: ["function", "class-name"], style: { color: "#6f42c1" } },
     { types: ["regex", "important", "variable"], style: { color: "#e36209" } },
@@ -24,15 +30,21 @@ const lightTheme = {
 // Dark theme for syntax highlighting
 const darkTheme = {
   plain: {
-    color: "#e2e8f0",
+    color: "#94a3b8",
     backgroundColor: "transparent",
   },
   styles: [
     { types: ["comment", "prolog", "doctype", "cdata"], style: { color: "#4a5568", fontStyle: "italic" as const } },
     { types: ["punctuation"], style: { color: "#718096" } },
-    { types: ["property", "tag", "boolean", "number", "constant", "symbol", "deleted"], style: { color: "#fc8181" } },
-    { types: ["selector", "attr-name", "string", "char", "builtin", "inserted"], style: { color: "#68d391" } },
-    { types: ["operator", "entity", "url"], style: { color: "#76e4f7" } },
+    // JSON keys / object properties → blue
+    { types: ["property"], style: { color: "#79b8ff", fontWeight: "500" as const } },
+    // Strings → green
+    { types: ["string", "attr-name", "char", "builtin", "inserted", "selector"], style: { color: "#68d391" } },
+    // Numbers → orange
+    { types: ["number", "unit"], style: { color: "#f08d49" } },
+    // Booleans / null / constants → red/pink
+    { types: ["boolean", "constant", "symbol", "deleted", "tag"], style: { color: "#fc8181" } },
+    { types: ["operator", "entity", "url"], style: { color: "#a0aec0" } },
     { types: ["atrule", "attr-value", "keyword"], style: { color: "#76e4f7" } },
     { types: ["function", "class-name"], style: { color: "#f6ad55" } },
     { types: ["regex", "important", "variable"], style: { color: "#faf089" } },
