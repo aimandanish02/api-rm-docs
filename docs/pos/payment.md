@@ -39,15 +39,13 @@ Integrate RM Terminal with POS System or Kiosk machine (using local callback). T
     { name: "additionalData", type: "String", required: true, description: "For merchant's remark, max 128", example: "\"API Test\"" }
   ]}
 />
-> Example Request
-
-```json
-curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay" \
---header "Content-Type: application/json" \
---header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiYXBpX2NsaWVudEBFaGNLQzA5QmRYUm9RMnhwWlc1MEVNV1Z4NF9UbE5MZEZRIl0sImV4cCI6MTU4NjMzNzc1OCwiaWF0IjoxNTgzNzQ1NzU4LCJpc3MiOiJodHRwczovL3NiLW9hdXRoLnJldmVudWVtb25zdGVyLm15IiwianRpIjoiRWh3S0VFOUJkWFJvUVdOalpYTnpWRzlyWlc0UXlKSG9qb2VNcHYwViIsIm5iZiI6MTU4Mzc0NTc1OCwic3ViIjoiRWhRS0NFMWxjbU5vWVc1MEVKWFZ6ZDN3cmFxVE9SSVFDZ1JWYzJWeUVJeUpxSXp2eU1QVmNRIn0.FfBkCb7fjCKJdcy_DS06dKgEtcAvukPio0HyDRtH2UovhZsLFSqD_8oo21u094XSor_mqFg4hqXmLaHjX-h92Wz3kHl7OwiKQb16x8Rnl5OdyPHtMqIZqP8ab8Ch0RHEZ33VchK1zBTnG6Xosrb1B44tWqJ0_kdTtbRZN4rG821C8i4sb6sx8GaxgluJ5q7CEifMTBFJam_Jub9LfAfukq8YyIl0Bykp7B3A_su2QoELL9L_ElJdV9FuwFPHcKr9bxLvVSrEdyrFg7IBm_tJHxSl8gTh3j4b6lWZrBCfMSLraXaYRNzz1ddbVnwYD4aRuSyRmQeMYTUj0cInktnKUA" \
---header "X-Signature: sha256 GohuT2QTUXJV3MZh2OoEE9qW9wcfakOU9iVLmkTjM12NQuV6IcWMRQDz9NdxAOVIrh5MssfYCLDlafb2illXxgQMpmZkZ38NT6NQsMeMfGbHBS1Kc+BUtU7o1TMLUzk55J1tA6f0Z95oEuBlCeLm6VsgCG30wFm5YmgssJ0weIwMcW355r2sFl7QcKOuRqynoGtmmr/aGfOk1HjiFLoFzSd38O7rRjwGrekYwuYUD1N/Wp5GFXRjtaaPkzAERPbXEmnh/taLME8VeAhky6dAVGZE6gHKnP5WvvVjUE+KLtj3D32YIHzxhzEW9x3JEObqgvm5Q2oRZNxoh6/MvqwkVA==" \
---header "X-Nonce-Str: bfdgdjgtjhmnbmmjmdfdghghffj" \
---header "X-Timestamp: 1546850694" \
+<CodeBlock language="json" filename="Example Request">
+{`curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/terminal/quickpay" \\
+--header "Content-Type: application/json" \\
+--header "Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjIwMTgtMDMtMTMiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOlsiYXBpX2NsaWVudEBFaGNLQzA5QmRYUm9RMnhwWlc1MEVNV1Z4NF9UbE5MZEZRIl0sImV4cCI6MTU4NjMzNzc1OCwiaWF0IjoxNTgzNzQ1NzU4LCJpc3MiOiJodHRwczovL3NiLW9hdXRoLnJldmVudWVtb25zdGVyLm15IiwianRpIjoiRWh3S0VFOUJkWFJvUVdOalpYTnpWRzlyWlc0UXlKSG9qb2VNcHYwViIsIm5iZiI6MTU4Mzc0NTc1OCwic3ViIjoiRWhRS0NFMWxjbU5vWVc1MEVKWFZ6ZDN3cmFxVE9SSVFDZ1JWYzJWeUVJeUpxSXp2eU1QVmNRIn0.FfBkCb7fjCKJdcy_DS06dKgEtcAvukPio0HyDRtH2UovhZsLFSqD_8oo21u094XSor_mqFg4hqXmLaHjX-h92Wz3kHl7OwiKQb16x8Rnl5OdyPHtMqIZqP8ab8Ch0RHEZ33VchK1zBTnG6Xosrb1B44tWqJ0_kdTtbRZN4rG821C8i4sb6sx8GaxgluJ5q7CEifMTBFJam_Jub9LfAfukq8YyIl0Bykp7B3A_su2QoELL9L_ElJdV9FuwFPHcKr9bxLvVSrEdyrFg7IBm_tJHxSl8gTh3j4b6lWZrBCfMSLraXaYRNzz1ddbVnwYD4aRuSyRmQeMYTUj0cInktnKUA" \\
+--header "X-Signature: sha256 GohuT2QTUXJV3MZh2OoEE9qW9wcfakOU9iVLmkTjM12NQuV6IcWMRQDz9NdxAOVIrh5MssfYCLDlafb2illXxgQMpmZkZ38NT6NQsMeMfGbHBS1Kc+BUtU7o1TMLUzk55J1tA6f0Z95oEuBlCeLm6VsgCG30wFm5YmgssJ0weIwMcW355r2sFl7QcKOuRqynoGtmmr/aGfOk1HjiFLoFzSd38O7rRjwGrekYwuYUD1N/Wp5GFXRjtaaPkzAERPbXEmnh/taLME8VeAhky6dAVGZE6gHKnP5WvvVjUE+KLtj3D32YIHzxhzEW9x3JEObqgvm5Q2oRZNxoh6/MvqwkVA==" \\
+--header "X-Nonce-Str: bfdgdjgtjhmnbmmjmdfdghghffj" \\
+--header "X-Timestamp: 1546850694" \\
 --data-raw {
   "terminalId": "1554193032595276913",
   "type": "CARD",
@@ -59,11 +57,11 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
     "id": "387153091916665362292147",
     "title": "title",
     "detail": "desc",
-    "additionalData": "010100 Pay parking ticket\n30/07/20 07:13 - 30/07/20 18:40\nLength of stay: 0 Days. 11:35\n02993777014011020212260030??"
+    "additionalData": "010100 Pay parking ticket\\n30/07/20 07:13 - 30/07/20 18:40\\nLength of stay: 0 Days. 11:35\\n02993777014011020212260030??"
   }
 }
-
-```
+`}
+</CodeBlock>
 
 ### Response Parameters
 
@@ -149,10 +147,8 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
     { name: "updatedAt", type: "DateTime", description: "Last update date time of store", example: "\"2018-02-12T08:53:13Z\"" }
   ]}
 />
-> Example Response
-
-```json
-{
+<CodeBlock language="json" filename="Example Response">
+{`{
   "balanceAmount": 10,
   "createdAt": "2021-02-17T18:39:30Z",
   "currencyType": "MYR",
@@ -166,7 +162,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   },
   "method": "CARD",
   "order": {
-    "additionalData": "010100 Pay parking ticket\n30/07/20 07:13 - 30/07/20 18:40\nLength of stay: 0 Days. 11:35\n02993777014011020212260030??",
+    "additionalData": "010100 Pay parking ticket\\n30/07/20 07:13 - 30/07/20 18:40\\nLength of stay: 0 Days. 11:35\\n02993777014011020212260030??",
     "amount": 10,
     "detail": "desc",
     "id": "387153091916665362292147",
@@ -202,7 +198,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   "transactionId": "210217183930100325434403",
   "type": "BANK_CARD",
   "updatedAt": "2021-02-17T18:39:37Z"
-}
-```
+}`}
+</CodeBlock>
 
 

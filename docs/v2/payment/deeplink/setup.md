@@ -52,11 +52,10 @@ The result is returned as a JSON string in the `result` extra of the intent.
 
 ## ReceiverActivity.kt
 
-```kotlin title="ReceiverActivity.kt"
-class ReceiverActivity : AppCompatActivity() {
+<CodeBlock language="kotlin" filename="ReceiverActivity.kt">
+{`class ReceiverActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         try {
             val keySet: Set<String> = intent?.extras!!.keySet()
             keySet.forEach { key ->
@@ -66,10 +65,9 @@ class ReceiverActivity : AppCompatActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
         val result = intent?.getStringExtra("result")
         val transactionType = intent?.getIntExtra("transactionType")
         // Process result and transactionType here
     }
-}
-```
+}`}
+</CodeBlock>

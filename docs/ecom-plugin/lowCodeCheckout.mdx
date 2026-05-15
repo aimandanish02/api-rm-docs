@@ -58,32 +58,29 @@ Client can also specify the URL to which users should be redirected after comple
 
 1. Add the stylsheet and script tag to your head
 
-```html
-<head>
+<CodeBlock language="html" filename="Production">
+{`<head>
     <!--- ... -->
-
     <link rel="stylesheet" href="https://rm-component.oss-ap-southeast-3.aliyuncs.com/checkout-button/index.css"/>
     <script type="module" src="https://rm-component.oss-ap-southeast-3.aliyuncs.com/checkout-button/index.js"></script>
-</head>
-```
+</head>`}
+</CodeBlock>
 
 Alternatively, if you are developing for sandbox environment, please amend the link to below
 
-```html
-<head>
+<CodeBlock language="html" filename="Sandbox">
+{`<head>
     <!--- ... -->
-
     <link rel="stylesheet" href="https://rm-component-sandbox.oss-ap-southeast-3.aliyuncs.com/checkout-button/index.css"/>
     <script type="module" src="https://rm-component-sandbox.oss-ap-southeast-3.aliyuncs.com/checkout-button/index.js"></script>
-</head>
-```
+</head>`}
+</CodeBlock>
 
 2. Add the button with the checkout details to the body
 
-```html
-<body>
+<CodeBlock language="html" filename="index.html">
+{`<body>
     <!--- ... -->
-    
    <rm-pay-button
         clientId="1698131134927762904"
         orderId="1234567890" 
@@ -96,8 +93,8 @@ Alternatively, if you are developing for sandbox environment, please amend the l
     >
         Checkout
     </rm-pay-button>
-</body>
-```
+</body>`}
+</CodeBlock>
 
 
 **Button Parameters**

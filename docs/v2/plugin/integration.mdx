@@ -43,10 +43,10 @@ Once you have the first segment of data you can verify the signature using signi
 
 :::note
 Example Code in Go
+:::
 
-```go
-package main
-
+<CodeBlock language="go" filename="Signature Verification">
+{`package main
 import (
 	"crypto/hmac"
 	"crypto/sha256"
@@ -54,7 +54,6 @@ import (
 	"fmt"
 	"strings"
 )
-
 func main() {
 	secretKey := "some_secret_key_from_portal"
 	signedRequest := "_FuBOoZR8iGNThRTj9FpEfcBPI4Jhh6ZGPqMU76HnSA=.eyJtZXJjaGFudElkIjoiNDExODE2NTIwMzY3OTY2ODg4NSIsIm5vbmNlU3RyIjoiMTY4ODEwMjQwMiIsInBsYXRmb3JtIjoiV0VCX1BPUlRBTCIsInJlZmVyZW5jZUlkIjoiODE5MDY1NjA0NTE2NjIzMjcxNiIsInJlZmVyZW5jZUxhYmVsIjoiREVWIFJNUyIsInJlZmVyZW5jZVJvbGUiOiJPV05FUiIsInJlZmVyZW5jZVR5cGUiOiJVU0VSIiwic3RvcmVJZHMiOltdLCJzdWJzY3JpcHRpb25FeHBpcmVkQXQiOiIyMDUwLTEyLTMxVDIzOjU5OjU5WiIsInN1YnNjcmlwdGlvblN0YXR1cyI6IkFDVElWRSIsInRpbWVzdGFtcCI6IjE2ODgxMDI0MDIiLCJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjU1MDAvaW5kZXguaHRtbCIsInVzZXJDb3VudHJ5Q29kZSI6IjYwIiwidXNlcklkIjoiODE5MDY1NjA0NTE2NjIzMjcxNiIsInVzZXJQaG9uZSI6IjEyODUzNDQ4OCJ9"
@@ -62,25 +61,21 @@ func main() {
 	if len(segments) != 2 {
 		panic("invalid signed request")
 	}
-
 	signer := hmac.New(sha256.New, []byte(secretKey))
 	signer.Write([]byte(segments[1]))
-
 	if base64.URLEncoding.EncodeToString(signer.Sum(nil)) != segments[0] {
 		panic("invalid signed request signature")
 	}
-
 	fmt.Print("valid signature")
-}
-```
-:::
+}`}
+</CodeBlock>
 
 ### Merchant Data & Information
 
 From the second segment of the signed request, you can obtain the data by `Base64URL` decode then you will got the JSON data from the signed request.
 
-```json
-{
+<CodeBlock language="json" filename="Decoded Payload">
+{`{
   "merchantId": "4118165203679668885",
   "nonceStr": "1688102402",
   "platform": "WEB_PORTAL",
@@ -95,8 +90,8 @@ From the second segment of the signed request, you can obtain the data by `Base6
   "url": "http://127.0.0.1:5500/index.html",
   "userCountryCode": "60",
   "userPhone": "128534488"
-}
-```
+}`}
+</CodeBlock>
 
 ## Webview Setup
 
@@ -110,31 +105,28 @@ Most of the function are using browser native feature so all the rules still rem
 
 While initialize / rendering the view our application will send a signed request to you and that's mean initialize is completed after that you will able proceed your own views. Example of VanillaJS code to initialize the receiver and also sender, once initialize complete you will be able communicate with our application. For the message handler to handling the response from our application please refer [Message Handler](#request--message-handler).
 
-```js
-var initialized = false;
+<CodeBlock language="js" filename="Initialize Handshake">
+{`var initialized = false;
 var signedRequest = "";
 var appWindow = null;
 var appOrigin = null
 var sendMessage = function (message) {
     appWindow.postMessage(JSON.stringify(message), appOrigin);
 }
-
 function onReceiveMessage(data) {
     // your business logic for the response will be here
 }
-
 window.addEventListener('message', function (event) {
     if (initialized) {
         return onReceiveMessage(event.data)
     }
-
     initialized = true
     signedRequest = event.data
     appWindow = event.source
     appOrigin = event.origin
     sendMessage({ action: 'FINISH_HANDSHAKE' })
-})
-```
+})`}
+</CodeBlock>
 
 ## Request & Message Handler
 
@@ -148,11 +140,11 @@ To inform our application the handshake step is completed.
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "FINISH_HANDSHAKE"
-}
-```
+}`}
+</CodeBlock>
 
 ### Get Signed Request
 
@@ -160,20 +152,20 @@ To get the signed request. Most of the time you will get it when initialize so t
 
 **Request `postMessage`:**
 
-```json
-{
-    "action": "REQUEST_SIGNED_REQUEST",
-}
-```
+<CodeBlock language="json" filename="Request">
+{`{
+    "action": "REQUEST_SIGNED_REQUEST"
+}`}
+</CodeBlock>
 
 **Response:**
 
-```json
-{
+<CodeBlock language="json" filename="Response">
+{`{
     "action": "REQUEST_SIGNED_REQUEST",
     "data": "_FuBOoZR8iGNThRTj9FpEfcBPI4Jhh6ZGPqMU76HnSA=.eyJtZXJjaGFudElkIjoiNDExODE2NTIwMzY3OTY2ODg4NSIsIm5vbmNlU3RyIjoiMTY4ODEwMjQwMiIsInBsYXRmb3JtIjoiV0VCX1BPUlRBTCIsInJlZmVyZW5jZUlkIjoiODE5MDY1NjA0NTE2NjIzMjcxNiIsInJlZmVyZW5jZUxhYmVsIjoiREVWIFJNUyIsInJlZmVyZW5jZVJvbGUiOiJPV05FUiIsInJlZmVyZW5jZVR5cGUiOiJVU0VSIiwic3RvcmVJZHMiOltdLCJzdWJzY3JpcHRpb25FeHBpcmVkQXQiOiIyMDUwLTEyLTMxVDIzOjU5OjU5WiIsInN1YnNjcmlwdGlvblN0YXR1cyI6IkFDVElWRSIsInRpbWVzdGFtcCI6IjE2ODgxMDI0MDIiLCJ1cmwiOiJodHRwOi8vMTI3LjAuMC4xOjU1MDAvaW5kZXguaHRtbCIsInVzZXJDb3VudHJ5Q29kZSI6IjYwIiwidXNlcklkIjoiODE5MDY1NjA0NTE2NjIzMjcxNiIsInVzZXJQaG9uZSI6IjEyODUzNDQ4OCJ9"
-}
-```
+}`}
+</CodeBlock>
 
 ### Open New Link
 
@@ -181,12 +173,12 @@ To open up new link url on user browser.
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "WHATS_APP_LINK",
     "message": "https://google.com"
-}
-```
+}`}
+</CodeBlock>
 
 ### Toggle Loader
 
@@ -194,11 +186,11 @@ To trigger loader, will work as on/off strategy.
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "TOGGLE_LOADER"
-}
-```
+}`}
+</CodeBlock>
 
 ### Show Notification ( Toast )
 
@@ -206,12 +198,12 @@ To show toast notification to user
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "SHOW_NOTIFICATION",
     "message": "some notification message toast"
-}
-```
+}`}
+</CodeBlock>
 
 ### Set Cookie
 
@@ -219,13 +211,13 @@ Set the cookie value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "SET_COOKIE",
     "type": "some_key",
     "message": "some_value"
-}
-```
+}`}
+</CodeBlock>
 
 ### Set Session Storage
 
@@ -233,13 +225,13 @@ Set the session storage value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "SET_SESSION_STORAGE",
     "type": "some_key",
     "message": "some_value"
-}
-```
+}`}
+</CodeBlock>
 
 ### Set Local Storage
 
@@ -247,13 +239,13 @@ Set the session storage value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "SET_LOCAL_STORAGE",
     "type": "some_key",
     "message": "some_value"
-}
-```
+}`}
+</CodeBlock>
 
 ### Delete Cookie
 
@@ -261,12 +253,12 @@ Delete the cookie value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "REMOVE_COOKIE",
     "type": "some_key"
-}
-```
+}`}
+</CodeBlock>
 
 ### Delete Session Storage
 
@@ -274,12 +266,12 @@ Set the session storage value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "REMOVE_SESSION_STORAGE",
     "type": "some_key"
-}
-```
+}`}
+</CodeBlock>
 
 ### Delete Local Storage
 
@@ -287,12 +279,12 @@ Set the session storage value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "REMOVE_LOCAL_STORAGE",
     "type": "some_key"
-}
-```
+}`}
+</CodeBlock>
 
 ### Get Cookie Value
 
@@ -300,22 +292,22 @@ Get the cookie value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "GET_COOKIE",
     "type": "some_key"
-}
-```
+}`}
+</CodeBlock>
 
 **Response:**
 
-```json
-{
+<CodeBlock language="json" filename="Response">
+{`{
     "type": "some_key",
     "action": "GET_COOKIE",
     "data": "some_value"
-}
-```
+}`}
+</CodeBlock>
 
 ### Get Session Storage Value
 
@@ -323,22 +315,22 @@ Get the session storage value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "GET_SESSION_STORAGE",
     "type": "some_key"
-}
-```
+}`}
+</CodeBlock>
 
 **Response:**
 
-```json
-{
+<CodeBlock language="json" filename="Response">
+{`{
     "type": "some_key",
     "action": "GET_SESSION_STORAGE",
     "data": "some_value"
-}
-```
+}`}
+</CodeBlock>
 
 ### Get Local Storage Value
 
@@ -346,19 +338,19 @@ Get the session storage value with `type` as a key
 
 **Request `postMessage`:**
 
-```json
-{
+<CodeBlock language="json" filename="Request">
+{`{
     "action": "GET_LOCAL_STORAGE",
     "type": "some_key"
-}
-```
+}`}
+</CodeBlock>
 
 **Response:**
 
-```json
-{
+<CodeBlock language="json" filename="Response">
+{`{
     "type": "some_key",
     "action": "GET_LOCAL_STORAGE",
     "data": "some_value"
-}
-```
+}`}
+</CodeBlock>
