@@ -60,14 +60,6 @@ Returns a payment redirect URL for GoBiz, Paydee, or Mastercard payment methods.
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "checkoutId": "1687168234460362061",
-  "method": "MASTERCARD_MY",
-  "type": "URL"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

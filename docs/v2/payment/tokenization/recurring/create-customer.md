@@ -111,25 +111,6 @@ Creates a recurring payment customer. The customer will be redirected to bind th
 | `MONTHLY` | `0` | Start of every month |
 | `MONTHLY` | `1–28` | Day of the month |
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "storeId": "1602660043994159611",
-  "email": "oska.ng@revenuemonster.my",
-  "name": "Oska Ng OpenAPI",
-  "countryCode": "60",
-  "phoneNumber": "187824152",
-  "currency": "MYR",
-  "amount": 120,
-  "redirectUrl": "https://google.com",
-  "notifyUrl": "https://google.com",
-  "productName": "Some Product Name",
-  "productDescription": "Some Product productDescription",
-  "recurringInterval": "WEEKLY",
-  "recurringTarget": "1",
-  "recurringRepetition": 10
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

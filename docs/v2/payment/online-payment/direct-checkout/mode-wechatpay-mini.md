@@ -66,15 +66,6 @@ Returns base64-encoded data to pass to the WeChat Pay Mini Program payment API.
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "checkoutId": "1582438693268947023",
-  "type": "MINI_PROGRAM",
-  "method": "WECHATPAY_CN",
-  "userId": "oFGqK6w1kZyjDTtNAcOXBDHAa8CY"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

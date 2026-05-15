@@ -63,14 +63,6 @@ Poll [Query Payment Checkout](../query-checkout.md) every 3–5 seconds to track
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "checkoutId": "1687168234460362061",
-  "method": "",
-  "type": "DUITNOW_QRCODE"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

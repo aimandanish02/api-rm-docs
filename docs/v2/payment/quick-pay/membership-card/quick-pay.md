@@ -87,26 +87,6 @@ After [verifying the membership card](./verify.md), use this endpoint to process
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "authCode": "134850717797247290",
-  "storeId": "6170506694335521334",
-  "ipAddress": "8.8.8.8",
-  "order": {
-    "id": "ODR-20230513-1001",
-    "title": "Payment via OpenAPI",
-    "currencyType": "MYR",
-    "amount": 1000,
-    "detail": "",
-    "additionalData": ""
-  },
-  "extraInfo": {
-    "type": "MEMBERSHIP",
-    "reference": "28158443195878043074"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

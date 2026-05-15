@@ -81,23 +81,6 @@ Sends an e-wallet Quick Pay event to the RM Terminal. The terminal will open its
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "terminalId": "1554193032595276913",
-  "type": "E-WALLET",
-  "receiptType": 3,
-  "cameraType": "FRONT",
-  "order": {
-    "amount": 10,
-    "currencyType": "MYR",
-    "id": "387153091916665362292147",
-    "title": "title",
-    "detail": "desc",
-    "additionalData": "010100 Pay parking ticket"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

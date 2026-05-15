@@ -53,13 +53,6 @@ Cancels any ongoing event on the RM Terminal (e.g., an active Quick Pay or Card 
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "terminalId": "1582107209454501456",
-  "type": "CANCEL"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

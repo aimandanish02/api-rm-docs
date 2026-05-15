@@ -74,22 +74,6 @@ Sends a card payment event to the RM Terminal. The terminal will prompt the cust
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "terminalId": "1554193032595276913",
-  "type": "CARD",
-  "receiptType": 3,
-  "order": {
-    "amount": 10,
-    "currencyType": "MYR",
-    "id": "387153091916665362292147",
-    "title": "title",
-    "detail": "desc",
-    "additionalData": "010100 Pay parking ticket"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

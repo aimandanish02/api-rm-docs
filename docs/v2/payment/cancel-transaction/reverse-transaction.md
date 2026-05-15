@@ -66,12 +66,6 @@ Send the reverse request with the `orderId`. Check the `code` field in the respo
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "orderId": "180730103903010431152179"
-}`}
-</CodeBlock>
-
 ## Response Parameters
 
 <ParamTable

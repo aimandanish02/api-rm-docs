@@ -63,14 +63,6 @@ Poll [Query Payment Checkout](../query-checkout.md) every 3–5 seconds to track
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "checkoutId": "1582438693268947023",
-  "type": "QRCODE",
-  "method": "MAYBANK_MY"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

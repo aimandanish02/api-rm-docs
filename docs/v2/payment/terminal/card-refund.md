@@ -76,20 +76,6 @@ For e-wallet refunds, use [Cancel Transaction — Refund](../cancel-transaction/
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "terminalId": "1582107209454501456",
-  "type": "REFUND",
-  "data": {
-    "transactionId": "210215083727100327507906",
-    "receiptType": 3,
-    "reason": "Testing Refund",
-    "email": "oska.ng@revenuemonster.my",
-    "pin": "321123"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

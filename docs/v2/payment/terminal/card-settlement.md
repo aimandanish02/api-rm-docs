@@ -56,16 +56,6 @@ Sends a card settlement event to the RM Terminal. The terminal will settle all p
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "terminalId": "1554193032595276913",
-  "type": "SETTLEMENT",
-  "data": {
-    "receiptType": 3
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

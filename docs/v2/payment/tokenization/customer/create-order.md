@@ -77,15 +77,6 @@ This charges the customer's card — it is not a manual order creation. The amou
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "currency": "MYR",
-  "amount": 100,
-  "title": "Some order title",
-  "description": "Some order description"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

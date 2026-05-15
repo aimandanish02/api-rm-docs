@@ -90,17 +90,6 @@ Returns an FPX payment redirect URL. Use the FPX bank list endpoint to get avail
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "checkoutId": "1687166508263303064",
-  "method": "FPX_MY",
-  "type": "URL",
-  "fpx": {
-    "bankCode": "TEST0021"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

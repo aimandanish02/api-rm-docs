@@ -89,16 +89,6 @@ Each item in `items` represents a settled transaction. Use `meta.cursor` for pag
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "transactionType": "PAYMENT",
-  "date": "2021-07-28",
-  "method": ["BOOST"],
-  "region": ["MALAYSIA"],
-  "cursor": ""
-}`}
-</CodeBlock>
-
 ## Response Parameters
 
 <ParamTable

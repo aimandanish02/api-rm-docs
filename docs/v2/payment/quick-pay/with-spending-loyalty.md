@@ -95,27 +95,6 @@ See [Transaction Object > Spending Loyalty](../query/transaction-object.md#spend
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "authCode": "134850717797247290",
-  "storeId": "6170506694335521334",
-  "ipAddress": "8.8.8.8",
-  "order": {
-    "id": "ODR-20230513-1001",
-    "title": "Payment via OpenAPI",
-    "currencyType": "MYR",
-    "amount": 1000,
-    "detail": "",
-    "additionalData": ""
-  },
-  "loyalty": {
-    "type": "PHONENUMBER",
-    "countryCode": "60",
-    "phoneNumber": "103403660"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

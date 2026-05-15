@@ -59,13 +59,6 @@ Call this endpoint first to verify the membership card before processing payment
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "memberCardId": "28158443195878043074",
-  "storeId": "4949529109748431621"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

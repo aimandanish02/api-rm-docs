@@ -86,25 +86,6 @@ Vouchers can be generated as QR codes for scanning. Scan the voucher QR code fir
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "authCode": "134850717797247290",
-  "storeId": "6170506694335521334",
-  "ipAddress": "8.8.8.8",
-  "order": {
-    "id": "ODR-20230513-1001",
-    "title": "Payment via OpenAPI",
-    "currencyType": "MYR",
-    "amount": 1000,
-    "detail": "",
-    "additionalData": ""
-  },
-  "voucher": {
-    "code": "haYkAch3VN"
-  }
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

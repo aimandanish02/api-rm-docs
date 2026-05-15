@@ -59,14 +59,6 @@ Returns base64-encoded data to pass to the Alipay Mini Program payment API.
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "checkoutId": "1582438693268947023",
-  "type": "MINI_PROGRAM",
-  "method": "ALIPAY_CN"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable

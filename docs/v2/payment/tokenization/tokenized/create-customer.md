@@ -78,19 +78,6 @@ Creates a tokenized payment customer. The customer binds their card once on the 
   ]}
 />
 
-<CodeBlock language="json" filename="Example Request">
-{`{
-  "storeId": "1602660043994159611",
-  "email": "oska.ng@revenuemonster.my",
-  "name": "Oska Ng OpenAPI",
-  "countryCode": "60",
-  "phoneNumber": "187824152",
-  "redirectUrl": "https://google.com",
-  "productName": "Card Tokenized Binding",
-  "productDescription": "Some description for card tokenized"
-}`}
-</CodeBlock>
-
 **Response Parameters**
 
 <ParamTable
