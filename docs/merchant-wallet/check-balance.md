@@ -42,7 +42,7 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/credit" \
 
 <a id="item" />
 
-<strong>Wallet object (item):</strong>
+<strong>Wallet object <code>item</code>:</strong>
 
 <ParamTable
   rows={[

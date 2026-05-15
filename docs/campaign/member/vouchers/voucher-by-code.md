@@ -107,7 +107,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <a id="item" />
 
-<strong>Voucher object (item):</strong>
+<strong>Voucher object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

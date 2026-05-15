@@ -389,7 +389,7 @@ These APIs are only available after a customer has bound their card at least onc
   ]}
 />
 
-**Order record (items[\*]):**
+**Order record `items[\*]`:**
 
 <ParamTable
   title="Details"

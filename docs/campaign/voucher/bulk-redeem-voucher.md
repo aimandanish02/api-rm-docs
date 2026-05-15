@@ -189,7 +189,7 @@ Redeem voucher(s) by Bulk
 
 <a id="item" />
 
-<strong>Voucher object (item):</strong>
+<strong>Voucher object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -222,7 +222,7 @@ Redeem voucher(s) by Bulk
 
 <br/>
 
-<strong>Expiry object (expiry):</strong>
+<strong>Expiry object <code>expiry</code>:</strong>
 
 <ParamTable
   title="Details"

@@ -80,7 +80,7 @@ To issue vouchers for customer.
 
 <a id="item" />
 
-<strong>Voucher object (item):</strong>
+<strong>Voucher object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

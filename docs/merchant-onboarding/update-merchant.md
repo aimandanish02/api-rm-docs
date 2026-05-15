@@ -256,9 +256,9 @@ Pass the merchant ID as a path parameter in the URL.
     { name: "averageTicketSize", type: "Integer", example: "1000000" },
     { name: "averageTurnoverPerMonth", type: "Integer", example: "1000000" },
     { name: "businessScope", type: "String", example: "\"some business scope\"" },
-    { name: "invoiceAddress", type: "Object (nullable)", description: "See invoiceAddress object below.", example: "(Refer below)" },
+    { name: "invoiceAddress", type: "Object", description: "See invoiceAddress object below.", example: "(Refer below)" },
     { name: "document", type: "Object", description: "See document object below.", example: "(Refer below)" },
-    { name: "inspectList", type: "Array (nullable)", description: "See inspectList object below.", example: "(Refer below)" },
+    { name: "inspectList", type: "Array", description: "See inspectList object below.", example: "(Refer below)" },
     { name: "bankAccountType", type: "String", example: "\"CORPORATE\"" },
     { name: "bankAccountHolderName", type: "String", example: "\"Revenue Monster\"" },
     { name: "bankAccountNo", type: "String", example: "\"32312323\"" },
@@ -348,7 +348,7 @@ Pass the merchant ID as a path parameter in the URL.
 
 <a id="item" />
 
-**Settlement object (item):**
+**Settlement object `item`:**
 
 <ParamTable
   title="Details"
@@ -373,8 +373,8 @@ Pass the merchant ID as a path parameter in the URL.
     { name: "state", type: "String", description: "State of merchant", example: "\"JOHOR\"" },
     { name: "country", type: "String", description: "Country of merchant", example: "\"MALAYSIA\"" },
     { name: "isSameBusinessAddress", type: "Boolean", example: "false" },
-    { name: "invoiceAddress", type: "Object (nullable)", description: "See invoiceAddress object below.", example: "(Refer below)" },
-    { name: "inspectList", type: "Array (nullable)", description: "See inspectList object below.", example: "(Refer below)" },
+    { name: "invoiceAddress", type: "Object", description: "See invoiceAddress object below.", example: "(Refer below)" },
+    { name: "inspectList", type: "Array", description: "See inspectList object below.", example: "(Refer below)" },
     { name: "status", type: "String", description: "Current status of settlement", example: "\"UNVERIFIED\"" },
     { name: "document", type: "Object", description: "See document object below.", example: "(Refer below)" },
     { name: "documentFile", type: "Object", description: "See documentFile object below.", example: "(Refer below)" },
@@ -458,18 +458,18 @@ Pass the merchant ID as a path parameter in the URL.
 <ParamTable
   title="Details"
   rows={[
-    { name: "CTOSFileURL", type: "String (nullable)", example: "null" },
-    { name: "OwnerICFileURL", type: "String (nullable)", example: "null" },
-    { name: "DirectorICFileURL", type: "String (nullable)", example: "null" },
-    { name: "ShareHolderICFileURL", type: "String (nullable)", example: "null" },
-    { name: "BusinessRegistrationFileURL", type: "String (nullable)", example: "null" },
-    { name: "BankStatementFileURL", type: "String (nullable)", example: "null" },
-    { name: "MOAFileURL", type: "String (nullable)", example: "null" },
-    { name: "Form24FileURL", type: "String (nullable)", example: "null" },
-    { name: "Form49FileURL", type: "String (nullable)", example: "null" },
-    { name: "Section14FileURL", type: "String (nullable)", example: "null" },
-    { name: "Form44FileURL", type: "String (nullable)", example: "null" },
-    { name: "BusinessSitePhotoFileURL", type: "String (nullable)", example: "null" }
+    { name: "CTOSFileURL", type: "String", example: "null" },
+    { name: "OwnerICFileURL", type: "String", example: "null" },
+    { name: "DirectorICFileURL", type: "String", example: "null" },
+    { name: "ShareHolderICFileURL", type: "String", example: "null" },
+    { name: "BusinessRegistrationFileURL", type: "String", example: "null" },
+    { name: "BankStatementFileURL", type: "String", example: "null" },
+    { name: "MOAFileURL", type: "String", example: "null" },
+    { name: "Form24FileURL", type: "String", example: "null" },
+    { name: "Form49FileURL", type: "String", example: "null" },
+    { name: "Section14FileURL", type: "String", example: "null" },
+    { name: "Form44FileURL", type: "String", example: "null" },
+    { name: "BusinessSitePhotoFileURL", type: "String", example: "null" }
   ]}
 />
 

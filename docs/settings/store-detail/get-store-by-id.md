@@ -88,7 +88,7 @@ Use `Store ID` to check a particular store details.
 <br/>
 <a id="item" />
 
-<strong>Array of store object (item):</strong>
+<strong>Array of store object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

@@ -27,7 +27,7 @@ Integrate RM Terminal with POS System or Kiosk machine (using local callback). T
   ]}
 />
 <br/>
-<strong>Order object (order):</strong>
+<strong>Order object <code>order</code>:</strong>
 
 <ParamTable
   rows={[
@@ -88,7 +88,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   ]}
 />
 <br/>
-<strong>Extra Info object (extraInfo):</strong>
+<strong>Extra Info object <code>extraInfo</code>:</strong>
 
 <ParamTable
   rows={[
@@ -98,7 +98,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
 <br/>
 <a id="card" />
 
-<strong>Card object (card):</strong>
+<strong>Card object <code>card</code>:</strong>
 
 <ParamTable
   rows={[
@@ -109,7 +109,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   ]}
 />
 <br/>
-<strong>Order object (order):</strong>
+<strong>Order object <code>order</code>:</strong>
 
 <ParamTable
   rows={[
@@ -121,7 +121,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   ]}
 />
 <br/>
-<strong>Payee object (payee):</strong>
+<strong>Payee object <code>payee</code>:</strong>
 
 <ParamTable
   rows={[
@@ -129,7 +129,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/payment/ter
   ]}
 />
 <br />
-<strong>Store object (store):</strong>
+<strong>Store object <code>store</code>:</strong>
 
 <ParamTable
   rows={[

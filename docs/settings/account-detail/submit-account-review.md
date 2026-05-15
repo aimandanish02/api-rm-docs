@@ -269,7 +269,7 @@ Submit Account For Review
 
 <a id="item" />
 
-<strong>Accoount Info (item):</strong>
+<strong>Accoount Info <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -295,7 +295,7 @@ Submit Account For Review
     { name: "country", type: "String", description: "Country of merchant", example: "\"Malaysia\"" },
     { name: "isSameBusinessAddress", type: "Boolean", example: "false" },
     { name: "invoiceAddress", type: "Object", description: "Object of Invoice Address", example: "(Refer below)" },
-    { name: "inspectList", type: "Array (nullable)", example: "null" },
+    { name: "inspectList", type: "Array", example: "null" },
     { name: "status", type: "String", description: "Current status of Account", example: "\"UNVERIFIED\"" },
     { name: "document", type: "Object", example: "Refer Below" },
     { name: "documentFile", type: "Object", example: "Refer Below" },
@@ -345,25 +345,25 @@ Submit Account For Review
 <ParamTable
   title="Details"
   rows={[
-    { name: "CtosFileUrl", type: "String (nullable)", example: "null" },
-    { name: "OwnerICFileUrl", type: "String (nullable)", example: "null" },
-    { name: "DirectorICFileUrl", type: "String (nullable)", example: "null" },
-    { name: "ShareHolderICFileUrl", type: "String (nullable)", example: "null" },
-    { name: "BusinessRegistrationFileUrl", type: "String (nullable)", example: "null" },
-    { name: "BankStatementFileUrl", type: "String (nullable)", example: "null" },
-    { name: "MoaFileUrl", type: "String (nullable)", example: "null" },
-    { name: "Form24FileUrl", type: "String (nullable)", example: "null" },
-    { name: "Form49FileUrl", type: "String (nullable)", example: "null" },
-    { name: "Section14FileUrl", type: "String (nullable)", example: "null" },
-    { name: "Form44FileUrl", type: "String (nullable)", example: "null" },
-    { name: "BusinessSitePhotoFileUrl", type: "String (nullable)", example: "null" }
+    { name: "CtosFileUrl", type: "String", example: "null" },
+    { name: "OwnerICFileUrl", type: "String", example: "null" },
+    { name: "DirectorICFileUrl", type: "String", example: "null" },
+    { name: "ShareHolderICFileUrl", type: "String", example: "null" },
+    { name: "BusinessRegistrationFileUrl", type: "String", example: "null" },
+    { name: "BankStatementFileUrl", type: "String", example: "null" },
+    { name: "MoaFileUrl", type: "String", example: "null" },
+    { name: "Form24FileUrl", type: "String", example: "null" },
+    { name: "Form49FileUrl", type: "String", example: "null" },
+    { name: "Section14FileUrl", type: "String", example: "null" },
+    { name: "Form44FileUrl", type: "String", example: "null" },
+    { name: "BusinessSitePhotoFileUrl", type: "String", example: "null" }
   ]}
 />
 
 
 <br />
 
-<strong>invoiceAddress (parameter) :</strong>
+<strong>invoiceAddress :</strong>
 
 <ParamTable
   title="Details"
@@ -380,7 +380,7 @@ Submit Account For Review
 
 <br/>
 
-<strong>inspectList (parameter) :</strong>
+<strong>inspectList :</strong>
 
 <ParamTable
   title="Details"

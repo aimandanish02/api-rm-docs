@@ -143,7 +143,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <a id="items" />
 
-<strong>Vouchers object (item):</strong>
+<strong>Vouchers object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

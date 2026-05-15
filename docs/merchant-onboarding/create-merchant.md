@@ -140,7 +140,7 @@ Check the `code` field in the response. If `"SUCCESS"`, the merchant was created
 
 ---
 
-**Merchant object (item.merchant):**
+**Merchant object `item.merchant`:**
 
 <ParamTable
   title="Details"
@@ -170,7 +170,7 @@ Check the `code` field in the response. If `"SUCCESS"`, the merchant was created
 
 ---
 
-**Subscription object (item.merchant.subscription):**
+**Subscription object `item.merchant.subscription`:**
 
 <ParamTable
   title="Details"
@@ -183,7 +183,7 @@ Check the `code` field in the response. If `"SUCCESS"`, the merchant was created
 
 ---
 
-**Store object (item.store):**
+**Store object `item.store`:**
 
 <ParamTable
   title="Details"
@@ -208,7 +208,7 @@ Check the `code` field in the response. If `"SUCCESS"`, the merchant was created
 
 ---
 
-**User object (item.user):**
+**User object `item.user`:**
 
 <ParamTable
   title="Details"

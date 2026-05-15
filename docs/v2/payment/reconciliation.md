@@ -113,7 +113,7 @@ Each item in `items` represents a settled transaction. Use `meta.cursor` for pag
   ]}
 />
 
-**Transaction record (items[\*]):**
+**Transaction record `items[\*]`:**
 
 <ParamTable
   title="Details"

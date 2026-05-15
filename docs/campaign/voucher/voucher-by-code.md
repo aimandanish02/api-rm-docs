@@ -107,7 +107,7 @@ To get single voucher by code
 
 <a id="item" />
 
-<strong>Voucher object (item):</strong>
+<strong>Voucher object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -140,7 +140,7 @@ To get single voucher by code
 
 <br/>
 
-<strong>Expiry object (expiry):</strong>
+<strong>Expiry object <code>expiry</code>:</strong>
 
 <ParamTable
   title="Details"

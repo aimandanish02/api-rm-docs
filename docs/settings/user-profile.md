@@ -78,7 +78,7 @@ No request parameter is required for this endpoint.
 
 <a id="item" />
 
-<strong>Array of store object (item):</strong>
+<strong>Array of store object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

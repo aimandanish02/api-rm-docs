@@ -96,7 +96,7 @@ No request parameter is required for this endpoint.
 
 <br/>
 
-<strong>Item Object (item):</strong>
+<strong>Item Object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

@@ -111,7 +111,7 @@ Collect information using member card ID
 
 <a id="item" />
 
-<strong>Item object (item):</strong>
+<strong>Item object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -133,7 +133,7 @@ Collect information using member card ID
 
 <a id="card" />
 
-<strong> Card object (card):</strong>
+<strong>Card object <code>card</code>:</strong>
 
 <ParamTable
   title="Details"

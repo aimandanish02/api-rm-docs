@@ -117,7 +117,7 @@ This is a GET request with no request body. Pass the `merchantId` as a path para
 
 ---
 
-**Application object (items):**
+**Application object `items`:**
 
 <ParamTable
   title="Details"

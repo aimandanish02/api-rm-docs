@@ -133,7 +133,7 @@ No request parameter is required for this endpoint.
 <br/>
 <a id="items" />
 
-<strong>Array of store object (items):</strong>
+<strong>Array of store object <code>items</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -160,7 +160,7 @@ No request parameter is required for this endpoint.
 <br/>
 <a id="meta" />
 
-<strong>Database object (meta):</strong>
+<strong>Database object <code>meta</code>:</strong>
 
 <ParamTable
   title="Details"

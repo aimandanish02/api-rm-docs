@@ -128,7 +128,7 @@ To reinstate voucher(s) of customer.
 
 <a id="item" />
 
-<strong>Voucher object (item):</strong>
+<strong>Voucher object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -161,7 +161,7 @@ To reinstate voucher(s) of customer.
 
 <br/>
 
-<strong>Expiry object (expiry):</strong>
+<strong>Expiry object <code>expiry</code>:</strong>
 
 <ParamTable
   title="Details"

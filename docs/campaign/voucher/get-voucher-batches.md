@@ -149,7 +149,7 @@ No request parameter is required for this endpoint.
 
 <a id="items" />
 
-<strong>Voucher object (items):</strong>
+<strong>Voucher object <code>items</code>:</strong>
 
 <ParamTable
   title="Details"

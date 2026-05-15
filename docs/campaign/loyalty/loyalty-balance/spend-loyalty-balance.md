@@ -124,7 +124,7 @@ Get loyalty balance
 
 <br />
 
-<strong>Order object (order):</strong>
+<strong>Order object <code>order</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -174,7 +174,7 @@ Get loyalty balance
 
 <br />
 
-<strong>Store object (store):</strong>
+<strong>Store object <code>store</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -201,7 +201,7 @@ Get loyalty balance
 
 <br />
 
-<strong>Order object (order):</strong>
+<strong>Order object <code>order</code>:</strong>
 
 <ParamTable
   title="Details"

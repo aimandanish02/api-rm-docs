@@ -172,7 +172,7 @@ Check the `code` field. If `"SUCCESS"`, the merchant has been submitted. The `st
 
 ---
 
-**Settlement object (item):**
+**Settlement object `item`:**
 
 <ParamTable
   title="Details"
@@ -197,8 +197,8 @@ Check the `code` field. If `"SUCCESS"`, the merchant has been submitted. The `st
     { name: "state", type: "String", description: "State of merchant", example: "\"Selangor\"" },
     { name: "country", type: "String", description: "Country of merchant", example: "\"Malaysia\"" },
     { name: "isSameBusinessAddress", type: "Boolean", example: "false" },
-    { name: "invoiceAddress", type: "Object (nullable)", example: "null" },
-    { name: "inspectList", type: "Object (nullable)", example: "null" },
+    { name: "invoiceAddress", type: "Object", example: "null" },
+    { name: "inspectList", type: "Object", example: "null" },
     { name: "status", type: "String", description: "Current status of settlement. Changes to \"REVIEWING\" after submission.", example: "\"REVIEWING\"" },
     { name: "document", type: "Object", description: "Uploaded document URLs. See document object below.", example: "(See below)" },
     { name: "documentFile", type: "Object", description: "Uploaded document files. See documentFile object below.", example: "(See below)" },
@@ -246,18 +246,18 @@ Check the `code` field. If `"SUCCESS"`, the merchant has been submitted. The `st
 <ParamTable
   title="Details"
   rows={[
-    { name: "CTOSFileURL", type: "String (nullable)", example: "null" },
-    { name: "OwnerICFileURL", type: "String (nullable)", example: "null" },
-    { name: "DirectorICFileURL", type: "String (nullable)", example: "null" },
-    { name: "ShareHolderICFileURL", type: "String (nullable)", example: "null" },
-    { name: "BusinessRegistrationFileURL", type: "String (nullable)", example: "null" },
-    { name: "BankStatementFileURL", type: "String (nullable)", example: "null" },
-    { name: "MOAFileURL", type: "String (nullable)", example: "null" },
-    { name: "Form24FileURL", type: "String (nullable)", example: "null" },
-    { name: "Form49FileURL", type: "String (nullable)", example: "null" },
-    { name: "Section14FileURL", type: "String (nullable)", example: "null" },
-    { name: "Form44FileURL", type: "String (nullable)", example: "null" },
-    { name: "BusinessSitePhotoFileURL", type: "String (nullable)", example: "null" }
+    { name: "CTOSFileURL", type: "String", example: "null" },
+    { name: "OwnerICFileURL", type: "String", example: "null" },
+    { name: "DirectorICFileURL", type: "String", example: "null" },
+    { name: "ShareHolderICFileURL", type: "String", example: "null" },
+    { name: "BusinessRegistrationFileURL", type: "String", example: "null" },
+    { name: "BankStatementFileURL", type: "String", example: "null" },
+    { name: "MOAFileURL", type: "String", example: "null" },
+    { name: "Form24FileURL", type: "String", example: "null" },
+    { name: "Form49FileURL", type: "String", example: "null" },
+    { name: "Section14FileURL", type: "String", example: "null" },
+    { name: "Form44FileURL", type: "String", example: "null" },
+    { name: "BusinessSitePhotoFileURL", type: "String", example: "null" }
   ]}
 />
 

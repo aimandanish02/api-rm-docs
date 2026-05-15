@@ -105,7 +105,7 @@ The response contains `merchant` and `settlement` objects with complete details.
 
 ---
 
-**Merchant object (item.merchant):**
+**Merchant object `item.merchant`:**
 
 <ParamTable
   title="Details"
@@ -137,7 +137,7 @@ The response contains `merchant` and `settlement` objects with complete details.
 
 ---
 
-**Subscription object (item.merchant.subscription):**
+**Subscription object `item.merchant.subscription`:**
 
 <ParamTable
   title="Details"
@@ -150,7 +150,7 @@ The response contains `merchant` and `settlement` objects with complete details.
 
 ---
 
-**Settlement object (item.settlement):**
+**Settlement object `item.settlement`:**
 
 <ParamTable
   title="Details"
@@ -187,7 +187,7 @@ The response contains `merchant` and `settlement` objects with complete details.
 
 ---
 
-**Document object (item.settlement.document):**
+**Document object `item.settlement.document`:**
 
 <ParamTable
   title="Details"
@@ -211,23 +211,23 @@ The response contains `merchant` and `settlement` objects with complete details.
 
 ---
 
-**DocumentFile object (item.settlement.documentFile):**
+**DocumentFile object `item.settlement.documentFile`:**
 
 <ParamTable
   title="Details"
   rows={[
-    { name: "CTOSFileURL", type: "String (nullable)", description: "CTOS file URL", example: "null" },
-    { name: "OwnerICFileURL", type: "String (nullable)", description: "Owner IC file URL", example: "null" },
-    { name: "DirectorICFileURL", type: "String (nullable)", description: "Director IC file URL", example: "null" },
-    { name: "ShareHolderICFileURL", type: "String (nullable)", description: "Shareholder IC file URL", example: "null" },
-    { name: "BusinessRegistrationFileURL", type: "String (nullable)", description: "Business registration file URL", example: "null" },
-    { name: "BankStatementFileURL", type: "String (nullable)", description: "Bank statement file URL", example: "null" },
-    { name: "MOAFileURL", type: "String (nullable)", description: "MOA file URL", example: "null" },
-    { name: "Form24FileURL", type: "String (nullable)", description: "Form 24 file URL", example: "null" },
-    { name: "Form49FileURL", type: "String (nullable)", description: "Form 49 file URL", example: "null" },
-    { name: "Section14FileURL", type: "String (nullable)", description: "Section 14 file URL", example: "null" },
-    { name: "Form44FileURL", type: "String (nullable)", description: "Form 44 file URL", example: "null" },
-    { name: "BusinessSitePhotoFileURL", type: "String (nullable)", description: "Business site photo file URL", example: "null" }
+    { name: "CTOSFileURL", type: "String", description: "CTOS file URL", example: "null" },
+    { name: "OwnerICFileURL", type: "String", description: "Owner IC file URL", example: "null" },
+    { name: "DirectorICFileURL", type: "String", description: "Director IC file URL", example: "null" },
+    { name: "ShareHolderICFileURL", type: "String", description: "Shareholder IC file URL", example: "null" },
+    { name: "BusinessRegistrationFileURL", type: "String", description: "Business registration file URL", example: "null" },
+    { name: "BankStatementFileURL", type: "String", description: "Bank statement file URL", example: "null" },
+    { name: "MOAFileURL", type: "String", description: "MOA file URL", example: "null" },
+    { name: "Form24FileURL", type: "String", description: "Form 24 file URL", example: "null" },
+    { name: "Form49FileURL", type: "String", description: "Form 49 file URL", example: "null" },
+    { name: "Section14FileURL", type: "String", description: "Section 14 file URL", example: "null" },
+    { name: "Form44FileURL", type: "String", description: "Form 44 file URL", example: "null" },
+    { name: "BusinessSitePhotoFileURL", type: "String", description: "Business site photo file URL", example: "null" }
   ]}
 />
 

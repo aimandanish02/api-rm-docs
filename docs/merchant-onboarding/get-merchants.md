@@ -97,7 +97,7 @@ This is a GET request with no parameters.
 
 ---
 
-**Merchant object (items):**
+**Merchant object `items`:**
 
 <ParamTable
   title="Details"
@@ -130,7 +130,7 @@ This is a GET request with no parameters.
 
 ---
 
-**Subscription object (items.subscription):**
+**Subscription object `items.subscription`:**
 
 <ParamTable
   title="Details"

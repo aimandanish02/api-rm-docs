@@ -133,7 +133,7 @@ To get Multiple voucher batches by Key .
 
 <a id="items" />
 
-<strong>Voucher object (items):</strong>
+<strong>Voucher object <code>items</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -160,7 +160,7 @@ To get Multiple voucher batches by Key .
 
 
 <br/>
-<strong>Expiry object (expiry):</strong>
+<strong>Expiry object <code>expiry</code>:</strong>
 
 <ParamTable
   title="Details"

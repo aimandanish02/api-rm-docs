@@ -129,7 +129,7 @@ To create a store under one merchant.
 
 <a id="item" />
 
-<strong>Array of store object (item):</strong>
+<strong>Array of store object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

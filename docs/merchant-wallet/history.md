@@ -49,7 +49,7 @@ curl --location --request GET "{{open_base_path}}/v3/wallet/history" \
 
 <a id="items" />
 
-<strong>History object (item):</strong>
+<strong>History object <code>item</code>:</strong>
 
 <ParamTable
   rows={[

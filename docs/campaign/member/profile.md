@@ -103,7 +103,7 @@ Using Query String to **Get User Profile** by input the **country code** and **p
 
 <a id="item" />
 
-<strong>Profile object (item):</strong>
+<strong>Profile object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"

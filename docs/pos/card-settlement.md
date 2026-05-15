@@ -20,7 +20,7 @@ Sandbox URL : `https://sb-open.revenuemonster.my/v3/event/terminal`
     { name: "data", type: "String", required: true, description: "(Refer data )", example: "{}" }
   ]}
 />
-<strong>Data object (data):</strong>
+<strong>Data object <code>data</code>:</strong>
 
 <ParamTable
   rows={[
@@ -54,7 +54,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
   ]}
 />
 <br/>
-<strong>Summary object (summary):</strong>
+<strong>Summary object <code>summary</code>:</strong>
 
 <ParamTable
   rows={[
@@ -66,7 +66,7 @@ curl --location --request POST "https://sb-open.revenuemonster.my/v3/event/termi
   ]}
 />
 <br/>
-<strong>Transaction object (transaction):</strong>
+<strong>Transaction object <code>transaction</code>:</strong>
 
 <ParamTable
   rows={[

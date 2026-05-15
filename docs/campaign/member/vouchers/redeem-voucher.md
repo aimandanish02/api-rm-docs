@@ -46,7 +46,7 @@ curl --location --request POST "{{open_base_path}}/v3/loyalty/me/voucher/rms@xR4
 
 <a id="item" />
 
-<strong>Voucher object (item):</strong>
+<strong>Voucher object <code>item</code>:</strong>
 
 <ParamTable
   rows={[

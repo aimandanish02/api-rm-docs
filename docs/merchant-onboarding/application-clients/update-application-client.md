@@ -148,7 +148,7 @@ Pass `merchantId` and `clientId` as path parameters in the URL.
 
 ---
 
-**Application object (item):**
+**Application object `item`:**
 
 <ParamTable
   title="Details"

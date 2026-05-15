@@ -132,7 +132,7 @@ Specify loyalty member id to topup using quickpay
 
 <a id="order" />
 
-<strong>Order object (order):</strong>
+<strong>Order object <code>order</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -161,7 +161,7 @@ Specify loyalty member id to topup using quickpay
 
 <a id="item" />
 
-<strong>Transaction object (item):</strong>
+<strong>Transaction object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -188,7 +188,7 @@ Specify loyalty member id to topup using quickpay
 
 <a id="store" />
 
-<strong>Store object (store):</strong>
+<strong>Store object <code>store</code>:</strong>
 
 <ParamTable
   title="Details"
@@ -212,7 +212,7 @@ Specify loyalty member id to topup using quickpay
 
 
 <br />
-<strong>Order object (order):</strong>
+<strong>Order object <code>order</code>:</strong>
 
 <ParamTable
   title="Details"

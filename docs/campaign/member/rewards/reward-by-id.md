@@ -99,7 +99,7 @@ import { Box, Heading, Text, Card, Image, Button, Flex } from "rebass";
 
 <a id="item" />
 
-<strong>Reward object (item):</strong>
+<strong>Reward object <code>item</code>:</strong>
 
 <ParamTable
   title="Details"
