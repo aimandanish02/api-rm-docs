@@ -98,14 +98,35 @@ module.exports = {
 
 Payment: [
   {
-    type: "doc",
-    id: "v2/payment/quick-pay",
-    className: "api-post",
+    type: "category",
+    label: "Quick Pay",
+    collapsible: true,
+    collapsed: false,
+    items: [
+      { type: "doc", id: "v2/payment/quick-pay/standard", className: "api-post" },
+      { type: "doc", id: "v2/payment/quick-pay/with-voucher", className: "api-post" },
+      { type: "doc", id: "v2/payment/quick-pay/with-spending-loyalty", className: "api-post" },
+      {
+        type: "category",
+        label: "Membership Card",
+        items: [
+          { type: "doc", id: "v2/payment/quick-pay/membership-card/verify", className: "api-post" },
+          { type: "doc", id: "v2/payment/quick-pay/membership-card/quick-pay", className: "api-post" },
+        ],
+      },
+    ],
   },
   {
-    type: "doc",
-    id: "v2/payment/query-transaction",
-    className: "api-get",
+    type: "category",
+    label: "Query",
+    collapsible: true,
+    collapsed: false,
+    items: [
+      { type: "doc", id: "v2/payment/query/by-order-id", className: "api-get" },
+      { type: "doc", id: "v2/payment/query/by-transaction-id", className: "api-get" },
+      { type: "doc", id: "v2/payment/query/all-transactions", className: "api-get" },
+      "v2/payment/query/transaction-object",
+    ],
   },
   {
     type: "category",
@@ -113,39 +134,97 @@ Payment: [
     collapsible: true,
     collapsed: false,
     items: [
+      { type: "doc", id: "v2/payment/cancel-transaction/reverse-transaction", className: "api-post" },
+      { type: "doc", id: "v2/payment/cancel-transaction/refund-transaction", className: "api-post" },
+    ],
+  },
+  {
+    type: "category",
+    label: "Terminal",
+    collapsible: true,
+    collapsed: true,
+    items: [
+      { type: "doc", id: "v2/payment/terminal/quick-pay", className: "api-post" },
+      { type: "doc", id: "v2/payment/terminal/card-payment", className: "api-post" },
+      { type: "doc", id: "v2/payment/terminal/card-refund", className: "api-post" },
+      { type: "doc", id: "v2/payment/terminal/card-settlement", className: "api-post" },
+      { type: "doc", id: "v2/payment/terminal/cancel-event", className: "api-post" },
+    ],
+  },
+  {
+    type: "category",
+    label: "DeepLink",
+    collapsible: true,
+    collapsed: true,
+    items: [
+      "v2/payment/deeplink/setup",
+      { type: "doc", id: "v2/payment/deeplink/quick-pay", className: "api-post" },
+      { type: "doc", id: "v2/payment/deeplink/card-payment", className: "api-post" },
+      { type: "doc", id: "v2/payment/deeplink/void-transaction", className: "api-post" },
+      { type: "doc", id: "v2/payment/deeplink/wallet-settlement", className: "api-post" },
+      { type: "doc", id: "v2/payment/deeplink/card-settlement", className: "api-post" },
+    ],
+  },
+  {
+    type: "category",
+    label: "Online Payment",
+    collapsible: true,
+    collapsed: true,
+    items: [
+      { type: "doc", id: "v2/payment/online-payment/hosted-checkout", className: "api-post" },
+      "v2/payment/online-payment/individual-checkout",
+      { type: "doc", id: "v2/payment/online-payment/query-checkout", className: "api-get" },
       {
-        type: "doc",
-        id: "v2/payment/cancel-transaction/reverse-transaction",
-        className: "api-post",
-      },
-      {
-        type: "doc",
-        id: "v2/payment/cancel-transaction/refund-transaction",
-        className: "api-post",
+        type: "category",
+        label: "Direct Checkout",
+        items: [
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-url", className: "api-post" },
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-qrcode", className: "api-post" },
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-duitnow-qr", className: "api-post" },
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-alipay-mini", className: "api-post" },
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-wechatpay-mini", className: "api-post" },
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-fpx", className: "api-post" },
+          { type: "doc", id: "v2/payment/online-payment/direct-checkout/mode-gobiz", className: "api-post" },
+        ],
       },
     ],
   },
   {
-    type: "doc",
-    id: "v2/payment/terminal-integration",
-    className: "api-post",
+    type: "category",
+    label: "Tokenization",
+    collapsible: true,
+    collapsed: true,
+    items: [
+      {
+        type: "category",
+        label: "Recurring",
+        items: [
+          { type: "doc", id: "v2/payment/tokenization/recurring/create-customer", className: "api-post" },
+          "v2/payment/tokenization/recurring/redirect-response",
+          "v2/payment/tokenization/recurring/notify-response",
+        ],
+      },
+      {
+        type: "category",
+        label: "Tokenized",
+        items: [
+          { type: "doc", id: "v2/payment/tokenization/tokenized/create-customer", className: "api-post" },
+          "v2/payment/tokenization/tokenized/redirect-response",
+        ],
+      },
+      {
+        type: "category",
+        label: "Customer",
+        items: [
+          { type: "doc", id: "v2/payment/tokenization/customer/get-info", className: "api-get" },
+          { type: "doc", id: "v2/payment/tokenization/customer/get-orders", className: "api-get" },
+          { type: "doc", id: "v2/payment/tokenization/customer/toggle-status", className: "api-post" },
+          { type: "doc", id: "v2/payment/tokenization/customer/create-order", className: "api-post" },
+        ],
+      },
+    ],
   },
-  "v2/payment/deeplink-integration",
-  {
-    type: "doc",
-    id: "v2/payment/online-payment",
-    className: "api-post",
-  },
-  {
-    type: "doc",
-    id: "v2/payment/tokenization-payment",
-    className: "api-post",
-  },
-  {
-    type: "doc",
-    id: "v2/payment/reconciliation",
-    className: "api-post",
-  },
+  { type: "doc", id: "v2/payment/reconciliation", className: "api-post" },
 ],
 
 

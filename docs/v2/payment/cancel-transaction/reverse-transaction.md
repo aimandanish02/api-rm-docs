@@ -1,5 +1,4 @@
 ---
-id: reverse-transaction
 title: "Reverse Transaction"
 sidebar_label: "Reverse Transaction"
 

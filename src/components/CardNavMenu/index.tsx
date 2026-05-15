@@ -8,7 +8,7 @@ const navItems = [
     links: [
       { label: "Quick Start", href: "/docs/introduction/overview" },
       { label: "Merchant Onboarding", href: "/docs/merchant-onboarding/introduction" },
-      { label: "Payment", href: "/docs/v2/payment/quick-pay" },
+      { label: "Payment", href: "/docs/v2/payment/quick-pay/standard" },
     ],
   },
   {

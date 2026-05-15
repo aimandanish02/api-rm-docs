@@ -15,7 +15,7 @@ const products = [
     key: "payment",
     title: "Payment",
     description: "Payment APIs, transactions, terminals, and reconciliation.",
-    to: "/docs/v2/payment/quick-pay",
+    to: "/docs/v2/payment/quick-pay/standard",
   },
   {
     key: "visa-vop",
