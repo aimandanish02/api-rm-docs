@@ -472,8 +472,9 @@
 /* ================= URL PARAM ================= */
 
 .urlParam {
-  background: #facc15;
-  color: #111827;
+  background: rgba(102, 102, 235, 0.12);
+  color: var(--ifm-color-primary);
+  border: 1px solid rgba(102, 102, 235, 0.3);
   padding: 2px 6px;
   border-radius: 6px;
   cursor: text;
@@ -482,12 +483,13 @@
 }
 
 .urlParam:hover {
-  background: #fde047;
-  transform: scale(1.05);
+  background: rgba(102, 102, 235, 0.2);
+  border-color: var(--ifm-color-primary);
 }
 
 .urlParam:focus {
   outline: 2px solid var(--ifm-color-primary);
+  outline-offset: 1px;
 }
 
 /* ================= ENV SWITCH ================= */
@@ -561,6 +563,17 @@
 .bannerWarning .bannerDot {
   background: #fbbf24;
   box-shadow: 0 0 6px #fbbf2488;
+}
+
+.bannerPrimary {
+  background: rgba(102, 102, 235, 0.08);
+  border-color: rgba(102, 102, 235, 0.35);
+  color: var(--ifm-color-primary);
+}
+
+.bannerPrimary .bannerDot {
+  background: var(--ifm-color-primary);
+  box-shadow: 0 0 6px rgba(102, 102, 235, 0.5);
 }
 
 .bannerInfo {
