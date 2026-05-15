@@ -67,7 +67,7 @@ function ParamRowItem({ row, last }: { row: ParamRow; last: boolean }) {
         <code className={styles.paramName}>{row.name}</code>
         {row.type && (
           <span className={`${styles.typeLabel} ${styles[typeKey] ?? ""}`}>
-            {row.type}
+            {row.type.toUpperCase()}
           </span>
         )}
         {row.required && (
